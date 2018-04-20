@@ -47,7 +47,7 @@ void turn_on_sram(){
 
 void turn_off_sram(){
   analogWrite(PIN_POWER, 0);
-  
+
   for (int i=11; i<=13; i++){
     digitalWrite(i, LOW);
   }
@@ -61,23 +61,6 @@ void turn_off_sram(){
     digitalWrite(i, LOW);
   }
 }
-
-void appendChallengeToMicroSD(long val){
-  String name = "challenge.txt";
-  String a, b;
-  // File myFile = SD.open(name, FILE_WRITE);
-  if (myFile) {
-    myFile.println(val);
-    myFile.close();
-  }
-}
-
-void removeChallengeFromMicroSD(){
-  String name = "challenge.txt";
-  String a, b;
-  SD.remove(name);
-}
-
 
 boolean readBit(long location){
   uint8_t result = sram.read(floor(location / 8));
@@ -180,7 +163,7 @@ void readSRAMfromMicroSD(){
   // read
   int index = 0, i=0;
 
-  String name = "challenge.txt";
+  String name = "c.txt";
   String a, b;
   long thisItem;
   myFile = SD.open(name);
@@ -211,7 +194,7 @@ void readHelperDatafromMicroSD(){
   // read
   int index = 0, i=0;
 
-  String name = "helper_data.txt";
+  String name = "h.txt";
   String a, b;
   long thisItem;
   myFile = SD.open(name);
@@ -268,7 +251,7 @@ void gen_helper_data(){
       memcpy(&helper_data_new[i * 7], &xor_enroll_new[i * 8], 7 * sizeof(uint8_t));
   }
 
-  File myFile = SD.open("helper_data.txt", O_WRITE | O_CREAT | O_TRUNC);
+  File myFile = SD.open("h.txt", O_WRITE | O_CREAT | O_TRUNC);
   if (myFile) {
     for (int i = 0; i < 37*7;i++){
       myFile.println(helper_data_new[i]);
@@ -289,7 +272,6 @@ void check_command(){
       if (command[2] > 0){
         delay(1000);
       }
-      // delay(50);
       q = analogRead(PIN_POWER_ANALOG);
 
       Serial.write(99);
@@ -397,7 +379,7 @@ void check_command(){
     case APPEND_CHALLENGE_TO_MICRO_SD:
       memcpy(&a, &command[2], 4);
       myFile.println(a);
-      // appendChallengeToMicroSD(a);
+
       Serial.write(99);
       Serial.write(APPEND_CHALLENGE_TO_MICRO_SD);
       Serial.write((uint8_t) (a >> 24) & 0xFF);
@@ -408,17 +390,17 @@ void check_command(){
         Serial.write(0);
       break;
     case NEW_CHALLENGE_FOR_MICRO_SD:
-      // removeChallengeFromMicroSD();
-
-      myFile = SD.open("challenge.txt", O_WRITE | O_CREAT | O_TRUNC);
+      myFile = SD.open("c.txt", O_WRITE | O_CREAT | O_TRUNC);
 
       Serial.write(99);
       Serial.write(NEW_CHALLENGE_FOR_MICRO_SD);
-      for (int i=0; i < 36-2; i++)
+      Serial.write(myFile ? 1 : 0);
+      for (int i=0; i < 33; i++)
         Serial.write(0);
       break;
     case FINISH_WRITING_CHALLENGE_TO_MICRO_SD:
       myFile.close();
+
       Serial.write(99);
       Serial.write(FINISH_WRITING_CHALLENGE_TO_MICRO_SD);
       for (int i=0; i < 36-2; i++)

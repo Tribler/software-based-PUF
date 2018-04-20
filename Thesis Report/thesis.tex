@@ -1,0 +1,181 @@
+% This document provides the style to be used for a MSc Thesis at the
+% Parallel and Distributed Systems group
+\documentclass[11pt,twoside,a4paper,openright]{report}
+
+% use babel for proper hyphenation
+\usepackage[dutch,british]{babel}
+% Graphics: like the DUT logo on the front cover
+\usepackage[dvips]{graphicx}
+% \usepackage{graphicx}
+% \usepackage{graphicx}
+% \usepackage{graphics}
+\usepackage{eurosym}
+\usepackage{seqsplit}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+\def\UrlBreaks{\do\/\do-}
+\usepackage{breakurl}
+
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{tabularx}
+\usepackage{changepage}
+% \usepackage{tocstyle}
+
+% FONT: times
+\usepackage{times}
+% for url's use "\url{http://www.google.com/}"
+\usepackage{url}
+\usepackage{cite}
+\usepackage{amsmath,booktabs}
+\usepackage[]{siunitx}
+\usepackage{textcomp}
+
+% \makeatletter
+% \renewcommand*\l@chapter[2]{%
+%   \ifnum \c@tocdepth >\m@ne
+%     \addpenalty{-\@highpenalty}%
+%     \vskip 1.0em \@plus\p@
+%     \setlength\@tempdima{1.5em}%
+%     \begingroup
+%       \parindent \z@ \rightskip \@pnumwidth
+%       \parfillskip -\@pnumwidth
+%       \leavevmode \bfseries
+%       \advance\leftskip\@tempdima
+%       \hskip -\leftskip
+%       #1\nobreak\hskip .5em \@plus 1fil % <<< MODIFICATION <<<
+%       \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+%       \penalty\@highpenalty
+%     \endgroup
+%   \fi}
+% \makeatother
+
+\newcommand\vn[1]{\textsc{\MakeLowercase{#1}}} % "variable name" macro
+\newcommand\mc[1]{\multicolumn{1}{c}{#1}} % handy shortcut macro
+\newcommand\ID{\mathit{ID}}
+
+% \newcommand{\reportTitle}{Open Source Software-Only SRAM PUF-Based Secure Data Protection and Key Storage Scheme Using Off-The-Shelf SRAM}
+% \newcommand{\reportTitle}{Open Source Secure Data Protection and Key Storage Scheme Using Off-The-Shelf SRAM Component Based on Software-Only SRAM PUF Technology }
+\newcommand{\reportTitle}{Open Source Secure Data Protection and Key Storage Scheme Utilizing Off-The-Shelf SRAM Component, Software-Based SRAM PUF Technology and Multifactor Authentication}
+\newcommand{\reportAuthor}{Ade Setyawan Sajim}
+\newcommand{\reportEmail}{AdeSetyawanSajim@student.tudelft.nl}
+\newcommand{\reportUrlEmail}{\href{mailto:\reportEmail}{\reportEmail}}
+\newcommand{\reportMSC}{MSc Computer Engineering} %{Embedded Systems}{Computer Engineering}{Computer Science}{Electrical Engineering}
+\newcommand{\reportDate}{25\textsuperscript{th} April 2018} %TODO: Dit is de datum van uitgifte van final versie aan de afstudeer commissie
+\newcommand{\presentationDate}{9\textsuperscript{th} May 2018} %TODO: Dit is de datum van de afstudeerpresentatie
+% \newcommand{\graduationCommittee}{
+% Prof.dr. Koen Langendoen & Delft University of Technology \\
+% Dr. RangaRao Venkatesha Prasad & Delft University of Technology \\
+% Dr. Alessandro Bozzon & Delft University of Technology \\
+% } % The order of listing the names: Graduation prof, supervisor(s), others ordered by title + alphabetical
+
+\newcommand{\graduationCommittee}{
+Dr. Ir. Johan Pouwelse & Delft University of Technology \\
+Dr. Ir. Stephan Wong & Delft University of Technology \\
+Haji Akhundov, MSc & Delft University of Technology \\
+% Dr. RangaRao Venkatesha Prasad 	& Delft University of Technology \\
+% Dr. Alessandro Bozzon 			& Delft University of Technology \\
+} % The order of listing the names: Graduation prof, supervisor(s), others ordered by title + alphabetical
+%examples:
+%prof. dr. ir. H. J. Sips (chair) & Delft University of Technology \\
+%ir. dr. D. H. J. Epema           & Delft University of Technology \\
+\newcommand{\reportAbstract}{
+SRAM PUF has a potential to become the main player in hardware security. Unfortunately, the currently available solution is usually locked to specific entities. Here, we initiate an open source project to develop software-based SRAM PUF technology using off-the-shelf SRAM.
+We also present a testing result on two off-the-shelf SRAMs as SRAM PUF candidates; Microchip 23LC1024 and Cypress CY62256NLL.
+% Both are tested on the effect of voltage variation and time interval between enrollment.
+Both are tested on the distribution of 0's and 1's in their cells, intra hamming distance, inter hamming distance, and the effect of voltage variation and time interval between enrollment
+Testing on two bit-selection algorithms (data remanence analysis and neighbor analysis) are also performed.
+Based on the testing results, we introduce a PUF enrollment scheme using data remanence analysis as the bit selection algorithm which will locate the location of the stable bits and SRAM Cypress CY62256NLL as the off-the-shelf SRAM.
+In addition, an idea to create a strong PUF using SRAM is also proposed here. Using a collection of bits as a challenge, the stable bits are permutated among themselves to create a challenge which has a tremendous number of possibilities.
+Furthermore, we also present a secure data protection and key storage scheme using SRAM PUF. The proposed scheme is influenced by multi-factor authentication. Using a combination of a PUF-generated key and user's password, a derived key is produced and utilized as the final key to protect user's data or/and user's key.
+}
+\newcommand{\reportKeywords}{PUF, SRAM PUF, security, key storage, data protection}
+\newcommand{\chapterTwo}{Related Work}
+% \newcommand{\chapterThree}{SRAM PUF Open Problems}
+\newcommand{\chapterThree}{Problem Statement}
+\newcommand{\chapterFour}{Proposed System}
+\newcommand{\chapterFive}{Implementation, Experiments and Results}
+\newcommand{\chapterSix}{Conclusions and Future Work}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hoffset=1.63cm
+\oddsidemargin=0in
+\evensidemargin=0in
+\textwidth=5in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\parindent=1em
+
+\pagestyle{empty}
+
+% FRONTCOVER
+\include{template/frontcover}
+
+% EMPTY PAGE
+\cleardoublepage
+
+\pagestyle{plain}
+
+% TITLE PAGE: page i (hidden)
+\include{template/titlepage}
+
+% GRADUATION DATA AND ABSTRACT: pages ii and iii (hidden)
+\include{template/graduationdata}
+
+\pagenumbering{roman}
+\setcounter{page}{4}
+
+% EMPTY PAGE: page iv
+\cleardoublepage
+
+% OPTIONAL QUOTATION: page v
+%\include{quotation}
+% EMPTY PAGE: page vi
+%\cleardoublepage
+
+% PREFACE: page v
+\include{template/preface}
+% EMPTY PAGE: page vi
+\cleardoublepage
+
+% TABLE OF CONTENTS: starting at page vii
+\tableofcontents
+
+\cleardoublepage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% INTRODUCTION: page 1
+% \include{introduction}
+
+% % CHAPTERS ... For instance: History/Prior Work, Design/Implementation, Experiments
+% \include{chapter_2}
+
+\include{chapter/introduction}
+% \input{chapter/security}
+% \input{chapter/chapter3}
+\input{chapter/related_work}
+% \input{chapter/related}
+% \input{chapter/chapter3}
+\input{chapter/proposed}
+\input{chapter/experiment}
+
+% CONCLUSIONS AND FUTURE WORK
+\include{chapter/conclusion}
+
+% BIBLIOGRAPHY
+% \addcontentsline{toc}{chapter}{Bibliography}
+% \bibliographystyle{bib/latex8}
+\bibliographystyle{unsrt}
+% \bibliography{bib/all}
+\bibliography{bib/article,bib/book,bib/inbook,bib/inproceedings,bib/misc,bib/mscthesis}
+
+
+%\appendix
+
+%\include{appendix_a}
+
+\end{document}

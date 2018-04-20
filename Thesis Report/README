@@ -1,0 +1,31 @@
+# 25/9/07 Koen: added proper indentation, color logo, and chapters starting on
+# right hand pages.
+
+The MSc-thesis should be written in british-english. The report should be
+built using LaTeX. A very good way of learning LaTeX is by using it, while
+keeping the "Not So Short Introduction to LaTeX" nearby.
+
+You are provided with an template, which should be used for writing your 
+final thesis. In this template, some example are given for certain common 
+constructions in MSc theses. Additionally, some guidelines are provided in 
+the files for writing.
+
+The Makefile can be used to do the following things:
+  make            DVI-file is compiled
+  make pdf        PDF-file is compiled
+  make spell      all TEX-files are spellchecked with british-english
+
+Advice and common mistakes for the english language itself can be found at:
+  http://enghelp.ewi.tudelft.nl/
+
+Some other things:
+  use "are not" instead of "aren't" (in general: do not use an apostrophe)
+  talk with others about using LaTeX, this is easier, faster and more fun!
+  use BiBTeX for your bibliography: examples are given in the bib-directory
+
+Information on how to print your documents, can be found at:
+  http://www.st.ewi.tudelft.nl/printen.html
+
+Comments are welcome, so don't hesitate to contact me at:
+  renze@ch.tudelft.nl
+

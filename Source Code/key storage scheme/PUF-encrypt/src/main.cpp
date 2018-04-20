@@ -189,7 +189,7 @@ void readSRAMfromMicroSD() {
   // read
   int index = 0, i = 0;
 
-  String name = "challenge.txt";
+  String name = "c.txt";
   String a, b;
   long thisItem;
   File myFile = SD.open(name);
@@ -222,7 +222,7 @@ void readHelperDatafromMicroSD() {
   // read
   int index = 0, i = 0;
 
-  String name = "helper_data.txt";
+  String name = "h.txt";
   String a, b;
   long thisItem;
   File myFile = SD.open(name);
@@ -315,7 +315,7 @@ void setup(void)
   */
   decode(key_32);
   Serial.println();
-  Serial.print("PUF key \t\t: ");
+  Serial.print("PUF key \t: ");
   print_key(key_32, 32);
 
   /**
@@ -327,12 +327,12 @@ void setup(void)
   {
   }
   user_password = Serial.readString();
+  Serial.print("User password \t: ");
+  Serial.println(user_password);
 
   derive_new_key(user_password, final_key, key_32);
 
-  Serial.print("User password \t\t: ");
-  Serial.println(user_password);
-  Serial.print("Final key \t\t: ");
+  Serial.print("Final key \t: ");
   print_key(final_key, 32);
 
   /**
@@ -344,16 +344,16 @@ void setup(void)
   {
   }
   String plain_text = Serial.readString();
-  Serial.print("plaintext\t\t: ");
+  Serial.print("plaintext \t: ");
   Serial.println(plain_text);
 
   uint8_t result[16];
   memset(result, 0, sizeof(result));
   encrypt_test(final_key, reinterpret_cast<const uint8_t*>(&plain_text[0]), result);
-  Serial.print("encrypted \t\t: ");
+  Serial.print("encrypted \t: ");
   print_key(result, 16);
 
-  writeToSD("encrypted.txt", result, 16);
+  writeToSD("e.txt", result, 16);
 }
 
 void loop() {

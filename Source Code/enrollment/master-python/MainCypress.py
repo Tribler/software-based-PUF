@@ -100,39 +100,31 @@ time.sleep(2)
 # -------------------------------------------------------------------------------------------------------
 
 # strong_ones = get_strong_bits_by_goal(goal=2300, write_ones=False, initial_delay=0.34, step_delay=0.01)
-strong_ones = get_strong_bits_by_time(delay=0.34, write_ones=False)
+strong_ones = get_strong_bits_by_time(delay=0.31, write_ones=False)
 # strong_zeros = get_strong_bits_by_goal(goal=2300, write_ones=True, initial_delay=0.34, step_delay=0.01)
-strong_zeros = get_strong_bits_by_time(delay=0.34, write_ones=True)
+strong_zeros = get_strong_bits_by_time(delay=0.31, write_ones=True)
 
 # --------------------------------------------------------------------------------
 # -------------------- GENERATE CHALLENGES ---------------------------------------
 # --------------------------------------------------------------------------------
 
 x = []
-x.extend(strong_zeros)
-x.extend(strong_ones)
+x.extend(strong_zeros[:2331])
+x.extend(strong_ones[:2331])
 x = list(map(int, x))
 
 shuffle(x)
-serialPUF.turn_on_sram()
 serialPUF.write_challenges_to_sd(x[:37*63])
 Tools.save_to_file(x[:37*63], "challenge.txt", with_comma=True)
+
+# res = Tools.read_bits_from_file("challenge.txt", is_separated_by_comma=True)
+# x = []
+# for i in res:
+#     x.append(int(i))
+# serialPUF.write_challenges_to_sd(x)
+
 
 # --------------------------------------------------------------------------------
 # -------------------- GENERATE HELPER DATA --------------------------------------
 # --------------------------------------------------------------------------------
 serialPUF.generate_helper_data_on_sd()
-
-# --------------------------------------------------------------------------------
-# -------------------- GENERATE KEYS ---------------------------------------------
-# --------------------------------------------------------------------------------
-a = serialPUF.get_keys()
-for i in a:
-    print(format(i, '02x'), end='')
-print()
-
-# --------------------------------------------------------------------------------
-# -------------------- FINISH ----------------------------------------------------
-# --------------------------------------------------------------------------------
-
-serialPUF.turn_off_sram()

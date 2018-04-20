@@ -1,0 +1,156 @@
+% \chapter{Background Theory}
+\chapter{\chapterTwo}
+\label{chp:2}
+
+\textit{This chapter examines some background theory related to security, cryptography, and PUF. A brief review of security is presented, followed by explanations on symmetric cryptography, key derivation function and multi-factor authentication.
+Then, theories related to PUF and SRAM PUF are described, continued by a short evaluation on how to generate a key using SRAM PUF.}
+
+\section{Security Requirements and Cryptography}
+\label{chapter2.1}
+
+A perfect and 100\% secure system is the holy grail of all computing system. Unfortunately, such thing doesn't exist. The best way to achieve that goal is by designing a system to be as secure as possible in a limited scope.
+To help defining a secure system, common security requirements are mentioned.
+According to \cite{cryptography_decrypted}, there are four elements on common security, which are:
+\begin{itemize}
+  \item \textit{Confidentiality}: a piece of information should be accessible only to an authorized user. For example, an encrypted data can only be decrypted by the secret key owner.
+  \item \textit{Authentication}: assurance of the sender of a message, date of origin, data content, time sent, data information, etc. are correctly identified.
+  \item \textit{Integrity}: any assets can only be modified by authorized subjects. For example, data should be kept intact during transmission
+  \item \textit{Non-repudiation}: a subject should be prevented from denying previous actions. For example, a sender cannot deny the data which it sent.
+\end{itemize}
+
+One way to achieve these four security requirements is by using cryptography. In traditional definition, cryptography can be defined as the art of writing or solving codes \cite{Oxford_dictionary}. But this definition is inaccurate to use nowadays because instead of depending on creativity and personal skill when constructing or breaking codes, the modern cryptography focuses their definition using science and mathematics. According to \cite{modern_cryptography}, modern cryptography can be defined as "the scientific study of techniques for securing digital information, transactions, and distributed computations." The algorithm which uses cryptography as their main point is called cryptographic algorithm.
+
+Since the birth of cryptography, its main concerned is usually related to securing communication which can be achieved by constructing \textit{ciphers} to provide secret communication between parties involved. The construction of ciphers to ensure only authorized parties also can be called as encryption schemes.
+There are two types of cryptographic algorithm; symmetric and asymmetric algorithm. Symmetric, also known as private key encryption or private key cryptography, requires the same key for encryption and decryption. Meanwhile, in the asymmetric algorithm (can be referred as public key encryption or public key cryptography), there are two keys utilized; private key and public key. A public key is utilized for encryption and a private key is used for decryption. One of the main advantages of symmetric encryption over asymmetric encryption is it requires less computational power which makes it suitable to use in embedded devices.
+
+\section{Symmetric Encryption}
+
+According to \cite{modern_cryptography}, symmetric encryption consists of three algorithms which are:
+\begin{itemize}
+    \item \large{\textit{Gen}}: key-generation algorithm
+    \item \large{\textit{Enc}}: encryption algorithm
+    \item \large{\textit{Dec}}: decryption algorithm
+\end{itemize}
+To illustrate this better, an example using two parties, Alice and Bob are given. Before using the encryption or decryption algorithm, both parties will agree on a shared secret key $k$. This phase can be referred as \large{Gen}.
+Afterwards, Alice can use the encryption algorithm (\large{Enc}) $E_k$ using the shared secret key $k$ on a message $m$ which will generates a ciphertext $c$. This procedure can be noted as $c\ =\ E_k(m)$. Bob can read the message by using the decryption algorithm (\large(Dec)) $Dec_k$ using the same shared secret key $k$. Decryption will result in the plaintext message $m$. This can be noted as $m\ =\ D_k(c)$.
+
+
+There are many examples of symmetric encryption algorithms, such as RC2, DES, 3DES, RC6, Blowfish, and AES. AES algorithm will be explained below.
+
+\subsubsection{AES}
+AES, stands for Advanced Encryption Standard, is an encryption algorithm based on a substitution-permutation network and established by the U.S. National Institute of Standards and Technology (NIST) in 2001.
+The block size inside AES has a size of 128 bits, while the key size can be either 128, 192, or 256 bits. The key size  itself describes the number of rounds which convert the plaintext into the ciphertext. If 128-bit key is used, there are 10 rounds utilized. 192-bit key lead to 12 rounds, while 14 rounds is used when 256-bit key is applied.
+
+
+There are four major parts inside AES; \textit{KeyExpansions}, \textit{InitialRound}, \textit{Rounds} and \textit{FinalRound}. In KeyExpansions, the round keys are generated using Rijndael's key schedule based on the AES key.
+Inside a normal round, there are four stages required to do; \textit{SubBytes}, \textit{ShiftRows}, \textit{MixColumns}, and \textit{AddRoundKey}.
+SubBytes refers to a non-linear substitution procedure using a lookup table. ShiftRows means an act of shifting cyclically the last three rows of the state. MixColumns contains a mixing activity on the columns of the state.
+AddRoundKey involves a fusing process of each byte of the state with a block of the round key utilizing bitwise xor operation. The difference between InitialRound, Rounds, and FinalRound is InitialRound only contain AddRoundKey, FinalRound does not has MixColumns inside, and Rounds just filled with those four stages.
+
+An encryption can be done by following all these four parts. To convert ciphertext into the original plaintext, it's only required to apply a set of reverse rounds using the same encryption key.
+
+\section{Key Derivation Function}
+Besides the encryption algorithm, a \textit{key derivation function} (KDF) is one of the most utilized components of cryptographic applications. Its importance is due to its ability to convert a stable secret, usually contain sufficient amount of randomness but non-uniformly distributed,  $Z$ into one or more cryptographically strong secret keys $k\ \epsilon\ {0,1}^K$.
+Cryptographically strong itself refers to indistinguishability by reasonable computation from a random uniform string with similar length \cite{key_derivation}.
+KDF can also be referred as a strong extractor.
+
+A popular example of KDF is a keyed cryptographic hash function. The difference between keyed cryptographic hash function and a normal hash function is a keyed hash function requires an additional \textit{salt} as an input (besides the key to derived).
+There are three requirements need to be fulfilled as a secure cryptographic hash function; \textit{preimage resistant, second preimage resistant, and collision resistant}. Preimage resistant means it should be hard to find a message with a given hash value. In second preimage resistant, if one message is provided, it should be hard to find another message with the same hash value.
+Last, collision resistant refers to difficultness to find two messages with the same hash value.
+
+\section{Multi-factor Authentication}
+\label{chp:2.mfa}
+As mentioned in Section \ref{chapter2.1}, authentication refers to assuring any piece of information is correctly identified. Authentication can be done using any of these elements/factors; knowledge (a piece of information which only known by the user, e.g. password), possession (any object which only owned by the user, e.g. RFID card), or inherence (something which uniquely describe the user, e.g. fingerprint). If two or more elements are combined together for authentication, this leads to \textit{multi-factor authentication}. To understand the security level among all possible combinations, Figure \ref{fig:authentication} is provided. The highest possible security level is when these three factors are combined together.
+
+\begin{figure}[tph!]
+    \centerline{\includegraphics[width={0.5\textwidth}]{images/authentication}}
+    \caption{Authentication systems security levels: (1) knowledge; (2) possession; (3) knowledge + inherence; (4) inherence; (5) possession + inherence; (6) knowledge + inherence; (7) knowledge + possesion + inherence \cite{Galdi2018ExploringNA}.}
+    \label{fig:authentication}
+\end{figure}
+
+
+\section{PUF}
+A physical unclonable function is an entity that utilizes manufacturing variability to produce a device-specific output. The idea to build PUF arise from the fact that even though the mask and manufacturing process is the same among different ICs, each IC is actually slightly different due to normal manufacturing variability \cite{retrospective}. PUFs leverage this variability to derive secret information that is unique to the chip. This secret can be referred as a silicon biometric.
+In addition, due to the manufacturing variability that defines the secret, one cannot manufacture two identical chips, even with full knowledge of the chip’s design. PUF architectures exploit manufacturing variability in multiple ways. For example, one can utilize the effect of gate delay, the power-on state of SRAM, threshold voltages, and many other physical characteristics to derive the secret.
+
+Due to this feature, PUFs are a promising innovative primitive that is used for authentication and secret key storage without the requirement of secure hardware. Currently, the best practice for providing a secure memory or authentication source in such a mobile system is to place a secret key in a nonvolatile electrically erasable programmable read-only memory (EEPROM) or battery-backed static random-access memory (SRAM) and use hardware cryptographic operations such as digital signatures or encryption.
+
+There are two main parts of PUF, physical part, and operational part. Physical part refers to a physical system that is very difficult to clone due to uncontrollable process variations during manufacturing. Operational part means a set of \textit{challenges} (PUF input) $C_i$ has to be available to which the system responds with a set of sufficiently different \textit{responses} (PUF output) $R_i$. This combination of challenge and response is called \textit{challenge-response-pair} (CRP).
+\begin{equation}
+R_i <- PUF(C_i)
+\end{equation}
+
+The common application on using PUF usually requires two phases; the first phase is called \textit{enrollment} and the second one is usually referred as \textit{validation}. In enrollment, a number of CRPs are gathered from a PUF and then stored. In validation phase, a challenge from the stored CRPs is given to the PUF. Afterwards, the PUF response from this challenge is compared with the corresponding response from the database. The response is considered to be valid if there's a CRP from the stored CRPs related to this challenge and response. The validation phase can also be referred as \textit{reproduction} phase since this phase involves a reconstruction of a response given a challenge.
+
+According to \cite{retrospective}, to be qualified as PUF, a device should fulfill several characteristics below :
+\begin{itemize}
+\item \textit{Reliable}: A response to the same challenge should be able to be reproduced over time and over a various range of conditions.
+\item \textit{Unpredictable}: A response to a challenge on a PUF device should be unrelated to a response to another challenge from the same device or the same challenge from a different device.
+\item \textit{Unclonable}: Challenge-response pairs mapping of a device should be unique and cannot be duplicated.
+\item \textit{Physically Unbreakable}: Any physical attempts to maliciously modify the device will result in malfunction or permanent damage.
+\end{itemize}
+
+\subsection{PUFs Classification} \label{lbl:puf-classification}
+
+Based on the number CRPs, PUFs can be divided into two categories \cite{Srivathsa2017SecureAE}:
+\begin{itemize}
+\item Strong PUFs\newline
+Strong PUFs can be identified by having a large number of CRPs. Strong PUFs typically used for authentication.
+\item Weak PUFs\newline
+Contrary to strong PUFs, weak PUFs only have a small number of CRPs. Weak PUFs commonly used for key storage.
+\end{itemize}
+
+Besides the number of CRPs, PUFs can also be categorized based on their physical design. There are two major categories, extrinsic and intrinsic.
+
+Extrinsic means that it needs extra hardware added to the PUF component. The extra hardware is required to access the PUF component. There are two subcategories of extrinsic PUFs, non-electronic and analog electronic PUFs. Some examples in non-electronic PUFs are optical PUF, paper PUF, CD PUF, RF-DNA PUF, magnetic PUF, and acoustic PUF. Some design instances in analog electronic PUFs are VT PUF, power distribution PUF, coating PUF, and LC PUF.
+
+In intrinsic, the PUF component has to be available naturally during the manufacturing process. In addition, PUF and the measurement equipment should be fully integrated with intrinsic PUF. There are two subcategories in intrinsic PUFs, delay based and memory based PUFs. An example of delay based PUF is arbiter PUF. The main principle of arbiter PUF is by presenting a race condition on two different routes on a chip where the winner will be decided by an arbiter circuit \cite{study_of_the_art_puf}. As in memory based PUFs, some examples of this design are SRAM PUF, butterfly PUF and latch PUF. SRAM PUF utilized the random physical mismatch in the cell introduced by manufacturing variability which controls the power-up behavior (can be zero, one, or no preference) \cite{study_of_the_art_puf}. Butterfly PUF use the effect of cross coupling between two transparent data latches. Using the functionalities of the latches, an unsteady condition can be initiated after which the circuit resolves back to one of the two stable states \cite{study_of_the_art_puf}. In latch PUF, the concept is based on using two NOR gates which are cross-coupled. These gates will lead to a stable condition depending on the internal discrepancy between the electronic components.
+
+\subsection{Hamming Distances as an Identification Helper}
+
+As explained before, PUF main purpose is dedicated for identification, shown by having a device-specific output. In PUF, \textit{hamming distance} is commonly used as a way to help defining this idea. Hamming distance itself is the number of positions at which the corresponding symbols are different on two equal length strings \cite{hamming_distance}.
+There are two types of hamming distance utilized, intra-chip and inter-chip hamming distance. Inter-chip hamming distance is the distance between two responses resulting from giving a similar challenge to two distinct PUF devices \cite{study_of_the_art_puf}. Intra-chip hamming distance refers to the difference between the two responses resulting from applying a challenge twice to a PUF device \cite{modeling_sram}. To ease the identification purpose, fractional hamming distance is also introduced. Fractional hamming distance is the number of differences between two strings divided by the length of the bit strings.
+In ideal PUFs, the intra-chip fractional hamming distance (HD\textsubscript{intra}) is 0\% and inter-chip fractional hamming distance (HD\textsubscript{inter}) is 50\%. Due to noises, normally PUF devices has HD\textsubscript{intra} $\leq$ 10\% and HD\textsubscript{inter} ~50\%. The identification goal will not be achieved if there is an overlap between HD\textsubscript{intra} and HD\textsubscript{inter} \cite{impact_aging}. Overlap will happen if the HD\textsubscript{intra} is too large and HD\textsubscript{inter} is too small, e.g. HD\textsubscript{intra} is 35\% and HD\textsubscript{inter} is 30\%.
+
+\subsection{Helper Data Algorithms and Fuzzy Extractor}
+
+There are two issues if PUF raw responses are used as a key in cryptographic primitive. First, both weak and strong PUFs rely on analog physical properties of the fabricated circuit to derive secret information. Naturally, these analog properties have noise and variability associated with them.
+This can be a problem due to sensitivity of cryptographic functions on noises of their inputs.
+Another issue is the PUF raw responses usually are not uniformly distributed, which makes it an unqualified as a cryptographically secure key. These two issues can be solved using \textit{Helper Data Algorithm} (HDA). One can also refer Helper Data Algorithm as \textit{fuzzy extractor} since both are capable of converting noisy information into keys usable for any cryptographic application \cite{efficient_helper} \cite{fuzzy_extractor}.
+
+Fuzzy extractor solves both issues mentioned above by using two phases, \textit{information reconciliation} and \textit{privacy amplification}. In information reconciliation phase, possible bit errors are corrected to form a robust bit string \cite{soft_decision}. Information reconciliation is tightly related to error correction. In fact, a procedure to do information reconciliation based on error-correcting codes is called code-offset technique \cite{fuzzy_extractor}. Using code-offset technique, one should be able to reconstruct a bit string \textit{w} from a noisy version \textit{w'} as long as the Hamming distance between \textit{w}and \textit{w'} is limited to \textit{t}.
+The second phase, privacy amplification, is a process to evolve this robust bit string into a full entropy key. Privacy amplification, also can be called as randomness extraction \cite{information_reconciliation}, can be done by utilizing two-way hash function.
+
+Beside these two phases, fuzzy extractor also consists of two procedures, \large{Gen} and \large{Rep}. \large{Gen}, stands for \textit{generation}, is a probabilistic procedure which outputs an "extracted" string / key (secret) $R$ and a string (public) \textit{helper data} $P$ on input fuzzy data $w$. \large{Rep}, stands for \textit{reproduction}, is a deterministic function capable of recovering secret key $R$ from the string \textit{helper data} $P$ and any vector $w'$ as long as the Hamming distance between \textit{w}and \textit{w'} is limited to \textit{t}.
+In \cite{stable_key_generation}, Taniguchi et. al illustrated the generation and reproduction procedure of fuzzy extractor on PUF which is shown in Figure \ref{fig:scheme-key-generator}.
+
+\begin{figure}[tph!]
+    \centerline{\includegraphics[width={0.8\textwidth}]{images/scheme_stable_key_generation}}
+    \caption{Two procedures inside fuzzy extractor; generation and reproduction \cite{stable_key_generation}.}
+    \label{fig:scheme-key-generator}
+\end{figure}
+
+\subsection{Error Correcting Codes}
+To handle noises occurred inside a PUF, error-correcting codes (ECC) is employed.
+Error-correcting codes are a class of schemes for encoding messages in an attempt to enable message recovery when there is noise introduced in the sending or receiving of the message. ECC can be divided into two subcategories, hard-decision and soft-decision. Hard-decision works on a predetermined set of values (usually 0 or 1 in a binary code), while a soft-decision decoder may take inputs on a span of values in-between (usually refers to float value).
+
+There are some well-known ECC, such as in hard-decision code, Reed-Solomon code and BCH code; while in soft-decision, Viterbi code and turbo code. Soft-decision code has an advantage over hard-decision code where it can process extra information which indicates the reliability of each input data point and used to form better estimates of the original data. But it has drawback where one should provide a probability function on the data (on SRAM, a probability function on each cell should be provided) to enable a good decoding result. This is a problem if applied on this thesis goal where the system should work on any SRAM off-the-market. Calculating the probability on each SRAM cell will take an extra step, overcomplicate the system and the procedure on using the constructed system. Thus, the hard-decision code is preferred.
+
+One of the popular hard-decision error correcting code is BCH codes. BCH, stands for \textit{Bose–Chaudhuri–Hocquenghem}, codes are a family of cyclic error correcting codes which constructed using polynomials over a finite field and work in a binary field.
+BCH codes are a very flexible set of codes in that within certain bounds there is a great amount of choice in code parameters and are relatively efficient in message length and error correction. The code parameters are as follows:
+\begin{itemize}
+\item $q$: The number of symbols used (e.g., in binary field, $q = 2$)
+\item $m$: The power to which to raise $q$ to generate a Galois Field for the construction of the code.
+\item $d$: The minimum Hamming distance between distinct codewords.
+\end{itemize}
+
+These parameters lead to several derived parameters which are standard parameters of linear codes:
+\begin{itemize}
+\item $n$: The block length of the code; for our special case, $n = q*m – 1$
+\item $t$: The number of errors that can be corrected, $d \geq 2t + 1$
+\item $k$: The number of message bits in a codeword, $k \geq n - mt$
+\end{itemize}
+
+Both BCH codes and Reed-Solomon codes have the capability to correct multiple errors. Reed-Solomon codes are also a flexible ECC and have similar parameters as BCH codes, e.g. $n$, $k$, $d$.  Unlike BCH codes, Reed-Solomon codes can work in both binary and non-binary fields. Reed-Solomon codes also perform better in correcting burst errors while BCH codes are better at fixing random errors. BCH codes have an advantage where it requires less computing resource when working on the same parameter compared to Reed-Solomon codes.
+
+\input{chapter/sram_puf}

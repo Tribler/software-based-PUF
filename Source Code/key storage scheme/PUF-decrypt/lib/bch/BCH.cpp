@@ -415,8 +415,8 @@ BCH::decode_bch(uint8_t *in, uint8_t *result)
                 /* no. roots = degree of elp hence <= t errors */
                 for (i = 0; i < l[u]; i++)
                     input[loc[i]] ^= 1;
-            else    /* elp has degree >t hence cannot solve */
-                Serial.println("Incomplete decoding: errors detected\n");
+            // else    /* elp has degree >t hence cannot solve */
+            //     Serial.println("Incomplete decoding: errors detected\n");
         }
     }
 

@@ -242,6 +242,7 @@ class SerialPUF:
             return r
         elif res[1] == 50:
             print("NEW CHALLENGES")
+            return res[2]
             self.has_reply = True
         elif res[1] == 51:
             # print("APPEND CHALLENGES")
@@ -401,7 +402,7 @@ class SerialPUF:
         """
         self.send_command_new_challenges()
         res = self.check_serial_data()
-        self.process_command(res)
+        return self.process_command(res)
 
     def append_challenges_on_sd(self, address):
         """
@@ -425,7 +426,10 @@ class SerialPUF:
         Write a challenge to microSD through Arduino
         :param challenges:
         """
-        self.new_challenges_on_sd()
+        a = self.new_challenges_on_sd()
+        if a == 0:
+            print("Error opening challenge file on microSD")
+            exit(1)
         for i in challenges:
             self.append_challenges_on_sd(int(i))
         self.close_challenges_on_sd()

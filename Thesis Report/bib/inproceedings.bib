@@ -1,0 +1,342 @@
+@comment{
+  An article in a conference proceedings
+
+  required fields: author, title, booktitle, year
+  optional fields: editor, volume XOR number, series, pages, address, month, organization, publisher, note
+
+  author       =   "",
+  title        =   "",
+  booktitle    =   "",
+  year         =   "",
+  editor       =   "",
+  volume       =   "",
+  number       =   "",
+  series       =   "",
+  pages        =   "",
+  address      =   "",
+  month        =   "",
+  organization =   "",
+  publisher    =   "",
+  note         =   ""
+}
+@InProceedings{modeling_sram,
+  author={M. Cortez and A. Dargar and S. Hamdioui and G. J. Schrijen},
+  booktitle={2012 IEEE International Symposium on Defect and Fault Tolerance in VLSI and Nanotechnology Systems (DFT)},
+  title={Modeling SRAM start-up behavior for Physical Unclonable Functions},
+  year={2012},
+  volume={},
+  number={},
+  pages={1-6},
+  keywords={SRAM chips;cryptography;integrated circuit measurement;integrated circuit modelling;integrated circuit noise;SNM;SRAM PUF;SRAM start-up behavior modelling;SUV;cryptographic key storage;deep-submicron process variations;hardware intrinsic security;industrial measurements;physical unclonable functions;real memory devices;sensitivity parameters;start-up values analysis;static noise margin;threshold voltage variation;Inverters;MOS devices;Simulation;Threshold voltage;Transistors},
+  doi={10.1109/DFT.2012.6378190},
+  ISSN={1550-5774},
+  month={Oct},}
+@InProceedings{temporal_performance,
+  author={B. C. Paul and Kunhyuk Kang and H. Kufluoglu and M. A. Alam and K. Roy},
+  booktitle={Proceedings of the Design Automation Test in Europe Conference},
+  title={Temporal Performance Degradation under NBTI: Estimation and Design for Improved Reliability of Nanoscale Circuits},
+  year={2006},
+  volume={1},
+  number={},
+  pages={1-6},
+  keywords={integrated circuit reliability;logic circuits;logic design;nanoelectronics;10 years;logic circuits;nanoscale circuit reliability;negative bias temperature instability;temporal performance degradation;temporal reliability degradation;threshold voltage;Analytical models;Degradation;Delay estimation;Digital circuits;MOSFETs;Niobium compounds;Performance analysis;Reliability engineering;Threshold voltage;Titanium compounds},
+  doi={10.1109/DATE.2006.244119},
+  ISSN={1530-1591},
+  month={March},}
+@INPROCEEDINGS{soft_decision,
+  author={R. Maes and P. Tuyls and I. Verbauwhede},
+  booktitle={2009 IEEE International Symposium on Information Theory},
+  title={A soft decision helper data algorithm for SRAM PUFs},
+  year={2009},
+  volume={},
+  number={},
+  pages={2101-2105},
+  keywords={SRAM chips;cryptography;entropy;fuzzy systems;logic design;SRAM;cryptographic key generation;fuzzy secret minentropy;physically unclonable functions;soft decision helper data algorithm;soft decision information;Biometrics;Coatings;Counterfeiting;Cryptography;Data mining;Hardware;Humans;Information security;Manufacturing;Random access memory},
+  doi={10.1109/ISIT.2009.5205263},
+  ISSN={2157-8095},
+  month={June},}
+@InProceedings{information_reconciliation,
+  author="Renner, Renato
+  and Wolf, Stefan",
+  editor="Roy, Bimal",
+  title="Simple and Tight Bounds for Information Reconciliation and Privacy Amplification",
+  booktitle="Advances in Cryptology - ASIACRYPT 2005",
+  year="2005",
+  publisher="Springer Berlin Heidelberg",
+  address="Berlin, Heidelberg",
+  pages="199--216",
+  abstract="Shannon entropy is a useful and important measure in information processing, for instance, data compression or randomness extraction, under the assumption---which can typically safely be made in communication theory---that a certain random experiment is independently repeated many times. In cryptography, however, where a system's working has to be proven with respect to a malicious adversary, this assumption usually translates to a restriction on the latter's knowledge or behavior and is generally not satisfied. An example is quantum key agreement, where the adversary can attack each particle sent through the quantum channel differently or even carry out coherent attacks, combining a number of particles together. In information-theoretic key agreement, the central functionalities of information reconciliation and privacy amplification have, therefore, been extensively studied in the scenario of general distributions: Partial solutions have been given, but the obtained bounds are arbitrarily far from tight, and a full analysis appeared to be rather involved to do. We show that, actually, the general case is not more difficult than the scenario of independent repetitions---in fact, given our new point of view, even simpler. When one analyzes the possible efficiency of data compression and randomness extraction in the case of independent repetitions, then Shannon entropy H is the answer. We show that H can, in these two contexts, be generalized to two very simple quantities---                                                                          {\$}H{\_}0^{\backslash}epsilon{\$}                 and                                                                           {\$}H{\_}{\backslash}infty^{\backslash}epsilon{\$}                , called smooth R{\'e}nyi entropies---which are tight bounds for data compression (hence, information reconciliation) and randomness extraction (privacy amplification), respectively. It is shown that the two new quantities, and related notions, do not only extend Shannon entropy in the described contexts, but they also share central properties of the latter such as the chain rule as well as sub-additivity and monotonicity.",
+  isbn="978-3-540-32267-2"
+  }
+@InProceedings{efficient_helper,
+  author="B{\"o}sch, Christoph
+  and Guajardo, Jorge
+  and Sadeghi, Ahmad-Reza
+  and Shokrollahi, Jamshid
+  and Tuyls, Pim",
+  editor="Oswald, Elisabeth
+  and Rohatgi, Pankaj",
+  title="Efficient Helper Data Key Extractor on FPGAs",
+  booktitle="Cryptographic Hardware and Embedded Systems -- CHES 2008",
+  year="2008",
+  publisher="Springer Berlin Heidelberg",
+  address="Berlin, Heidelberg",
+  pages="181--197",
+  abstract="Physical Unclonable Functions (PUFs) have properties that make them very attractive for a variety of security-related applications. Due to their inherent dependency on the physical properties of the device that contains them, they can be used to uniquely bind an application to a particular device for the purpose of IP protection. This is crucial for the protection of FPGA applications against illegal copying and distribution. In order to exploit the physical nature of PUFs for reliable cryptography a so-called helper data algorithm or fuzzy extractor is used to generate cryptographic keys with appropriate entropy from noisy and non-uniform random PUF responses. In this paper we present for the first time efficient implementations of fuzzy extractors on FPGAs where the efficiency is measured in terms of required hardware resources. This fills the gap of the missing building block for a full FPGA IP protection solution. Moreover, in this context we propose new architectures for the decoders of Reed-Muller and Golay codes, and show that our solutions are very attractive from both the area and error correction capability points of view.",
+  isbn="978-3-540-85053-3"
+  }
+@InProceedings{fuzzy_extractor,
+  author="Dodis, Yevgeniy
+  and Reyzin, Leonid
+  and Smith, Adam",
+  editor="Cachin, Christian
+  and Camenisch, Jan L.",
+  title="Fuzzy Extractors: How to Generate Strong Keys from Biometrics and Other Noisy Data",
+  booktitle="Advances in Cryptology - EUROCRYPT 2004",
+  year="2004",
+  publisher="Springer Berlin Heidelberg",
+  address="Berlin, Heidelberg",
+  pages="523--540",
+  abstract="We provide formal definitions and efficient secure techniques for                                       turning biometric information into keys usable for any cryptographic application, and                                                        reliably and securely authenticating biometric data.                                                ",
+  isbn="978-3-540-24676-3"
+  }
+@INPROCEEDINGS{cryptographic_key_generation,
+  author={H. Kang and Y. Hori and T. Katashita and M. Hagiwara and K. Iwamura},
+  booktitle={16th International Conference on Advanced Communication Technology},
+  title={Cryptographic key generation from PUF data using efficient fuzzy extractors},
+  year={2014},
+  volume={},
+  number={},
+  pages={23-26},
+  keywords={Hamming codes;cryptography;error correction codes;fuzzy set theory;BCH code;Hamming distance;PUF data;biometrics;cryptographic key generation;efficient fuzzy extractors;error correcting code;information-theoretic security;physical unclonable functions;reliable bit strings;Cryptography;Data mining;Entropy;Hamming distance;High definition video;Indexes;Reliability;Arbiter PUF;Fuzzy Extractor;Physical Unclonable Functions},
+  doi={10.1109/ICACT.2014.6778915},
+  ISSN={1738-9445},
+  month={Feb},}
+@InProceedings{cryptographic_key_generation_old,
+  author="Kang, Hyunho
+  and Hori, Yohei
+  and Katashita, Toshihiro
+  and Hagiwara, Manabu
+  and Iwamura, Keiichi",
+  editor="Jeong, Young-Sik
+  and Park, Young-Ho
+  and Hsu, Ching-Hsien (Robert)
+  and Park, James J. (Jong Hyuk)",
+  title="Performance Analysis for PUF Data Using Fuzzy Extractor",
+  booktitle="Ubiquitous Information Technologies and Applications",
+  year="2014",
+  publisher="Springer Berlin Heidelberg",
+  address="Berlin, Heidelberg",
+  pages="277--284",
+  abstract="The extraction of a stable signal from noisy data is very useful in applications that aim to combine it with a cryptographic key. An approach based on an error correcting code was proposed by Dodis et al., which is known as a fuzzy extractor. Physical unclonable functions (PUFs) generate device-specific data streams, although PUFs are noisy functions. In this paper, we describe a method for preparing a PUF key during fuzzy extractor implementation. The experimental results showed that all possible combinations of input message length and the number of correctable errors were tested for a BCH code with codeword length N, which was the length of the PUF responses.",
+  isbn="978-3-642-41671-2"
+}
+
+@INPROCEEDINGS{stable_key_generation,
+  author={M. Taniguchi and M. Shiozaki and H. Kubo and T. Fujino},
+  booktitle={2013 IEEE 2nd Global Conference on Consumer Electronics (GCCE)},
+  title={A stable key generation from PUF responses with a Fuzzy Extractor for cryptographic authentications},
+  year={2013},
+  volume={},
+  number={},
+  pages={525-527},
+  keywords={CMOS integrated circuits;cryptography;CMOS technology;PUF response;RG-DTM PUF;block error rate;complimentary metal oxide semiconductor technology;cryptographic authentications;fuzzy extractor;physical unclonable function;size 0.18 mum;soft-decision FE;stable key generation;voltage fluctuation;Authentication;Error analysis;Error correction;Fluctuations;Iron;Voltage fluctuations;Environmental Fluctuation;Fuzzy Extractor;Key Generation;Physical Unclonable Function;Soft-Decision},
+  doi={10.1109/GCCE.2013.6664910},
+  ISSN={2378-8143},
+  month={Oct},}
+@InProceedings{key_derivation,
+  author="Krawczyk, Hugo",
+  editor="Rabin, Tal",
+  title="Cryptographic Extraction and Key Derivation: The HKDF Scheme",
+  booktitle="Advances in Cryptology -- CRYPTO 2010",
+  year="2010",
+  publisher="Springer Berlin Heidelberg",
+  address="Berlin, Heidelberg",
+  pages="631--648",
+  abstract="In spite of the central role of key derivation functions (KDF) in applied cryptography, there has been little formal work addressing the design and analysis of general multi-purpose KDFs. In practice, most KDFs (including those widely standardized) follow ad-hoc approaches that treat cryptographic hash functions as perfectly random functions. In this paper we close some gaps between theory and practice by contributing to the study and engineering of KDFs in several ways. We provide detailed rationale for the design of KDFs based on the extract-then-expand approach; we present the first general and rigorous definition of KDFs and their security that we base on the notion of computational extractors; we specify a concrete fully practical KDF based on the HMAC construction; and we provide an analysis of this construction based on the extraction and pseudorandom properties of HMAC. The resultant KDF design can support a large variety of KDF applications under suitable assumptions on the underlying hash function; particular attention and effort is devoted to minimizing these assumptions as much as possible for each usage scenario.",
+  isbn="978-3-642-14623-7"
+  }
+@proceedings{chaum,
+ editor = {Blakley, G R and Chaum, David},
+ title = {Proceedings of CRYPTO 84 on Advances in Cryptology},
+ year = {1985},
+ isbn = {0-387-15658-5},
+ location = {Santa Barbara, California, USA},
+ publisher = {Springer-Verlag New York, Inc.},
+ address = {New York, NY, USA},
+}
+@inproceedings{Srivathsa2017SecureAE,
+  title={Secure and Energy Efficient Physical Unclonable Functions},
+  author={Sudheendra Srivathsa and Sudheendra K. Srivathsa and Wayne P. Burleson},
+  year={2017}
+}
+@inproceedings{Suh:2007:PUF:1278480.1278484,
+ author = {Suh, G. Edward and Devadas, Srinivas},
+ title = {Physical Unclonable Functions for Device Authentication and Secret Key Generation},
+ booktitle = {Proceedings of the 44th Annual Design Automation Conference},
+ series = {DAC '07},
+ year = {2007},
+ isbn = {978-1-59593-627-1},
+ location = {San Diego, California},
+ pages = {9--14},
+ numpages = {6},
+ url = {http://doi.acm.org/10.1145/1278480.1278484},
+ doi = {10.1145/1278480.1278484},
+ acmid = {1278484},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {IC authentication, secret keys},
+}
+@InProceedings{10.1007/978-3-642-33027-8_18,
+author="Maes, Roel
+and Van Herrewege, Anthony
+and Verbauwhede, Ingrid",
+editor="Prouff, Emmanuel
+and Schaumont, Patrick",
+title="PUFKY: A Fully Functional PUF-Based Cryptographic Key Generator",
+booktitle="Cryptographic Hardware and Embedded Systems -- CHES 2012",
+year="2012",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="302--319",
+abstract="We present PUFKY: a practical and modular design for a cryptographic key generator based on a Physically Unclonable Function (PUF). A fully functional reference implementation is developed and successfully evaluated on a substantial set of FPGA devices. It uses a highly optimized ring oscillator PUF (ROPUF) design, producing responses with up to 99{\%} entropy. A very high key reliability is guaranteed by a syndrome construction secure sketch using an efficient and extremely low-overhead BCH decoder. This first complete implementation of a PUF-based key generator, including a PUF, a BCH decoder and a cryptographic entropy accumulator, utilizes merely 17{\%} (1162slices) of the available resources on a low-end FPGA, of which 82{\%} are occupied by the ROPUF and only 18{\%} by the key generation logic. PUFKY is able to produce a cryptographically secure 128-bit key with a failure rate <{\thinspace}10−{\thinspace}9 in 5.62ms. The design's modularity allows for rapid and scalable adaptations for other PUF implementations or for alternative key requirements. The presented PUFKY core is immediately deployable in an embedded system, e.g. by connecting it to an embedded microcontroller through a convenient bus interface.",
+isbn="978-3-642-33027-8"
+}
+@InProceedings{10.1007/978-3-642-04474-8_22,
+author="Frikken, Keith B.
+and Blanton, Marina
+and Atallah, Mikhail J.",
+editor="Samarati, Pierangela
+and Yung, Moti
+and Martinelli, Fabio
+and Ardagna, Claudio A.",
+title="Robust Authentication Using Physically Unclonable Functions",
+booktitle="Information Security",
+year="2009",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="262--277",
+abstract="In this work we utilize a physically unclonable function (PUF) to improve resilience of authentication protocols to various types of compromise. As an example application, we consider users who authenticate at an ATM using their bank-issued PUF and a password. We present a scheme that is provably secure and achieves strong security properties. In particular, we ensure that (i) the user is unable to authenticate without her device; (ii) the device cannot be used by someone else to successfully authenticate as the user; (iii) the device cannot be duplicated (e.g., by a bank employee); (iv) an adversary with full access to the bank's personal and authentication records is unable to impersonate the user even if he obtains access to the device before and/or after the setup; (v) the device does not need to store any information. We also give an extension that endows the solution with emergency capabilities: if a user is coerced into opening her secrets and giving the coercer full access to the device, she gives the coercer alternative secrets whose use notifies the bank of the coercion in such a way that the coercer is unable to distinguish between emergency and normal operation of the protocol.",
+isbn="978-3-642-04474-8"
+}
+@InProceedings{10.1007/978-3-642-10838-9_22,
+author="Busch, Heike
+and Katzenbeisser, Stefan
+and Baecher, Paul",
+editor="Youm, Heung Youl
+and Yung, Moti",
+title="PUF-Based Authentication Protocols -- Revisited",
+booktitle="Information Security Applications",
+year="2009",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="296--308",
+abstract="Physical Unclonable Functions (                                                                          {\$}{\{}{\backslash}emph{\{}PUF{\}}{\}}{\$}                ) are physical objects that are unique and unclonable.                                                                           {\$}{\{}{\backslash}emph{\{}PUF{\}}{\}}{\$}                s were used in the past to construct authentication protocols secure against physical attackers. However, in this paper we show that known constructions are not fully secure if attackers have raw access to the                                                                           {\$}{\{}{\backslash}emph{\{}PUF{\}}{\}}{\$}                 for a short period of time. We therefore propose a new, stronger, and more realistic attacker model. Subsequently, we suggest two constructions of authentication protocols, which are secure against physical attackers in the new model and which only need symmetric primitives.",
+isbn="978-3-642-10838-9"
+}
+@InProceedings{10.1007/978-3-319-29078-2_5,
+author="Resende, Amanda C. Davi
+and Mochetti, Karina
+and Aranha, Diego F.",
+editor="G{\"u}neysu, Tim
+and Leander, Gregor
+and Moradi, Amir",
+title="PUF-Based Mutual Multifactor Entity and Transaction Authentication for Secure Banking",
+booktitle="Lightweight Cryptography for Security and Privacy",
+year="2016",
+publisher="Springer International Publishing",
+address="Cham",
+pages="77--96",
+abstract="In this work we propose a protocol combining a Physical Unclonable Function (PUF) with Password-based Authenticated Key Exchange (PAKE). The resulting protocol provides mutual multifactor authentication between client and server and establishes a session key between the authenticated parties, important features that were not found simultaneously in the literature of PUF-based authentication. The combination can be adapted to support a panic password which allows the client to notify the server in case of emergency. Moreover, a novel protocol for two-factor transaction authentication is proposed. This ensures that only parties authenticated in the current session can realize valid bank transactions.",
+isbn="978-3-319-29078-2"
+}
+@InProceedings{Stanzione,
+author = {Stanzione, S and Iannaccone, Giuseppe},
+year = {2009},
+month = {07},
+pages = {116 - 117},
+title = {Silicon Physical Unclonable Function resistant to a $10^25$-trial brute force attack in 90 nm CMOS}
+}
+@InProceedings{10.1007/11894063_29,
+author="Tuyls, Pim
+and Schrijen, Geert-Jan
+and {\v{S}}kori{\'{c}}, Boris
+and van Geloven, Jan
+and Verhaegh, Nynke
+and Wolters, Rob",
+editor="Goubin, Louis
+and Matsui, Mitsuru",
+title="Read-Proof Hardware from Protective Coatings",
+booktitle="Cryptographic Hardware and Embedded Systems - CHES 2006",
+year="2006",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="369--383",
+abstract="In cryptography it is assumed that adversaries only have black box access to the secret keys of honest parties. In real life, however, the black box approach is not sufficient because attackers have access to many physical means that enable them to derive information on the secret keys. In order to limit the attacker's ability to read out secret information, the concept of Algorithmic Tamper Proof (ATP) security is needed as put forth by Gennaro, Lysyanskaya, Malkin, Micali and Rabin. An essential component to achieve ATP security is read-proof hardware. In this paper, we develop an implementation of read-proof hardware that is resistant against invasive attacks. The construction is based on a hardware and a cryptographic part. The hardware consists of a protective coating that contains a lot of randomness. By performing measurements on the coating a fingerprint is derived. The cryptographic part consists of a Fuzzy Extractor that turns this fingerprint into a secure key. Hence no key is present in the non-volatile memory of the device. It is only constructed at the time when needed, and deleted afterwards. A practical implementation of the hardware and the cryptographic part is given. Finally, experimental evidence is given that an invasive attack on an IC equipped with this coating, reveals only a small amount of information on the key.",
+isbn="978-3-540-46561-4"
+}
+@InProceedings{10.1007/978-3-319-19962-7_3,
+author="Tao, Biaoshuai
+and Wu, Hongjun",
+editor="Foo, Ernest
+and Stebila, Douglas",
+title="Improving the Biclique Cryptanalysis of AES",
+booktitle="Information Security and Privacy",
+year="2015",
+publisher="Springer International Publishing",
+address="Cham",
+pages="39--56",
+}
+@inproceedings{Juels:1999:FCS:319709.319714,
+ author = {Juels, Ari and Wattenberg, Martin},
+ title = {A Fuzzy Commitment Scheme},
+ booktitle = {Proceedings of the 6th ACM Conference on Computer and Communications Security},
+ series = {CCS '99},
+ year = {1999},
+ isbn = {1-58113-148-8},
+ location = {Kent Ridge Digital Labs, Singapore},
+ pages = {28--36},
+ numpages = {9},
+ url = {http://doi.acm.org/10.1145/319709.319714},
+ doi = {10.1145/319709.319714},
+ acmid = {319714},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+}
+@INPROCEEDINGS{8006840,
+author={L. Kusters and T. Ignatenko and F. M. J. Willems and R. Maes and E. van der Sluis and G. Selimis},
+booktitle={2017 IEEE International Symposium on Information Theory (ISIT)},
+title={Security of helper data schemes for SRAM-PUF in multiple enrollment scenarios},
+year={2017},
+volume={},
+number={},
+pages={1803-1807},
+keywords={SRAM chips;fuzzy set theory;private key cryptography;SRAM-PUF observations;fuzzy commitment;helper data schemes;multiple enrollment scenarios;multiple secret keys;mutual information;secrecy capacity;syndrome-based schemes;zero secrecy leakage;Cryptography;Decoding;Manganese;SRAM cells},
+doi={10.1109/ISIT.2017.8006840},
+ISSN={},
+month={June}
+}
+@INPROCEEDINGS{6865541,
+author={A. Garg and T. T. Kim},
+booktitle={2014 IEEE International Symposium on Circuits and Systems (ISCAS)},
+title={Design of SRAM PUF with improved uniformity and reliability utilizing device aging effect},
+year={2014},
+volume={},
+number={},
+pages={1941-1944},
+keywords={SRAM chips;integrated circuit reliability;negative bias temperature instability;NBTI;SRAM PUF;SRAM physical unclonable function;aging effects;aging polarity;environmental fluctuations;exact replica devices;silicon fabrication process;startup pattern;Aging;Arrays;Inverters;Reliability;SRAM cells;Security;Physical Unclonable Function (PUF);Static Random Access Memory (SRAM);device aging},
+doi={10.1109/ISCAS.2014.6865541},
+ISSN={0271-4302},
+month={June},}
+@INPROCEEDINGS{7102498,
+author={M. Cortez and S. Hamdioui and R. Ishihara},
+booktitle={2015 16th Latin-American Test Symposium (LATS)},
+title={Design dependent SRAM PUF robustness analysis},
+year={2015},
+volume={},
+number={},
+pages={1-6},
+keywords={SRAM chips;integrated circuit design;low-power electronics;GP design;LP design;SRAM PUF robustness analysis;circuit simulation;general purpose design;low-power design;size 32 nm;size 45 nm;temperature ramp-up time;voltage ramp-up time;Decision support systems;Erbium;Error correction codes;Measurement;Nonvolatile memory;Random access memory;Robustness;PUF-based system;Robustness;SRAM PUF},
+doi={10.1109/LATW.2015.7102498},
+ISSN={2373-0862},
+month={March},}

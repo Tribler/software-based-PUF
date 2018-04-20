@@ -1,0 +1,416 @@
+\begin{thebibliography}{10}
+
+\bibitem{blueprint}
+World economic forum - a blueprint for digital identity.
+\newblock
+  \url{http://www3.weforum.org/docs/WEF_A_Blueprint_for_Digital_Identity.pdf}.
+\newblock [Online; accessed 16-March-2018].
+
+\bibitem{chaum}
+G~R Blakley and David Chaum, editors.
+\newblock {\em Proceedings of CRYPTO 84 on Advances in Cryptology}, New York,
+  NY, USA, 1985. Springer-Verlag New York, Inc.
+
+\bibitem{moxytongue}
+What is "sovereign source authority"? | the moxy tongue.
+\newblock
+  \url{http://http://www.moxytongue.com/2012/02/what-is-sovereign-source-authority.html}.
+\newblock [Online; accessed 19-February-2018].
+
+\bibitem{pouwelse}
+Johan Pouwelse, André~De Kok, Joost Fleuren, Peter Hoogendoorn, Raynor
+  Vliegendhart, and Martijn~De Vos.
+\newblock Laws for creating trust in the blockchain age.
+\newblock {\em European Property Law Journal}, 6(3), Dec 2017.
+
+\bibitem{eur-lex}
+Eur-lex - 32016r0679 - en.
+\newblock
+  \url{http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A32016R0679}.
+\newblock [Online; accessed 06-March-2018].
+
+\bibitem{data_protection_scheme}
+Data privacy vs. data protection.
+\newblock \url{https://blog.ipswitch.com/data-privacy-vs-data-protection}.
+\newblock [Online; accessed 16-March-2018].
+
+\bibitem{skorobogatov_2011}
+Sergei Skorobogatov.
+\newblock Physical attacks and tamper resistance.
+\newblock {\em Introduction to Hardware Security and Trust}, page 143–173,
+  Aug 2011.
+
+\bibitem{Pappu2026}
+Ravikanth Pappu, Ben Recht, Jason Taylor, and Neil Gershenfeld.
+\newblock Physical one-way functions.
+\newblock {\em Science}, 297(5589):2026--2030, 2002.
+
+\bibitem{retrospective}
+C.~H. Chang, Y.~Zheng, and L.~Zhang.
+\newblock A retrospective and a look forward: Fifteen years of physical
+  unclonable function advancement.
+\newblock {\em IEEE Circuits and Systems Magazine}, 17(3):32--62, thirdquarter
+  2017.
+
+\bibitem{tuyls_2010}
+Pim Tuyls.
+\newblock {\em "Security with Noisy Data: On Private Biometrics, Secure Key
+  Storage and Anti-Counterfeiting"}.
+\newblock Springer, 2010.
+
+\bibitem{guajardo_kumar_schrijen_tuyls}
+Jorge Guajardo, Sandeep~S. Kumar, Geert-Jan Schrijen, and Pim Tuyls.
+\newblock Fpga intrinsic pufs and their use for ip protection.
+\newblock {\em Cryptographic Hardware and Embedded Systems - CHES 2007 Lecture
+  Notes in Computer Science}, page 63–80.
+
+\bibitem{google_patents}
+Google patents.
+\newblock \url{https://patents.google.com/?q=sram\&q=puf\&oq=sram puf}.
+\newblock [Online; accessed 06-March-2018].
+
+\bibitem{google_scholar}
+Google scholar.
+\newblock \url{https://scholar.google.nl/scholar?as\_vis=1\&q=sram
+  puf\&hl=en\&as\_sdt=1,5}.
+\newblock [Online; accessed 06-March-2018].
+
+\bibitem{broadkey}
+Broadkey - intrinsic id | iot security.
+\newblock \url{https://www.intrinsic-id.com/products/broadkey/}.
+\newblock [Online; accessed 06-March-2018].
+
+\bibitem{polarfire}
+Polarfire evaluation kit.
+\newblock
+  \url{https://www.microsemi.com/products/fpga-soc/design-resources/dev-kits/polarfire/polarfire-eval-kit}.
+\newblock [Online; accessed 06-March-2018].
+
+\bibitem{Tuyls2007}
+Pim Tuyls and Boris {\v{S}}kori{\'{c}}.
+\newblock {\em Strong Authentication with Physical Unclonable Functions}, pages
+  133--148.
+\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 2007.
+
+\bibitem{delvaux}
+Jeroen Delvaux, Roel Peeters, Dawu Gu, and Ingrid Verbauwhede.
+\newblock A survey on lightweight entity authentication with strong pufs.
+\newblock {\em ACM Comput. Surv.}, 48(2):26:1--26:42, October 2015.
+
+\bibitem{Suh:2007:PUF:1278480.1278484}
+G.~Edward Suh and Srinivas Devadas.
+\newblock Physical unclonable functions for device authentication and secret
+  key generation.
+\newblock In {\em Proceedings of the 44th Annual Design Automation Conference},
+  DAC '07, pages 9--14, New York, NY, USA, 2007. ACM.
+
+\bibitem{10.1007/978-3-642-04474-8_22}
+Keith~B. Frikken, Marina Blanton, and Mikhail~J. Atallah.
+\newblock Robust authentication using physically unclonable functions.
+\newblock In Pierangela Samarati, Moti Yung, Fabio Martinelli, and Claudio~A.
+  Ardagna, editors, {\em Information Security}, pages 262--277, Berlin,
+  Heidelberg, 2009. Springer Berlin Heidelberg.
+
+\bibitem{10.1007/978-3-642-10838-9_22}
+Heike Busch, Stefan Katzenbeisser, and Paul Baecher.
+\newblock Puf-based authentication protocols -- revisited.
+\newblock In Heung~Youl Youm and Moti Yung, editors, {\em Information Security
+  Applications}, pages 296--308, Berlin, Heidelberg, 2009. Springer Berlin
+  Heidelberg.
+
+\bibitem{10.1007/978-3-319-29078-2_5}
+Amanda C.~Davi Resende, Karina Mochetti, and Diego~F. Aranha.
+\newblock Puf-based mutual multifactor entity and transaction authentication
+  for secure banking.
+\newblock In Tim G{\"u}neysu, Gregor Leander, and Amir Moradi, editors, {\em
+  Lightweight Cryptography for Security and Privacy}, pages 77--96, Cham, 2016.
+  Springer International Publishing.
+
+\bibitem{10.1007/978-3-642-33027-8_18}
+Roel Maes, Anthony Van~Herrewege, and Ingrid Verbauwhede.
+\newblock Pufky: A fully functional puf-based cryptographic key generator.
+\newblock In Emmanuel Prouff and Patrick Schaumont, editors, {\em Cryptographic
+  Hardware and Embedded Systems -- CHES 2012}, pages 302--319, Berlin,
+  Heidelberg, 2012. Springer Berlin Heidelberg.
+
+\bibitem{repository}
+Strong software based physical unclonable function.
+\newblock
+  \url{https://github.com/Tribler/strong-software-based-Physical-Unclonable-Function}.
+\newblock [Online; accessed 15-April-2018].
+
+\bibitem{cryptography_decrypted}
+H.~X. Mel and Doris Baker.
+\newblock {\em Cryptography decrypted}.
+\newblock Addison-Wesley, 2003.
+
+\bibitem{Oxford_dictionary}
+C.~Soanes and A.~Stevenson.
+\newblock {\em Concise Oxford English Dictionary}.
+\newblock Concise Oxford English Dictionary. Oxford University Press, 2008.
+
+\bibitem{modern_cryptography}
+Jonathan Katz and Yehuda Lindell.
+\newblock {\em Introduction to Modern Cryptography, Second Edition}.
+\newblock Chapman \& Hall/CRC, 2nd edition, 2014.
+
+\bibitem{key_derivation}
+Hugo Krawczyk.
+\newblock Cryptographic extraction and key derivation: The hkdf scheme.
+\newblock In Tal Rabin, editor, {\em Advances in Cryptology -- CRYPTO 2010},
+  pages 631--648, Berlin, Heidelberg, 2010. Springer Berlin Heidelberg.
+
+\bibitem{Galdi2018ExploringNA}
+Chiara Galdi, Michele Nappi, Jean-Luc Dugelay, and Yong Yu.
+\newblock Exploring new authentication protocols for sensitive data protection
+  on smartphones.
+\newblock {\em IEEE Communications Magazine}, 56:136--142, 2018.
+
+\bibitem{Srivathsa2017SecureAE}
+Sudheendra Srivathsa, Sudheendra~K. Srivathsa, and Wayne~P. Burleson.
+\newblock Secure and energy efficient physical unclonable functions.
+\newblock 2017.
+
+\bibitem{study_of_the_art_puf}
+Roel Maes and Ingrid Verbauwhede.
+\newblock {\em Physically Unclonable Functions: A Study on the State of the Art
+  and Future Research Directions}, pages 3--37.
+\newblock 10 2010.
+
+\bibitem{hamming_distance}
+Hamming distance | practice problems | hackerearth.
+\newblock
+  \url{https://www.hackerearth.com/problem/algorithm/hamming-distance-1/}.
+\newblock [Online; accessed 10-Jan-2018].
+
+\bibitem{modeling_sram}
+M.~Cortez, A.~Dargar, S.~Hamdioui, and G.~J. Schrijen.
+\newblock Modeling sram start-up behavior for physical unclonable functions.
+\newblock In {\em 2012 IEEE International Symposium on Defect and Fault
+  Tolerance in VLSI and Nanotechnology Systems (DFT)}, pages 1--6, Oct 2012.
+
+\bibitem{impact_aging}
+A.~Maiti and P.~Schaumont.
+\newblock The impact of aging on a physical unclonable function.
+\newblock {\em IEEE Transactions on Very Large Scale Integration (VLSI)
+  Systems}, 22(9):1854--1864, Sept 2014.
+
+\bibitem{efficient_helper}
+Christoph B{\"o}sch, Jorge Guajardo, Ahmad-Reza Sadeghi, Jamshid Shokrollahi,
+  and Pim Tuyls.
+\newblock Efficient helper data key extractor on fpgas.
+\newblock In Elisabeth Oswald and Pankaj Rohatgi, editors, {\em Cryptographic
+  Hardware and Embedded Systems -- CHES 2008}, pages 181--197, Berlin,
+  Heidelberg, 2008. Springer Berlin Heidelberg.
+
+\bibitem{fuzzy_extractor}
+Yevgeniy Dodis, Leonid Reyzin, and Adam Smith.
+\newblock Fuzzy extractors: How to generate strong keys from biometrics and
+  other noisy data.
+\newblock In Christian Cachin and Jan~L. Camenisch, editors, {\em Advances in
+  Cryptology - EUROCRYPT 2004}, pages 523--540, Berlin, Heidelberg, 2004.
+  Springer Berlin Heidelberg.
+
+\bibitem{soft_decision}
+R.~Maes, P.~Tuyls, and I.~Verbauwhede.
+\newblock A soft decision helper data algorithm for sram pufs.
+\newblock In {\em 2009 IEEE International Symposium on Information Theory},
+  pages 2101--2105, June 2009.
+
+\bibitem{information_reconciliation}
+Renato Renner and Stefan Wolf.
+\newblock Simple and tight bounds for information reconciliation and privacy
+  amplification.
+\newblock In Bimal Roy, editor, {\em Advances in Cryptology - ASIACRYPT 2005},
+  pages 199--216, Berlin, Heidelberg, 2005. Springer Berlin Heidelberg.
+
+\bibitem{stable_key_generation}
+M.~Taniguchi, M.~Shiozaki, H.~Kubo, and T.~Fujino.
+\newblock A stable key generation from puf responses with a fuzzy extractor for
+  cryptographic authentications.
+\newblock In {\em 2013 IEEE 2nd Global Conference on Consumer Electronics
+  (GCCE)}, pages 525--527, Oct 2013.
+
+\bibitem{6865541}
+A.~Garg and T.~T. Kim.
+\newblock Design of sram puf with improved uniformity and reliability utilizing
+  device aging effect.
+\newblock In {\em 2014 IEEE International Symposium on Circuits and Systems
+  (ISCAS)}, pages 1941--1944, June 2014.
+
+\bibitem{maes_2016}
+Roel Maes.
+\newblock {\em Physically Unclonable Functions Constructions, Properties and
+  Applications}.
+\newblock Springer Berlin, 2016.
+
+\bibitem{dargar_2011}
+Apurva Dargar.
+\newblock Modeling sram start-up behavior for physical unclonable functions.
+\newblock {MSc thesis}, Delft University of Technology, 2011.
+
+\bibitem{wang_tehranipoor_2010}
+Xiaoxiao Wang and Mohammad Tehranipoor.
+\newblock Novel physical unclonable function with process and environmental
+  variations.
+\newblock {\em 2010 Design, Automation \& Test in Europe Conference \&
+  Exhibition (DATE 2010)}, 2010.
+
+\bibitem{Abu-Rahma2013}
+Mohamed~H. Abu-Rahma and Mohab Anis.
+\newblock {\em Variability in Nanometer Technologies and Impact on SRAM}, pages
+  5--47.
+\newblock Springer New York, New York, NY, 2013.
+
+\bibitem{rao_mahmoodi_2011}
+Vikram~G Rao and Hamid Mahmoodi.
+\newblock Analysis of reliability of flip-flops under transistor aging effects
+  in nano-scale cmos technology.
+\newblock {\em 2011 IEEE 29th International Conference on Computer Design
+  (ICCD)}, 2011.
+
+\bibitem{Maricau2013}
+Elie Maricau and Georges Gielen.
+\newblock {\em CMOS Reliability Overview}, pages 15--35.
+\newblock Springer New York, New York, NY, 2013.
+
+\bibitem{impact_mosfet}
+B.~{Kaczer}, R.~{Degraeve}, M.~{Rasras}, K.~{van de Mieroop}, P.~J. {Roussel},
+  and G.~{Groeseneken}.
+\newblock {Impact of MOSFET gate oxide breakdown on digital circuit operation
+  and reliability}.
+\newblock {\em IEEE Transactions on Electron Devices}, 49:500--506, March 2002.
+
+\bibitem{temporal_performance}
+B.~C. Paul, Kunhyuk Kang, H.~Kufluoglu, M.~A. Alam, and K.~Roy.
+\newblock Temporal performance degradation under nbti: Estimation and design
+  for improved reliability of nanoscale circuits.
+\newblock In {\em Proceedings of the Design Automation Test in Europe
+  Conference}, volume~1, pages 1--6, March 2006.
+
+\bibitem{impact_hot_carriers}
+P.~Magnone, F.~Crupi, N.~Wils, R.~Jain, H.~Tuinhout, P.~Andricciola, G.~Giusi,
+  and C.~Fiegna.
+\newblock Impact of hot carriers on nmosfet variability in 45- and 65-nm cmos
+  technologies.
+\newblock {\em IEEE Transactions on Electron Devices}, 58(8):2347--2353, Aug
+  2011.
+
+\bibitem{xiao_rahman_forte_huang_su_tehranipoor_2014}
+Kan Xiao, Md.~Tauhidur Rahman, Domenic Forte, Yu~Huang, Mei Su, and Mohammad
+  Tehranipoor.
+\newblock Bit selection algorithm suitable for high-volume production of
+  sram-puf.
+\newblock {\em 2014 IEEE International Symposium on Hardware-Oriented Security
+  and Trust (HOST)}, 2014.
+
+\bibitem{liu_zhou_tang_parhi_kim_2017}
+Muqing Liu, Chen Zhou, Qianying Tang, Keshab~K. Parhi, and Chris~H. Kim.
+\newblock A data remanence based approach to generate 100% stable keys from an
+  sram physical unclonable function.
+\newblock {\em 2017 IEEE/ACM International Symposium on Low Power Electronics
+  and Design (ISLPED)}, 2017.
+
+\bibitem{cryptographic_key_generation_old}
+Hyunho Kang, Yohei Hori, Toshihiro Katashita, Manabu Hagiwara, and Keiichi
+  Iwamura.
+\newblock Performance analysis for puf data using fuzzy extractor.
+\newblock In Young-Sik Jeong, Young-Ho Park, Ching-Hsien~(Robert) Hsu, and
+  James J. (Jong~Hyuk) Park, editors, {\em Ubiquitous Information Technologies
+  and Applications}, pages 277--284, Berlin, Heidelberg, 2014. Springer Berlin
+  Heidelberg.
+
+\bibitem{cryptographic_key_generation}
+H.~Kang, Y.~Hori, T.~Katashita, M.~Hagiwara, and K.~Iwamura.
+\newblock Cryptographic key generation from puf data using efficient fuzzy
+  extractors.
+\newblock In {\em 16th International Conference on Advanced Communication
+  Technology}, pages 23--26, Feb 2014.
+
+\bibitem{Juels:1999:FCS:319709.319714}
+Ari Juels and Martin Wattenberg.
+\newblock A fuzzy commitment scheme.
+\newblock In {\em Proceedings of the 6th ACM Conference on Computer and
+  Communications Security}, CCS '99, pages 28--36, New York, NY, USA, 1999.
+  ACM.
+
+\bibitem{8006840}
+L.~Kusters, T.~Ignatenko, F.~M.~J. Willems, R.~Maes, E.~van~der Sluis, and
+  G.~Selimis.
+\newblock Security of helper data schemes for sram-puf in multiple enrollment
+  scenarios.
+\newblock In {\em 2017 IEEE International Symposium on Information Theory
+  (ISIT)}, pages 1803--1807, June 2017.
+
+\bibitem{Skoric2007}
+Boris Skoric, Geert-Jan Schrijen, Pim Tuyls, Tanya Ignatenko, and Frans
+  Willems.
+\newblock {\em Secure Key Storage with PUFs}, pages 269--292.
+\newblock Springer London, London, 2007.
+
+\bibitem{10.1007/11894063_29}
+Pim Tuyls, Geert-Jan Schrijen, Boris {\v{S}}kori{\'{c}}, Jan van Geloven, Nynke
+  Verhaegh, and Rob Wolters.
+\newblock Read-proof hardware from protective coatings.
+\newblock In Louis Goubin and Mitsuru Matsui, editors, {\em Cryptographic
+  Hardware and Embedded Systems - CHES 2006}, pages 369--383, Berlin,
+  Heidelberg, 2006. Springer Berlin Heidelberg.
+
+\bibitem{bch_code}
+The error correcting codes (ecc) page.
+\newblock \url{http://www.eccpage.com}.
+\newblock [Online; accessed 09-November-2017].
+
+\bibitem{Stanzione}
+S~Stanzione and Giuseppe Iannaccone.
+\newblock Silicon physical unclonable function resistant to a $10^25$-trial
+  brute force attack in 90 nm cmos.
+\newblock pages 116 -- 117, 07 2009.
+
+\bibitem{atoms_earth}
+Fermilab | science | inquiring minds | questions about physics.
+\newblock \url{http://www.fnal.gov/pub/science/inquiring/questions/atoms.html}.
+\newblock [Online; accessed 10-April-2018].
+
+\bibitem{10.1007/978-3-319-19962-7_3}
+Biaoshuai Tao and Hongjun Wu.
+\newblock Improving the biclique cryptanalysis of aes.
+\newblock In Ernest Foo and Douglas Stebila, editors, {\em Information Security
+  and Privacy}, pages 39--56, Cham, 2015. Springer International Publishing.
+
+\bibitem{hmac_security}
+Donghoon Chang.
+\newblock Security evaluation report on sha-224, sha-512/224, sha-512/256, and
+  the six sha-3 functions.
+\newblock \url{http://www.cryptrec.go.jp/estimation/techrep_id2403_2.pdf},
+  March 2015.
+\newblock [Online; accessed 15-April-2018].
+
+\bibitem{7102498}
+M.~Cortez, S.~Hamdioui, and R.~Ishihara.
+\newblock Design dependent sram puf robustness analysis.
+\newblock In {\em 2015 16th Latin-American Test Symposium (LATS)}, pages 1--6,
+  March 2015.
+
+\bibitem{hmac_calculator}
+Hmac generator — online hash encryption.
+\newblock \url{https://www.liavaag.org/English/SHA-Generator/HMAC/}.
+\newblock [Online; accessed 26-March-2018].
+
+\bibitem{aes_calculator}
+Cryptomathic - aes calculator.
+\newblock \url{http://extranet.cryptomathic.com/aescalc/index}.
+\newblock [Online; accessed 27-March-2018].
+
+\bibitem{bitcoin_key}
+Private key - bitcoin wiki.
+\newblock \url{https://en.bitcoin.it/wiki/Private_key}.
+\newblock [Online; accessed 12-April-2018].
+
+\bibitem{haji}
+Haji Akhundov.
+\newblock Design \& development of public-key based authentication architecture
+  for iot devices using puf.
+\newblock {MSc thesis}, Delft University of Technology, 2017.
+
+\end{thebibliography}

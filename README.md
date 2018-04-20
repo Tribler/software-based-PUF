@@ -1,10 +1,10 @@
 # strong-software-based-Physical-Unclonable-Function
 
 ## README
-This repository is dedicated for master thesis project by Ade Setyawan Sajim, TU Delft. All Arduino code in this repository is developed using [platformio](https://platformio.org/platformio-ide). The type of the Arduino is Arduino Mega 2560. The python code is developed using [PyCharm Edu IDE](https://www.jetbrains.com/pycharm/download/#section=mac).
+This repository is dedicated for master thesis project by Ade Setyawan Sajim, TU Delft. All Arduino code in this repository is developed using [platformio](https://platformio.org/platformio-ide). The type of the Arduino is Arduino Mega 2560. The python code is developed using [PyCharm IDE](https://www.jetbrains.com/pycharm/download/#section=mac).
 
 ### Abstract
-SRAM PUF has a potential to become the main player in hardware security. Unfortunately, the currently available solution is usually locked to specific entities. Here, we initiate an open source project to develop software based SRAM PUF technology using off-the-shelf SRAM.
+SRAM PUF has a potential to become the main player in hardware security. Unfortunately, the currently available solution is usually locked to specific entities. Here, we initiate an open source project to develop software-based SRAM PUF technology using off-the-shelf SRAM.
 We also present a testing result on two off-the-shelf SRAMs as SRAM PUF candidates; Microchip 23LC1024 and Cypress CY62256NLL.
 Both are tested on the distribution of 0's and 1's in their cells, intra hamming distance, inter hamming distance, and the effect of voltage variation and time interval between enrollment
 Testing on two bit-selection algorithms (data remanence analysis and neighbor analysis) are also performed.
