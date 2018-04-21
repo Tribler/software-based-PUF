@@ -8,18 +8,70 @@
 The first step to do in this thesis implementation is looking for SRAM components to be the root-of-trust in our SRAM PUF project.
 There are numerous SRAM types available in the market. The main requirements on the SRAM are easy to get (a simple google search should show some e-commerce websites to buy from), can be bought in small quantity ($\leq$ 5 pieces), stand-alone component (available without buying extra component, e.g. not embedded in an FPGA), inexpensive (cost less than \euro{}5), reasonable memory size ($\geq$ 64kb). These criteria are chosen due to some product only sold to a company or an entity that willing to buy in a big quantity or has to be custom made. There are two SRAM types purchased and tested here; Microchip 23LC 1024 and Cypress CY62256NLL.
 
-As mentioned in Chapter 2, to be qualified as a PUF candidate, an SRAM has to be stable in various conditions. This means if it is given various power input or used in varied temperatures or utilized for a long time, the initialized SRAM values has to remain similar or only has little changes. Under any condition, there should be no overlap between HD\textsubscript{intra} and HD\textsubscript{inter}. Moreover, the SRAM has to have a sufficient amount of randomness, shown by having equal distributions between 1's 0's on its values.  To ensure the quality of these two SRAMs, there are several experiments performed on each SRAM, such as calculating HD\textsubscript{intra} and HD\textsubscript{inter} given the whole memory value as the challenge and also the distribution of 1's and 0's inside SRAM memory.
-
+% As mentioned in Chapter 2, to be qualified as a PUF candidate, an SRAM has to be stable in various conditions. This means if it is given various power input or used in varied temperatures or utilized for a long time, the initialized SRAM values has to remain similar or only has little changes. Under any condition, there should be no overlap between HD\textsubscript{intra} and HD\textsubscript{inter}. Moreover, the SRAM has to have a sufficient amount of randomness, shown by having equal distributions between 1's 0's on its values.  To ensure the quality of these two SRAMs, there are several experiments performed on each SRAM, such as calculating HD\textsubscript{intra} and HD\textsubscript{inter} given the whole memory value as the challenge and also the distribution of 1's and 0's inside SRAM memory.
+%
 \subsection{Microchip 23LC1024}
 The Microchip Technology Inc. 23A1024/23LC1024 is a 1024 Kbit Serial SRAM device. This SRAM is very popular shown by many references available online and several GitHub repositories intended just to access this SRAM. The reason of its popularity can be traced to its cheap price, small size, and easy-to-use. The price is ranging from \euro{}1.5-3.5. This device has eight pins which contribute significantly to its small footprint (it has dimension of 9.271 x 6.35 x 3.302 mm).
 It is easy to use because it provides SPI connection which simplified the communication, and has three modes available; SPI (Serial Peripheral Interface), SDI (Serial Dual Interface) and SQI (Serial Quad Interface). Its voltage range also quite large, ranging from 2.5-5.5V. Figure \ref{fig:23LC1024} shows the Microchip 23LC1024.
 
 \begin{figure}[tph!]
     \centerline{\includegraphics[width={0.2\textwidth}]{images/23lc1024}}
-    \caption{SRAM Microchip 23LC1024.}
+    \caption{SRAM Microchip 23LC1024 \cite{23lc1024}.}
     \label{fig:23LC1024}
 \end{figure}
 
+% There are ten SRAMs Microchip 23LC1024 that were available during the experiment. To check whether this SRAM is a justifiable candidate for PUF, several testings are performed.
+% First, the number of 1's and 0's in memory after a start is calculated. Unfortunately, the average distribution of 1's and 0's are not similar, 1's occupy 70\% and 0's fill the remaining 30\%.
+% Second, HD\textsubscript{intra} and HD\textsubscript{inter} are calculated on these chips. The calculation is done using twenty data of chip memory values on each chip which retrieved at room temperature, 5V input and 10 seconds interval between retrieval attempts. From these chips, the average HD\textsubscript{intra} is 6.18\% and the average HD\textsubscript{inter} is 42.54\%.
+% Third, the effect of voltage variation on the HD\textsubscript{intra} and HD\textsubscript{inter} are also evaluated. The calculation is done using memory values on each chip which retrieved on room temperature and 10 seconds interval between retrieval attempts. The voltage range is between 2.5V and 5V with 0.5V increase on a step. On each step, there are three data retrieved. Using these data, voltage variation results in an average HD\textsubscript{intra} 8.21\% and an average HD\textsubscript{inter} 42.59\%.
+%
+% \begin{figure}[tph!]
+%     \centerline{\includegraphics[width={\textwidth}]{images/23lc1024_hd_intra}}
+%     \caption{HD\textsubscript{intra} of ten SRAMs Microchip 23LC1024. The left is HD\textsubscript{intra} with constant voltage, the right one is tested based on the voltage variation.}
+%     \label{fig:23lc1024_hd_intra}
+% \end{figure}
+%
+% Based on these experiments, SRAM Microchip 23LC1024 shows questionable results. First, the distribution of 1's and 0's inside the SRAM is not balanced. Second, a voltage variation shows that it significantly affects the  HD\textsubscript{intra}. Fortunately, there is no overlap between HD\textsubscript{intra} and HD\textsubscript{inter}. Even though these outcomes make us doubtful on this SRAM quality as an SRAM PUF candidate, we decided to continue using this SRAM in further experiments. Hopefully, when we locate the stable bits inside the SRAM, the experiments done on the stable bits will show a better result than this result.
+
+\subsection{Cypress CY62256NLL}
+The Cypress CY62256NLL is a 256k bit SRAM device. Even though this device is less popular than Microchip 23LC1024, it's still widely used. One of the reason is that this device has an automatic power-down feature, reducing the power consumption by 99.9 percent when deselected. Unlike Microchip 23LC1024, Cypress CY62256NLL doesn't have an SPI connection which complicates the communication. To communicate, one should utilize its twenty-eight pins available. Since it has many pins, this contributes to its significantly larger size compared to Microchip 23LC1024. Specifically, its size is 37.592 × 13.97 × 4.953 mm and produced using 90nm technology. Its voltage range is ranging from 4.5V-5.5V. Figure \ref{fig:CY62256NLL} shows Cypress CY62256NLL.
+
+\begin{figure}[tph!]
+    \centerline{\includegraphics[width={0.4\textwidth}]{images/cy62256nll}}
+    \caption{SRAM Cypress CY62256NLL \cite{CY62256NLL}.}
+    \label{fig:CY62256NLL}
+\end{figure}
+
+% There are five Cypress CY62256NLL SRAMs that were available during experiment. Similar like on previous SRAM, several testing are performed to check whether this SRAM is a justifiable candidate for PUF.
+% First, the number of 1's and 0's in an initialization is counted. Fortunately, unlike the 23LC1024, the average distribution of 1's and 0's are similar, both occupy 50\% of total bits available.
+% Next,
+% HD\textsubscript{intra} and HD\textsubscript{inter} are calculated on both chips. The calculation is done using twenty data of chip memory values on each chip which retrieved at room temperature, 5V input and 10 seconds interval between retrieval attempts.
+% From these chips, the average HD\textsubscript{intra} is 4.85\% and the average HD\textsubscript{inter} is 39.28\%.
+% Last, the effect of voltage variation on the HD\textsubscript{intra} and HD\textsubscript{inter} are also evaluated. The calculation is done using chip memory values on each chip which retrieved on room temperature and 10 seconds interval between retrieval attempts. The voltage range is between 4.5V and 5V with 0.1V increase on each step. On each step, there are ten data enrolled.
+% The average HD\textsubscript{inter} on voltage variation is 38.59\%, while HD\textsubscript{intra} is 3.58\%. Figure \ref{fig:cy62256nll_hd_intra} shows the HD\textsubscript{intra} between the constant and the variated voltage.
+%
+% \begin{figure}[tph!]
+%     \centerline{\includegraphics[width={\textwidth}]{images/cy62256nll_hd_intra}}
+%     \caption{HD\textsubscript{intra} of five SRAMs Cypress CY62256NLL. The left is HD\textsubscript{intra} with constant voltage, the right one is tested based on the voltage variation.}
+%     \label{fig:cy62256nll_hd_intra}
+% \end{figure}
+%
+% The results shown above indicate that SRAM Cypress CY62256NLL is a qualified candidate for SRAM PUF. A well distributed 0's and 1's inside SRAM memory, voltage variation has little effect on HD\textsubscript{intra} and HD\textsubscript{inter}, and no overlap between HD\textsubscript{intra} and HD\textsubscript{inter} lead us to continue using this SRAM on further experiments.
+
+\section{Automated PUF Profiling System}
+To increase the experiment's efficiency, an automated PUF profiling system is constructed. The system consists of a PC, act as a master, and an Arduino connected to an external SRAM which acts as a slave. A custom protocol was designed to communicate between them. It is specifically designed to be generic and usable for all types of PUF profiling measurements. The software on Arduino side waits for measurement commands sent by PC on the serial link after booting. The designed protocol is dedicated for read bytes, write bytes, and SRAM disable/enable. The system also supported parallel profiling which significantly increases the effectivity. Figure \ref{fig:puf_profiling} shows the setup and the schematic to profile four SRAMs Cypress CY62256NLL concurrently using four Arduino.
+
+\begin{figure}[tph!]
+    \centerline{\includegraphics[width={\textwidth}]{images/setup}}
+    \caption{Automated PUF profiling setup using a PC and four Arduino. Left picture shows the actual setup, while the right picture displays the schematic of such setup.}
+    \label{fig:puf_profiling}
+\end{figure}
+
+\section{Testing on Selected SRAMs}
+
+As mentioned in Chapter 2, to be qualified as a PUF candidate, an SRAM has to be stable in various conditions. This means if it is given various power input or used in varied temperatures or utilized for a long time, the initialized SRAM values has to remain similar or only has little changes. Under any condition, there should be no overlap between HD\textsubscript{intra} and HD\textsubscript{inter}. Moreover, the SRAM has to have a sufficient amount of randomness, shown by having equal distributions between 1's 0's on its values.  To ensure the quality of these two SRAMs, there are several experiments performed on each SRAM, such as calculating HD\textsubscript{intra} and HD\textsubscript{inter} given the whole memory value as the challenge and also the distribution of 1's and 0's inside SRAM memory.
+
+\subsection{Microchip 23LC1024}
 There are ten SRAMs Microchip 23LC1024 that were available during the experiment. To check whether this SRAM is a justifiable candidate for PUF, several testings are performed.
 First, the number of 1's and 0's in memory after a start is calculated. Unfortunately, the average distribution of 1's and 0's are not similar, 1's occupy 70\% and 0's fill the remaining 30\%.
 Second, HD\textsubscript{intra} and HD\textsubscript{inter} are calculated on these chips. The calculation is done using twenty data of chip memory values on each chip which retrieved at room temperature, 5V input and 10 seconds interval between retrieval attempts. From these chips, the average HD\textsubscript{intra} is 6.18\% and the average HD\textsubscript{inter} is 42.54\%.
@@ -34,13 +86,6 @@ Third, the effect of voltage variation on the HD\textsubscript{intra} and HD\tex
 Based on these experiments, SRAM Microchip 23LC1024 shows questionable results. First, the distribution of 1's and 0's inside the SRAM is not balanced. Second, a voltage variation shows that it significantly affects the  HD\textsubscript{intra}. Fortunately, there is no overlap between HD\textsubscript{intra} and HD\textsubscript{inter}. Even though these outcomes make us doubtful on this SRAM quality as an SRAM PUF candidate, we decided to continue using this SRAM in further experiments. Hopefully, when we locate the stable bits inside the SRAM, the experiments done on the stable bits will show a better result than this result.
 
 \subsection{Cypress CY62256NLL}
-The Cypress CY62256NLL is a 256k bit SRAM device. Even though this device is less popular than Microchip 23LC1024, it's still widely used. One of the reason is that this device has an automatic power-down feature, reducing the power consumption by 99.9 percent when deselected. Unlike Microchip 23LC1024, Cypress CY62256NLL doesn't have an SPI connection which complicates the communication. To communicate, one should utilize its twenty-eight pins available. Since it has many pins, this contributes to its significantly larger size compared to Microchip 23LC1024. Specifically, its size is 37.592 × 13.97 × 4.953 mm and produced using 90nm technology. Its voltage range is ranging from 4.5V-5.5V. Figure \ref{fig:CY62256NLL} shows Cypress CY62256NLL.
-
-\begin{figure}[tph!]
-    \centerline{\includegraphics[width={0.4\textwidth}]{images/cy62256nll}}
-    \caption{SRAM Cypress CY62256NLL.}
-    \label{fig:CY62256NLL}
-\end{figure}
 
 There are five Cypress CY62256NLL SRAMs that were available during experiment. Similar like on previous SRAM, several testing are performed to check whether this SRAM is a justifiable candidate for PUF.
 First, the number of 1's and 0's in an initialization is counted. Fortunately, unlike the 23LC1024, the average distribution of 1's and 0's are similar, both occupy 50\% of total bits available.
@@ -58,17 +103,7 @@ The average HD\textsubscript{inter} on voltage variation is 38.59\%, while HD\te
 
 The results shown above indicate that SRAM Cypress CY62256NLL is a qualified candidate for SRAM PUF. A well distributed 0's and 1's inside SRAM memory, voltage variation has little effect on HD\textsubscript{intra} and HD\textsubscript{inter}, and no overlap between HD\textsubscript{intra} and HD\textsubscript{inter} lead us to continue using this SRAM on further experiments.
 
-\section{Automated PUF Profiling System}
-To increase the experiment's efficiency, an automated PUF profiling system is constructed. The system consists of a PC, act as a master, and an Arduino connected to an external SRAM which acts as a slave. A custom protocol was designed to communicate between them. It is specifically designed to be generic and usable for all types of PUF profiling measurements. The software on Arduino side waits for measurement commands sent by PC on the serial link after booting. The designed protocol is dedicated for read bytes, write bytes, and SRAM disable/enable. The system also supported parallel profiling which significantly increases the effectivity. Figure \ref{fig:puf_profiling} shows the setup and the schematic to profile four SRAMs Cypress CY62256NLL concurrently using four Arduino.
-
-\begin{figure}[tph!]
-    \centerline{\includegraphics[width={\textwidth}]{images/setup}}
-    \caption{Automated PUF profiling setup using a PC and four Arduino. Left picture shows the actual setup, while the right picture displays the schematic of such setup.}
-    \label{fig:puf_profiling}
-\end{figure}
-
-
-\section{Bit Selection Algorithms Experiments}
+\section{Experiments on Bit Selection Algorithms}
 
 In this section, the test on stable bits produced by two algorithms, neighbor stability and data remanence analysis, is shown. The test was done on a single chip of each SRAM type.
 % , one 23L1024 and one CY62256NLL.
@@ -132,25 +167,25 @@ SRAM Cypress CY62256NLL will reach the uninitialized point if it is temporarily 
 In this section, test results on the effect of time interval and voltage on stable bits using both algorithms on each SRAM are shown. The effect of aging and temperature is not tested due to a limitation on time and equipment. For the effect of time interval testing, the enrollment was done on 16 days with one day gap between enrollment. Voltage effect testing was done on voltage ranging from 4.5V-5V for SRAM Cypress CY62256NLL and 2.5V-5V for SRAM Microchip 23LC1024. The test is done on 4662 bits which is twice the length of the bits required to generate 256 bits key when using scheme shown in Figure \ref{fig:key-generation-scheme}. The result of time interval testing on SRAM Microchip 23LC1024 is shown on Figure \ref{fig:test_stable_23lc1024}, while Figure \ref{fig:test_stable_cy62256nll} displays the result for SRAM Cypress CY62256NLL.
 
 \begin{figure}[tph!]
-    \centerline{\includegraphics[width={1.2\textwidth}]{images/23lc1024_hd_intra_time_stable}}
+    \centerline{\includegraphics[width={1.1\textwidth}]{images/23lc1024_hd_intra_time_stable}}
     \caption{Time interval testing results on SRAM Microchip 23LC1024. Top figure is the testing result on stable bits generated using neighbor analysis, while the bottom one is tested on data remanence generated stable bits. Index A on x-axis refers to enrollment on day 1, B on day 2, etc. Index A-B refers to fractional hamming distance between enrollment on day 1 and day 2.}
     \label{fig:test_stable_23lc1024}
 \end{figure}
 
 \begin{figure}[tph!]
-    \centerline{\includegraphics[width={1.2\textwidth}]{images/23lc1024_hd_intra_voltage_stable}}
+    \centerline{\includegraphics[width={1.1\textwidth}]{images/23lc1024_hd_intra_voltage_stable}}
     \caption{Voltage variation testing results on SRAM Microchip 23LC1024. Top figure is the testing result on stable bits generated using neighbor analysis, while the bottom one is tested on stable bits produced by data remanence analysis. Index on x-axis refers to two different voltages, e.g. 2.5-5.0 means the fractional hamming distance between enrollment on voltage 2.5V and voltage 5.0V.}
     \label{fig:test_stable_23lc1024_voltage}
 \end{figure}
 
 \begin{figure}[tph!]
-    \centerline{\includegraphics[width={1.2\textwidth}]{images/cy62256nll_hd_intra_time_stable}}
+    \centerline{\includegraphics[width={1.1\textwidth}]{images/cy62256nll_hd_intra_time_stable}}
     \caption{Time interval testing results on SRAM Cypress CY62256NLL. Top figure is the testing result on stable bits generated using neighbor analysis, while the bottom one is tested on data remanence generated stable bits. Index A on x-axis refers to enrollment on day 1, B on day 2, etc. Index A-B refers to fractional hamming distance between enrollment on day 1 and day 2.}
     \label{fig:test_stable_cy62256nll}
 \end{figure}
 
 \begin{figure}[tph!]
-    \centerline{\includegraphics[width={1.2\textwidth}]{images/cy62256nll_hd_intra_voltage_stable}}
+    \centerline{\includegraphics[width={1.1\textwidth}]{images/cy62256nll_hd_intra_voltage_stable}}
     \caption{Voltage variation testing results on SRAM Cypress CY62256NLL. Top figure is the testing result on stable bits generated using neighbor analysis, while the bottom one is tested on stable bits produced by data remanence analysis. Index on x-axis refers to two different voltages, e.g. 4.5-4.6 means the fractional hamming distance between enrollment on voltage 4.5V and voltage 4.6V.}
     \label{fig:test_stable_cy62256nll_voltage}
 \end{figure}

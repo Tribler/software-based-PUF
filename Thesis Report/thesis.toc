@@ -38,26 +38,29 @@
 \contentsline {chapter}{\numberline {4}Implementation, Experiments and Results}{33}{chapter.4}
 \contentsline {section}{\numberline {4.1}Chosen SRAMs}{33}{section.4.1}
 \contentsline {subsection}{\numberline {4.1.1}Microchip 23LC1024}{34}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Cypress CY62256NLL}{35}{subsection.4.1.2}
-\contentsline {section}{\numberline {4.2}Automated PUF Profiling System}{37}{section.4.2}
-\contentsline {section}{\numberline {4.3}Bit Selection Algorithms Experiments}{37}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Neighbour Stability Analysis}{38}{subsection.4.3.1}
-\contentsline {subsubsection}{Microchip 23LC1024}{38}{subsection.4.3.1}
-\contentsline {subsubsection}{Cypress CY62256NLL}{39}{figure.4.6}
-\contentsline {subsection}{\numberline {4.3.2}Data Remanence Approach}{39}{subsection.4.3.2}
-\contentsline {subsubsection}{Microchip 23LC1024}{39}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.1.2}Cypress CY62256NLL}{34}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.2}Automated PUF Profiling System}{34}{section.4.2}
+\contentsline {section}{\numberline {4.3}Testing on Selected SRAMs}{35}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Microchip 23LC1024}{36}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Cypress CY62256NLL}{37}{subsection.4.3.2}
+\contentsline {section}{\numberline {4.4}Experiments on Bit Selection Algorithms}{38}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Neighbour Stability Analysis}{38}{subsection.4.4.1}
+\contentsline {subsubsection}{Microchip 23LC1024}{38}{subsection.4.4.1}
+\contentsline {subsubsection}{Cypress CY62256NLL}{38}{figure.4.6}
+\contentsline {subsection}{\numberline {4.4.2}Data Remanence Approach}{40}{subsection.4.4.2}
+\contentsline {subsubsection}{Microchip 23LC1024}{40}{subsection.4.4.2}
 \contentsline {subsubsection}{Cypress CY62256NLL}{40}{figure.4.8}
-\contentsline {subsection}{\numberline {4.3.3}Stability Test on Stable Bits}{40}{subsection.4.3.3}
-\contentsline {subsubsection}{Microchip 23LC1024}{45}{figure.4.13}
-\contentsline {subsubsection}{Cypress CY62256NLL}{45}{figure.4.13}
+\contentsline {subsection}{\numberline {4.4.3}Stability Test on Stable Bits}{40}{subsection.4.4.3}
+\contentsline {subsubsection}{Microchip 23LC1024}{41}{figure.4.13}
+\contentsline {subsubsection}{Cypress CY62256NLL}{46}{figure.4.13}
 \contentsline {subsubsection}{Stability Test Conclusion}{46}{figure.4.13}
-\contentsline {section}{\numberline {4.4}Testing on A Set of Bit Locations as A Challenge}{47}{section.4.4}
-\contentsline {section}{\numberline {4.5}Complete Enrollment Scheme}{47}{section.4.5}
-\contentsline {section}{\numberline {4.6}Testing on Secure Data Protection and Key Storage Scheme}{48}{section.4.6}
-\contentsline {section}{\numberline {4.7}Concluding Experiment with Cybercurrency}{53}{section.4.7}
+\contentsline {section}{\numberline {4.5}Testing on A Set of Bit Locations as A Challenge}{47}{section.4.5}
+\contentsline {section}{\numberline {4.6}Complete Enrollment Scheme}{48}{section.4.6}
+\contentsline {section}{\numberline {4.7}Testing on Secure Data Protection and Key Storage Scheme}{49}{section.4.7}
+\contentsline {section}{\numberline {4.8}Concluding Experiment with Cybercurrency}{53}{section.4.8}
 \contentsline {chapter}{\numberline {5}Conclusions and Future Work}{65}{chapter.5}
 \contentsline {section}{\numberline {5.1}Conclusions}{65}{section.5.1}
 \contentsline {section}{\numberline {5.2}Future Work}{66}{section.5.2}
-\contentsline {subsubsection}{Possible Experiments on Off-the-shelf SRAMs}{66}{section.5.2}
+\contentsline {subsubsection}{Possible Experiments on Off-The-Shelf SRAMs}{66}{section.5.2}
 \contentsline {subsubsection}{Improvement on Secure Data Protection and Key Storage Scheme}{67}{section.5.2}
 \contentsfinish 
