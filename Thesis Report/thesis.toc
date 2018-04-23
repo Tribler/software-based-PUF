@@ -36,14 +36,14 @@
 \contentsline {section}{\numberline {3.6}Bits Locations as the PUF Challenge - Leads to Strong PUF}{29}{section.3.6}
 \contentsline {section}{\numberline {3.7}Security Analysis of The Proposed Scheme}{30}{section.3.7}
 \contentsline {chapter}{\numberline {4}Implementation, Experiments and Results}{33}{chapter.4}
-\contentsline {section}{\numberline {4.1}Chosen SRAMs}{33}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Microchip 23LC1024}{34}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Cypress CY62256NLL}{34}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.1}Chosen Off-The-Shelf SRAMs}{33}{section.4.1}
+\contentsline {subsubsection}{Microchip 23LC1024}{34}{section.4.1}
+\contentsline {subsubsection}{Cypress CY62256NLL}{34}{figure.4.1}
 \contentsline {section}{\numberline {4.2}Automated PUF Profiling System}{34}{section.4.2}
-\contentsline {section}{\numberline {4.3}Testing on Selected SRAMs}{35}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Microchip 23LC1024}{36}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}Cypress CY62256NLL}{37}{subsection.4.3.2}
-\contentsline {section}{\numberline {4.4}Experiments on Bit Selection Algorithms}{38}{section.4.4}
+\contentsline {section}{\numberline {4.3}Testing on Chosen Off-The-Shelf SRAMs}{35}{section.4.3}
+\contentsline {subsubsection}{Microchip 23LC1024}{36}{section.4.3}
+\contentsline {subsubsection}{Cypress CY62256NLL}{37}{figure.4.4}
+\contentsline {section}{\numberline {4.4}Testing on Bit Selection Algorithms}{38}{section.4.4}
 \contentsline {subsection}{\numberline {4.4.1}Neighbour Stability Analysis}{38}{subsection.4.4.1}
 \contentsline {subsubsection}{Microchip 23LC1024}{38}{subsection.4.4.1}
 \contentsline {subsubsection}{Cypress CY62256NLL}{38}{figure.4.6}
@@ -54,7 +54,7 @@
 \contentsline {subsubsection}{Microchip 23LC1024}{41}{figure.4.13}
 \contentsline {subsubsection}{Cypress CY62256NLL}{46}{figure.4.13}
 \contentsline {subsubsection}{Stability Test Conclusion}{46}{figure.4.13}
-\contentsline {section}{\numberline {4.5}Testing on A Set of Bit Locations as A Challenge}{47}{section.4.5}
+\contentsline {section}{\numberline {4.5}Testing on Bits Locations as A Challenge}{47}{section.4.5}
 \contentsline {section}{\numberline {4.6}Complete Enrollment Scheme}{48}{section.4.6}
 \contentsline {section}{\numberline {4.7}Testing on Secure Data Protection and Key Storage Scheme}{49}{section.4.7}
 \contentsline {section}{\numberline {4.8}Concluding Experiment with Cybercurrency}{53}{section.4.8}
