@@ -150,8 +150,8 @@ In addition, if you look further into the scheme, there is an entropy loss as ma
 \end{figure}
 
 
-\section{Bits Locations as the PUF Challenge - Leads to Strong PUF}
-An example of a well known PUF construction which claimed to be resistant against brute force attack is Stanzione and Iannaccone's work \cite{Stanzione}. They mentioned that their PUF construction is resistant to $10^{25}$-trials brute force attack. Inspired by their work, we imagine having a stronger construction. We envision an SRAM PUF which has total challenge-response pairs possibilities more than the number of atoms on earth which predicted to be at least $10^{49}$ \cite{atoms_earth}. To achieve this goal, we come up with an idea to use a set of bits locations as a PUF challenge.
+\section{Bits Locations as the PUF Challenge - Numerous CRPs}
+An example of a well known PUF construction which claimed to be resistant against brute force attack is Stanzione and Iannaccone's work \cite{Stanzione}. They mentioned that their PUF construction is resistant to $10^{25}$-trials brute force attack. Inspired by their work, we imagine having a stronger construction. We envision an SRAM PUF which has total challenge-response pairs possibilities more than the number of atoms on earth which predicted to be at least $10^{49}$ \cite{atoms_earth}. To achieve this goal, we come up with an idea to use bits locations as a PUF challenge.
 Below are the reasons why this decision is taken:
 \begin{enumerate}
     \item Stable bits tend to be scattered all around SRAM memory.
@@ -163,7 +163,8 @@ Below are the reasons why this decision is taken:
     \end{equation}
 \end{enumerate}
 As an illustration, if the number of bits required to generate/reconstruct the key is 2331 bits (the length of the bits required to generate 256-bits key when using scheme shown in Figure \ref{fig:key-generation-scheme}), then a set of 2331 bits locations is required as an input (a challenge) to PUF device. And if the SRAM has a total capacity of 65536 bits, using Equation \ref{bits} explained before, there are $P(65536, 2331)=\frac{65536!}{\left( 65536-2331 \right) !}\approx 10^{11209}$ possible combinations. The total possible CRPs is even much higher compared to the total possibilities of the number of bits required ($2^{256}\approx5.02\times10^{701}$) or the number of possible keys ($2^{256}\approx1.16\times10^{77}$).
-Due to these large possibilities of challenge-response pairs, this idea will lead to a \textbf{strong PUF} (as mentioned in section \ref{lbl:puf-classification}, a strong PUF can be identified by having a large number of CRPs).
+Due to these large possibilities of challenge-response pairs, this idea will lead to \textbf{numerous CRPs}.
+% Due to these large possibilities of challenge-response pairs, this idea will lead to a \textbf{strong PUF} (as mentioned in section \ref{lbl:puf-classification}, a strong PUF can be identified by having a large number of CRPs).
 
 Using this concept, before generating the challenge, the location of stable bits needs to be identified first. The location of stable bits can be detected by using bit selection algorithm mentioned in section \ref{lbl:bit-selection}.
 After the location of stable bits is identified, during the generation of a challenge, the locations' order inside the challenge will be randomized.

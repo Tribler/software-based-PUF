@@ -92,12 +92,12 @@ According to \cite{retrospective}, to be qualified as PUF, a device should fulfi
 
 \subsection{PUFs Classification} \label{lbl:puf-classification}
 
-Based on the number CRPs, PUFs can be divided into two categories \cite{Srivathsa2017SecureAE}:
+In this subsection, two subtypes of PUFs so-called "Weak PUFs" and "Strong PUFs" are presented.  The explanations on both types can be found below \cite{6800561}:
 \begin{itemize}
 \item Strong PUFs\newline
-Strong PUFs can be identified by having a large number of CRPs. Strong PUFs typically used for authentication.
+Strong PUFs can be recognized by possessing a tremendous number of CRPs which prevent an adversary to read all possible CRPs even if he has open access to the challenge-response interface. Anyone can freely give any challenge and read the response without affecting its security. In addition, even if he has a large subset of CRPs, he still cannot predict another yet unknown CRPs. Strong PUFs typically used for authentication.
 \item Weak PUFs\newline
-Contrary to strong PUFs, weak PUFs only have a small number of CRPs. Weak PUFs commonly used for key storage.
+Weak PUFs can be identified by having few CRPs. Unlike the strong PUFs, weak PUFs require an access-restricted to the challenge-response mechanism. This means that even if an adversary holds a possession of the PUF device, he cannot read the response from a challenge or give any challenge to the PUF device. Weak PUFs commonly used for key storage and key generation.
 \end{itemize}
 
 Besides the number of CRPs, PUFs can also be categorized based on their physical design. There are two major categories, extrinsic and intrinsic.

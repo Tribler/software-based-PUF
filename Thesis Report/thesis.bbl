@@ -134,7 +134,7 @@ Roel Maes, Anthony Van~Herrewege, and Ingrid Verbauwhede.
   Heidelberg, 2012. Springer Berlin Heidelberg.
 
 \bibitem{repository}
-Strong software based physical unclonable function.
+Tribler - strong software based physical unclonable function.
 \newblock
   \url{https://github.com/Tribler/strong-software-based-Physical-Unclonable-Function}.
 \newblock [Online; accessed 15-April-2018].
@@ -166,10 +166,11 @@ Chiara Galdi, Michele Nappi, Jean-Luc Dugelay, and Yong Yu.
   on smartphones.
 \newblock {\em IEEE Communications Magazine}, 56:136--142, 2018.
 
-\bibitem{Srivathsa2017SecureAE}
-Sudheendra Srivathsa, Sudheendra~K. Srivathsa, and Wayne~P. Burleson.
-\newblock Secure and energy efficient physical unclonable functions.
-\newblock 2017.
+\bibitem{6800561}
+U.~Rührmair and D.~E. Holcomb.
+\newblock Pufs at a glance.
+\newblock In {\em 2014 Design, Automation Test in Europe Conference Exhibition
+  (DATE)}, pages 1--6, March 2014.
 
 \bibitem{study_of_the_art_puf}
 Roel Maes and Ingrid Verbauwhede.
@@ -356,6 +357,41 @@ Pim Tuyls, Geert-Jan Schrijen, Boris {\v{S}}kori{\'{c}}, Jan van Geloven, Nynke
   Hardware and Embedded Systems - CHES 2006}, pages 369--383, Berlin,
   Heidelberg, 2006. Springer Berlin Heidelberg.
 
+\bibitem{VanHerrewege:2013:DIP:2541806.2512493}
+Anthony Van~Herrewege, Andr{\'e} Schaller, Stefan Katzenbeisser, and Ingrid
+  Verbauwhede.
+\newblock Demo: Inherent pufs and secure prngs on commercial off-the-shelf
+  microcontrollers.
+\newblock In {\em Proceedings of the 2013 ACM SIGSAC conference on Computer
+  \&\#38; communications security}, CCS '13, pages 1333--1336, New York, NY,
+  USA, 2013. ACM.
+
+\bibitem{cryptoeprint:2016:769}
+Nikolaos~Athanasios Anagnostopoulos, Stefan Katzenbeisser, Markus Rosenstihl,
+  André Schaller, Sebastian Gabmeyer, and Tolga Arul.
+\newblock Low-temperature data remanence attacks against intrinsic sram pufs.
+\newblock Cryptology ePrint Archive, Report 2016/769, 2016.
+\newblock \url{https://eprint.iacr.org/2016/769}.
+
+\bibitem{haji}
+Haji Akhundov.
+\newblock Design \& development of public-key based authentication architecture
+  for iot devices using puf.
+\newblock {MSc thesis}, Delft University of Technology, 2017.
+
+\bibitem{Schrijen:2012:CAS:2492708.2493033}
+Geert-Jan Schrijen and Vincent van~der Leest.
+\newblock Comparative analysis of sram memories used as puf primitives.
+\newblock In {\em Proceedings of the Conference on Design, Automation and Test
+  in Europe}, DATE '12, pages 1319--1324, San Jose, CA, USA, 2012. EDA
+  Consortium.
+
+\bibitem{4674345}
+D.~E. Holcomb, W.~P. Burleson, and K.~Fu.
+\newblock Power-up sram state as an identifying fingerprint and source of true
+  random numbers.
+\newblock {\em IEEE Transactions on Computers}, 58(9):1198--1210, Sept 2009.
+
 \bibitem{bch_code}
 The error correcting codes (ecc) page.
 \newblock \url{http://www.eccpage.com}.
@@ -416,11 +452,5 @@ Cryptomathic - aes calculator.
 Private key - bitcoin wiki.
 \newblock \url{https://en.bitcoin.it/wiki/Private_key}.
 \newblock [Online; accessed 12-April-2018].
-
-\bibitem{haji}
-Haji Akhundov.
-\newblock Design \& development of public-key based authentication architecture
-  for iot devices using puf.
-\newblock {MSc thesis}, Delft University of Technology, 2017.
 
 \end{thebibliography}

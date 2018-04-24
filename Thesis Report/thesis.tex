@@ -4,6 +4,7 @@
 
 % use babel for proper hyphenation
 \usepackage[dutch,british]{babel}
+\newcommand\fh{\babelhyphen{hard}}
 % Graphics: like the DUT logo on the front cover
 \usepackage[dvips]{graphicx}
 % \usepackage{graphicx}
@@ -71,7 +72,8 @@
 
 \newcommand{\graduationCommittee}{
 Dr. Ir. Johan Pouwelse & Delft University of Technology \\
-Dr. Ir. Stephan Wong & Delft University of Technology \\
+Dr. Stephan Wong & Delft University of Technology \\
+Dr. J.S. Rellermeyer & Delft University of Technology \\
 Haji Akhundov, MSc & Delft University of Technology \\
 % Dr. RangaRao Venkatesha Prasad 	& Delft University of Technology \\
 % Dr. Alessandro Bozzon 			& Delft University of Technology \\
@@ -86,7 +88,7 @@ We also present a testing result on two off-the-shelf SRAMs as SRAM PUF candidat
 Both are tested on the distribution of 0's and 1's in their cells, intra hamming distance, inter hamming distance, and the effect of voltage variation and time interval between enrollment.
 Testing on two bit-selection algorithms (data remanence analysis and neighbor analysis) are also performed.
 Based on the testing results, we introduce a PUF enrollment scheme using data remanence analysis as the bit selection algorithm which will locate the location of the stable bits and SRAM Cypress CY62256NLL as the off-the-shelf SRAM.
-In addition, an idea to create a strong PUF using SRAM is also proposed here. Using a collection of bits as a challenge, the stable bits are permutated among themselves to create a challenge which has a tremendous number of possibilities.
+In addition, an idea to create numerous CRPs using SRAM PUF is also proposed here. Using a collection of bits as a challenge, the stable bits are permutated among themselves to create a challenge which has a tremendous number of possibilities.
 Furthermore, we also present a secure data protection and key storage scheme using SRAM PUF. The proposed scheme is influenced by multi-factor authentication. Using a combination of a PUF-generated key and user's password, a derived key is produced and utilized as the final key to protect user's data or/and user's key.
 }
 \newcommand{\reportKeywords}{PUF, SRAM PUF, security, key storage, data protection}
