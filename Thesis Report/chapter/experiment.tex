@@ -129,7 +129,7 @@ The result of the calculation is shown on Figure \ref{fig:cy62256nll_score_rank_
 
 \begin{figure}[tph!]
     \centerline{\includegraphics[width={0.9\textwidth}]{images/cy62256nll_score_rank_bits}}
-    \caption{Remaining stable bits count according to their rank in SRAM Cypress CY62256NLL.}
+    \caption{Remaining stable bits count according to their rank in SRAM Cypress CY62256NLL. There are 246678 bits with rank less or equal to seven.}
     \label{fig:cy62256nll_score_rank_bits}
 \end{figure}
 
@@ -227,7 +227,7 @@ Furthermore, since every company always has their own way of dealing with noises
 % Now, this also brings to other questions, what is the optimum density for an off-the-shelf SRAM to be valid as a PUF candidate?
 We suggest the communities and the academics to study this thing further.
 
-Another conclusion that can be retrieved is that data remanence analysis is also proven to be a better bit selection algorithm than neighbor analysis. This also confirms the claim by Muqing et. al. \cite{liu_zhou_tang_parhi_kim_2017}. Futhermore, based on this outcome, further testing shown below are only done on SRAM Cypress CY62256NLL and the stable bits used are generated using the data remanence algorithm.
+Another conclusion that can be retrieved is that data remanence analysis is also proven to be a better bit selection algorithm than neighbor analysis which also confirms similar claim by Muqing et. al. \cite{liu_zhou_tang_parhi_kim_2017}. Futhermore, based on this outcome, further testing shown below are only done on SRAM Cypress CY62256NLL and the stable bits used are generated using the data remanence algorithm.
 
 \section{Testing on Bits Locations as A Challenge}
 In this section, the testing results on our proposed PUF challenge is presented. As mentioned in the previous chapter, bits locations is selected as the PUF challenge in our application. The test was done on SRAM Cypress CY62256NLL. Cypress CY62256NLL itself has a capacity to store 262144 bits. The number of bits required in a challenge is 2331 bits (the length of the bits required to generate 256 bits key when using scheme shown in Figure \ref{fig:key-generation-scheme}). Using Equation \ref{bits} explained in previous chapter, there are $P(262144, 2331)=\frac{262144!}{\left( 262144-2331 \right) !}\approx 10^{12626}$ possible combinations.
@@ -240,10 +240,12 @@ The selected test to test this challenge is by calculating the HD\textsubscript{
     \label{fig:cy62256cy62256nll_hd_inter_stable_remanences}
 \end{figure}
 
-\section{Complete Enrollment Scheme}
-Based on the experiment results shown before, we construct a complete enrollment scheme. The enrollment scheme has a goal to create challenge and helper data which will be used in our proposed secure data protection and key storage scheme (further explanation is available on Section \ref{chp:data_protection_scheme}). Our complete enrollment scheme is shown in Figure \ref{fig:enrollment}. We also present Figure \ref{fig:cy62256nll_scheme_sd} to show how to connect an Arduino Mega 2560, an SRAM Cypress CY62256NLL and a microSD.
+\section{Complete Enrollment Scheme}\label{ch:complete_enrollment_scheme}
+Based on the experiment results shown before, we construct a complete enrollment scheme. The enrollment scheme has a goal to create challenge and helper data which will be used in our proposed secure data protection and key storage scheme (further explanation is available on Section \ref{chp:data_protection_scheme}).
+Similar to the automatic profiling system, the enrollment scheme also consists of a PC, act as a master, and an Arduino connected to an external SRAM component which acts as a slave. The PC side will run Python code while Arduino side requires Arduino code.
+Our complete enrollment scheme is shown in Figure \ref{fig:enrollment}. We also present Figure \ref{fig:cy62256nll_scheme_sd} to show how to connect an Arduino Mega 2560, an SRAM Cypress CY62256NLL and a microSD.
 
-The enrollment scheme starts by locating stable bits using bit selection algorithm. The chosen bit selection algorithm is data remanence analysis due to its better result and shorter time needed compared to neighbor analysis. Using this algorithm, we detect the position of 4662 stable bits. Afterwards, these stable bits are shuffled to form a set of 2331 bits locations which will be used as the PUF challenge. The process continues with creating the helper data based on the PUF challenge. The enrollment scheme ends with storing the helper data and the PUF challenge to a microSD.
+The enrollment scheme starts by locating stable bits using bit selection algorithm. The chosen bit selection algorithm is data remanence analysis due to its better result and shorter time needed compared to neighbor analysis. Using this algorithm, we detect the position of 4662 stable bits. Afterwards, these stable bits are shuffled to form a set of 2331 bits locations which will be used as the PUF challenge. The process continues with creating the helper data based on the PUF challenge. The enrollment scheme ends with storing the helper data and the PUF challenge to a microSD. Later, if one wants to reconstruct the PUF-generated key from the helper data and the challenge, he only requires an Arduino, no PC is needed (the Arduino code used for reconstructing the PUF-generated key is different from the Arduino code when it act as a slave).
 
 \begin{figure}[tph!]
     \centerline{\includegraphics[width={0.5\textwidth}]{images/enrollment}}
@@ -256,6 +258,21 @@ The enrollment scheme starts by locating stable bits using bit selection algorit
     \caption{An illustration on how to connect an Arduino Mega 2560 with an SRAM Cypress CY62256NLL and a micro SD.}
     \label{fig:cy62256nll_scheme_sd}
 \end{figure}
+
+% How to develop an open source secure data protection and key storage scheme using off-the-shelf SRAM component and software-based SRAM PUF technology?
+
+\section{Procedure on Developing SRAM PUF-Based Applications Using Any Off-The-Shelf SRAM}\label{ch:procedure_develop}
+After presenting the complete enrollment scheme, we also come up with a procedure to develop SRAM PUF-based applications using any off-the-shelf SRAM.
+Similar to the complete enrollment scheme, this procedure scheme also consists of a PC, acting as a master, and an Arduino connected to an external SRAM component which acts as a slave. The PC side will run Python code. To reconstruct the PUF-generated key, similar to the enrollment scheme, one also only need an Arduino, no PC is needed.
+This procedure will check whether the quality of off-the-shelf SRAM is sufficient as a PUF root-of-trust or not. In addition, the procedure also generates the helper data and the challenge of the SRAM which can be used to reconstruct PUF-generated key. Using this PUF-generated key, anyone can build their applications. For example, this PUF-generated key can be utilized as the root-of-trust in an authentication application. Below are the steps defined in this procedure (step 1-5 requires an Arduino and a PC, step 7 only requires an Arduino):
+\begin{enumerate}
+  \item Get any off-the-shelf SRAM from the market.
+  \item Ensure that the Arduino and the PC are able to communicate perfectly with the off-the-shelf SRAM.
+  \item Locate the stable bits using data remanence algorithm.
+  \item Test the stable bits on various conditions. If the stable bits show an acceptable result, continue using this SRAM (continue to next step). Otherwise, abandon and try another off-the-shelf SRAM (go back to step 1).
+  \item Generate the challenge and the helper data using the enrollment scheme shown in Section \ref{ch:complete_enrollment_scheme}. Both the helper data and the challenge is unique to the tested SRAM component.
+  \item Using the challenge and the helper data, one will be able to reconstruct the PUF-generated key. Afterward, the PUF-generated key can be applied as a root-of-trust in any application.
+\end{enumerate}
 
 \section{Testing on Secure Data Protection and Key Storage Scheme}\label{ch:testing_scheme}
 To check the validity of the proposed data protection and key storage scheme, several testings are performed. First, the final key generated using HMAC SHA3 is checked. Afterwards, the result of the encryption and decryption using the final key is also tested. Last, the time required in the scheme is also measured. During the time measurement, the stage is divided into multiple stages to ease the analysis.
@@ -327,28 +344,8 @@ After checking the validity of the final key, a testing on encryption and decryp
 
 \end{itemize}
 
-Measurement of time required in this scheme is also done. During the measurement, the scheme is divided into eight stages. Stage one is on the initialization of the libraries required to access SRAM Cypress CY62256 and microSD. Stage two is when the challenge and the helper data are loaded from micro SD. The third one is calculated when reconstructing the PUF key. Next stage is during the derivation of the final key (derived from user's password and PUF-generated key). Stage five and stage six refers to the processes of encryption and saving ciphertext to microSD. Stage seven and stage eight refers to the procedure of reading ciphertext from microSD and the decryption process (reconstructing the bitcoin key). The measurement result can be seen on Table \ref{tab:time_scheme}. It can be seen that the longest time required is when loading the challenge and the helper data from the microSD (stage 2), followed by the initialization stage (stage 1). Due to this significant time required, a further optimization on accessing data from microSD is suggested.
+Measurement of time required in this scheme is also done. During the measurement, the scheme is divided into eight stages. Stage one is on the initialization of the libraries required to access SRAM Cypress CY62256 and microSD. Stage two is when the challenge and the helper data are loaded from micro SD. The third one is calculated when reconstructing the PUF key. Next stage is during the derivation of the final key (derived from user's password and PUF-generated key). Stage five and stage six refers to the processes of encryption and saving ciphertext to microSD. Stage seven and stage eight refers to the procedure of reading ciphertext from microSD and the decryption process (reconstructing the bitcoin key). The measurement result can be seen on Table \ref{tab:time_scheme}. It can be seen that the longest time required is when loading the challenge and the helper data from the microSD (stage 2), followed by the initialization stage (stage 1). Due to this significant time required, a further optimization on accessing data from microSD is suggested in possible future works.
 
-% \begin{table}[htbp]
-%   \centering
-%   \caption{Time measurement of the secure data protection and key storage scheme in \si{\micro}s.}
-%     \begin{tabular}{|c|c|c|c|c|c|c|}
-%     \hline
-%     \textbf{No} & \textbf{Stage 1} & \textbf{Stage 2} & \textbf{Stage 3} & \textbf{Stage 4} & \textbf{Stage 5} & \textbf{Stage 6} \\
-%     \hline
-%     1     & 1022656 & 2205248 & 978152 & 33572 & 836   & 1716 \\
-%     \hline
-%     2     & 1022652 & 2205244 & 974388 & 33568 & 848   & 1712 \\
-%     \hline
-%     3     & 1022632 & 2205248 & 981272 & 33572 & 836   & 1716 \\
-%     \hline
-%     Average & 1022647 & 2205247 & 977937 & 33571 & 840   & 1715 \\
-%     \hline
-%     \end{tabular}%
-%   \label{tab:time_scheme}%
-% \end{table}%
-
-% Table generated by Excel2LaTeX from sheet 'Sheet1'
 \begin{table}[htbp]
   \centering
   \caption{Time measurement of the secure data protection and key storage scheme in ms.}
@@ -378,6 +375,13 @@ Measurement of time required in this scheme is also done. During the measurement
   \label{tab:time_scheme}%
 \end{table}%
 
+To ensure the functionality of the system, we also constructed test cases for the source code. The testing is done only on the functionality of the system, not on the code which has a direct interaction with hardware (e.g. code to read microSD and SRAM). This decision is taken because to ensure the code is properly working, the hardware has to be in a proper condition, while checking the hardware condition is sometimes problematic and cannot be automated. The quality of the test cases is shown by code coverage which generated using GCOV and LCOV. Figure \ref{fig:code_coverage} shows the code coverage result. As seen there, there are directories where the line coverage is not 100\% covered. The reasons are some directories are just library to enable code testing (folder 'gmock' and folder 'gtest', both are libraries created by Google which required to enable the testing) and one directory is a part of LLVM compiler infrastructure (folder 'v1'). Another directory which is not fully covered is 'Crypto', this folder is a library required to do the encryption, decryption, and HMAC but provides more functional than what we need to construct the system. Thus, the test is only done on the functionality that is actually needed by the system which leads to a not full percentage of code coverage.
+
+\begin{figure}[tph!]
+    \centerline{\includegraphics[width={\textwidth}]{images/code_coverage}}
+    \caption{Code coverage of the constructed project.}
+    \label{fig:code_coverage}
+\end{figure}
 
 % \section{Concluding Experiment with Cybercurrency}
 \section{Concluding Experiment with Cybercurrency}
@@ -386,152 +390,9 @@ Later, the microSD and the SRAM are transferred to another Arduino board. The ne
 Moreover, we also shows that the bitcoin key will not be reconstructed successfully if user's password is incorrect or the SRAM is not similar with the one that use to encrypt the bitcoin key.
 
 This experiment was done on five SRAMs Cypress CY62256NLL which can be identified by having index 'A', 'B', 'C', 'D', and E.
-The result of this experiment is shown on Figure \ref{fig:A_encrypt} until Figure \ref{fig:E_decrypt_wrong_SRAM}. These figures show that the stored / secured bitcoin key can only be reconstructed using a correct user's password and the exact SRAM that used during the storing (encryption) stage. If the SRAM is not similar with the one used for the encryption stage or the input password is inaccurate, the bitcoin key cannot be reconstructed to the actual one.
-% Figure \ref{fig:encryption} shows the encryption of bitcoin key 'testpasswordtest' using user's password 'testtest' and SRAM Cypress CY62256NLL.
-% Figure \ref{fig:decryption_correct_pass} displays the decryption of bitcoin key is successful when the user's password and the SRAM is correct. Meanwhile, Figure \ref{fig:decryption_wrong_pass} present the failure of bitcoin key reconstruction when an incorrect user's password is utilized.
+The result of this experiment is shown on Appendix \ref{app:screenshot}. These figures show that the stored / secured bitcoin key can only be reconstructed using a correct user's password and the exact SRAM that used during the storing (encryption) stage. If the SRAM is not similar with the one used for the encryption stage or the input password is inaccurate, the bitcoin key cannot be reconstructed to the actual one.
 Based on these result, we believe that the constructed data protection and key storage scheme is secure and successfully built.
 
-% SRAM A
-\begin{figure}[tph!]
-    \centerline{\includegraphics[width={\textwidth}]{images/A_encrypt}}
-    \caption{Screenshot of the bitcoin key storing experiment during encryption stage using SRAM Cypress CY62256NLL 'A'.
-    User's password is '1234' and the bitcoin key (user's key) is '1234567890123456'.}
-    \label{fig:A_encrypt}
-\end{figure}
-
-\begin{figure}[tph!]
-    \centerline{\includegraphics[width={\textwidth}]{images/A_decrypt_correct}}
-    \caption{Screenshot of the bitcoin key storing experiment during decryption stage. The bitcoin key '1234567890123456' is previously secured by using SRAM Cypress CY62256NLL 'A' and user's password '1234'.
-    The bitcoin key can be reconstructed because user's password is correct.}
-    \label{fig:A_decrypt_correct}
-\end{figure}
-
-\begin{figure}[tph!]
-    \centerline{\includegraphics[width={\textwidth}]{images/A_decrypt_wrong_password}}
-    \caption{Screenshot of the bitcoin key storing experiment during decryption stage. The bitcoin key '1234567890123456' is previously secured by using SRAM Cypress CY62256NLL 'A' and user's password '1234'.
-    The bitcoin key cannot be reconstructed because user's password is wrong.}
-    \label{fig:A_decrypt_wrong_password}
-\end{figure}
-
-\begin{figure}[tph!]
-    \centerline{\includegraphics[width={\textwidth}]{images/A_decrypt_wrong_SRAM_D}}
-    \caption{Screenshot of the bitcoin key storing experiment during decryption stage. The bitcoin key '1234567890123456' is previously secured by using SRAM Cypress CY62256NLL 'A' and user's password '1234'.
-    The bitcoin key cannot be reconstructed because the SRAM utilized for the decryption is SRAM Cypress CY62256NLL 'D'.}
-    \label{fig:A_decrypt_wrong_SRAM}
-\end{figure}
-
-% SRAM B
-\begin{figure}[tph!]
-    \centerline{\includegraphics[width={\textwidth}]{images/B_encrypt}}
-    \caption{Screenshot of the bitcoin key storing experiment during encryption stage using SRAM Cypress CY62256NLL 'B'.
-    User's password is 'testpassword' and the bitcoin key (user's key) is 'testpasswordtest'.}
-    \label{fig:B_encrypt}
-\end{figure}
-
-\begin{figure}[tph!]
-    \centerline{\includegraphics[width={\textwidth}]{images/B_decrypt_correct}}
-    \caption{Screenshot of the bitcoin key storing experiment during decryption stage. The bitcoin key 'testpasswordtest' is previously secured by using SRAM Cypress CY62256NLL 'B' and user's password 'testpassword'.
-    The bitcoin key can be reconstructed because user's password is correct.}
-    \label{fig:B_decrypt_correct}
-\end{figure}
-
-\begin{figure}[tph!]
-    \centerline{\includegraphics[width={\textwidth}]{images/B_decrypt_wrong_password}}
-    \caption{Screenshot of the bitcoin key storing experiment during decryption stage. The bitcoin key 'testpasswordtest' is previously secured by using SRAM Cypress CY62256NLL 'B' and user's password 'testpassword'.
-    The bitcoin key cannot be reconstructed because user's password is wrong.}
-    \label{fig:B_decrypt_wrong_password}
-\end{figure}
-
-\begin{figure}[tph!]
-    \centerline{\includegraphics[width={\textwidth}]{images/B_decrypt_wrong_SRAM_A}}
-    \caption{Screenshot of the bitcoin key storing experiment during decryption stage. The bitcoin key 'testpasswordtest' is previously secured by using SRAM Cypress CY62256NLL 'B' and user's password 'testpassword'.
-    The bitcoin key cannot be reconstructed because the SRAM utilized for the decryption is SRAM Cypress CY62256NLL 'A'.}
-    \label{fig:B_decrypt_wrong_SRAM}
-\end{figure}
-
-% SRAM C
-\begin{figure}[tph!]
-    \centerline{\includegraphics[width={\textwidth}]{images/C_encrypt}}
-    \caption{Screenshot of the bitcoin key storing experiment during encryption stage using SRAM Cypress CY62256NLL 'C'.
-    User's password is 'password' and the bitcoin key (user's key) is 'testpasswordtest'.}
-    \label{fig:C_encrypt}
-\end{figure}
-
-\begin{figure}[tph!]
-    \centerline{\includegraphics[width={\textwidth}]{images/C_decrypt_correct}}
-    \caption{Screenshot of the bitcoin key storing experiment during decryption stage. The bitcoin key 'testpasswordtest' is previously secured by using SRAM Cypress CY62256NLL 'C' and user's password 'password'.
-    The bitcoin key can be reconstructed because user's password is correct.}
-    \label{fig:C_decrypt_correct}
-\end{figure}
-
-\begin{figure}[tph!]
-    \centerline{\includegraphics[width={\textwidth}]{images/C_decrypt_wrong_password}}
-    \caption{Screenshot of the bitcoin key storing experiment during decryption stage. The bitcoin key 'testpasswordtest' is previously secured by using SRAM Cypress CY62256NLL 'C' and user's password 'password'.
-    The bitcoin key cannot be reconstructed because user's password is wrong.}
-    \label{fig:C_decrypt_wrong_password}
-\end{figure}
-
-\begin{figure}[tph!]
-    \centerline{\includegraphics[width={\textwidth}]{images/C_decrypt_wrong_SRAM_D}}
-    \caption{Screenshot of the bitcoin key storing experiment during decryption stage. The bitcoin key 'testpasswordtest' is previously secured by using SRAM Cypress CY62256NLL 'C' and user's password 'password'.
-    The bitcoin key cannot be reconstructed because the SRAM utilized for the decryption is SRAM Cypress CY62256NLL 'D'.}
-    \label{fig:C_decrypt_wrong_SRAM}
-\end{figure}
-
-% SRAM D
-\begin{figure}[tph!]
-    \centerline{\includegraphics[width={\textwidth}]{images/D_encrypt}}
-    \caption{Screenshot of the bitcoin key storing experiment during encryption stage using SRAM Cypress CY62256NLL 'D'.
-    User's password is 'qwertyuiop' and the bitcoin key (user's key) is 'hahahahalalalala'.}
-    \label{fig:D_encrypt}
-\end{figure}
-
-\begin{figure}[tph!]
-    \centerline{\includegraphics[width={\textwidth}]{images/D_decrypt_correct}}
-    \caption{Screenshot of the bitcoin key storing experiment during decryption stage. The bitcoin key 'hahahahalalalala' is previously secured by using SRAM Cypress CY62256NLL 'D' and user's password 'qwertyuiop'.
-    The bitcoin key can be reconstructed because user's password is correct.}
-    \label{fig:D_decrypt_correct}
-\end{figure}
-
-\begin{figure}[tph!]
-    \centerline{\includegraphics[width={\textwidth}]{images/D_decrypt_wrong_password}}
-    \caption{Screenshot of the bitcoin key storing experiment during decryption stage. The bitcoin key 'hahahahalalalala' is previously secured by using SRAM Cypress CY62256NLL 'D' and user's password 'qwertyuiop'.
-    The bitcoin key cannot be reconstructed because user's password is wrong.}
-    \label{fig:D_decrypt_wrong_password}
-\end{figure}
-
-\begin{figure}[tph!]
-    \centerline{\includegraphics[width={\textwidth}]{images/D_decrypt_wrong_SRAM_B}}
-    \caption{Screenshot of the bitcoin key storing experiment during decryption stage. The bitcoin key 'hahahahalalalala' is previously secured by using SRAM Cypress CY62256NLL 'D' and user's password 'qwertyuiop'.
-    The bitcoin key cannot be reconstructed because the SRAM utilized for the decryption is SRAM Cypress CY62256NLL 'B'.}
-    \label{fig:D_decrypt_wrong_SRAM}
-\end{figure}
-
-% SRAM E
-\begin{figure}[tph!]
-    \centerline{\includegraphics[width={\textwidth}]{images/E_encrypt}}
-    \caption{Screenshot of the bitcoin key storing experiment during encryption stage using SRAM Cypress CY62256NLL 'E'.
-    User's password is 'testtest' and the bitcoin key (user's key) is 'testpasswordtest'.}
-    \label{fig:E_encrypt}
-\end{figure}
-
-\begin{figure}[tph!]
-    \centerline{\includegraphics[width={\textwidth}]{images/E_decrypt_correct}}
-    \caption{Screenshot of the bitcoin key storing experiment during decryption stage. The bitcoin key 'testpasswordtest' is previously secured by using SRAM Cypress CY62256NLL 'E' and user's password 'testtest'.
-    The bitcoin key can be reconstructed because user's password is correct.}
-    \label{fig:E_decrypt_correct}
-\end{figure}
-
-\begin{figure}[tph!]
-    \centerline{\includegraphics[width={\textwidth}]{images/E_decrypt_wrong_password}}
-    \caption{Screenshot of the bitcoin key storing experiment during decryption stage. The bitcoin 'testpasswordtest' is previously secured by using SRAM Cypress CY62256NLL 'E' and user's password 'testtest'.
-    The bitcoin key 'testpasswordtest' cannot be reconstructed because user's password is incorrect.}
-    \label{fig:E_decrypt_wrong_password}
-\end{figure}
-
-\begin{figure}[tph!]
-    \centerline{\includegraphics[width={\textwidth}]{images/E_decrypt_wrong_SRAM_C}}
-    \caption{Screenshot of the bitcoin key storing experiment during decryption stage. The bitcoin key 'testpasswordtest' is previously secured by using SRAM Cypress CY62256NLL 'E' and user's password 'testtest'.
-    The bitcoin key cannot be reconstructed because the SRAM utilized for the decryption is SRAM Cypress CY62256NLL 'C'.}
-    \label{fig:E_decrypt_wrong_SRAM}
-\end{figure}
+\section{Conclusion}
+In this chapter, we provide explanations of several experiment setups and results. We start by presenting two chosen SRAMs that used in experiments; Microchip 23LC1024 and Cypress CY62256NLL. Both are tested on the effect of voltage variations regarding the HD\textsubscript{intra}, HD\textsubscript{inter}, distribution of 1's and 0's. Afterwards, the testing results on two bit selection algorithms (neighbor analysis and data remanence approach) and the reliability of the stable bits produced by these algorithms are displayed. From these experiments, we concluded that the Microchip 23LC1024 is unreliable to be a PUF candidate while Cypress CY62256NLL has a solid ground to be the root-of-trust of a PUF. We also able to determine that data remanence approach can produce more stable bits compared to neighbor analysis.
+The chapter continues with examination on our proposed PUF challenge. Since Cypress CY62256NLL has a capacity of 262144 bits and the required bits for PUF generation is 2331 bits, there are $P(262144, 2331)=\frac{262144!}{\left( 262144-2331 \right) !}\approx 10^{12626}$ possible challenges. We also display our complete enrollment scheme and the procedure on developing SRAM PUF-based applications using any off-the-shelf SRAM. Next, testing on the designed secure data protection and key storage scheme is shown. Last, experiment outcomes on storing bitcoin private key conclude this chapter.

@@ -272,13 +272,6 @@ void print_key(uint8_t* key, uint8_t length) {
   Serial.println();
 }
 
-void reconstruct_puf_key(uint32_t key_32) {
-  BCH bch;
-  Tools tools;
-  bch.initialize();               /* Read m */
-  decodePUF(bch, tools, key_32);
-}
-
 void derive_new_key(String user_password, uint8_t* final_key, uint8_t* key_32) {
   SHA3_256 sha3_256;
 

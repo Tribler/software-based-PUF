@@ -3,7 +3,7 @@
 \label{chp:2}
 
 \textit{This chapter examines some background theory related to security, cryptography, and PUF. A brief review of security is presented, followed by explanations on symmetric cryptography, key derivation function and multi-factor authentication.
-Then, theories related to PUF and SRAM PUF are described, continued by a short evaluation on how to generate a key using SRAM PUF.}
+Then, theories related to PUF and SRAM PUF are described, continued by evaluation on some PUF-based applications. We also present previous publications which related to SRAM PUF built using off-the-shelf SRAM.}
 
 \section{Security Requirements and Cryptography}
 \label{chapter2.1}
@@ -54,9 +54,15 @@ Besides the encryption algorithm, a \textit{key derivation function} (KDF) is on
 Cryptographically strong itself refers to indistinguishability by reasonable computation from a random uniform string with similar length \cite{key_derivation}.
 KDF can also be referred as a strong extractor.
 
-A popular example of KDF is a keyed cryptographic hash function. The difference between keyed cryptographic hash function and a normal hash function is a keyed hash function requires an additional \textit{salt} as an input (besides the key to derived).
+A popular example of KDF is a keyed cryptographic hash function (can be referred as \textit{HMAC}, stands for hash-based message authentication code). The difference between keyed cryptographic hash function and a normal hash function is a keyed hash function requires an additional \textit{salt} as an input (besides the key to derived).
+The formula for HMAC is shown below \cite{rfc2104}:
+\begin{equation}
+  {\displaystyle \operatorname {HMAC} (K,m)=H{\Bigl (}(K'\oplus opad)\|H{\bigl (}(K'\oplus ipad)\|m{\bigr )}{\Bigr )}}
+\end{equation}
+There are three elements which defined the cryptographic strength of the HMAC; the utilized hash function's cryptographic strength, the output size, and the key's size and quality. Currently, the latest cryptographic hash function published by the National Institute of Standards and Technology (NIST) as a U.S. Federal Information Processing Standard (FIPS) is SHA-3. SHA-3 (Secure Hash Algorithm 3) is a part of another cryptographic primitive family called Keccak \cite{10.1007/978-3-642-38348-9_19}. Keccak is built on top of an method called sponge construction. Sponge construction itself is based on multiple layers of pseurandom function where each layer is able of absorbing (receive input) and squeezing (generate output) any amount of data.
+
 There are three requirements need to be fulfilled as a secure cryptographic hash function; \textit{preimage resistant, second preimage resistant, and collision resistant}. Preimage resistant means it should be hard to find a message with a given hash value. In second preimage resistant, if one message is provided, it should be hard to find another message with the same hash value.
-Last, collision resistant refers to difficultness to find two messages with the same hash value.
+Last, collision resistant refers to difficultness to find two messages with the same hash value. HMAC built using SHA-3 with key length of 256 bits has collision resistance of 128 bits, preimage resistance of 256 bits, and second preimage resistant of	256 bits \cite{technology2015sha}.
 
 \section{Multi-factor Authentication}
 \label{chp:2.mfa}
@@ -154,3 +160,7 @@ These parameters lead to several derived parameters which are standard parameter
 Both BCH codes and Reed-Solomon codes have the capability to correct multiple errors. Reed-Solomon codes are also a flexible ECC and have similar parameters as BCH codes, e.g. $n$, $k$, $d$.  Unlike BCH codes, Reed-Solomon codes can work in both binary and non-binary fields. Reed-Solomon codes also perform better in correcting burst errors while BCH codes are better at fixing random errors. BCH codes have an advantage where it requires less computing resource when working on the same parameter compared to Reed-Solomon codes.
 
 \input{chapter/sram_puf}
+
+\section{Conclusion}
+It is a challenging task to design a secure data and key storage based on SRAM PUF technology, especially since to solve this task, we need to understand the term of software and hardware security. Therefore, we investigate several background theory related to security, cryptography, and PUF. We started by presenting four elements on common security; confidentiality, authentication, integrity, and non-repudiation. Then, the history of cryptography is explained, followed by explanations on symmetric cryptography, key derivation function, and multi-factor authentication.
+Later on, theories related to PUF, hamming distance, error correcting codes and SRAM PUF are described. We continue the chapter by a portrayal of several PUF applications, such as key generation and key storage. We also show some previous works which related to SRAM PUF built using off-the-shelf SRAM. In the next chapter, our proposed ideas on how to build a secure data and key storage using SRAM PUF and off-the-shelf SRAM will be explained.

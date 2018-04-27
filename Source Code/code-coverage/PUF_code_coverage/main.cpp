@@ -1,0 +1,28 @@
+#include <iostream>
+#include <gtest/gtest.h>
+#include <gmock/gmock.h>
+#include "src/PUF.h"
+
+int main(int argc, char* argv[]){
+    testing::InitGoogleTest(&argc, argv);
+    RUN_ALL_TESTS();
+
+//    PUF puf;
+//    string user_password = "password";
+//    uint8_t final_key[16];
+//    uint8_t key_32[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+//                        0x00,};
+//
+//    puf.derive_new_key(user_password, final_key, key_32);
+//
+//    uint8_t final_key_default[] = {0xf5, 0x14, 0xe6, 0x18, 0x4c, 0x0b, 0x98, 0x91, 0x44, 0xab, 0x43, 0xb5, 0x44, 0xbe,
+//                                   0x1b, 0x12, 0xf2, 0x00, 0x9d, 0xc7, 0x4b, 0xc1, 0xac, 0x69, 0xfb, 0x5b, 0x07, 0x47,
+//                                   0x79, 0xcd, 0x84, 0xf7};
+//
+//    for (int i=0;i<32;i++){
+//        printf("%x %x\n", final_key[i], final_key_default[i]);
+//    }
+
+    std::cout << "FINISH !" << std::endl;
+    return 0;
+}

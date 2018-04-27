@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="PUF_code_coverage"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\cmake-build-debug\;CMake Files\cmake-build-debug\googletest-src\;CMake Files\cmake-build-debug\googletest-src\googlemock\;CMake Files\cmake-build-debug\googletest-src\googlemock\cmake\;CMake Files\cmake-build-debug\googletest-src\googletest\;CMake Files\cmake-build-debug\googletest-src\googletest\cmake\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="PUF_code_coverage">
+				<Option output="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/PUF_code_coverage" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googlemock/include"/>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 PUF_code_coverage"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="PUF_code_coverage/fast">
+				<Option output="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/PUF_code_coverage" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googlemock/include"/>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 PUF_code_coverage/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gmock">
+				<Option output="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/libgmockd.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googlemock/include"/>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googlemock"/>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/include"/>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/Makefile&quot;  VERBOSE=1 gmock"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gmock/fast">
+				<Option output="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/libgmockd.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googlemock/include"/>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googlemock"/>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/include"/>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/Makefile&quot;  VERBOSE=1 gmock/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gmock_main">
+				<Option output="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/libgmock_maind.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googlemock/include"/>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googlemock"/>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/include"/>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/Makefile&quot;  VERBOSE=1 gmock_main"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gmock_main/fast">
+				<Option output="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/libgmock_maind.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googlemock/include"/>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googlemock"/>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/include"/>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/Makefile&quot;  VERBOSE=1 gmock_main/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gtest_main">
+				<Option output="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/gtest/libgtest_maind.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/gtest"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/include"/>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/gtest/Makefile&quot;  VERBOSE=1 gtest_main"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/gtest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gtest_main/fast">
+				<Option output="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/gtest/libgtest_maind.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/gtest"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/include"/>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/gtest/Makefile&quot;  VERBOSE=1 gtest_main/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/gtest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gtest">
+				<Option output="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/gtest/libgtestd.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/gtest"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/include"/>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/gtest/Makefile&quot;  VERBOSE=1 gtest"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/gtest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gtest/fast">
+				<Option output="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/gtest/libgtestd.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/gtest"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/include"/>
+					<Add directory="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/gtest/Makefile&quot;  VERBOSE=1 gtest/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/gtest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source\ Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-build/googlemock/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googlemock/src/gmock-all.cc">
+			<Option target="gmock"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googlemock/src/gmock_main.cc">
+			<Option target="gmock_main"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/src/gtest-all.cc">
+			<Option target="gtest"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/src/gtest_main.cc">
+			<Option target="gtest_main"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/main.cpp">
+			<Option target="PUF_code_coverage"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/AES256.cpp">
+			<Option target="PUF_code_coverage"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/AESCommon.cpp">
+			<Option target="PUF_code_coverage"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/BlockCipher.cpp">
+			<Option target="PUF_code_coverage"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/BlockCipher.h">
+			<Option target="PUF_code_coverage"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/Hash.cpp">
+			<Option target="PUF_code_coverage"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/Hash.h">
+			<Option target="PUF_code_coverage"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/KeccakCore.cpp">
+			<Option target="PUF_code_coverage"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/KeccakCore.h">
+			<Option target="PUF_code_coverage"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/SHA3.cpp">
+			<Option target="PUF_code_coverage"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/SHA3.h">
+			<Option target="PUF_code_coverage"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/PUF.h">
+			<Option target="PUF_code_coverage"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/bch/BCH.cpp">
+			<Option target="PUF_code_coverage"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/bch/BCH.h">
+			<Option target="PUF_code_coverage"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/tools/Tools.cpp">
+			<Option target="PUF_code_coverage"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/tools/Tools.h">
+			<Option target="PUF_code_coverage"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/test/BCHCompleteTest.cpp">
+			<Option target="PUF_code_coverage"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/test/BCHTest.cpp">
+			<Option target="PUF_code_coverage"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/test/PUF_Test.cpp">
+			<Option target="PUF_code_coverage"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/test/ToolsTest.cpp">
+			<Option target="PUF_code_coverage"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/CMakeLists.txt.in">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googlemock/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\googlemock\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googlemock/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\googlemock\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googlemock/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\googlemock\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googlemock/cmake/gmock.pc.in">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\googlemock\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googlemock/cmake/gmock_main.pc.in">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\googlemock\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googlemock/cmake/gmock.pc.in">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\googlemock\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googlemock/cmake/gmock_main.pc.in">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\googlemock\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googlemock/cmake/gmock.pc.in">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\googlemock\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googlemock/cmake/gmock_main.pc.in">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\googlemock\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\googletest\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\googletest\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\googletest\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\googletest\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/cmake/internal_utils.cmake">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\googletest\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/cmake/gtest.pc.in">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\googletest\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/cmake/gtest_main.pc.in">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\googletest\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/cmake/internal_utils.cmake">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\googletest\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/cmake/gtest.pc.in">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\googletest\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/cmake/gtest_main.pc.in">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\googletest\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/cmake/internal_utils.cmake">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\googletest\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/cmake/gtest.pc.in">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\googletest\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/cmake/gtest_main.pc.in">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\googletest\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/cmake/internal_utils.cmake">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\googletest\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/cmake/gtest.pc.in">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\googletest\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/cmake/gtest_main.pc.in">
+			<Option virtualFolder="CMake Files\cmake-build-debug\googletest-src\googletest\cmake\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

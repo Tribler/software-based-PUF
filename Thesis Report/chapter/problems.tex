@@ -1,6 +1,6 @@
 % \chapter{\chapterThree}
 % \label{chp:3}
-\section{Problem Statement}
+\section{Problem Statement}\label{ch:problem}
 
 
 Since introduced by Guajardo and Holcomb in 2007, there have been many innovations in SRAM PUF field. A simple patent search using patents.google.com with query 'sram; puf' results in 546 results \cite{google_patents}. The number of articles in \seqsplit{scholar.google.com} also exhibit a high occurrences, shown by a total of 2,120 articles (citations and patents are not included) \cite{google_scholar}.
@@ -25,6 +25,6 @@ To understand our intention in this thesis better, this thesis' problem statemen
     % \textit{How to develop a secure software-only SRAM PUF-based data protection and key storage scheme using off-the-shelf SRAM while providing a mature and sharing ecosystem for continuous SRAM PUF development?}
 \end{adjustwidth}
 
-Derived from the problem statement, there are two goals defined in this thesis. The first goal is to devise a secure data protection and key storage scheme based on SRAM PUF technology. The data and the key protected by the scheme has to be safe even though the PUF device is lost. Moreover, the scheme should work using off-the-shelf SRAM. This sub-goal leads us to another question, can we build SRAM PUF using off-the-shelf SRAM? If it is possible, what characteristics need to be fulfilled by off-the-shelf SRAM to be eligible as a PUF candidate?
+Derived from the problem statement, there are two goals defined in this thesis. The first goal is to devise a secure data and key storage scheme based on SRAM PUF technology. The data and the key protected by the scheme has to be safe even though the PUF device is lost. Moreover, the scheme should work using off-the-shelf SRAM. This sub-goal leads us to another question, can we build SRAM PUF using off-the-shelf SRAM? If it is possible, what characteristics need to be fulfilled by off-the-shelf SRAM to be eligible as a PUF candidate?
 In addition, the constructed SRAM PUF has to work without any hardware design, or in other words, software-based construction. The data protection and key storage functions inside the scheme will be helpful in addressing the problem of self-sovereign identity and keeping the secret key.
 The next goal is to create a sharing ecosystem for the evolution of our data protection and key storage scheme. The ecosystem should be easily accessed and understood to encourage the academics and commercial parties to use and develop the ecosystem together. The easiest step to achieve this goal is by making our thesis as an open source project.

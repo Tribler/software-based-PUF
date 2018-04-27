@@ -15,11 +15,16 @@
 #include "BCH.h"
 
 BCH::BCH() {
-    tools = Tools();
+    
 }
 
 
 void BCH::initialize() {
+    memset(p, 0, sizeof(p));
+    memset(alpha_to, 0, sizeof(alpha_to));
+    memset(index_of, 0, sizeof(index_of));
+    memset(g, 0, sizeof(g));
+
     tools = Tools();
     initialize_p();
     generate_gf();

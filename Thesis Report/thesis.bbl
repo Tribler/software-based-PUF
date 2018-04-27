@@ -160,6 +160,24 @@ Hugo Krawczyk.
 \newblock In Tal Rabin, editor, {\em Advances in Cryptology -- CRYPTO 2010},
   pages 631--648, Berlin, Heidelberg, 2010. Springer Berlin Heidelberg.
 
+\bibitem{rfc2104}
+Dr.~Hugo Krawczyk, Mihir Bellare, and Ran Canetti.
+\newblock {HMAC: Keyed-Hashing for Message Authentication}.
+\newblock RFC 2104, February 1997.
+
+\bibitem{10.1007/978-3-642-38348-9_19}
+Guido Bertoni, Joan Daemen, Micha{\"e}l Peeters, and Gilles Van~Assche.
+\newblock Keccak.
+\newblock In Thomas Johansson and Phong~Q. Nguyen, editors, {\em Advances in
+  Cryptology -- EUROCRYPT 2013}, pages 313--314, Berlin, Heidelberg, 2013.
+  Springer Berlin Heidelberg.
+
+\bibitem{technology2015sha}
+N.I.N.I.S. Technology.
+\newblock {\em SHA-3 Standard: Permutation-Based Hash and Extendable-Output
+  Functions: FiPS PUB 202}.
+\newblock CreateSpace Independent Publishing Platform, 2015.
+
 \bibitem{Galdi2018ExploringNA}
 Chiara Galdi, Michele Nappi, Jean-Luc Dugelay, and Yong Yu.
 \newblock Exploring new authentication protocols for sensitive data protection
@@ -391,6 +409,11 @@ D.~E. Holcomb, W.~P. Burleson, and K.~Fu.
 \newblock Power-up sram state as an identifying fingerprint and source of true
   random numbers.
 \newblock {\em IEEE Transactions on Computers}, 58(9):1198--1210, Sept 2009.
+
+\bibitem{arduino}
+Arduino - about us.
+\newblock \url{https://www.arduino.cc/en/Main/AboutUs}.
+\newblock [Online; accessed 20-Jan-2018].
 
 \bibitem{bch_code}
 The error correcting codes (ecc) page.

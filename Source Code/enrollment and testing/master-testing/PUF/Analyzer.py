@@ -133,7 +133,7 @@ class Analyzer:
             if a > limit:
                 break
 
-        xs = ['≥16', '15', '14', '13', '12', '11', '10', '9', '8']
+        xs = ['8', '9', '10', '11', '12', '13', '14', '15', '≥16']
         width = .35
         ind = numpy.arange(len(ys))
 
@@ -166,7 +166,7 @@ class Analyzer:
             if a > limit:
                 break
 
-        xs = ['≥6', '5', '4', '3', '1', '0']
+        xs = ['0', '1', '2', '3', '4', '5', '≥6']
         width = .35
         ind = numpy.arange(len(ys))
 

@@ -277,16 +277,16 @@ def read_file(file):
 # -------------------------------------------------------------------------------------------------------
 
 # ************************** 23LC1024 **********************************
-# b = Tools.read_dict("23LC1024/rank-neighbor-5-2018-04-05")
-# for i in b:
-#     print(str(i) + ", " + str(b[i]))
-# h.gen_graph_rank_23lc1024(b, ymax=700000, limit=8)
+b = Tools.read_dict("23LC1024/rank-neighbor-5-2018-04-05")
+for i in b:
+    print(str(i) + ", " + str(b[i]))
+h.gen_graph_rank_23lc1024(b, ymax=700000, limit=6)
 
 # ************************** CY62256NLL **********************************
 # b = Tools.read_dict("CY62256NLL/rank-neighbor-15-2018-04-05-edit")
 # for i in b:
 #     print(str(i) + ", " + str(b[i]))
-# h.gen_graph_rank_cy62256nll(b, ymax=6000, limit=8
+# h.gen_graph_rank_cy62256nll(b, ymax=6000, limit=8)
 #
 #
 # -------------------------------------------------------------------------------------------------------
@@ -302,9 +302,9 @@ def read_file(file):
 # h.gen_remanence_graph(b)
 
 # ************************* CY62256NLL **********************************
-remanence0 = Tools.read_remanence_from_file("CY62256NLL/remanences-count/E/remanence0-2018-04-04")
-remanence1 = Tools.read_remanence_from_file("CY62256NLL/remanences-count/E/remanence1-2018-04-04")
-a = h.calculate_percentage(remanence0, max=262144, is_write_one=False)
-b = h.calculate_percentage(remanence1, max=262144, is_write_one=True)
-h.gen_remanence_graph(a)
-h.gen_remanence_graph(b)
+# remanence0 = Tools.read_remanence_from_file("CY62256NLL/remanences-count/E/remanence0-2018-04-04")
+# remanence1 = Tools.read_remanence_from_file("CY62256NLL/remanences-count/E/remanence1-2018-04-04")
+# a = h.calculate_percentage(remanence0, max=262144, is_write_one=False)
+# b = h.calculate_percentage(remanence1, max=262144, is_write_one=True)
+# h.gen_remanence_graph(a)
+# h.gen_remanence_graph(b)
