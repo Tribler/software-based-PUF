@@ -2,7 +2,7 @@
 \contentsline {chapter}{Preface}{v}{chapter*.1}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Need for Self-Sovereign Identity}{1}{section.1.1}
-\contentsline {section}{\numberline {1.2}Rise of PUF as a Security Solution}{2}{section.1.2}
+\contentsline {section}{\numberline {1.2}Rise of PUF as a Security Solution}{3}{section.1.2}
 \contentsline {section}{\numberline {1.3}Problem Statement}{4}{section.1.3}
 \contentsline {section}{\numberline {1.4}Contributions}{5}{section.1.4}
 \contentsline {section}{\numberline {1.5}Outlines}{6}{section.1.5}

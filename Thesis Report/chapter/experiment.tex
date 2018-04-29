@@ -263,16 +263,18 @@ The enrollment scheme starts by locating stable bits using bit selection algorit
 
 \section{Procedure on Developing SRAM PUF-Based Applications Using Any Off-The-Shelf SRAM}\label{ch:procedure_develop}
 After presenting the complete enrollment scheme, we also come up with a procedure to develop SRAM PUF-based applications using any off-the-shelf SRAM.
-Similar to the complete enrollment scheme, this procedure scheme also consists of a PC, acting as a master, and an Arduino connected to an external SRAM component which acts as a slave. The PC side will run Python code. To reconstruct the PUF-generated key, similar to the enrollment scheme, one also only need an Arduino, no PC is needed.
-This procedure will check whether the quality of off-the-shelf SRAM is sufficient as a PUF root-of-trust or not. In addition, the procedure also generates the helper data and the challenge of the SRAM which can be used to reconstruct PUF-generated key. Using this PUF-generated key, anyone can build their applications. For example, this PUF-generated key can be utilized as the root-of-trust in an authentication application. Below are the steps defined in this procedure (step 1-5 requires an Arduino and a PC, step 7 only requires an Arduino):
-\begin{enumerate}
-  \item Get any off-the-shelf SRAM from the market.
-  \item Ensure that the Arduino and the PC are able to communicate perfectly with the off-the-shelf SRAM.
-  \item Locate the stable bits using data remanence algorithm.
-  \item Test the stable bits on various conditions. If the stable bits show an acceptable result, continue using this SRAM (continue to next step). Otherwise, abandon and try another off-the-shelf SRAM (go back to step 1).
-  \item Generate the challenge and the helper data using the enrollment scheme shown in Section \ref{ch:complete_enrollment_scheme}. Both the helper data and the challenge is unique to the tested SRAM component.
-  \item Using the challenge and the helper data, one will be able to reconstruct the PUF-generated key. Afterward, the PUF-generated key can be applied as a root-of-trust in any application.
-\end{enumerate}
+Similar to the complete enrollment scheme, this procedure scheme also requires a PC, acting as a master, and an Arduino connected to an external SRAM component which acts as a slave. The PC side will run Python code. To reconstruct the PUF-generated key, similar to the enrollment scheme, one also only need an Arduino, no PC is needed.
+This procedure will check whether the quality of the off-the-shelf SRAM is sufficient as a PUF root-of-trust or not. In addition, the procedure also generates the helper data and the challenge of the SRAM which can be used to reconstruct PUF-generated key. Using this PUF-generated key, anyone can build their applications. For example, this PUF-generated key can be utilized as the root-of-trust in an authentication application. Below are the steps defined in this procedure:
+% the off-the-shelf SRAM testing, enrollment and reconstruction mechanism
+\begin{itemize}
+  % First, one should be test the off-the-shelf SRAM quality to be a PUF component. If passed, the procedure continues to the next step which consists of enrollment-reconstruction mechanism which will be able to create a PUF-generated key. Last, using the PUF-generated key, one can develop any PUF-based application.
+  \item Step 1: \textit{Test the off-the-shelf SRAM quality to be a PUF component.}\newline
+  This step can be started by getting any off-the-shelf SRAM from the market. Ensure that the Arduino and the PC are able to communicate perfectly with off-the-shelf SRAM. Afterward, locate the stable bits using data remanence algorithm. Then, test the stable bits on various conditions. If the stable bits show an acceptable result, continue using this SRAM (continue to next step). Otherwise, abandon and try another off-the-shelf SRAM (repeat this step).
+  \item Step 2: \textit{Use enrollment-reconstruction mechanism which will be able to create a PUF-generated key.}\newline
+  Using the enrollment scheme shown in Section \ref{ch:complete_enrollment_scheme}, one can generate the challenge and the helper data. Both the helper data and the challenge is unique to the tested SRAM component. Later, using the challenge and the helper data, one will be able to reconstruct the PUF-generated key.
+  \item Step 3: \textit{Develop PUF-based application using the PUF-generated key.}\newline
+  The PUF-generated key can be applied as a root-of-trust in any application.
+\end{itemize}
 
 \section{Testing on Secure Data Protection and Key Storage Scheme}\label{ch:testing_scheme}
 To check the validity of the proposed data protection and key storage scheme, several testings are performed. First, the final key generated using HMAC SHA3 is checked. Afterwards, the result of the encryption and decryption using the final key is also tested. Last, the time required in the scheme is also measured. During the time measurement, the stage is divided into multiple stages to ease the analysis.
