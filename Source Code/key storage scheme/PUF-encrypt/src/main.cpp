@@ -37,50 +37,6 @@ void set() {
   delay(1000);
 }
 
-void decodePUF(BCH bch, Tools tools, uint8_t *key_32) {
-  uint8_t helper_data_padded_new[8 * 37];
-  uint8_t xor_reproduction_new[8 * 37];
-  uint8_t reconstructed_key_new[37];
-  uint8_t key_per_row[37];
-
-
-  memset(helper_data_padded_new, 0, sizeof(helper_data_padded_new));
-  memset(xor_reproduction_new, 0, sizeof(xor_reproduction_new));
-  memset(reconstructed_key_new, 0, sizeof(reconstructed_key_new));
-  memset(key_per_row, 0, sizeof(key_per_row));
-
-  int row = 37;
-  int n = bch.get_n();
-  int k = bch.get_key_length();
-
-  int k_length_bit = row;//tools.ceil(k*row,8);
-  int n_length_bit = row * 8;//tools.ceil(n*row,8);
-
-  long thisItem[7];
-
-  /************************************
-   ****** REPRODUCTION PROCEDURE ******
-   ************************************/
-  /******************** ASSERT HELPER DATA PADDED**********************/
-  for (int i = 0; i < row; i++) {
-    memcpy(&helper_data_padded_new[i * 8], &helper_data_new[i * 7], 7 * sizeof(uint8_t));
-  }
-
-  /******************** ASSERT XOR REPRODUCTION **********************/
-  for (int i = 0; i < row; i++) {
-    for (int j = 0; j < 8; j++) {
-      xor_reproduction_new[i * 8 + j] = puf_binary_new[i * 8 + j] ^ helper_data_padded_new[i * 8 + j];
-    }
-  }
-
-  /******************** ASSERT RECONSTRUCTED KEY **********************/
-  for (int i = 0; i < row; i++) {
-    bch.decode_bch(&xor_reproduction_new[i * 8], &reconstructed_key_new[i]);
-  }
-
-  tools.convert_key_back(reconstructed_key_new, key_32);
-}
-
 void decode(uint8_t *key_32) {
   BCH bch;
   Tools tools;

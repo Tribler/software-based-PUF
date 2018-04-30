@@ -4,7 +4,7 @@ from random import shuffle
 from PUF import SerialPUF, Tools
 
 
-def get_strong_bits_by_goal(goal, initial_delay=0.2, step_delay=0.5, write_ones=True):
+def get_strong_bits_by_goal(goal, initial_delay=0.3, step_delay=0.005, write_ones=True):
     """
     Bit selection algorithm using data remanence approach
     :param goal: number of strong bits desired
@@ -16,12 +16,11 @@ def get_strong_bits_by_goal(goal, initial_delay=0.2, step_delay=0.5, write_ones=
     """
     delay = initial_delay
     strong_bits = []
-    is_prev_larger = False
 
     current_goal = 0
     delays = []
 
-    while not (goal + 50 > current_goal > goal - 50):
+    while current_goal < goal:
         print("DATA REMANENCE - delay: " + str(delay))
         delays.append(delay)
 
@@ -34,22 +33,7 @@ def get_strong_bits_by_goal(goal, initial_delay=0.2, step_delay=0.5, write_ones=
         print(current_goal)
 
         if current_goal < goal:
-            if is_prev_larger:
-                step_delay = step_delay / 2
-            delay = round(delay + step_delay, 3)
-            if delay in delays:
-                step_delay = step_delay / 2
-                delay = round(delay + step_delay, 3)
-
-            is_prev_larger = False
-        if current_goal > goal + 100:
-            if is_prev_larger:
-                step_delay = step_delay / 2
-            delay = round(delay - step_delay, 3)
-            if delay in delays:
-                step_delay = step_delay / 2
-                delay = round(delay + step_delay, 3)
-            is_prev_larger = True
+            delay = delay + step_delay
 
         print()
 
@@ -99,10 +83,10 @@ time.sleep(2)
 # --------------------------------------- DATA REMANENCE TRIAL ------------------------------------------
 # -------------------------------------------------------------------------------------------------------
 
-# strong_ones = get_strong_bits_by_goal(goal=2300, write_ones=False, initial_delay=0.34, step_delay=0.01)
-strong_ones = get_strong_bits_by_time(delay=0.31, write_ones=False)
-# strong_zeros = get_strong_bits_by_goal(goal=2300, write_ones=True, initial_delay=0.34, step_delay=0.01)
-strong_zeros = get_strong_bits_by_time(delay=0.31, write_ones=True)
+strong_ones = get_strong_bits_by_goal(goal=2331, write_ones=False, initial_delay=0.43, step_delay=0.01)
+# strong_ones = get_strong_bits_by_time(delay=0.31, write_ones=False)
+strong_zeros = get_strong_bits_by_goal(goal=2331, write_ones=True, initial_delay=0.43, step_delay=0.01)
+# strong_zeros = get_strong_bits_by_time(delay=0.31, write_ones=True)
 
 # --------------------------------------------------------------------------------
 # -------------------- GENERATE CHALLENGES ---------------------------------------
@@ -114,8 +98,8 @@ x.extend(strong_ones[:2331])
 x = list(map(int, x))
 
 shuffle(x)
-serialPUF.write_challenges_to_sd(x[:37*63])
-Tools.save_to_file(x[:37*63], "challenge.txt", with_comma=True)
+serialPUF.write_challenges_to_sd(x[:37 * 63])
+Tools.save_to_file(x[:37 * 63], "challenge.txt", with_comma=True)
 
 # res = Tools.read_bits_from_file("challenge.txt", is_separated_by_comma=True)
 # x = []

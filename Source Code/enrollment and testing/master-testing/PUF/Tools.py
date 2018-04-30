@@ -4,9 +4,10 @@ import datetime
 
 
 def save_to_file(data, filename, with_comma=False):
-    if not os.path.exists(os.path.dirname(filename)):
+    dir_name = os.path.dirname(filename)
+    if not os.path.exists(dir_name) and len(dir_name) > 0:
         try:
-            os.makedirs(os.path.dirname(filename))
+            os.makedirs(dir_name)
         except OSError as exc:  # Guard against race condition
             if exc.errno != errno.EEXIST:
                 raise

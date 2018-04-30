@@ -229,24 +229,24 @@ def read_file(file):
 # h.gen_graph_hamming_distance(avg_distance, xlbl='Chip')
 
 # ----------------------------------- CY62256NLL NORMAL ------------------------------------------------------------
-# avg_distance = {}
-# files_per_folder = {}
-#
-# for k in [chr(i) for i in range(ord('A'),ord('B')+1)]:
-#     print(k)
-#     folder = '../CY62256NLL/'+ k +'/2018-02-14/NORMAL'
-#     files =  []
-#     for filename in os.listdir(folder + "/"):
-#         files.append(Tools.read_bits_from_file_and_merge(folder + "/" + filename))
-#     files_per_folder[k] = files
-#
-# inter_hd = []
-# for a, b in itertools.combinations(files_per_folder, 2):
-#     files1 = files_per_folder[a]
-#     files2 = files_per_folder[b]
-#     inter_hd.append(h.calculate_inter_hamming_distance(files1,  files2, length=262144))
-#
-# print(sum(inter_hd)/len(inter_hd))
+avg_distance = {}
+files_per_folder = {}
+
+for k in [chr(i) for i in range(ord('A'),ord('E')+1)]:
+    print(k)
+    folder = 'CY62256NLL/all-locations/'+ k +'/2018-02-14/NORMAL'
+    files =  []
+    for filename in os.listdir(folder + "/"):
+        files.append(Tools.read_bits_from_file_and_merge(folder + "/" + filename))
+    files_per_folder[k] = files
+
+inter_hd = []
+for a, b in itertools.combinations(files_per_folder, 2):
+    files1 = files_per_folder[a]
+    files2 = files_per_folder[b]
+    inter_hd.append(h.calculate_inter_hamming_distance(files1,  files2, length=262144))
+
+print(sum(inter_hd)/len(inter_hd))
 
 # ----------------------------------- CY62256NLL VOLTAGE VARIATION ------------------------------------------
 # avg_distance = {}
@@ -254,7 +254,7 @@ def read_file(file):
 #
 # for k in [chr(i) for i in range(ord('A'),ord('B')+1)]:
 #     # print(k)
-#     folder = '../CY62256NLL/'+ k +'/2018-02-14/'
+#     folder = 'CY62256NLL/all-locations/'+ k +'/2018-02-14/'
 #     files = []
 #     for x in os.listdir(folder):
 #         if "NORMAL" in x:
@@ -277,10 +277,10 @@ def read_file(file):
 # -------------------------------------------------------------------------------------------------------
 
 # ************************** 23LC1024 **********************************
-b = Tools.read_dict("23LC1024/rank-neighbor-5-2018-04-05")
-for i in b:
-    print(str(i) + ", " + str(b[i]))
-h.gen_graph_rank_23lc1024(b, ymax=700000, limit=6)
+# b = Tools.read_dict("23LC1024/rank-neighbor-5-2018-04-05")
+# for i in b:
+#     print(str(i) + ", " + str(b[i]))
+# h.gen_graph_rank_23lc1024(b, ymax=700000, limit=6)
 
 # ************************** CY62256NLL **********************************
 # b = Tools.read_dict("CY62256NLL/rank-neighbor-15-2018-04-05-edit")

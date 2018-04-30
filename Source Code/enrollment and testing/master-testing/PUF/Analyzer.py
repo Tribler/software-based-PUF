@@ -79,7 +79,8 @@ class Analyzer:
                     lowest = dis
                     lowest_pct = pct
                     # print(str(dis) + ", " + str(pct) + "%")
-        return [total / count, highest, lowest, highest_pct, lowest_pct, distances]
+            average = total / count if count > 0 else 0
+        return [average, highest, lowest, highest_pct, lowest_pct, distances]
 
     def calculate_inter_hamming_distance(self, files1, files2, length=1048576):
         total = 0
