@@ -2,54 +2,74 @@
 % Parallel and Distributed Systems group
 \documentclass[11pt,twoside,a4paper,openright]{report}
 
+% % use babel for proper hyphenation
+% \usepackage[dutch,british]{babel}
+% \newcommand\fh{\babelhyphen{hard}}
+% % Graphics: like the DUT logo on the front cover
+% \usepackage[dvips]{graphicx}
+% % \usepackage{graphicx}
+% % \usepackage{graphicx}
+% % \usepackage{graphics}
+% \usepackage{eurosym}
+% \usepackage{seqsplit}
+% \usepackage[hidelinks]{hyperref}
+% \usepackage{url}
+% \def\UrlBreaks{\do\/\do-}
+% \usepackage{breakurl}
+%
+% \usepackage{titlesec}
+% \usepackage{titletoc}
+% \usepackage{tabularx}
+% \usepackage{changepage}
+% \usepackage{tocstyle}
+
+% math packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% textblocks for title page
+\usepackage[absolute]{textpos}
+
 % use babel for proper hyphenation
-\usepackage[dutch,british]{babel}
-\newcommand\fh{\babelhyphen{hard}}
-% Graphics: like the DUT logo on the front cover
-\usepackage[dvips]{graphicx}
-% \usepackage{graphicx}
-% \usepackage{graphicx}
-% \usepackage{graphics}
+\usepackage[british]{babel}
+
+% Graphics: different for pdflatex or dvi output, choose one
+%%\usepackage[dvips]{graphicx}
+%%\usepackage[pdftex]{graphicx}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{epstopdf}
+\usepackage{rotating}
+\usepackage{subfig}
+\usepackage{caption}
+\usepackage{epstopdf}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{listings}
+\usepackage{cite}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage[bottom]{footmisc}
+
 \usepackage{eurosym}
 \usepackage{seqsplit}
 \usepackage[hidelinks]{hyperref}
 \usepackage{url}
 \def\UrlBreaks{\do\/\do-}
 \usepackage{breakurl}
-
 \usepackage{titlesec}
 \usepackage{titletoc}
 \usepackage{tabularx}
 \usepackage{changepage}
-% \usepackage{tocstyle}
+
 
 % FONT: times
 \usepackage{times}
 % for url's use "\url{http://www.google.com/}"
-\usepackage{url}
 \usepackage{cite}
 \usepackage{amsmath,booktabs}
 \usepackage[]{siunitx}
 \usepackage{textcomp}
-
-% \makeatletter
-% \renewcommand*\l@chapter[2]{%
-%   \ifnum \c@tocdepth >\m@ne
-%     \addpenalty{-\@highpenalty}%
-%     \vskip 1.0em \@plus\p@
-%     \setlength\@tempdima{1.5em}%
-%     \begingroup
-%       \parindent \z@ \rightskip \@pnumwidth
-%       \parfillskip -\@pnumwidth
-%       \leavevmode \bfseries
-%       \advance\leftskip\@tempdima
-%       \hskip -\leftskip
-%       #1\nobreak\hskip .5em \@plus 1fil % <<< MODIFICATION <<<
-%       \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
-%       \penalty\@highpenalty
-%     \endgroup
-%   \fi}
-% \makeatother
 
 \newcommand\vn[1]{\textsc{\MakeLowercase{#1}}} % "variable name" macro
 \newcommand\mc[1]{\multicolumn{1}{c}{#1}} % handy shortcut macro
@@ -57,7 +77,7 @@
 
 % \newcommand{\reportTitle}{Open Source Software-Only SRAM PUF-Based Secure Data Protection and Key Storage Scheme Using Off-The-Shelf SRAM}
 % \newcommand{\reportTitle}{Open Source Secure Data Protection and Key Storage Scheme Using Off-The-Shelf SRAM Component Based on Software-Only SRAM PUF Technology }
-\newcommand{\reportTitle}{Open-Source Software-Based SRAM-PUF Technology for Secure Data and Key Storage Using Off-The-Shelf SRAM}
+\newcommand{\reportTitle}{Open-Source Software-Based SRAM-PUF for Secure Data and Key Storage Using Off-The-Shelf SRAM}
 \newcommand{\problemStatement}{How to develop an open-source secure data and key storage scheme using off-the-shelf SRAM component and software-based SRAM PUF technology?}
 \newcommand{\reportAuthor}{Ade Setyawan Sajim}
 \newcommand{\reportEmail}{AdeSetyawanSajim@student.tudelft.nl}
@@ -77,12 +97,13 @@ Haji Akhundov, MSc & Delft University of Technology \\
 %prof. dr. ir. H. J. Sips (chair) & Delft University of Technology \\
 %ir. dr. D. H. J. Epema           & Delft University of Technology \\
 \newcommand{\reportAbstract}{
-SRAM PUF has a potential to become the main player in hardware security. Unfortunately, the currently available solution is usually locked to specific entities. Here, we initiate an open source project to develop software-based SRAM PUF technology using off-the-shelf SRAM.
-We also present a testing result on two off-the-shelf SRAMs as SRAM PUF candidates; Microchip 23LC1024 and Cypress CY62256NLL.
+SRAM PUF has a potential to become the main player in hardware security. Unfortunately, the currently available solution is usually locked to specific entities. Here, we introduce the first open source project to develop software-based SRAM PUF technology using off-the-shelf SRAM.
+We also present testing results on two off-the-shelf SRAMs quality to be a PUF component; Microchip 23LC1024 and Cypress CY62256NLL.
 % Both are tested on the effect of voltage variation and time interval between enrollment.
-Both are tested on the distribution of 0's and 1's in their cells, intra hamming distance, inter hamming distance, and the effect of voltage variation and time interval between enrollment.
+% Both are tested on the distribution of 0's and 1's in their cells, intra hamming distance, inter hamming distance, and the effect of voltage variation and time interval between enrollment.
 Testing on two bit-selection algorithms (data remanence analysis and neighbor analysis) are also performed.
 Based on the testing results, we introduce a PUF enrollment scheme using data remanence analysis as the bit selection algorithm which will locate the location of the stable bits and SRAM Cypress CY62256NLL as the off-the-shelf SRAM.
+Moreover, we also propose a procedure to develop SRAM PUF-based applications using any off-the-shelf SRAM. The procedure consists of three main steps; test the off-the-shelf SRAM quality to be a PUF component, create a PUF-generated key using enrollment-reconstruction mechanism, and develop any PUF-based application utilizing the PUF-generated key.
 In addition, an idea to create numerous CRPs using SRAM PUF is also proposed here. Using a collection of stable bits as a challenge, the stable bits are permutated among themselves to create a challenge which has a numerous number of possibilities.
 Furthermore, we also present a secure data protection and key storage scheme using SRAM PUF. The proposed scheme is influenced by multi-factor authentication. Using a combination of a PUF-generated key and user's password, a derived key is produced and utilized as the final key to protect user's data or/and user's key.
 }

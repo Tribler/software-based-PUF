@@ -59,7 +59,7 @@ The formula for HMAC is shown below \cite{rfc2104}:
 \begin{equation}
   {\displaystyle \operatorname {HMAC} (K,m)=H{\Bigl (}(K'\oplus opad)\|H{\bigl (}(K'\oplus ipad)\|m{\bigr )}{\Bigr )}}
 \end{equation}
-There are three elements which defined the cryptographic strength of the HMAC; the utilized hash function's cryptographic strength, the output size, and the key's size and quality. Currently, the latest cryptographic hash function published by the National Institute of Standards and Technology (NIST) as a U.S. Federal Information Processing Standard (FIPS) is SHA-3. SHA-3 (Secure Hash Algorithm 3) is a part of another cryptographic primitive family called Keccak \cite{10.1007/978-3-642-38348-9_19}. Keccak is built on top of an method called sponge construction. Sponge construction itself is based on multiple layers of pseurandom function where each layer is able of absorbing (receive input) and squeezing (generate output) any amount of data.
+There are three elements which defined the cryptographic strength of the HMAC; the utilized hash function's cryptographic strength, the output size, and the key's size and quality. Currently, the latest cryptographic hash function standard published by the National Institute of Standards and Technology (NIST) as a U.S. Federal Information Processing Standard (FIPS) is SHA-3 (introduced in 2015). SHA-3 (Secure Hash Algorithm 3) is a part of another cryptographic primitive family called Keccak \cite{10.1007/978-3-642-38348-9_19}. Keccak is built on top of an method called sponge construction. Sponge construction itself is based on multiple layers of pseurandom function where each layer is able of absorbing (receiving input) and squeezing (generating output) any amount of data.
 
 There are three requirements need to be fulfilled as a secure cryptographic hash function; \textit{preimage resistant, second preimage resistant, and collision resistant}. Preimage resistant means it should be hard to find a message with a given hash value. In second preimage resistant, if one message is provided, it should be hard to find another message with the same hash value.
 Last, collision resistant refers to difficultness to find two messages with the same hash value. HMAC built using SHA-3 with key length of 256 bits has collision resistance of 128 bits, preimage resistance of 256 bits, and second preimage resistant of	256 bits \cite{technology2015sha}.
@@ -86,7 +86,7 @@ There are two main parts of PUF, physical part, and operational part. Physical p
 R_i <- PUF(C_i)
 \end{equation}
 
-The common application on using PUF usually requires two phases; the first phase is called \textit{enrollment} and the second one is usually referred as \textit{validation}. In enrollment, a number of CRPs are gathered from a PUF and then stored. In validation phase, a challenge from the stored CRPs is given to the PUF. Afterwards, the PUF response from this challenge is compared with the corresponding response from the database. The response is considered to be valid if there's a CRP from the stored CRPs related to this challenge and response. The validation phase can also be referred as \textit{reproduction} phase since this phase involves a reconstruction of a response given a challenge.
+The common application on using PUF usually requires two phases; the first phase is called \textit{enrollment} and the second one is usually referred as \textit{validation}. In enrollment, a number of CRPs are gathered from a PUF and then stored. In validation phase, a challenge from the stored CRPs is given to the PUF. Afterwards, the PUF response from this challenge is compared with the corresponding response from the database. The response is considered to be valid if there's a CRP from the stored CRPs related to this challenge and response. The validation phase can also be referred as \textit{reconstruction} phase since this phase involves a reconstruction of a response given a challenge.
 
 According to \cite{retrospective}, to be qualified as PUF, a device should fulfill several characteristics below :
 \begin{itemize}
@@ -106,7 +106,7 @@ Strong PUFs can be recognized by possessing a tremendous number of CRPs which pr
 Weak PUFs can be identified by having few CRPs. Unlike the strong PUFs, weak PUFs require an access-restricted to the challenge-response mechanism. This means that even if an adversary holds a possession of the PUF device, he cannot read the response from a challenge or give any challenge to the PUF device. Weak PUFs commonly used for key storage and key generation.
 \end{itemize}
 
-Besides the number of CRPs, PUFs can also be categorized based on their physical design. There are two major categories, extrinsic and intrinsic.
+Besides the number of CRPs, PUFs can also be categorized based on their physical design. There are two major categories, extrinsic and intrinsic PUFs.
 
 Extrinsic means that it needs extra hardware added to the PUF component. The extra hardware is required to access the PUF component. There are two subcategories of extrinsic PUFs, non-electronic and analog electronic PUFs. Some examples in non-electronic PUFs are optical PUF, paper PUF, CD PUF, RF-DNA PUF, magnetic PUF, and acoustic PUF. Some design instances in analog electronic PUFs are VT PUF, power distribution PUF, coating PUF, and LC PUF.
 
