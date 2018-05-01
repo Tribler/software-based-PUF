@@ -75,8 +75,8 @@ As mentioned in Section \ref{chapter2.1}, authentication refers to assuring any 
 \end{figure}
 
 
-\section{PUF}
-A physical unclonable function is an entity that utilizes manufacturing variability to produce a device-specific output. The idea to build PUF arise from the fact that even though the mask and manufacturing process is the same among different ICs, each IC is actually slightly different due to normal manufacturing variability \cite{retrospective}. PUFs leverage this variability to derive secret information that is unique to the chip. This secret can be referred as a silicon biometric.
+\section{Physically Unclonable Function}
+A physically unclonable function (PUF) is an entity that utilizes manufacturing variability to produce a device-specific output. The idea to build PUF arise from the fact that even though the mask and manufacturing process is the same among different ICs, each IC is actually slightly different due to normal manufacturing variability \cite{retrospective}. PUFs leverage this variability to derive secret information that is unique to the chip. This secret can be referred as a silicon biometric.
 In addition, due to the manufacturing variability that defines the secret, one cannot manufacture two identical chips, even with full knowledge of the chip’s design. PUF architectures exploit manufacturing variability in multiple ways. For example, one can utilize the effect of gate delay, the power-on state of SRAM, threshold voltages, and many other physical characteristics to derive the secret.
 
 Due to this feature, PUFs are a promising innovative primitive that is used for authentication and secret key storage without the requirement of secure hardware. Currently, the best practice for providing a secure memory or authentication source in such a mobile system is to place a secret key in a nonvolatile electrically erasable programmable read-only memory (EEPROM) or battery-backed static random-access memory (SRAM) and use hardware cryptographic operations such as digital signatures or encryption.
@@ -106,7 +106,7 @@ Strong PUFs can be recognized by possessing a tremendous number of CRPs which pr
 Weak PUFs can be identified by having few CRPs. Unlike the strong PUFs, weak PUFs require an access-restricted to the challenge-response mechanism. This means that even if an adversary holds a possession of the PUF device, he cannot read the response from a challenge or give any challenge to the PUF device. Weak PUFs commonly used for key storage and key generation.
 \end{itemize}
 
-Besides the number of CRPs, PUFs can also be categorized based on their physical design. There are two major categories, extrinsic and intrinsic PUFs.
+Besides the number of CRPs, PUFs can also be categorized based on their physical design. There are two major categories, extrinsic and intrinsic PUFs \cite{maes_2016}.
 
 Extrinsic means that it needs extra hardware added to the PUF component. The extra hardware is required to access the PUF component. There are two subcategories of extrinsic PUFs, non-electronic and analog electronic PUFs. Some examples in non-electronic PUFs are optical PUF, paper PUF, CD PUF, RF-DNA PUF, magnetic PUF, and acoustic PUF. Some design instances in analog electronic PUFs are VT PUF, power distribution PUF, coating PUF, and LC PUF.
 

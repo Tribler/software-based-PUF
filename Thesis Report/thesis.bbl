@@ -190,6 +190,12 @@ U.~Rührmair and D.~E. Holcomb.
 \newblock In {\em 2014 Design, Automation Test in Europe Conference Exhibition
   (DATE)}, pages 1--6, March 2014.
 
+\bibitem{maes_2016}
+Roel Maes.
+\newblock {\em Physically Unclonable Functions Constructions, Properties and
+  Applications}.
+\newblock Springer Berlin, 2016.
+
 \bibitem{study_of_the_art_puf}
 Roel Maes and Ingrid Verbauwhede.
 \newblock {\em Physically Unclonable Functions: A Study on the State of the Art
@@ -256,12 +262,6 @@ A.~Garg and T.~T. Kim.
   device aging effect.
 \newblock In {\em 2014 IEEE International Symposium on Circuits and Systems
   (ISCAS)}, pages 1941--1944, June 2014.
-
-\bibitem{maes_2016}
-Roel Maes.
-\newblock {\em Physically Unclonable Functions Constructions, Properties and
-  Applications}.
-\newblock Springer Berlin, 2016.
 
 \bibitem{dargar_2011}
 Apurva Dargar.

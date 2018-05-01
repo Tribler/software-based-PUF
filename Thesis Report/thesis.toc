@@ -12,7 +12,7 @@
 \contentsline {subsubsection}{AES}{8}{section.2.2}
 \contentsline {section}{\numberline {2.3}Key Derivation Function}{9}{section.2.3}
 \contentsline {section}{\numberline {2.4}Multi-factor Authentication}{10}{section.2.4}
-\contentsline {section}{\numberline {2.5}PUF}{11}{section.2.5}
+\contentsline {section}{\numberline {2.5}Physically Unclonable Function}{11}{section.2.5}
 \contentsline {subsection}{\numberline {2.5.1}PUFs Classification}{12}{subsection.2.5.1}
 \contentsline {subsection}{\numberline {2.5.2}Hamming Distances as an Identification Helper}{13}{subsection.2.5.2}
 \contentsline {subsection}{\numberline {2.5.3}Helper Data Algorithms and Fuzzy Extractor}{13}{subsection.2.5.3}
@@ -46,21 +46,21 @@
 \contentsline {section}{\numberline {4.3}Testing on Chosen Off-The-Shelf SRAMs}{39}{section.4.3}
 \contentsline {subsubsection}{Microchip 23LC1024}{40}{section.4.3}
 \contentsline {subsubsection}{Cypress CY62256NLL}{41}{figure.caption.18}
-\contentsline {section}{\numberline {4.4}Testing on Bit Selection Algorithms}{42}{section.4.4}
+\contentsline {section}{\numberline {4.4}Testing on Bit Selection Algorithms}{41}{section.4.4}
 \contentsline {subsection}{\numberline {4.4.1}Neighbour Stability Analysis}{42}{subsection.4.4.1}
 \contentsline {subsubsection}{Microchip 23LC1024}{42}{subsection.4.4.1}
-\contentsline {subsubsection}{Cypress CY62256NLL}{42}{figure.caption.20}
+\contentsline {subsubsection}{Cypress CY62256NLL}{43}{figure.caption.20}
 \contentsline {subsection}{\numberline {4.4.2}Data Remanence Approach}{43}{subsection.4.4.2}
 \contentsline {subsubsection}{Microchip 23LC1024}{43}{subsection.4.4.2}
-\contentsline {subsubsection}{Cypress CY62256NLL}{43}{figure.caption.22}
+\contentsline {subsubsection}{Cypress CY62256NLL}{45}{figure.caption.22}
 \contentsline {subsection}{\numberline {4.4.3}Stability Test on Stable Bits}{45}{subsection.4.4.3}
 \contentsline {subsubsection}{Microchip 23LC1024}{45}{figure.caption.27}
 \contentsline {subsubsection}{Cypress CY62256NLL}{50}{figure.caption.27}
 \contentsline {subsubsection}{Stability Test Conclusion}{50}{figure.caption.27}
 \contentsline {section}{\numberline {4.5}Testing on Bits Locations as A Challenge}{52}{section.4.5}
-\contentsline {section}{\numberline {4.6}Complete Enrollment Scheme}{53}{section.4.6}
-\contentsline {section}{\numberline {4.7}Procedure on Developing SRAM PUF-Based Applications}{53}{section.4.7}
-\contentsline {section}{\numberline {4.8}Testing on Secure Data Protection and Key Storage Scheme}{56}{section.4.8}
+\contentsline {section}{\numberline {4.6}Complete Enrollment and Reconstruction Scheme}{52}{section.4.6}
+\contentsline {section}{\numberline {4.7}Procedure on Developing SRAM PUF-Based Applications}{56}{section.4.7}
+\contentsline {section}{\numberline {4.8}Testing on Secure Data Protection and Key Storage Scheme}{57}{section.4.8}
 \contentsline {section}{\numberline {4.9}Concluding Experiment with Cybercurrency}{60}{section.4.9}
 \contentsline {section}{\numberline {4.10}Conclusion}{61}{section.4.10}
 \contentsline {chapter}{\numberline {5}Conclusions and Future Work}{63}{chapter.5}

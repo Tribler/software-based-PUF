@@ -111,6 +111,42 @@ TEST_F(BCHCompleteTest, encode_decode_multi_key_with_error) {
     }
 }
 
+TEST_F(BCHCompleteTest, encode_decode_multi_key_with_error_8) {
+    int length = 8;
+    uint8_t *in = (uint8_t *) calloc(length, sizeof(uint8_t));
+    uint8_t *out = (uint8_t *) calloc(length, sizeof(uint8_t));
+    uint8_t *result = (uint8_t *) calloc(length * 8, sizeof(uint8_t));;
+    for (int i = 0; i < 128; i++) {
+        for (int j = 0; j < length; j++) {
+            in[j] = (i + j) << 1;
+            bch.encode_bch(&in[j], &result[j]);
+            bch.decode_bch(&result[j], &out[j]);
+            ASSERT_EQ(in[j], out[j]);
+        }
+        memset(in, 0, sizeof(in));
+        memset(out, 0, sizeof(out));
+        memset(result, 0, sizeof(result));
+    }
+}
+
+TEST_F(BCHCompleteTest, encode_decode_multi_key_with_error_15) {
+    int length = 15;
+    uint8_t *in = (uint8_t *) calloc(length, sizeof(uint8_t));
+    uint8_t *out = (uint8_t *) calloc(length, sizeof(uint8_t));
+    uint8_t *result = (uint8_t *) calloc(length * 8, sizeof(uint8_t));;
+    for (int i = 0; i < 128; i++) {
+        for (int j = 0; j < length; j++) {
+            in[j] = (i + j) << 1;
+            bch.encode_bch(&in[j], &result[j]);
+            bch.decode_bch(&result[j], &out[j]);
+            ASSERT_EQ(in[j], out[j]);
+        }
+        memset(in, 0, sizeof(in));
+        memset(out, 0, sizeof(out));
+        memset(result, 0, sizeof(result));
+    }
+}
+
 //TEST_F(BCHCompleteTest, complete) {
 //    int row = bch.get_row();
 //    int n = bch.get_n();

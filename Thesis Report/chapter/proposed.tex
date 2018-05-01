@@ -1,7 +1,7 @@
 \chapter{\chapterFour}
 \label{chp:4}
 
-\textit{This chapter contains our proposed system to achieved our goals which explained in Chapter 1. First, assumptions, requirements and steps to achieve thesis' main goal. on our system are presented. The chapter continues with reasonings on our chosen embedded platform, Arduino. Then, the selected error correcting code which will be used in the system is explained. Afterwards, we present our data and key storage scheme and also our way to generate key using SRAM PUF. Last, our idea to use bits locations as a PUF challenge is shown. }
+\textit{This chapter contains our proposed system to achieved our goals which explained in Chapter 1. First, assumptions, requirements and steps to achieve thesis' main goal on our system are presented. The chapter continues with reasonings on our chosen embedded platform, Arduino. Then, the selected error correcting code which will be used in the system is explained. Afterwards, we present our data and key storage scheme and also our way to generate key using SRAM PUF. Last, our idea to use bits locations as a PUF challenge is shown. }
 
 \section{Assumptions, Requirements and Steps To Achieve Main Goal}\label{ch:use_case}
 
@@ -37,14 +37,15 @@ Below are several steps expected to be done as an attempt to achieve this goal:
   \item Get off-the-shelf SRAM components available in the market.
   \item Locate the stable bits inside each SRAM using bit selection algorithm.
   \item Test the reliability of SRAM's stable bits. The error rate of the stable bits (referred as HD\textsubscript{intra}) has to be lower than the maximum error rate that can be handled by the key generation scheme.
-  \item If the SRAM's stable bits is reliable, continue using this SRAM as the root-of-trust in the proposed secure data and key storage.
+  \item If the SRAM's stable bits is reliable, check also the uniqueness of the SRAM by ensuring that there is no overlap between HD\textsubscript{intra} and HD\textsubscript{inter}.
+  \item Continue using this SRAM as the root-of-trust in the proposed secure data and key storage if it is proven to be reliable and unique.
   \item Test the complete secure data and key storage scheme in various scenarios.
 \end{enumerate}
 
 \section{Arduino Mega 2560 as the Embedded Platform}
 
 One of the important details of our system is choosing the platform on where the system will be built.
-There are two major candidates, Arduino and Raspberry Pi. Both are chosen due to its popularity, availability (easy to get), and various types available. High popularity means the debugging process can be done fast and many references are available online to help the system development. Availability is important because this thesis goal should be easily used by anyone. Low availability will reduce significantly reusability of this project and user's interest. Various types available is a good option for system flexibility. For example, if a user wants to develop a more complex system on top of this thesis' system or desire to use a more complex error correcting codes, he/she can choose a platform with higher computing capability.
+There are two major candidates, Arduino and Raspberry Pi. Both are chosen due to its popularity, availability (easy to get), and various types available. High popularity means the debugging process can be done fast and many references are available online to help the system development. Availability is important because one of the thesis' goals is to be easily used by anyone. Low availability will reduce the reusability of this project and user's interest. Various types available is a pleasant option for system flexibility. For example, if a user wants to develop a more complex system on top of this thesis' system or desire to use a more complex error correcting codes, he/she can choose a platform with higher computing capability.
 Besides those three factors, another feature which lead on selecting Raspberry Pi and Arduino is their GPIO. GPIO availability will enable easy communication between the SRAM and the embedded platform.
 
 Compared to Arduino, Raspberry Pi offers a higher computing capability and relatively easier development. This is because Raspberry Pi is basically a mini Linux computer. One can develop a software using C, C++, Python, etc. in Raspberry Pi which may fasten the project development, especially for a developer who already familiar with a specific programming language. Unfortunately, Raspberry Pi requires a longer startup time compared to Arduino. It also requires higher electrical power. If one wants to use the developed project in the embedded area, this two factor is a major trade-off.
@@ -54,8 +55,8 @@ Due to the above consideration, Arduino is chosen. Even though one has to constr
 There are various Arduino types available on the market. The chosen Arduino type is Arduino Mega 2560. It is selected because it offers larger memory capability compared to other types, such as 256k bytes of Flash memory, 8k bytes internal SRAM, and 4k byte EEPROM.
 Besides, it also has 54 digital I/O pins and 16 analog I/O pins which ease the communication to external SRAM.
 
-\section{BCH Codes as Error Correcting Codes}
-As shown in previous chapter, there are two major categories in ECC; soft-decision and hard-decision code. We choose to use hard-decision ECC over the soft decision one since there is no requirement to provide the error probability function on SRAM cells. Futhermore, between two examples of hard-decision ECC, we particularly pick BCH codes as the ECC due to lower computing resource required compared to Reed-Solomon Codes. BCH also better at correcting random errors than Reed-Solomon Codes.
+\section{BCH Codes as Error Correcting Codes}\label{ch:bch}
+As shown in previous chapter, there are two major categories in ECC; soft-decision and hard-decision code. We choose to use hard-decision ECC over the soft decision one because in hard-decision ECC, there is no requirement to provide the error probability function on SRAM cells. Futhermore, between two examples of hard-decision ECC, we particularly pick BCH codes as the ECC due to lower computing resource required compared to Reed-Solomon Codes. BCH also better at correcting random errors than Reed-Solomon Codes.
 
 As mentioned in the previous chapter, BCH codes are flexible Error Correcting Codes (ECC) shown by multiple parameters available. The only fixed parameter is $q$ since the problem is in binary form ($q=2$). The source code for BCH codes utilized in our construction is a modified version of Robert Morelos-Zaragoza's version which can be retrieved at \cite{bch_code}. This code is selected because it can support $m$ ranging from 2-20 which mean the length of the code that can be corrected ranging from 2 until 1048575. When using BCH codes, one should be careful on deciding the parameters that will be used, for example, larger $m$ or $n$ means a bigger memory needed.
 These parameters should be determined with several considerations, such as the inner hamming distance of SRAMs and memory available on Arduino Mega 2560.
@@ -94,7 +95,7 @@ On deciding the value $m$, a further look on the memory required during the erro
 \end{table}%
 
 Since the internal SRAM in Arduino only has 8k bytes capacity, the chosen $m$ is 6 (requires 4553 bytes, around 55\% of total SRAM available in Arduino). This parameter will result in possible $n$ between 32 and 63. $n$ is chosen to be 63 to maximize the length code that can be encoded.
-The combination of $m$ = 6 and $n$ = 63 results in various $k$ and $t$ that can be chosen. The combination of all parameter possible is shown on \ref{tab:bch}.
+The combination of $m$ = 6 and $n$ = 63 results in various $k$ and $t$ that can be chosen. The combination of all parameter possible is shown on Table \ref{tab:bch}.
 
 \begin{table}[htbp]
   \centering
@@ -140,7 +141,7 @@ To maximize the error correction capability, $k$ = 7 and $t$ = 15 is chosen. All
 
 Figure \ref{fig:scheme-data-protection} shows the scheme to protect user's data and key. On an attempt to protect the user's data and key, our proposal is divided into three major parts, first is generate the final key, and the rest is using the final key either to encrypt or decrypt data.
 To prevent unauthorized person accessing the data with a stolen PUF, an idea from multi-factor authentication is utilized. Instead of just depending on the PUF device to access the key, a combination of PUF device and user knowledge is presented. User knowledge that used here is password.
-User's password is combined with the PUF-generated key to generate a \textbf{final key} using HMAC. The input message to the HMAC is the user's password and the input key to the HMAC is the PUF-generated key. The HMAC function proposed to use is HMAC-SHA3 with key length 256 bits.
+User's password is combined with the PUF-generated key to generate a \textbf{final key} using HMAC. The input message to the HMAC is user's password and the input key to the HMAC is the PUF-generated key. The HMAC function proposed to use is HMAC SHA-3 with key length 256 bits.
 The final key can be used to encrypt and decrypt user data/key. To decrypt and encrypt the data, a symmetric encryption algorithm is preferred over the asymmetric one. The symmetric encryption algorithm used is AES with key length 256 bits.
 
 \begin{figure}[tph!]
@@ -155,9 +156,9 @@ The final key can be used to encrypt and decrypt user data/key. To decrypt and e
 
 \section{Key Generation Scheme}\label{ch:key_generation_scheme}
 
-As shown in the previous section, the secure data and key storage scheme requires the PUF to generate the key which will be used to generate the final key. The key generation scheme used in this project is a modified version of Figure \ref{fig:cryptographic_key_generation} proposed in \cite{cryptographic_key_generation}. Instead of using $n$ = 255, the scheme used in this project will choose $n$ = 63. The parameter \textit{n, k, t, d} is similar to the parameter chosen in the previous section, BCH error correcting code. Figure \ref{fig:key-generation-scheme} illustrates the mentioned scheme.
-Using this scheme, to generate a key with length 256-bits requires 37 blocks of this scheme, which lead to 2331 bits required. 37 blocks are calculated from $256\div7=36.57$, rounded-up resulting in 37. 7 comes from the key generated from 63 bits of data using this scheme. Since one block needs 63 bits of data, 37 blocks require $37\times63=2331$ bits.
-In addition, if you look further into the scheme, there is an entropy loss as many as 7 bits every 63 bits input during the generation of helper data. Due to this entropy loss, this scheme can only correct errors on maximum 8 bits instead of 15 bits. Based on this reason, to ensure the key generation scheme always produced the same key, the SRAM component used as root-of-trust has to have maximum error rate (shown by HD\textsubscript{intra}) 12.7\% (calculated from $8\div63\times100\%$).
+As shown in the previous section, the secure data and key storage scheme requires the PUF to generate the key which will be used to generate the final key. The key generation scheme used in this project is a modified version of Figure \ref{fig:cryptographic_key_generation} proposed in \cite{cryptographic_key_generation}. Instead of using $n$ = 255, the scheme used in this project will choose $n$ = 63. The parameter \textit{n, k, t, d} is similar to the parameter chosen in the Section \ref{ch:bch}. Figure \ref{fig:key-generation-scheme} illustrates the mentioned scheme.
+Using this scheme, to generate a key with length 256-bits requires 37 blocks of this scheme, which lead to 2331 bits required. 37 blocks are calculated from $\frac{256}{7}=36.57$, rounded-up resulting in 37. 7 is the length of the key generated from 63 bits of data using this scheme. Since one block needs 63 bits of data, 37 blocks require $37\times63=2331$ bits.
+In addition, a further look into the scheme will reveal that there is an entropy loss as many as 7 bits every 63 bits of data input during the generation of helper data. Due to this entropy loss, this scheme can only correct errors on maximum 8 bits instead of 15 bits. Based on this reason, to ensure the key generation scheme always produced the same key, the SRAM component used as root-of-trust has to have maximum error rate (shown by HD\textsubscript{intra}) 12.7\% (calculated from $\frac{8}{63}\times100\%$).
 
 \begin{figure}[tph!]
     \centerline{\includegraphics[width={\textwidth}]{images/key}}
@@ -178,11 +179,10 @@ Below are the reasons why this decision is taken:
         P(n,r)=\frac{n!}{\left( n-r \right) !}
     \end{equation}
 \end{enumerate}
-As an illustration, if the number of bits required to generate/reconstruct the key is 2331 bits (the length of the bits required to generate 256-bits key when using scheme shown in Figure \ref{fig:key-generation-scheme}), then a set of 2331 bits locations is required as an input (a challenge) to PUF device. And if the SRAM has a total capacity of 65536 bits, using Equation \ref{bits} explained before, there are $P(65536, 2331)=\frac{65536!}{\left( 65536-2331 \right) !}\approx 10^{11209}$ possible combinations. The total possible CRPs is even much higher compared to the total possibilities of the number of bits required ($2^{256}\approx5.02\times10^{701}$) or the number of possible keys ($2^{256}\approx1.16\times10^{77}$).
+As an illustration, if the number of bits required to generate/reconstruct the key is 2331 bits (the length of the bits required to generate 256-bits key when using the scheme shown in Figure \ref{fig:key-generation-scheme}), then a set of 2331 bits locations is required as an input (a challenge) to PUF device. And if the SRAM has a total capacity of 65536 bits, using Equation \ref{bits} explained before, there are $P(65536, 2331)=\frac{65536!}{\left( 65536-2331 \right) !}\approx 10^{11209}$ possible combinations. The total possible CRPs is even much higher compared to the total possibilities of the number of bits required ($2^{2331}\approx5.02\times10^{701}$) or the number of possible keys ($2^{256}\approx1.16\times10^{77}$).
 Due to these large possibilities of challenge-response pairs, this idea will lead to \textbf{numerous CRPs}.
-% Due to these large possibilities of challenge-response pairs, this idea will lead to a \textbf{strong PUF} (as mentioned in section \ref{lbl:puf-classification}, a strong PUF can be identified by having a large number of CRPs).
 
-Using this concept, before generating the challenge, the location of stable bits needs to be identified first. The location of stable bits can be detected by using bit selection algorithm mentioned in section \ref{lbl:bit-selection}.
+Using this concept, before generating the challenge, the location of stable bits needs to be identified first. The location of stable bits can be detected by using bit selection algorithm mentioned in Section \ref{lbl:bit-selection}.
 After the location of stable bits is identified, during the generation of a challenge, the locations' order inside the challenge will be randomized.
 
 \section{Security Analysis of The Proposed Scheme}

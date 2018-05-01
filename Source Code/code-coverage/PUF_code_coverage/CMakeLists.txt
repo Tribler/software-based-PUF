@@ -41,5 +41,5 @@ set(SOURCE_FILES main.cpp test/BCHCompleteTest.cpp  test/PUF_Test.cpp test/BCHTe
 add_executable(PUF_code_coverage ${SOURCE_FILES} )
 target_link_libraries(PUF_code_coverage gtest gtest_main)
 
-# gcov main.gcno && lcov --capture --directory . --output-file project_test.info && genhtml project_test.info --output-directory CODE_COVERAGE && open /Users/ades17/CLionProjects/PUF_code_coverage/cmake-build-debug/CMakeFiles/PUF_code_coverage.dir/CODE_COVERAGE/index.html
+# gcov main.gcno && lcov --capture --directory . --output-file project_test.info && genhtml project_test.info --output-directory CODE_COVERAGE && open CODE_COVERAGE/index.html
 # find . -name "*.gcda" -type f -delete

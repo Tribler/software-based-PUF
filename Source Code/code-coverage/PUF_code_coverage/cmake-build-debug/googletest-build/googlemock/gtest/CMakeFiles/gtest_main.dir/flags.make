@@ -6,5 +6,5 @@ CXX_FLAGS = -g -O0 -Wall -fprofile-arcs -ftest-coverage -g   -g -O0 -Wall -fprof
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -isystem "/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/include" -I"/Users/ades17/Documents/Thesis/strong-software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest" 
+CXX_INCLUDES = -isystem "/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest/include" -I"/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug/googletest-src/googletest" 
 
