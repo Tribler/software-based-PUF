@@ -1,7 +1,7 @@
 import os
 import itertools
 from PUF import Tools, Analyzer, DataRemanenceCalculator
-
+import distance
 h = Analyzer.Analyzer()
 
 
@@ -33,7 +33,8 @@ def calculate_uniquessness(min_index_SRAM, max_index_SRAM):
     for a, b in itertools.combinations(files_per_folder, 2):
         files1 = files_per_folder[a]
         files2 = files_per_folder[b]
-        inter_hd.append(h.calculate_inter_hamming_distance(files1, files2, length=4662))
+        dis = h.calculate_inter_hamming_distance(files1, files2, length=4662)
+        inter_hd.append(dis)
 
     average = sum(inter_hd) / len(inter_hd)
     max_distance = max(inter_hd)
@@ -42,7 +43,7 @@ def calculate_uniquessness(min_index_SRAM, max_index_SRAM):
     return [average, max_distance, min_distance]
 
 
-result = calculate_uniquessness(min_index_SRAM='A', max_index_SRAM='A')
+result = calculate_uniquessness(min_index_SRAM='A', max_index_SRAM='B')
 
 print("Average inter fractional hamming distance: " + str(result[0]))
 print("Maximum inter fractional hamming distance: " + str(result[1]))

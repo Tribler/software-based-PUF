@@ -44,7 +44,7 @@ class Analyzer:
         highest = 0
         highest_pct = 0
         lowest = length
-        lowest_pct = 100
+        lowest_pct = 101
         distances = {}
         if isinstance(files, dict):
             for a1, b1 in itertools.combinations(files, 2):
@@ -80,7 +80,7 @@ class Analyzer:
                     lowest_pct = pct
                     # print(str(dis) + ", " + str(pct) + "%")
             average = total / count if count > 0 else 0
-        return [average, highest, lowest, highest_pct, lowest_pct, distances]
+        return [average, highest, lowest, highest_pct, lowest_pct if lowest_pct != 101 else 0, distances]
 
     def calculate_inter_hamming_distance(self, files1, files2, length=1048576):
         total = 0

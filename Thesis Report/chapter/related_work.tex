@@ -8,13 +8,13 @@ Then, theories related to PUF and SRAM PUF are described, continued by evaluatio
 \section{Security Requirements and Cryptography}
 \label{chapter2.1}
 
-A perfect and 100\% secure system is the holy grail of all computing system. Unfortunately, such thing doesn't exist. The best way to achieve that goal is by designing a system to be as secure as possible in a limited scope.
+A perfect and 100\% secure system is the holy grail of all computing system. Unfortunately, such thing does not exist. The best way to achieve that goal is by designing a system to be as secure as possible in a limited scope.
 To help defining a secure system, common security requirements are mentioned.
 According to \cite{cryptography_decrypted}, there are four elements on common security, which are:
 \begin{itemize}
   \item \textit{Confidentiality}: a piece of information should be accessible only to an authorized user. For example, an encrypted data can only be decrypted by the secret key owner.
   \item \textit{Authentication}: assurance of the sender of a message, date of origin, data content, time sent, data information, etc. are correctly identified.
-  \item \textit{Integrity}: any assets can only be modified by authorized subjects. For example, data should be kept intact during transmission
+  \item \textit{Integrity}: any assets can only be modified by authorized subjects. For example, data should be kept intact during transmission.
   \item \textit{Non-repudiation}: a subject should be prevented from denying previous actions. For example, a sender cannot deny the data which it sent.
 \end{itemize}
 
@@ -39,22 +39,24 @@ There are many examples of symmetric encryption algorithms, such as RC2, DES, 3D
 
 \subsubsection{AES}
 AES, stands for Advanced Encryption Standard, is an encryption algorithm based on a substitution-permutation network and established by the U.S. National Institute of Standards and Technology (NIST) in 2001.
-The block size inside AES has a size of 128 bits, while the key size can be either 128, 192, or 256 bits. The key size  itself describes the number of rounds which convert the plaintext into the ciphertext. If 128-bit key is used, there are 10 rounds utilized. 192-bit key lead to 12 rounds, while 14 rounds is used when 256-bit key is applied.
+The block size inside AES has a size of 128 bits, while the key size can be either 128, 192, or 256 bits. The key size  itself describes the number of rounds which convert the plaintext into the ciphertext. If 128-bit key is used, there are 10 rounds utilized. 192-bit key leads to 12 rounds, while 14 rounds is used when 256-bit key is applied.
 
 
-There are four major parts inside AES; \textit{KeyExpansions}, \textit{InitialRound}, \textit{Rounds} and \textit{FinalRound}. In KeyExpansions, the round keys are generated using Rijndael's key schedule based on the AES key.
+There are four major parts inside AES; \textit{KeyExpansions}, \textit{InitialRound}, \textit{Rounds} and \textit{FinalRound}. In KeyExpansions, the round keys are generated using Rijndael's key schedule
+ based on the AES key.
 Inside a normal round, there are four stages required to do; \textit{SubBytes}, \textit{ShiftRows}, \textit{MixColumns}, and \textit{AddRoundKey}.
 SubBytes refers to a non-linear substitution procedure using a lookup table. ShiftRows means an act of shifting cyclically the last three rows of the state. MixColumns contains a mixing activity on the columns of the state.
 AddRoundKey involves a fusing process of each byte of the state with a block of the round key utilizing bitwise xor operation. The difference between InitialRound, Rounds, and FinalRound is InitialRound only contain AddRoundKey, FinalRound does not has MixColumns inside, and Rounds just filled with those four stages.
 
-An encryption can be done by following all these four parts. To convert ciphertext into the original plaintext, it's only required to apply a set of reverse rounds using the same encryption key.
+An encryption can be done by following all these four parts. To convert ciphertext into the original plaintext, it is only required to apply a set of reverse rounds using the same encryption key.
 
 \section{Key Derivation Function}
 Besides the encryption algorithm, a \textit{key derivation function} (KDF) is one of the most utilized components of cryptographic applications. Its importance is due to its ability to convert a stable secret, usually contain sufficient amount of randomness but non-uniformly distributed,  $Z$ into one or more cryptographically strong secret keys $k\ \epsilon\ {0,1}^K$.
 Cryptographically strong itself refers to indistinguishability by reasonable computation from a random uniform string with similar length \cite{key_derivation}.
 KDF can also be referred as a strong extractor.
 
-A popular example of KDF is a keyed cryptographic hash function (can be referred as \textit{HMAC}, stands for hash-based message authentication code). The difference between keyed cryptographic hash function and a normal hash function is a keyed hash function requires an additional \textit{salt} as an input (besides the key to derived).
+A popular example of KDF is a keyed cryptographic hash function (can be referred as \textit{HMAC}, stands for hash-based message authentication code).
+% The difference between keyed cryptographic hash function and a normal hash function is a keyed hash function requires an additional \textit{salt} as an input (besides the key to derived).
 The formula for HMAC is shown below \cite{rfc2104}:
 \begin{equation}
   {\displaystyle \operatorname {HMAC} (K,m)=H{\Bigl (}(K'\oplus opad)\|H{\bigl (}(K'\oplus ipad)\|m{\bigr )}{\Bigr )}}
@@ -122,9 +124,9 @@ In ideal PUFs, the intra-chip fractional hamming distance (HD\textsubscript{intr
 
 There are two issues if PUF raw responses are used as a key in cryptographic primitive. First, both weak and strong PUFs rely on analog physical properties of the fabricated circuit to derive secret information. Naturally, these analog properties have noise and variability associated with them.
 This can be a problem due to sensitivity of cryptographic functions on noises of their inputs.
-Another issue is the PUF raw responses usually are not uniformly distributed, which makes it an unqualified as a cryptographically secure key. These two issues can be solved using \textit{Helper Data Algorithm} (HDA). One can also refer Helper Data Algorithm as \textit{fuzzy extractor} since both are capable of converting noisy information into keys usable for any cryptographic application \cite{efficient_helper} \cite{fuzzy_extractor}.
+Another issue is the PUF raw responses usually are not uniformly distributed, which makes it unqualified as a cryptographically secure key. These two issues can be solved using \textit{Helper Data Algorithm} (HDA). One can also refer Helper Data Algorithm as \textit{fuzzy extractor} since both are capable of converting noisy information into keys usable for any cryptographic application \cite{efficient_helper} \cite{fuzzy_extractor}.
 
-Fuzzy extractor solves both issues mentioned above by using two phases, \textit{information reconciliation} and \textit{privacy amplification}. In information reconciliation phase, possible bit errors are corrected to form a robust bit string \cite{soft_decision}. Information reconciliation is tightly related to error correction. In fact, a procedure to do information reconciliation based on error-correcting codes is called code-offset technique \cite{fuzzy_extractor}. Using code-offset technique, one should be able to reconstruct a bit string \textit{w} from a noisy version \textit{w'} as long as the Hamming distance between \textit{w}and \textit{w'} is limited to \textit{t}.
+Fuzzy extractor solves both issues mentioned above by using two phases, \textit{information reconciliation} and \textit{privacy amplification}. In information reconciliation phase, possible bit errors are corrected to form a robust bit string \cite{soft_decision}. Information reconciliation is tightly related to error correction. In fact, a procedure to do information reconciliation based on error-correcting codes is called code-offset technique \cite{fuzzy_extractor}. Using code-offset technique, one should be able to reconstruct a bit string \textit{w} from a noisy version \textit{w'} as long as the Hamming distance between \textit{w} and \textit{w'} is limited to \textit{t}.
 The second phase, privacy amplification, is a process to evolve this robust bit string into a full entropy key. Privacy amplification, also can be called as randomness extraction \cite{information_reconciliation}, can be done by utilizing two-way hash function.
 
 Beside these two phases, fuzzy extractor also consists of two procedures, \large{Gen} and \large{Rep}. \large{Gen}, stands for \textit{generation}, is a probabilistic procedure which outputs an "extracted" string / key (secret) $R$ and a string (public) \textit{helper data} $P$ on input fuzzy data $w$. \large{Rep}, stands for \textit{reproduction}, is a deterministic function capable of recovering secret key $R$ from the string \textit{helper data} $P$ and any vector $w'$ as long as the Hamming distance between \textit{w}and \textit{w'} is limited to \textit{t}.
@@ -140,9 +142,10 @@ In \cite{stable_key_generation}, Taniguchi et. al illustrated the generation and
 To handle noises occurred inside a PUF, error-correcting codes (ECC) is employed.
 Error-correcting codes are a class of schemes for encoding messages in an attempt to enable message recovery when there is noise introduced in the sending or receiving of the message. ECC can be divided into two subcategories, hard-decision and soft-decision. Hard-decision works on a predetermined set of values (usually 0 or 1 in a binary code), while a soft-decision decoder may take inputs on a span of values in-between (usually refers to float value).
 
-There are some well-known ECC, such as in hard-decision code, Reed-Solomon code and BCH code; while in soft-decision, Viterbi code and turbo code. Soft-decision code has an advantage over hard-decision code where it can process extra information which indicates the reliability of each input data point and used to form better estimates of the original data. But it has drawback where one should provide a probability function on the data (on SRAM, a probability function on each cell should be provided) to enable a good decoding result. This is a problem if applied on this thesis goal where the system should work on any SRAM off-the-market. Calculating the probability on each SRAM cell will take an extra step, overcomplicate the system and the procedure on using the constructed system. Thus, the hard-decision code is preferred.
+There are some well-known ECC, such as in hard-decision code, Reed-Solomon code and BCH code; while in soft-decision, Viterbi code and turbo code. Soft-decision code has an advantage over hard-decision code where it can process extra information which indicates the reliability of each input data point and used to form better estimates of the original data. But it has drawback where one should provide a probability function on the data (on SRAM, a probability function on each cell should be provided) to enable a good decoding result.
+% This is a problem if applied on this thesis goal where the system should work on any SRAM off-the-market. Calculating the probability on each SRAM cell will take an extra step, overcomplicate the system and the procedure on using the constructed system. Thus, the hard-decision code is preferred.
 
-One of the popular hard-decision error correcting code is BCH codes. BCH, stands for \textit{Bose–Chaudhuri–Hocquenghem}, codes are a family of cyclic error correcting codes which constructed using polynomials over a finite field and work in a binary field.
+One of the popular hard-decision error correcting code is BCH codes. BCH, stands for \textit{Bose}–\textit{Chaudhuri}–\textit{Hocquenghem}, codes are a family of cyclic error correcting codes which constructed using polynomials over a finite field and work in a binary field.
 BCH codes are a very flexible set of codes in that within certain bounds there is a great amount of choice in code parameters and are relatively efficient in message length and error correction. The code parameters are as follows:
 \begin{itemize}
 \item $q$: The number of symbols used (e.g., in binary field, $q = 2$)
@@ -152,7 +155,7 @@ BCH codes are a very flexible set of codes in that within certain bounds there i
 
 These parameters lead to several derived parameters which are standard parameters of linear codes:
 \begin{itemize}
-\item $n$: The block length of the code; for our special case, $n = q*m – 1$
+\item $n$: The block length of the code; for our special case, $n = q*m \minus 1$
 \item $t$: The number of errors that can be corrected, $d \geq 2t + 1$
 \item $k$: The number of message bits in a codeword, $k \geq n - mt$
 \end{itemize}

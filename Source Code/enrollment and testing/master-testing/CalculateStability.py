@@ -27,7 +27,7 @@ def calculate_stability(index_SRAM):
     return h.calculate_intra_hamming_distance_between_elements(files, length=4662)
 
 
-result = calculate_stability(index_SRAM='A')
+result = calculate_stability(index_SRAM='C')
 print("Average Pct : " + str(result[0]))
 print("Highest Pct : " + str(result[3]))
 print("Lowest Pct \t: " + str(result[4]))

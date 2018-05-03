@@ -207,11 +207,11 @@ class SerialPUF:
         if res[1] == 40:
             self.is_turn_on = False
             r = unpack('>bbH', res[0:4])
-            print("TURNED OFF " + str(r[2]) + " : " + str(r[2] * 5 / 1023))
+            # print("TURNED OFF " + str(r[2]) + " : " + str(r[2] * 5 / 1023))
         elif res[1] == 41:
             self.is_turn_on = True
             r = unpack('>bbH', res[0:4])
-            print("TURNED ON  " + str(r[2]) + " : " + str(r[2] * 5 / 1023))
+            # print("TURNED ON  " + str(r[2]) + " : " + str(r[2] * 5 / 1023))
         elif res[1] == 42:
             rp = ReadPageResult(res)
             for a in rp.bytes:
@@ -225,7 +225,7 @@ class SerialPUF:
         elif res[1] == 46:
             self.is_turn_on = True
             r = unpack('>bbBH', res[:5])
-            print("TURNED ON " + str(r[2]) + " " + str(r[3]))
+            # print("TURNED ON " + str(r[2]) + " " + str(r[3]))
         elif res[1] == 47:
             rp = WritePageResult(res)
             for a in rp.bytes:
