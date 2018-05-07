@@ -32,6 +32,14 @@ There are two folder inside:
     - PUF-encrypt: Arduino code to encrypt user's key using the proposed scheme
   - reconstruction: Arduino source code for reconstruct the PUF-generated key.
   - schematic: pictures and fzz files which shows how to connect Arduino with SRAM Cypress CY62256NLL and Microchip 23LC1024 for the testing and enrollment. Open the fzz files using [Fritzing](http://fritzing.org/home/).
+- Figures: figures showing parallel profiling and key reconstruction using
+Arduino, microSD and SRAM Cypress CY62256NLL.
+  - Parallel profiling using four SRAMs and four arduino.
+  ![Parallel profiling](Figures/parallel-profiling.png)
+  - Key reconstruction.
+  ![key reconstruction](Figures/key-reconstruction.JPG)
+  - Arduino Mega 2560 connected to a microSD and an SRAM Cypress CY62256NLL.
+  ![key reconstruction](Figures/arduino-microsd-sram.JPG)
 
 ### Testing SRAMs
 #### Testing off-the-shelf SRAM on voltage variation:

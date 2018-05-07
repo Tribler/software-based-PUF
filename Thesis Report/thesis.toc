@@ -5,7 +5,7 @@
 \contentsline {section}{\numberline {1.2}Rise of PUF as a Security Solution}{3}{section.1.2}
 \contentsline {section}{\numberline {1.3}Problem Statement}{4}{section.1.3}
 \contentsline {section}{\numberline {1.4}Contributions}{5}{section.1.4}
-\contentsline {section}{\numberline {1.5}Outlines}{6}{section.1.5}
+\contentsline {section}{\numberline {1.5}Outline}{6}{section.1.5}
 \contentsline {chapter}{\numberline {2}Related Work}{7}{chapter.2}
 \contentsline {section}{\numberline {2.1}Security Requirements and Cryptography}{7}{section.2.1}
 \contentsline {section}{\numberline {2.2}Symmetric Encryption}{8}{section.2.2}
