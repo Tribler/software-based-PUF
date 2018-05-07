@@ -240,7 +240,8 @@ void derive_new_key(String user_password, uint8_t* final_key, uint8_t* key_32) {
 void decrypt_test(uint8_t* final_key, uint8_t *cypher, uint8_t *decrypted){
   AES256 aes256;
   aes256.setKey(final_key, 32);
-  aes256.decryptBlock(decrypted, cypher);
+  aes256.decryptBlock(&decrypted[0], &cypher[0]);
+  aes256.decryptBlock(&decrypted[16], &cypher[16]);
 }
 
 void setup(void)
@@ -289,17 +290,17 @@ void setup(void)
      DECRYPT USING THE FINAL KEY
   */
   Serial.println();
-  uint8_t e[16];
-  readFromSD("e.txt", e, 16);
+  uint8_t e[32];
+  readFromSD("e.txt", e, 32);
   Serial.print("cyphertext \t: ");
-  print_key(e, 16);
+  print_key(e, 32);
 
-  uint8_t decrypted[16];
+  uint8_t decrypted[32];
   memset(decrypted, 0, sizeof(decrypted));
   decrypt_test(final_key, e, decrypted);
 
   Serial.print("decrypted \t: ");
-  for (int i=0;i<16;i++)
+  for (int i=0;i<32;i++)
     Serial.print((char) decrypted[i]);
   Serial.println();
 }

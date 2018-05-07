@@ -3,7 +3,7 @@
 \label{chp:5}
 
 \textit{After describing our proposed system as an attempt to achieve this thesis' goals in the previous chapter, this chapter continues with an explanation of several experiment setups and results. This chapter starts by a presentation on two chosen SRAMs that used in experiments; Microchip 23LC1024 and Cypress CY62256NLL. Afterwards, the testing results on two bit selection algorithms (neighbor analysis and data remanence approach) and the stable bits produced by these algorithms are displayed. The chapter continues with examination on our proposed PUF challenge and a presentation on our complete enrollment scheme. Then, we present the procedure to develop SRAM PUF-based applications using any off-the-shelf SRAM.
-Next, testing on the designed secure data protection and key storage scheme is shown. Experiment outcomes on storing bitcoin private key will conclude this chapter.}
+Next, testing on the designed secure data and key storage scheme is shown. Experiment outcomes on storing Bitcoin private key will conclude this chapter.}
 
 \section{Chosen Off-The-Shelf SRAMs}
 The first step to do in this thesis implementation is looking for off-the-shelf SRAM components to be the root-of-trust in our SRAM PUF project.
@@ -242,13 +242,13 @@ The selected experiment to test this challenge is by calculating the HD\textsubs
 \end{figure}
 
 \section{Complete Enrollment and Reconstruction Scheme}\label{ch:complete_enrollment_scheme}
-Based on the experiment results shown before, we construct a complete enrollment and reconstruction scheme. The enrollment scheme has a goal to create challenge and helper data which will be used in our proposed secure data protection and key storage scheme (further explanation is available on Section \ref{chp:data_protection_scheme}). The reconstruction scheme has a function to reconstruct the PUF-generated key. Details on the key reconstruction can be seen on Figure \ref{fig:scheme-data-protection} and Figure \ref{fig:key-generation-scheme} in previous chapter.
+Based on the experiment results shown before, we construct a complete enrollment and reconstruction scheme. The enrollment scheme has a goal to create challenge and helper data which will be used in our proposed secure data and key storage scheme (further explanation is available on Section \ref{chp:data_protection_scheme}). The reconstruction scheme has a function to reconstruct the PUF-generated key. Details on the key reconstruction can be seen on Figure \ref{fig:scheme-data-protection} and Figure \ref{fig:key-generation-scheme} in previous chapter.
 
-Similar to the automatic profiling system, the enrollment scheme also consists of a PC, act as a master, and an Arduino connected to an external SRAM component which acts as a slave. The PC side will run Python code while Arduino side requires Arduino code.
+Similar to the automatic profiling system, the enrollment scheme also consists of a PC, act as a master, and an Arduino connected to an external SRAM component which acts as a slave. The PC side will run Python codes while Arduino side requires Arduino codes.
 Our complete enrollment scheme is shown in Figure \ref{fig:enrollment}. We also present Figure \ref{fig:cy62256nll_scheme_sd} to show how to connect an Arduino Mega 2560, an SRAM Cypress CY62256NLL and a microSD.
 
 The enrollment scheme starts by locating stable bits using bit selection algorithm. The chosen bit selection algorithm is data remanence analysis due to its better result and shorter time needed compared to neighbor analysis. Using this algorithm, we detect the position of 4662 stable bits. Afterwards, these stable bits are shuffled to form a set of 2331 bits locations which will be used as the PUF challenge. Using Equation \ref{bits} explained in previous chapter, there are $P(4662, 2331)=\frac{4662!}{\left( 4662-2331 \right) !}\approx 8.97\times10^{8240}$ possible stable bits combinations.
-The process continues with creating the helper data based on the PUF challenge. The enrollment scheme ends with storing the helper data and the PUF challenge to a microSD. Later, if one wants to reconstruct the PUF-generated key from the helper data and the challenge, he only requires an Arduino, no PC is needed (the Arduino code used for reconstructing the PUF-generated key is different from the Arduino code for testing and performing the enrollment scheme when it act as a slave).
+The process continues with creating the helper data based on the PUF challenge. The enrollment scheme ends with storing the helper data and the PUF challenge to a microSD. Later, if one wants to reconstruct the PUF-generated key from the helper data and the challenge, he only requires an Arduino, no PC is needed (the Arduino codes used for reconstructing the PUF-generated key is different from the Arduino codes for testing and performing the enrollment scheme when it act as a slave).
 
 \begin{figure}[tph!]
     \centerline{\includegraphics[width={0.5\textwidth}]{images/enrollment}}
@@ -262,7 +262,6 @@ The process continues with creating the helper data based on the PUF challenge. 
     \label{fig:cy62256nll_scheme_sd}
 \end{figure}
 
-% How to develop an open source secure data protection and key storage scheme using off-the-shelf SRAM component and software-based SRAM PUF technology?
 
 \section{Procedure on Developing SRAM PUF-Based Applications}\label{ch:procedure_develop}
 After presenting the complete enrollment scheme, we also come up with a procedure to develop SRAM PUF-based applications using any off-the-shelf SRAM.
@@ -279,8 +278,8 @@ This procedure will check whether the quality of the off-the-shelf SRAM is suffi
   The PUF-generated key can be applied as a root-of-trust in any application.
 \end{itemize}
 
-\section{Testing on Secure Data Protection and Key Storage Scheme}\label{ch:testing_scheme}
-To check the validity of the proposed data protection and key storage scheme, several testings are performed. First, the final key generated using HMAC SHA3 is checked. Afterwards, the result of the encryption and decryption using the final key is also tested. Last, the time required in the scheme is also measured. During the time measurement, the stage is divided into multiple stages to ease the analysis.
+\section{Testing on Secure Data and Key Storage Scheme}\label{ch:testing_scheme}
+To check the validity of the proposed data and key storage scheme, several testings are performed. First, the final key generated using HMAC SHA3 is checked. Afterwards, the result of the encryption and decryption using the final key is also tested. Last, the time required in the scheme is also measured. During the time measurement, the stage is divided into multiple stages to ease the analysis.
 
 To check the validity of the final key, a comparison between the generated final key and an online HMAC SHA3 calculator \cite{hmac_calculator} is performed. As a reminder, the key for HMAC function is the PUF generated key and the message input for the HMAC is the user's password. Below is the testing result:
 \begin{itemize}
@@ -313,47 +312,52 @@ To check the validity of the final key, a comparison between the generated final
 After checking the validity of the final key, a testing on encryption and decryption using the final key is performed. The input data on this testing is user’s key. To check the validity of the ciphertext, an online encryption calculator \cite{aes_calculator} is utilized. The ciphertext result of the encryption process will be used as the input for the decryption test. If the decryption result is similar with the user’s key, then both encryption and decryption process in this scheme is valid.
 
 \begin{itemize}
-  \item user's key: 6a656d6275746a656d62756a656d6275
+  \item user's key: \seqsplit{70617373776f726470617373776f726470617373776f726470617373776f7264}
   \begin{itemize}
     \item final key: \seqsplit{084536fcb3135af89e1e32d423156511f13e52246acaa591b1d4115666727814}\newline
-    ciphertext: 874cd8b8010f29f0a52eb564f1306119\newline
+    ciphertext: \seqsplit{fa656b2690ea048ae807e21fefd1c4cafa656b2690ea048ae807e21fefd1c4ca}\newline
     ciphertext validity: yes\newline
-    decryption result: 6a656d6275746a656d62756a656d6275\newline
+    decryption result: \seqsplit{70617373776f726470617373776f726470617373776f726470617373776f7264}\newline
     decryption validity: yes
+
     \item final key: \seqsplit{1d1e467224d72c81ede61fcd5d1ac10535f3ebafa6e9f0d5086e6086a30787c7}\newline
-    ciphertext: c258a267ea58d04e0795e661000b9e4f\newline
+    ciphertext: \seqsplit{c007e79a23c5534eb7a5bb3841304973c007e79a23c5534eb7a5bb3841304973}\newline
     ciphertext validity: yes\newline
-    decryption result: 6a656d6275746a656d62756a656d6275\newline
+    decryption result: \seqsplit{70617373776f726470617373776f726470617373776f726470617373776f7264}\newline
     decryption validity: yes
+
     \item final key: \seqsplit{dda21605fc56b55659cffdf57f5453a9e380aa7bd78fe52b7dc64ff4515ff4a0}\newline
-    ciphertext: 64586f93c32e0498a46e906dc85b726a\newline
+    ciphertext: \seqsplit{7ecc0a763eb6c263c84e80307168dbd47ecc0a763eb6c263c84e80307168dbd4}\newline
     ciphertext validity: yes\newline
-    decryption result: 6a656d6275746a656d62756a656d6275\newline
+    decryption result: \seqsplit{70617373776f726470617373776f726470617373776f726470617373776f7264}\newline
     decryption validity: yes
+
     \item final key: \seqsplit{c2892f1b1d52d59549591d410a40527b265b91d444d2032f28ce7374f7246152}\newline
-    ciphertext: f7a0c1bfdbe1d12af85ca5c3933bc29d\newline
+    ciphertext: \seqsplit{63ea246ddfff00def87c1a45ed7d09d863ea246ddfff00def87c1a45ed7d09d8}\newline
     ciphertext validity: yes\newline
-    decryption result: 6a656d6275746a656d62756a656d6275\newline
+    decryption result: \seqsplit{70617373776f726470617373776f726470617373776f726470617373776f7264}\newline
     decryption validity: yes
+
     \item final key: \seqsplit{ec85915ae65f3e5141128a520327c4d5cd3119cb6769fddd948d3061dfb6fed9}\newline
-    ciphertext: b91b1d3031b3da73a6c1afe516d85b8b\newline
+    ciphertext: \seqsplit{82e3d875ba4892f639196dfc0bd0091182e3d875ba4892f639196dfc0bd00911}\newline
     ciphertext validity: yes\newline
-    decryption result: 6a656d6275746a656d62756a656d6275\newline
+    decryption result: \seqsplit{70617373776f726470617373776f726470617373776f726470617373776f7264}\newline
     decryption validity: yes
+
     \item final key: \seqsplit{da9e28f76754dcd4946c1343a3dd8550338d98e46d3a11e09f903204044ac9c7}\newline
-    ciphertext: 1f78480b2687b7b7faba210985600372\newline
+    ciphertext: \seqsplit{ef03a64e3bd5549a78738b64ed1c6a78ef03a64e3bd5549a78738b64ed1c6a78}\newline
     ciphertext validity: yes\newline
-    decryption result: 6a656d6275746a656d62756a656d6275\newline
+    decryption result: \seqsplit{70617373776f726470617373776f726470617373776f726470617373776f7264}\newline
     decryption validity: yes
   \end{itemize}
 
 \end{itemize}
 
-Measurement of time required in this scheme is also done. During the time measurement, the scheme is divided into eight stages. Stage one is on the initialization of the libraries required to access SRAM Cypress CY62256NLL and microSD. Stage two is when the challenge and the helper data are loaded from micro SD. The third one is calculated when reconstructing the PUF key. Next stage is during the derivation of the final key (derived from user's password and PUF-generated key). Stage five and stage six refers to the processes of encryption and saving ciphertext to microSD. Stage seven and stage eight refers to the procedure of reading ciphertext from microSD and the decryption process (reconstructing the bitcoin key). The measurement result can be seen on Table \ref{tab:time_scheme}. It can be seen that the longest time required is when loading the challenge and the helper data from the microSD (stage 2), followed by the initialization stage (stage 1). Due to this significant time required, a further optimization on accessing data from microSD is suggested in possible future works.
+Measurement of time required in this scheme is also done. During the time measurement, the scheme is divided into eight stages. Stage one is on the initialization of the libraries required to access SRAM Cypress CY62256NLL and microSD. Stage two is when the challenge and the helper data are loaded from microSD. The third one is calculated when reconstructing the PUF key. Next stage is during the derivation of the final key (derived from user's password and PUF-generated key). Stage five and stage six refers to the processes of encryption and saving ciphertext to microSD. Stage seven and stage eight refers to the procedure of reading ciphertext from microSD and the decryption process (reconstructing the user's key). The measurement result can be seen on Table \ref{tab:time_scheme}. It can be seen that the longest time required is when loading the challenge and the helper data from the microSD (stage 2), followed by the initialization stage (stage 1). Due to this significant time required, a further optimization on accessing data from microSD is suggested in possible future works.
 
 \begin{table}[htbp]
   \centering
-  \caption{Time measurement of the secure data protection and key storage scheme in ms.}
+  \caption{Time measurement of the secure data and key storage scheme in ms.}
     \begin{tabular}{|c|c|c|c|c|}
     \hline
     \textbf{No} & \textbf{Stage 1} & \textbf{Stage 2} & \textbf{Stage 3} & \textbf{Stage 4} \\
@@ -390,16 +394,16 @@ To ensure the functionality of the system, we also constructed test cases for th
 
 % \section{Concluding Experiment with Cybercurrency}
 \section{Concluding Experiment with Cybercurrency}
-As the final experiment of this thesis, we present a demo of storing a private key of a cybercurrency. We believes this proves the usefulness and viability of this work for realistic use-cases. The chosen cybercurrency in this demo is Bitcoin. In Bitcoin, the private key has a length of 256-bit or 32 bytes \cite{bitcoin_key}. The experiments starts by performing an enrollment on an Arduino board with an SRAM Cypress CY62256NLL and a microSD connected to it, resulting in challenge and helper data which store in the microSD. Using the produced challenge and helper data, user creates a final key which derived from the PUF-generated key and user's password. The final key is utilized to encrypt a bitcoin key, then the ciphertext is stored in microSD. Afterwards, the Arduino is turned off.
-Later, the microSD and the SRAM are transferred to another Arduino board. The new Arduino board is powered on, then it is used to reconstruct the final key by inputing the correct user's password. Finally, the reconstructed final key is applied to the ciphertext which is loaded from the microSD. The bitcoin key storing experiment is considered successful if the result of decryption is the same as the bitcoin key.
-Moreover, we also shows that the bitcoin key will not be reconstructed successfully if user's password is incorrect or the SRAM is not similar with the one that use to encrypt the bitcoin key.
+As the final experiment of this thesis, we present a demo of storing a private key of a cybercurrency. We believes this proves the usefulness and viability of this work for realistic use-cases. The chosen cybercurrency in this demo is Bitcoin. In Bitcoin, the private key has a length of 256-bit or 32 bytes \cite{bitcoin_key}. The experiments starts by performing an enrollment on an Arduino board with an SRAM Cypress CY62256NLL and a microSD connected to it, resulting in challenge and helper data which store in the microSD. Using the produced challenge and helper data, user creates a final key which derived from the PUF-generated key and user's password. The final key is utilized to encrypt a Bitcoin key, then the ciphertext is stored in microSD. Afterwards, the Arduino is turned off.
+Later, the microSD and the SRAM are transferred to another Arduino board. The new Arduino board is powered on, then it is used to reconstruct the final key by inputing the correct user's password. Finally, the reconstructed final key is applied to the ciphertext which is loaded from the microSD. The Bitcoin key storing experiment is considered successful if the result of decryption is the same as the Bitcoin key.
+Moreover, we also shows that the Bitcoin key will not be reconstructed successfully if user's password is incorrect or the SRAM is not similar with the one that use to encrypt the Bitcoin key.
 
 This experiment was done on five SRAMs Cypress CY62256NLL which can be identified by having index 'A', 'B', 'C', 'D', and E.
-The result of this experiment is shown on Appendix \ref{app:screenshot}. These figures show that the stored / secured bitcoin key can only be reconstructed using a correct user's password and the exact SRAM that used during the storing (encryption) stage. If the SRAM is not similar with the one used for the encryption stage or the input password is inaccurate, the bitcoin key cannot be reconstructed to the actual one.
-Based on these result, we believe that the constructed data protection and key storage scheme is secure and successfully built.
+The result of this experiment is shown on Appendix \ref{app:screenshot}. These figures show that the stored / secured Bitcoin key can only be reconstructed using a correct user's password and the exact SRAM that used during the storing (encryption) stage. If the SRAM is not similar with the one used for the encryption stage or the input password is inaccurate, the Bitcoin key cannot be reconstructed to the actual one.
+Based on these result, we conclude that the constructed data and key storage scheme is secure and successfully built.
 
 \section{Conclusion}
 In this chapter, we provide explanations of several experiment setups and results. We start by presenting two chosen SRAMs that used in experiments; Microchip 23LC1024 and Cypress CY62256NLL. Both are tested on the effect of voltage variations regarding the HD\textsubscript{intra}, HD\textsubscript{inter}, distribution of 1's and 0's. Afterwards, the testing results on two bit selection algorithms (neighbor analysis and data remanence approach) and the reliability of the stable bits produced by these algorithms are displayed. From these experiments, we concluded that the Microchip 23LC1024 is unreliable to be a PUF candidate while Cypress CY62256NLL has a solid ground to be the root-of-trust of PUF. We also able to determine that data remanence approach can produce more stable bits compared to neighbor analysis.
 The chapter continues with examination on our proposed PUF challenge. Since Cypress CY62256NLL has a capacity of 262144 bits and the required bits for PUF generation is 2331 bits, there are $P(262144, 2331)=\frac{262144!}{\left( 262144-2331 \right) !}\approx 10^{12626}$ possible challenges. We also display our complete enrollment scheme and the procedure on developing SRAM PUF-based applications using any off-the-shelf SRAM.
 Moreover, we also propose a procedure to develop SRAM PUF-based applications using any off-the-shelf SRAM. The procedure consists of three main steps; test the off-the-shelf SRAM quality to be a PUF component, create a PUF-generated key using enrollment-reconstruction mechanism, and develop any PUF-based application utilizing the PUF-generated key.
-Next, testing on the designed secure data protection and key storage scheme is shown. Last, experiment outcomes on storing bitcoin private key conclude this chapter.
+Next, testing on the designed secure data and key storage scheme is shown. Last, experiment outcomes on storing Bitcoin private key conclude this chapter.

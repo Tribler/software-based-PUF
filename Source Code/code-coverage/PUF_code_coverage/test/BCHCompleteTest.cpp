@@ -493,11 +493,11 @@ TEST_F(BCHCompleteTest, encode_decode_complete) {
     for (int i = 0; i < row; i++) {
         memcpy(&helper_data_new[i * 7], &xor_enroll_new[i * 8], 7 * sizeof(uint8_t));
     }
-    for (int i = 0; i < row * 7; i++) {
-        printf("0x%x, ", helper_data_new[i]);
-        if ((i + 1) % 7 == 0)
-            printf("\n");
-    }
+//    for (int i = 0; i < row * 7; i++) {
+//        printf("0x%x, ", helper_data_new[i]);
+//        if ((i + 1) % 7 == 0)
+//            printf("\n");
+//    }
 
     /************************************
      ****** REPRODUCTION PROCEDURE ******

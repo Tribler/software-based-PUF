@@ -5,7 +5,6 @@
 
 \section{Assumptions, Requirements and Steps To Achieve Main Goal}\label{ch:use_case}
 
-% As mentioned in the first chapter, a subset of this thesis goal is to provide a secure data protection and key storage scheme using SRAM PUF. This thesis goal describes the use case of our proposed system.
 To focus the thesis approach, we have defined several assumptions. First, the field of the constructed SRAM PUF application is decided to be only available offline. Accessing the SRAM PUF requires the user to have the device next to his/her side. Second, an attacker cannot access the SRAM directly. An attacker may gain the knowledge of the helper data and challenge used in the PUF concept. Last, there is no analysis and/or solution against physical attacks, e.g side channel attacks, in our secure data and key storage scheme. The scheme is designed to be secure against theoretical attacks.
 
 We also have define a set of requirements related to our system. Below are the requirements defined:
@@ -194,7 +193,7 @@ As mentioned in Section \ref{ch:use_case}, our scheme is designed to be secure a
   \item Another attempt that may be taken by the attacker is by stealing the PUF device. Even though the attacker has the PUF device, he still cannot access the encrypted data directly since he has to guess the PUF owner's password. If PUF owner's password entropy is high enough, the chance for attacker to successfully gain the access to the encrypted data is small since he basically has to break the security level of HMAC SHA3-256 (which requires at least $min(2^k, 2^n)$ time complexity, where $k$ is the key size and $n$ is the hash output size \cite{hmac_security}).
   \item The attacker may also try accessing the encrypted data by doing a social engineering to gain the information of PUF owner's password, then guess the PUF-generated key to get the final key which used to encrypt the data. To successfully predict the PUF generated key, it is also a hard work. For example, if one want to brute force all possible input combinations to the PUF key generation scheme, there are $2^{2331} \approx 5.02 \times 10^{701}$ possible combinations. It is actually easier to just try all possible combinations of the PUF-generated key which has 256-bits in length. Even though such fact exists, the number is not small either. The total possibilities still accounts for $2^{256}$ keys which roughly equals to $1.157920892373163 \times 10^{77}$ possibilities.
 \end{itemize}
-Based on these reasonings, we believe our proposed data protection and key storage scheme is secure. The only possible way for an attacker to gain information from the encrypted data is by having both PUF device and PUF owner's password.
+Based on these reasonings, we believe our proposed data and key storage scheme is secure. The only possible way for an attacker to gain information from the encrypted data is by having both PUF device and PUF owner's password.
 
 % security of the schemes
 % - relies on AES 256

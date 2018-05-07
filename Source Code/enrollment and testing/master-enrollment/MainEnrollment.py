@@ -4,6 +4,7 @@ from random import shuffle
 from PUF import SerialPUF, Tools
 import threading
 
+
 def get_strong_bits_by_goal(serialPUF, goal, initial_delay=0.3, step_delay=0.005, write_ones=True):
     """
     Bit selection algorithm using data remanence approach
@@ -72,7 +73,6 @@ def get_strong_bits(serialPUF, goal, initial_delay=0.3, step_delay=0.005):
     return [strong_ones, strong_zeros]
 
 
-
 class EnrollmentTools(threading.Thread):
     def __init__(self, serialconnection, bitrate, index, goal=2331, initial_delay=0.33, step_delay=0.01):
         threading.Thread.__init__(self)
@@ -111,5 +111,5 @@ class EnrollmentTools(threading.Thread):
         serialPUF.generate_helper_data_on_sd()
 
 
-thread1 = EnrollmentTools(serialconnection='/dev/cu.usbmodem14121', bitrate=115200, index="C")
+thread1 = EnrollmentTools(serialconnection='/dev/cu.usbmodem1411', bitrate=115200, index="C", initial_delay=0.4)
 thread1.start()

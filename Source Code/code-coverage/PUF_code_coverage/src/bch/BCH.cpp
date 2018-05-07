@@ -99,6 +99,11 @@ BCH::gen_poly()
     register int8_t test, aux, nocycles, root, noterms, rdncy;
     int8_t cycle[(int) pow(2, m)][m], size[(int8_t) pow(2, m)], min[(int8_t) pow(2, m)], zeros[(int8_t) pow(2, m)];
 
+    memset(cycle, 0, sizeof(cycle));
+    memset(size, 0, sizeof(size));
+    memset(min, 0, sizeof(min));
+    memset(zeros, 0, sizeof(zeros));
+
     /* Generate cycle sets modulo n, n = 2**m - 1 */
     cycle[0][0] = 0;
     size[0] = 1;

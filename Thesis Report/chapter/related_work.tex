@@ -130,7 +130,7 @@ Fuzzy extractor solves both issues mentioned above by using two phases, \textit{
 The second phase, privacy amplification, is a process to evolve this robust bit string into a full entropy key. Privacy amplification, also can be called as randomness extraction \cite{information_reconciliation}, can be done by utilizing two-way hash function.
 
 Beside these two phases, fuzzy extractor also consists of two procedures, \large{Gen} and \large{Rep}. \large{Gen}, stands for \textit{generation}, is a probabilistic procedure which outputs an ``extracted" string / key (secret) $R$ and a string (public) \textit{helper data} $P$ on input fuzzy data $w$. \large{Rep}, stands for \textit{reproduction}, is a deterministic function capable of recovering secret key $R$ from the string \textit{helper data} $P$ and any vector $w'$ as long as the Hamming distance between \textit{w}and \textit{w'} is limited to \textit{t}.
-In \cite{stable_key_generation}, Taniguchi et. al illustrated the generation and reproduction procedure of fuzzy extractor on PUF which is shown in Figure \ref{fig:scheme-key-generator}.
+In \cite{stable_key_generation}, Taniguchi et. al. illustrated the generation and reproduction procedure of fuzzy extractor on PUF which is shown in Figure \ref{fig:scheme-key-generator}.
 
 \begin{figure}[tph!]
     \centerline{\includegraphics[width={0.8\textwidth}]{images/scheme_stable_key_generation}}

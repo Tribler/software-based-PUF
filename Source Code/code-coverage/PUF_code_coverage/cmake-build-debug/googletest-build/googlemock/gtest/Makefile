@@ -186,35 +186,59 @@ gtest/fast:
 	cd "/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug" && $(MAKE) -f googletest-build/googlemock/gtest/CMakeFiles/gtest.dir/build.make googletest-build/googlemock/gtest/CMakeFiles/gtest.dir/build
 .PHONY : gtest/fast
 
-# target to build an object file
-src/gtest-all.o:
-	cd "/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug" && $(MAKE) -f googletest-build/googlemock/gtest/CMakeFiles/gtest.dir/build.make googletest-build/googlemock/gtest/CMakeFiles/gtest.dir/src/gtest-all.o
+src/gtest-all.o: src/gtest-all.cc.o
+
 .PHONY : src/gtest-all.o
 
-# target to preprocess a source file
-src/gtest-all.i:
-	cd "/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug" && $(MAKE) -f googletest-build/googlemock/gtest/CMakeFiles/gtest.dir/build.make googletest-build/googlemock/gtest/CMakeFiles/gtest.dir/src/gtest-all.i
+# target to build an object file
+src/gtest-all.cc.o:
+	cd "/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug" && $(MAKE) -f googletest-build/googlemock/gtest/CMakeFiles/gtest.dir/build.make googletest-build/googlemock/gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.o
+.PHONY : src/gtest-all.cc.o
+
+src/gtest-all.i: src/gtest-all.cc.i
+
 .PHONY : src/gtest-all.i
 
-# target to generate assembly for a file
-src/gtest-all.s:
-	cd "/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug" && $(MAKE) -f googletest-build/googlemock/gtest/CMakeFiles/gtest.dir/build.make googletest-build/googlemock/gtest/CMakeFiles/gtest.dir/src/gtest-all.s
+# target to preprocess a source file
+src/gtest-all.cc.i:
+	cd "/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug" && $(MAKE) -f googletest-build/googlemock/gtest/CMakeFiles/gtest.dir/build.make googletest-build/googlemock/gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.i
+.PHONY : src/gtest-all.cc.i
+
+src/gtest-all.s: src/gtest-all.cc.s
+
 .PHONY : src/gtest-all.s
 
-# target to build an object file
-src/gtest_main.o:
-	cd "/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug" && $(MAKE) -f googletest-build/googlemock/gtest/CMakeFiles/gtest_main.dir/build.make googletest-build/googlemock/gtest/CMakeFiles/gtest_main.dir/src/gtest_main.o
+# target to generate assembly for a file
+src/gtest-all.cc.s:
+	cd "/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug" && $(MAKE) -f googletest-build/googlemock/gtest/CMakeFiles/gtest.dir/build.make googletest-build/googlemock/gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.s
+.PHONY : src/gtest-all.cc.s
+
+src/gtest_main.o: src/gtest_main.cc.o
+
 .PHONY : src/gtest_main.o
 
-# target to preprocess a source file
-src/gtest_main.i:
-	cd "/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug" && $(MAKE) -f googletest-build/googlemock/gtest/CMakeFiles/gtest_main.dir/build.make googletest-build/googlemock/gtest/CMakeFiles/gtest_main.dir/src/gtest_main.i
+# target to build an object file
+src/gtest_main.cc.o:
+	cd "/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug" && $(MAKE) -f googletest-build/googlemock/gtest/CMakeFiles/gtest_main.dir/build.make googletest-build/googlemock/gtest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o
+.PHONY : src/gtest_main.cc.o
+
+src/gtest_main.i: src/gtest_main.cc.i
+
 .PHONY : src/gtest_main.i
 
-# target to generate assembly for a file
-src/gtest_main.s:
-	cd "/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug" && $(MAKE) -f googletest-build/googlemock/gtest/CMakeFiles/gtest_main.dir/build.make googletest-build/googlemock/gtest/CMakeFiles/gtest_main.dir/src/gtest_main.s
+# target to preprocess a source file
+src/gtest_main.cc.i:
+	cd "/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug" && $(MAKE) -f googletest-build/googlemock/gtest/CMakeFiles/gtest_main.dir/build.make googletest-build/googlemock/gtest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.i
+.PHONY : src/gtest_main.cc.i
+
+src/gtest_main.s: src/gtest_main.cc.s
+
 .PHONY : src/gtest_main.s
+
+# target to generate assembly for a file
+src/gtest_main.cc.s:
+	cd "/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/cmake-build-debug" && $(MAKE) -f googletest-build/googlemock/gtest/CMakeFiles/gtest_main.dir/build.make googletest-build/googlemock/gtest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.s
+.PHONY : src/gtest_main.cc.s
 
 # Help Target
 help:

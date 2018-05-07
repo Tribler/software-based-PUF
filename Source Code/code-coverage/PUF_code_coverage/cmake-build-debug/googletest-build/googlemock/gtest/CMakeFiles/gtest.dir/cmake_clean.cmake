@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/gtest.dir/src/gtest-all.o"
+  "CMakeFiles/gtest.dir/src/gtest-all.cc.o"
   "libgtestd.pdb"
   "libgtestd.a"
 )

@@ -239,7 +239,8 @@ void derive_new_key(String user_password, uint8_t* final_key, uint8_t* key_32) {
 void encrypt_test(uint8_t* final_key, uint8_t *plain, uint8_t *result) {
   AES256 aes256;
   aes256.setKey(final_key, 32);
-  aes256.encryptBlock(result, plain);
+  aes256.encryptBlock(&result[0], &plain[0]);
+  aes256.encryptBlock(&result[16], &plain[16]);
 }
 
 void setup(void)
@@ -296,13 +297,13 @@ void setup(void)
   Serial.print("plaintext \t: ");
   Serial.println(plain_text);
 
-  uint8_t result[16];
+  uint8_t result[32];
   memset(result, 0, sizeof(result));
   encrypt_test(final_key, reinterpret_cast<const uint8_t*>(&plain_text[0]), result);
   Serial.print("encrypted \t: ");
-  print_key(result, 16);
+  print_key(result, 32);
 
-  writeToSD("e.txt", result, 16);
+  writeToSD("e.txt", result, 32);
 }
 
 void loop() {

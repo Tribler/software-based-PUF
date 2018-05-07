@@ -57,13 +57,15 @@ public:
     void encrypt_test(uint8_t* final_key, uint8_t *plain, uint8_t *result) {
         AES256 aes256;
         aes256.setKey(final_key, 32);
-        aes256.encryptBlock(result, plain);
+        aes256.encryptBlock(&result[0], &plain[0]);
+        aes256.encryptBlock(&result[16], &plain[16]);
     }
 
     void decrypt_test(uint8_t* final_key, uint8_t *cypher, uint8_t *decrypted){
         AES256 aes256;
         aes256.setKey(final_key, 32);
-        aes256.decryptBlock(decrypted, cypher);
+        aes256.decryptBlock(&decrypted[0], &cypher[0]);
+        aes256.decryptBlock(&decrypted[16], &cypher[16]);
     }
 };
 

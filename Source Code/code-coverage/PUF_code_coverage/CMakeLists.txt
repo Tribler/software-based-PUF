@@ -5,8 +5,8 @@ set(GCC_GENERATE_TEST_COVERAGE_FILES NO)
 set(GCC_INSTRUMENT_PROGRAM_FLOW_ARCS NO)
 
 set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_FLAGS "-g -O0 -Wall -fprofile-arcs -ftest-coverage")
-set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE 1)
+#set(CMAKE_CXX_FLAGS "-g -O0 -Wall -fprofile-arcs -ftest-coverage")
+#set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE 1)
 
 # Download and unpack googletest at configure time
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)

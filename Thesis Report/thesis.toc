@@ -49,24 +49,24 @@
 \contentsline {section}{\numberline {4.4}Testing on Bit Selection Algorithms}{41}{section.4.4}
 \contentsline {subsection}{\numberline {4.4.1}Neighbour Stability Analysis}{42}{subsection.4.4.1}
 \contentsline {subsubsection}{Microchip 23LC1024}{42}{subsection.4.4.1}
-\contentsline {subsubsection}{Cypress CY62256NLL}{43}{figure.caption.20}
+\contentsline {subsubsection}{Cypress CY62256NLL}{42}{figure.caption.20}
 \contentsline {subsection}{\numberline {4.4.2}Data Remanence Approach}{43}{subsection.4.4.2}
 \contentsline {subsubsection}{Microchip 23LC1024}{43}{subsection.4.4.2}
-\contentsline {subsubsection}{Cypress CY62256NLL}{45}{figure.caption.22}
+\contentsline {subsubsection}{Cypress CY62256NLL}{43}{figure.caption.22}
 \contentsline {subsection}{\numberline {4.4.3}Stability Test on Stable Bits}{45}{subsection.4.4.3}
 \contentsline {subsubsection}{Microchip 23LC1024}{45}{figure.caption.27}
 \contentsline {subsubsection}{Cypress CY62256NLL}{50}{figure.caption.27}
 \contentsline {subsubsection}{Stability Test Conclusion}{50}{figure.caption.27}
 \contentsline {section}{\numberline {4.5}Testing on Bits Locations as A Challenge}{52}{section.4.5}
-\contentsline {section}{\numberline {4.6}Complete Enrollment and Reconstruction Scheme}{52}{section.4.6}
-\contentsline {section}{\numberline {4.7}Procedure on Developing SRAM PUF-Based Applications}{56}{section.4.7}
-\contentsline {section}{\numberline {4.8}Testing on Secure Data Protection and Key Storage Scheme}{57}{section.4.8}
+\contentsline {section}{\numberline {4.6}Complete Enrollment and Reconstruction Scheme}{53}{section.4.6}
+\contentsline {section}{\numberline {4.7}Procedure on Developing SRAM PUF-Based Applications}{53}{section.4.7}
+\contentsline {section}{\numberline {4.8}Testing on Secure Data and Key Storage Scheme}{56}{section.4.8}
 \contentsline {section}{\numberline {4.9}Concluding Experiment with Cybercurrency}{60}{section.4.9}
 \contentsline {section}{\numberline {4.10}Conclusion}{61}{section.4.10}
 \contentsline {chapter}{\numberline {5}Conclusions and Future Work}{63}{chapter.5}
 \contentsline {section}{\numberline {5.1}Conclusions}{63}{section.5.1}
 \contentsline {section}{\numberline {5.2}Future Work}{65}{section.5.2}
 \contentsline {subsubsection}{Possible Experiments on Off-The-Shelf SRAMs}{65}{section.5.2}
-\contentsline {subsubsection}{Improvement on Secure Data Protection and Key Storage Scheme}{66}{section.5.2}
-\contentsline {chapter}{\numberline {A}Screenshot of Secure Data and Key Storage Scheme}{77}{appendix.A}
+\contentsline {subsubsection}{Improvement on Secure Data and Key Storage Scheme}{66}{section.5.2}
+\contentsline {chapter}{\numberline {A}Screenshot of Secure Data and Key Storage Scheme}{75}{appendix.A}
 \contentsfinish 

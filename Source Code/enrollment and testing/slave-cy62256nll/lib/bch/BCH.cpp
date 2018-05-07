@@ -117,6 +117,11 @@ BCH::gen_poly()
     register int8_t test, aux, nocycles, root, noterms, rdncy;
     int8_t cycle[(int) pow(2, m)][m], size[(int8_t) pow(2, m)], min[(int8_t) pow(2, m)], zeros[(int8_t) pow(2, m)];
 
+    memset(cycle, 0, sizeof(cycle));
+    memset(size, 0, sizeof(size));
+    memset(min, 0, sizeof(min));
+    memset(zeros, 0, sizeof(zeros));
+
     /* Generate cycle sets modulo n, n = 2**m - 1 */
     cycle[0][0] = 0;
     size[0] = 1;
@@ -420,8 +425,8 @@ BCH::decode_bch(uint8_t *in, uint8_t *result)
                 /* no. roots = degree of elp hence <= t errors */
                 for (i = 0; i < l[u]; i++)
                     input[loc[i]] ^= 1;
-            else    /* elp has degree >t hence cannot solve */
-                Serial.println("Incomplete decoding: errors detected\n");
+            // else    /* elp has degree >t hence cannot solve */
+            //     Serial.println("Incomplete decoding: errors detected\n");
         }
     }
 
