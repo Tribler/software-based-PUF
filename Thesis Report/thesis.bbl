@@ -134,9 +134,8 @@ Roel Maes, Anthony Van~Herrewege, and Ingrid Verbauwhede.
   Heidelberg, 2012. Springer Berlin Heidelberg.
 
 \bibitem{repository}
-Tribler - strong software based physical unclonable function.
-\newblock
-  \url{https://github.com/Tribler/software-based-Physical-Unclonable-Function}.
+Github - tribler/software-based-puf/ the first open source software-based puf.
+\newblock \url{https://github.com/Tribler/software-based-PUF}.
 \newblock [Online; accessed 15-April-2018].
 
 \bibitem{cryptography_decrypted}
