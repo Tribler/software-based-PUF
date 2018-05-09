@@ -335,6 +335,12 @@ sys/wait.h
 -
 spawn.h
 -
+fdio/io.h
+-
+launchpad/launchpad.h
+-
+zircon/syscalls.h
+-
 gtest/gtest-message.h
 googletest-src/googletest/src/gtest/gtest-message.h
 gtest/internal/gtest-string.h
@@ -432,6 +438,10 @@ sys/procfs.h
 procinfo.h
 -
 sys/types.h
+-
+zircon/process.h
+-
+zircon/syscalls.h
 -
 gtest/gtest-spi.h
 googletest-src/googletest/src/gtest/gtest-spi.h

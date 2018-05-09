@@ -9,6 +9,7 @@
 #include <SHA3.h>
 #include <string.h>
 #include <AES.h>
+#include <CTR.h>
 
 #define PIN_POWER_ANALOG A8
 #define PIN_POWER 9
@@ -236,18 +237,33 @@ void derive_new_key(String user_password, uint8_t* final_key, uint8_t* key_32) {
   sha3_256.finalizeHMAC(key_32, 32, final_key, 32);
 }
 
+void check_integrity(uint8_t* encrypted, uint8_t* result, uint8_t* key_32) {
+  SHA3_256 sha3_256;
 
-void decrypt_test(uint8_t* final_key, uint8_t *cypher, uint8_t *decrypted){
-  AES256 aes256;
-  aes256.setKey(final_key, 32);
-  aes256.decryptBlock(&decrypted[0], &cypher[0]);
-  aes256.decryptBlock(&decrypted[16], &cypher[16]);
+  sha3_256.resetHMAC(key_32, 32);
+  sha3_256.update(encrypted, sizeof(encrypted));
+  sha3_256.finalizeHMAC(key_32, 32, result, 32);
+}
+
+void decrypt_test(uint8_t* final_key, uint8_t* iv, uint8_t *cypher, uint8_t *decrypted){
+  CTR<AES256> ctraes256;
+  ctraes256.clear();
+  if (!ctraes256.setKey(final_key, 32)) {
+      Serial.print("setKey failed\n");
+      return;
+  }
+  if (!ctraes256.setIV(iv, 16)) {
+      Serial.print("setIV failed\n");
+      return;
+  }
+
+  ctraes256.decrypt(decrypted, cypher, 32);
 }
 
 void setup(void)
 {
   delay(1000);
-  String user_password = "password";
+  String user_password = "";
   uint8_t final_key[32];
   uint8_t key_32[32];
   memset(key_32, 0, sizeof(key_32));
@@ -295,9 +311,26 @@ void setup(void)
   Serial.print("cyphertext \t: ");
   print_key(e, 32);
 
+  uint8_t h_sd[32];
+  readFromSD("h.txt", h_sd, 32);
+
+  uint8_t h_result[32];
+  memset(h_result, 0, sizeof(h_result));
+  check_integrity(e, h_result, key_32);
+
+  uint8_t iv[16];
+  readFromSD("i.txt", iv, 16);
+  // Serial.print("IV \t\t: ");
+  // print_key(iv, 16);
+
   uint8_t decrypted[32];
   memset(decrypted, 0, sizeof(decrypted));
-  decrypt_test(final_key, e, decrypted);
+  decrypt_test(final_key, iv, e, decrypted);
+
+  if (memcmp(h_sd, h_result, 32) > 0){
+      Serial.println("CIPHERTEXT INVALID");
+      return;
+  }
 
   Serial.print("decrypted \t: ");
   for (int i=0;i<32;i++)

@@ -2,6 +2,7 @@
 #include "../src/bch/BCH.h"
 #include "../src/Crypto/AES.h"
 #include "../src/Crypto/SHA3.h"
+#include "../src/Crypto/CTR.h"
 
 class PUF {
 public:
@@ -54,18 +55,34 @@ public:
         sha3_256.finalizeHMAC(key_32, 32, final_key, 32);
     }
 
-    void encrypt_test(uint8_t* final_key, uint8_t *plain, uint8_t *result) {
-        AES256 aes256;
-        aes256.setKey(final_key, 32);
-        aes256.encryptBlock(&result[0], &plain[0]);
-        aes256.encryptBlock(&result[16], &plain[16]);
+    void encrypt_test(uint8_t* final_key, uint8_t* iv, uint8_t *plain, uint8_t *result) {
+        CTR<AES256> ctraes256;
+        ctraes256.clear();
+        if (!ctraes256.setKey(final_key, 32)) {
+            printf("setKey failed\n");
+            return;
+        }
+        if (!ctraes256.setIV(iv, 16)) {
+            printf("setIV failed\n");
+            return;
+        }
+
+        ctraes256.encrypt(result, plain, 32);
     }
 
-    void decrypt_test(uint8_t* final_key, uint8_t *cypher, uint8_t *decrypted){
-        AES256 aes256;
-        aes256.setKey(final_key, 32);
-        aes256.decryptBlock(&decrypted[0], &cypher[0]);
-        aes256.decryptBlock(&decrypted[16], &cypher[16]);
+    void decrypt_test(uint8_t* final_key, uint8_t* iv, uint8_t *cypher, uint8_t *decrypted){
+        CTR<AES256> ctraes256;
+        ctraes256.clear();
+        if (!ctraes256.setKey(final_key, 32)) {
+            printf("setKey failed\n");
+            return;
+        }
+        if (!ctraes256.setIV(iv, 16)) {
+            printf("setIV failed\n");
+            return;
+        }
+
+        ctraes256.decrypt(decrypted, cypher, 32);
     }
 };
 

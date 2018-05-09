@@ -50,8 +50,8 @@ CTRCommon::~CTRCommon()
 {
     // It is assumed that the subclass will clear sensitive
     // information in the block cipher.
-    clean(counter);
-    clean(state);
+//    clean(counter);
+//    clean(state);
 }
 
 size_t CTRCommon::keySize() const
@@ -165,8 +165,8 @@ void CTRCommon::decrypt(uint8_t *output, const uint8_t *input, size_t len)
 void CTRCommon::clear()
 {
     blockCipher->clear();
-    clean(counter);
-    clean(state);
+//    clean(counter);
+//    clean(state);
     posn = 16;
 }
 

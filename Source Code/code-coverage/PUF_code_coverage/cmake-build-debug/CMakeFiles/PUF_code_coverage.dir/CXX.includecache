@@ -46,6 +46,30 @@ inttypes.h
 stddef.h
 -
 
+/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/CTR.cpp
+CTR.h
+/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/CTR.h
+Crypto.h
+/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/Crypto.h
+string.h
+-
+
+/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/CTR.h
+Cipher.h
+/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/Cipher.h
+BlockCipher.h
+/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/BlockCipher.h
+
+/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/Cipher.cpp
+Cipher.h
+/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/Cipher.h
+
+/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/Cipher.h
+inttypes.h
+-
+stddef.h
+-
+
 /Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/Crypto.h
 inttypes.h
 -
@@ -123,6 +147,8 @@ iostream
 /Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/AES.h
 ../src/Crypto/SHA3.h
 /Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/SHA3.h
+../src/Crypto/CTR.h
+/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/CTR.h
 
 /Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/bch/BCH.cpp
 BCH.h
