@@ -40,4 +40,4 @@ Arduino, microSD and SRAM Cypress CY62256NLL.
   - Key reconstruction.
   ![key reconstruction](Figures/key-reconstruction.JPG)
   - Arduino Mega 2560 connected to a microSD and an SRAM Cypress CY62256NLL.
-  ![key reconstruction](Figures/Arduino-microsd-sram.JPG)
+  ![key reconstruction](Figures/arduino-microsd-sram.JPG)
