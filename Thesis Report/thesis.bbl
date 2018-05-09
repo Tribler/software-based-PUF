@@ -153,16 +153,16 @@ Jonathan Katz and Yehuda Lindell.
 \newblock {\em Introduction to Modern Cryptography, Second Edition}.
 \newblock Chapman \& Hall/CRC, 2nd edition, 2014.
 
+\bibitem{Smart:2015:CMS:2927491}
+Nigel~P. Smart.
+\newblock {\em Cryptography Made Simple}.
+\newblock Springer Publishing Company, Incorporated, 1st edition, 2015.
+
 \bibitem{key_derivation}
 Hugo Krawczyk.
 \newblock Cryptographic extraction and key derivation: The hkdf scheme.
 \newblock In Tal Rabin, editor, {\em Advances in Cryptology -- CRYPTO 2010},
   pages 631--648, Berlin, Heidelberg, 2010. Springer Berlin Heidelberg.
-
-\bibitem{rfc2104}
-Dr.~Hugo Krawczyk, Mihir Bellare, and Ran Canetti.
-\newblock {HMAC: Keyed-Hashing for Message Authentication}.
-\newblock RFC 2104, February 1997.
 
 \bibitem{10.1007/978-3-642-38348-9_19}
 Guido Bertoni, Joan Daemen, Micha{\"e}l Peeters, and Gilles Van~Assche.
@@ -170,6 +170,11 @@ Guido Bertoni, Joan Daemen, Micha{\"e}l Peeters, and Gilles Van~Assche.
 \newblock In Thomas Johansson and Phong~Q. Nguyen, editors, {\em Advances in
   Cryptology -- EUROCRYPT 2013}, pages 313--314, Berlin, Heidelberg, 2013.
   Springer Berlin Heidelberg.
+
+\bibitem{keccak}
+Keccak team - the sponge and duplex constructions.
+\newblock \url{https://keccak.team/sponge_duplex.html}.
+\newblock [Online; accessed 20-Jan-2018].
 
 \bibitem{technology2015sha}
 N.I.N.I.S. Technology.
@@ -227,6 +232,12 @@ Christoph B{\"o}sch, Jorge Guajardo, Ahmad-Reza Sadeghi, Jamshid Shokrollahi,
   Hardware and Embedded Systems -- CHES 2008}, pages 181--197, Berlin,
   Heidelberg, 2008. Springer Berlin Heidelberg.
 
+\bibitem{soft_decision}
+R.~Maes, P.~Tuyls, and I.~Verbauwhede.
+\newblock A soft decision helper data algorithm for sram pufs.
+\newblock In {\em 2009 IEEE International Symposium on Information Theory},
+  pages 2101--2105, June 2009.
+
 \bibitem{fuzzy_extractor}
 Yevgeniy Dodis, Leonid Reyzin, and Adam Smith.
 \newblock Fuzzy extractors: How to generate strong keys from biometrics and
@@ -234,12 +245,6 @@ Yevgeniy Dodis, Leonid Reyzin, and Adam Smith.
 \newblock In Christian Cachin and Jan~L. Camenisch, editors, {\em Advances in
   Cryptology - EUROCRYPT 2004}, pages 523--540, Berlin, Heidelberg, 2004.
   Springer Berlin Heidelberg.
-
-\bibitem{soft_decision}
-R.~Maes, P.~Tuyls, and I.~Verbauwhede.
-\newblock A soft decision helper data algorithm for sram pufs.
-\newblock In {\em 2009 IEEE International Symposium on Information Theory},
-  pages 2101--2105, June 2009.
 
 \bibitem{information_reconciliation}
 Renato Renner and Stefan Wolf.
@@ -260,17 +265,17 @@ Robert~H. Morelos-Zaragoza.
 \newblock {\em The Art of Error Correcting Coding}.
 \newblock Wiley, 2006.
 
+\bibitem{dargar_2011}
+Apurva Dargar.
+\newblock Modeling sram start-up behavior for physical unclonable functions.
+\newblock {MSc thesis}, Delft University of Technology, 2011.
+
 \bibitem{6865541}
 A.~Garg and T.~T. Kim.
 \newblock Design of sram puf with improved uniformity and reliability utilizing
   device aging effect.
 \newblock In {\em 2014 IEEE International Symposium on Circuits and Systems
   (ISCAS)}, pages 1941--1944, June 2014.
-
-\bibitem{dargar_2011}
-Apurva Dargar.
-\newblock Modeling sram start-up behavior for physical unclonable functions.
-\newblock {MSc thesis}, Delft University of Technology, 2011.
 
 \bibitem{wang_tehranipoor_2010}
 Xiaoxiao Wang and Mohammad Tehranipoor.
@@ -471,8 +476,8 @@ Hmac generator — online hash encryption.
 \newblock [Online; accessed 26-March-2018].
 
 \bibitem{aes_calculator}
-Cryptomathic - aes calculator.
-\newblock \url{http://extranet.cryptomathic.com/aescalc/index}.
+Aes ctr online calculator.
+\newblock \url{http://www.cryptogrium.com/aes-ctr.html}.
 \newblock [Online; accessed 27-March-2018].
 
 \bibitem{bitcoin_key}

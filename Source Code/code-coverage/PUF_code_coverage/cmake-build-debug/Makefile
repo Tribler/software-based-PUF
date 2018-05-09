@@ -221,356 +221,230 @@ gtest/fast:
 	$(MAKE) -f googletest-build/googlemock/gtest/CMakeFiles/gtest.dir/build.make googletest-build/googlemock/gtest/CMakeFiles/gtest.dir/build
 .PHONY : gtest/fast
 
-main.o: main.cpp.o
-
+# target to build an object file
+main.o:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/main.o
 .PHONY : main.o
 
-# target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/main.cpp.o
-.PHONY : main.cpp.o
-
-main.i: main.cpp.i
-
+# target to preprocess a source file
+main.i:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/main.i
 .PHONY : main.i
 
-# target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/main.cpp.i
-.PHONY : main.cpp.i
-
-main.s: main.cpp.s
-
+# target to generate assembly for a file
+main.s:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/main.s
 .PHONY : main.s
 
-# target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/main.cpp.s
-.PHONY : main.cpp.s
-
-src/Crypto/AES256.o: src/Crypto/AES256.cpp.o
-
+# target to build an object file
+src/Crypto/AES256.o:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/AES256.o
 .PHONY : src/Crypto/AES256.o
 
-# target to build an object file
-src/Crypto/AES256.cpp.o:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/AES256.cpp.o
-.PHONY : src/Crypto/AES256.cpp.o
-
-src/Crypto/AES256.i: src/Crypto/AES256.cpp.i
-
+# target to preprocess a source file
+src/Crypto/AES256.i:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/AES256.i
 .PHONY : src/Crypto/AES256.i
 
-# target to preprocess a source file
-src/Crypto/AES256.cpp.i:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/AES256.cpp.i
-.PHONY : src/Crypto/AES256.cpp.i
-
-src/Crypto/AES256.s: src/Crypto/AES256.cpp.s
-
+# target to generate assembly for a file
+src/Crypto/AES256.s:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/AES256.s
 .PHONY : src/Crypto/AES256.s
 
-# target to generate assembly for a file
-src/Crypto/AES256.cpp.s:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/AES256.cpp.s
-.PHONY : src/Crypto/AES256.cpp.s
-
-src/Crypto/AESCommon.o: src/Crypto/AESCommon.cpp.o
-
+# target to build an object file
+src/Crypto/AESCommon.o:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/AESCommon.o
 .PHONY : src/Crypto/AESCommon.o
 
-# target to build an object file
-src/Crypto/AESCommon.cpp.o:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/AESCommon.cpp.o
-.PHONY : src/Crypto/AESCommon.cpp.o
-
-src/Crypto/AESCommon.i: src/Crypto/AESCommon.cpp.i
-
+# target to preprocess a source file
+src/Crypto/AESCommon.i:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/AESCommon.i
 .PHONY : src/Crypto/AESCommon.i
 
-# target to preprocess a source file
-src/Crypto/AESCommon.cpp.i:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/AESCommon.cpp.i
-.PHONY : src/Crypto/AESCommon.cpp.i
-
-src/Crypto/AESCommon.s: src/Crypto/AESCommon.cpp.s
-
+# target to generate assembly for a file
+src/Crypto/AESCommon.s:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/AESCommon.s
 .PHONY : src/Crypto/AESCommon.s
 
-# target to generate assembly for a file
-src/Crypto/AESCommon.cpp.s:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/AESCommon.cpp.s
-.PHONY : src/Crypto/AESCommon.cpp.s
-
-src/Crypto/BlockCipher.o: src/Crypto/BlockCipher.cpp.o
-
+# target to build an object file
+src/Crypto/BlockCipher.o:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/BlockCipher.o
 .PHONY : src/Crypto/BlockCipher.o
 
-# target to build an object file
-src/Crypto/BlockCipher.cpp.o:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/BlockCipher.cpp.o
-.PHONY : src/Crypto/BlockCipher.cpp.o
-
-src/Crypto/BlockCipher.i: src/Crypto/BlockCipher.cpp.i
-
+# target to preprocess a source file
+src/Crypto/BlockCipher.i:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/BlockCipher.i
 .PHONY : src/Crypto/BlockCipher.i
 
-# target to preprocess a source file
-src/Crypto/BlockCipher.cpp.i:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/BlockCipher.cpp.i
-.PHONY : src/Crypto/BlockCipher.cpp.i
-
-src/Crypto/BlockCipher.s: src/Crypto/BlockCipher.cpp.s
-
+# target to generate assembly for a file
+src/Crypto/BlockCipher.s:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/BlockCipher.s
 .PHONY : src/Crypto/BlockCipher.s
 
+# target to build an object file
+src/Crypto/CTR.o:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/CTR.o
+.PHONY : src/Crypto/CTR.o
+
+# target to preprocess a source file
+src/Crypto/CTR.i:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/CTR.i
+.PHONY : src/Crypto/CTR.i
+
 # target to generate assembly for a file
-src/Crypto/BlockCipher.cpp.s:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/BlockCipher.cpp.s
-.PHONY : src/Crypto/BlockCipher.cpp.s
+src/Crypto/CTR.s:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/CTR.s
+.PHONY : src/Crypto/CTR.s
 
-src/Crypto/Hash.o: src/Crypto/Hash.cpp.o
+# target to build an object file
+src/Crypto/Cipher.o:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/Cipher.o
+.PHONY : src/Crypto/Cipher.o
 
+# target to preprocess a source file
+src/Crypto/Cipher.i:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/Cipher.i
+.PHONY : src/Crypto/Cipher.i
+
+# target to generate assembly for a file
+src/Crypto/Cipher.s:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/Cipher.s
+.PHONY : src/Crypto/Cipher.s
+
+# target to build an object file
+src/Crypto/Hash.o:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/Hash.o
 .PHONY : src/Crypto/Hash.o
 
-# target to build an object file
-src/Crypto/Hash.cpp.o:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/Hash.cpp.o
-.PHONY : src/Crypto/Hash.cpp.o
-
-src/Crypto/Hash.i: src/Crypto/Hash.cpp.i
-
+# target to preprocess a source file
+src/Crypto/Hash.i:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/Hash.i
 .PHONY : src/Crypto/Hash.i
 
-# target to preprocess a source file
-src/Crypto/Hash.cpp.i:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/Hash.cpp.i
-.PHONY : src/Crypto/Hash.cpp.i
-
-src/Crypto/Hash.s: src/Crypto/Hash.cpp.s
-
+# target to generate assembly for a file
+src/Crypto/Hash.s:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/Hash.s
 .PHONY : src/Crypto/Hash.s
 
-# target to generate assembly for a file
-src/Crypto/Hash.cpp.s:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/Hash.cpp.s
-.PHONY : src/Crypto/Hash.cpp.s
-
-src/Crypto/KeccakCore.o: src/Crypto/KeccakCore.cpp.o
-
+# target to build an object file
+src/Crypto/KeccakCore.o:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/KeccakCore.o
 .PHONY : src/Crypto/KeccakCore.o
 
-# target to build an object file
-src/Crypto/KeccakCore.cpp.o:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/KeccakCore.cpp.o
-.PHONY : src/Crypto/KeccakCore.cpp.o
-
-src/Crypto/KeccakCore.i: src/Crypto/KeccakCore.cpp.i
-
+# target to preprocess a source file
+src/Crypto/KeccakCore.i:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/KeccakCore.i
 .PHONY : src/Crypto/KeccakCore.i
 
-# target to preprocess a source file
-src/Crypto/KeccakCore.cpp.i:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/KeccakCore.cpp.i
-.PHONY : src/Crypto/KeccakCore.cpp.i
-
-src/Crypto/KeccakCore.s: src/Crypto/KeccakCore.cpp.s
-
+# target to generate assembly for a file
+src/Crypto/KeccakCore.s:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/KeccakCore.s
 .PHONY : src/Crypto/KeccakCore.s
 
-# target to generate assembly for a file
-src/Crypto/KeccakCore.cpp.s:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/KeccakCore.cpp.s
-.PHONY : src/Crypto/KeccakCore.cpp.s
-
-src/Crypto/SHA3.o: src/Crypto/SHA3.cpp.o
-
+# target to build an object file
+src/Crypto/SHA3.o:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/SHA3.o
 .PHONY : src/Crypto/SHA3.o
 
-# target to build an object file
-src/Crypto/SHA3.cpp.o:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/SHA3.cpp.o
-.PHONY : src/Crypto/SHA3.cpp.o
-
-src/Crypto/SHA3.i: src/Crypto/SHA3.cpp.i
-
+# target to preprocess a source file
+src/Crypto/SHA3.i:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/SHA3.i
 .PHONY : src/Crypto/SHA3.i
 
-# target to preprocess a source file
-src/Crypto/SHA3.cpp.i:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/SHA3.cpp.i
-.PHONY : src/Crypto/SHA3.cpp.i
-
-src/Crypto/SHA3.s: src/Crypto/SHA3.cpp.s
-
+# target to generate assembly for a file
+src/Crypto/SHA3.s:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/SHA3.s
 .PHONY : src/Crypto/SHA3.s
 
-# target to generate assembly for a file
-src/Crypto/SHA3.cpp.s:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/Crypto/SHA3.cpp.s
-.PHONY : src/Crypto/SHA3.cpp.s
-
-src/bch/BCH.o: src/bch/BCH.cpp.o
-
+# target to build an object file
+src/bch/BCH.o:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/bch/BCH.o
 .PHONY : src/bch/BCH.o
 
-# target to build an object file
-src/bch/BCH.cpp.o:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/bch/BCH.cpp.o
-.PHONY : src/bch/BCH.cpp.o
-
-src/bch/BCH.i: src/bch/BCH.cpp.i
-
+# target to preprocess a source file
+src/bch/BCH.i:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/bch/BCH.i
 .PHONY : src/bch/BCH.i
 
-# target to preprocess a source file
-src/bch/BCH.cpp.i:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/bch/BCH.cpp.i
-.PHONY : src/bch/BCH.cpp.i
-
-src/bch/BCH.s: src/bch/BCH.cpp.s
-
+# target to generate assembly for a file
+src/bch/BCH.s:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/bch/BCH.s
 .PHONY : src/bch/BCH.s
 
-# target to generate assembly for a file
-src/bch/BCH.cpp.s:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/bch/BCH.cpp.s
-.PHONY : src/bch/BCH.cpp.s
-
-src/tools/Tools.o: src/tools/Tools.cpp.o
-
+# target to build an object file
+src/tools/Tools.o:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/tools/Tools.o
 .PHONY : src/tools/Tools.o
 
-# target to build an object file
-src/tools/Tools.cpp.o:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/tools/Tools.cpp.o
-.PHONY : src/tools/Tools.cpp.o
-
-src/tools/Tools.i: src/tools/Tools.cpp.i
-
+# target to preprocess a source file
+src/tools/Tools.i:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/tools/Tools.i
 .PHONY : src/tools/Tools.i
 
-# target to preprocess a source file
-src/tools/Tools.cpp.i:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/tools/Tools.cpp.i
-.PHONY : src/tools/Tools.cpp.i
-
-src/tools/Tools.s: src/tools/Tools.cpp.s
-
+# target to generate assembly for a file
+src/tools/Tools.s:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/tools/Tools.s
 .PHONY : src/tools/Tools.s
 
-# target to generate assembly for a file
-src/tools/Tools.cpp.s:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/src/tools/Tools.cpp.s
-.PHONY : src/tools/Tools.cpp.s
-
-test/BCHCompleteTest.o: test/BCHCompleteTest.cpp.o
-
+# target to build an object file
+test/BCHCompleteTest.o:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/test/BCHCompleteTest.o
 .PHONY : test/BCHCompleteTest.o
 
-# target to build an object file
-test/BCHCompleteTest.cpp.o:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/test/BCHCompleteTest.cpp.o
-.PHONY : test/BCHCompleteTest.cpp.o
-
-test/BCHCompleteTest.i: test/BCHCompleteTest.cpp.i
-
+# target to preprocess a source file
+test/BCHCompleteTest.i:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/test/BCHCompleteTest.i
 .PHONY : test/BCHCompleteTest.i
 
-# target to preprocess a source file
-test/BCHCompleteTest.cpp.i:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/test/BCHCompleteTest.cpp.i
-.PHONY : test/BCHCompleteTest.cpp.i
-
-test/BCHCompleteTest.s: test/BCHCompleteTest.cpp.s
-
+# target to generate assembly for a file
+test/BCHCompleteTest.s:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/test/BCHCompleteTest.s
 .PHONY : test/BCHCompleteTest.s
 
-# target to generate assembly for a file
-test/BCHCompleteTest.cpp.s:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/test/BCHCompleteTest.cpp.s
-.PHONY : test/BCHCompleteTest.cpp.s
-
-test/BCHTest.o: test/BCHTest.cpp.o
-
+# target to build an object file
+test/BCHTest.o:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/test/BCHTest.o
 .PHONY : test/BCHTest.o
 
-# target to build an object file
-test/BCHTest.cpp.o:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/test/BCHTest.cpp.o
-.PHONY : test/BCHTest.cpp.o
-
-test/BCHTest.i: test/BCHTest.cpp.i
-
+# target to preprocess a source file
+test/BCHTest.i:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/test/BCHTest.i
 .PHONY : test/BCHTest.i
 
-# target to preprocess a source file
-test/BCHTest.cpp.i:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/test/BCHTest.cpp.i
-.PHONY : test/BCHTest.cpp.i
-
-test/BCHTest.s: test/BCHTest.cpp.s
-
+# target to generate assembly for a file
+test/BCHTest.s:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/test/BCHTest.s
 .PHONY : test/BCHTest.s
 
-# target to generate assembly for a file
-test/BCHTest.cpp.s:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/test/BCHTest.cpp.s
-.PHONY : test/BCHTest.cpp.s
-
-test/PUF_Test.o: test/PUF_Test.cpp.o
-
+# target to build an object file
+test/PUF_Test.o:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/test/PUF_Test.o
 .PHONY : test/PUF_Test.o
 
-# target to build an object file
-test/PUF_Test.cpp.o:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/test/PUF_Test.cpp.o
-.PHONY : test/PUF_Test.cpp.o
-
-test/PUF_Test.i: test/PUF_Test.cpp.i
-
+# target to preprocess a source file
+test/PUF_Test.i:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/test/PUF_Test.i
 .PHONY : test/PUF_Test.i
 
-# target to preprocess a source file
-test/PUF_Test.cpp.i:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/test/PUF_Test.cpp.i
-.PHONY : test/PUF_Test.cpp.i
-
-test/PUF_Test.s: test/PUF_Test.cpp.s
-
+# target to generate assembly for a file
+test/PUF_Test.s:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/test/PUF_Test.s
 .PHONY : test/PUF_Test.s
 
-# target to generate assembly for a file
-test/PUF_Test.cpp.s:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/test/PUF_Test.cpp.s
-.PHONY : test/PUF_Test.cpp.s
-
-test/ToolsTest.o: test/ToolsTest.cpp.o
-
+# target to build an object file
+test/ToolsTest.o:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/test/ToolsTest.o
 .PHONY : test/ToolsTest.o
 
-# target to build an object file
-test/ToolsTest.cpp.o:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/test/ToolsTest.cpp.o
-.PHONY : test/ToolsTest.cpp.o
-
-test/ToolsTest.i: test/ToolsTest.cpp.i
-
+# target to preprocess a source file
+test/ToolsTest.i:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/test/ToolsTest.i
 .PHONY : test/ToolsTest.i
 
-# target to preprocess a source file
-test/ToolsTest.cpp.i:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/test/ToolsTest.cpp.i
-.PHONY : test/ToolsTest.cpp.i
-
-test/ToolsTest.s: test/ToolsTest.cpp.s
-
-.PHONY : test/ToolsTest.s
-
 # target to generate assembly for a file
-test/ToolsTest.cpp.s:
-	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/test/ToolsTest.cpp.s
-.PHONY : test/ToolsTest.cpp.s
+test/ToolsTest.s:
+	$(MAKE) -f CMakeFiles/PUF_code_coverage.dir/build.make CMakeFiles/PUF_code_coverage.dir/test/ToolsTest.s
+.PHONY : test/ToolsTest.s
 
 # Help Target
 help:
@@ -601,6 +475,12 @@ help:
 	@echo "... src/Crypto/BlockCipher.o"
 	@echo "... src/Crypto/BlockCipher.i"
 	@echo "... src/Crypto/BlockCipher.s"
+	@echo "... src/Crypto/CTR.o"
+	@echo "... src/Crypto/CTR.i"
+	@echo "... src/Crypto/CTR.s"
+	@echo "... src/Crypto/Cipher.o"
+	@echo "... src/Crypto/Cipher.i"
+	@echo "... src/Crypto/Cipher.s"
 	@echo "... src/Crypto/Hash.o"
 	@echo "... src/Crypto/Hash.i"
 	@echo "... src/Crypto/Hash.s"

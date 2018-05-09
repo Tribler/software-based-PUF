@@ -9,64 +9,65 @@
 \contentsline {chapter}{\numberline {2}Related Work}{7}{chapter.2}
 \contentsline {section}{\numberline {2.1}Security Requirements and Cryptography}{7}{section.2.1}
 \contentsline {section}{\numberline {2.2}Symmetric Encryption}{8}{section.2.2}
-\contentsline {subsubsection}{AES}{8}{section.2.2}
-\contentsline {section}{\numberline {2.3}Key Derivation Function}{9}{section.2.3}
-\contentsline {section}{\numberline {2.4}Multi-factor Authentication}{10}{section.2.4}
+\contentsline {subsubsection}{AES}{9}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Modes of Operation}{9}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Encrypt-then-MAC}{10}{subsection.2.2.2}
+\contentsline {section}{\numberline {2.3}Key Derivation Function}{10}{section.2.3}
+\contentsline {section}{\numberline {2.4}Multi-factor Authentication}{11}{section.2.4}
 \contentsline {section}{\numberline {2.5}Physically Unclonable Function}{11}{section.2.5}
-\contentsline {subsection}{\numberline {2.5.1}PUFs Classification}{12}{subsection.2.5.1}
-\contentsline {subsection}{\numberline {2.5.2}Hamming Distances as an Identification Helper}{13}{subsection.2.5.2}
-\contentsline {subsection}{\numberline {2.5.3}Helper Data Algorithms and Fuzzy Extractor}{13}{subsection.2.5.3}
-\contentsline {subsection}{\numberline {2.5.4}Error Correcting Codes}{14}{subsection.2.5.4}
-\contentsline {section}{\numberline {2.6}SRAM PUF}{16}{section.2.6}
-\contentsline {subsection}{\numberline {2.6.1}SRAM Cell}{16}{subsection.2.6.1}
-\contentsline {subsection}{\numberline {2.6.2}Problem: Noise}{18}{subsection.2.6.2}
-\contentsline {subsection}{\numberline {2.6.3}Bit Selection Algorithm}{19}{subsection.2.6.3}
-\contentsline {subsubsection}{Neighbor Analysis}{19}{subsection.2.6.3}
-\contentsline {subsubsection}{Data Remanence Approach}{19}{subsection.2.6.3}
-\contentsline {section}{\numberline {2.7}PUF Applications}{20}{section.2.7}
-\contentsline {subsection}{\numberline {2.7.1}Key Generation using SRAM PUF}{20}{subsection.2.7.1}
-\contentsline {subsection}{\numberline {2.7.2}Secret Key Binding based on Fuzzy Commitment Scheme}{20}{subsection.2.7.2}
-\contentsline {subsection}{\numberline {2.7.3}Secure Key Storage using Optical PUF and Coating PUF}{22}{subsection.2.7.3}
-\contentsline {section}{\numberline {2.8}Previous Experiments on Off-The-Shelf SRAM PUF}{22}{section.2.8}
-\contentsline {section}{\numberline {2.9}Conclusion}{23}{section.2.9}
-\contentsline {chapter}{\numberline {3}Proposed System}{25}{chapter.3}
-\contentsline {section}{\numberline {3.1}Assumptions, Requirements and Steps To Achieve Main Goal}{25}{section.3.1}
-\contentsline {section}{\numberline {3.2}Arduino Mega 2560 as the Embedded Platform}{27}{section.3.2}
-\contentsline {section}{\numberline {3.3}BCH Codes as Error Correcting Codes}{28}{section.3.3}
-\contentsline {section}{\numberline {3.4}Data and Key Storage Scheme}{30}{section.3.4}
-\contentsline {section}{\numberline {3.5}Key Generation Scheme}{30}{section.3.5}
-\contentsline {section}{\numberline {3.6}Bits Locations as the PUF Challenge - Numerous CRPs}{32}{section.3.6}
-\contentsline {section}{\numberline {3.7}Security Analysis of The Proposed Scheme}{33}{section.3.7}
-\contentsline {section}{\numberline {3.8}Conclusion}{34}{section.3.8}
-\contentsline {chapter}{\numberline {4}Implementation, Experiments and Results}{37}{chapter.4}
-\contentsline {section}{\numberline {4.1}Chosen Off-The-Shelf SRAMs}{37}{section.4.1}
-\contentsline {subsubsection}{Microchip 23LC1024}{38}{section.4.1}
-\contentsline {subsubsection}{Cypress CY62256NLL}{38}{figure.caption.15}
-\contentsline {section}{\numberline {4.2}Automated PUF Profiling System}{38}{section.4.2}
-\contentsline {section}{\numberline {4.3}Testing on Chosen Off-The-Shelf SRAMs}{39}{section.4.3}
-\contentsline {subsubsection}{Microchip 23LC1024}{40}{section.4.3}
-\contentsline {subsubsection}{Cypress CY62256NLL}{41}{figure.caption.18}
-\contentsline {section}{\numberline {4.4}Testing on Bit Selection Algorithms}{41}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Neighbour Stability Analysis}{42}{subsection.4.4.1}
-\contentsline {subsubsection}{Microchip 23LC1024}{42}{subsection.4.4.1}
-\contentsline {subsubsection}{Cypress CY62256NLL}{42}{figure.caption.20}
-\contentsline {subsection}{\numberline {4.4.2}Data Remanence Approach}{43}{subsection.4.4.2}
-\contentsline {subsubsection}{Microchip 23LC1024}{43}{subsection.4.4.2}
-\contentsline {subsubsection}{Cypress CY62256NLL}{43}{figure.caption.22}
-\contentsline {subsection}{\numberline {4.4.3}Stability Test on Stable Bits}{45}{subsection.4.4.3}
-\contentsline {subsubsection}{Microchip 23LC1024}{45}{figure.caption.27}
-\contentsline {subsubsection}{Cypress CY62256NLL}{50}{figure.caption.27}
-\contentsline {subsubsection}{Stability Test Conclusion}{50}{figure.caption.27}
-\contentsline {section}{\numberline {4.5}Testing on Bits Locations as A Challenge}{52}{section.4.5}
-\contentsline {section}{\numberline {4.6}Complete Enrollment and Reconstruction Scheme}{53}{section.4.6}
-\contentsline {section}{\numberline {4.7}Procedure on Developing SRAM PUF-Based Applications}{53}{section.4.7}
-\contentsline {section}{\numberline {4.8}Testing on Secure Data and Key Storage Scheme}{56}{section.4.8}
-\contentsline {section}{\numberline {4.9}Concluding Experiment with Cybercurrency}{60}{section.4.9}
-\contentsline {section}{\numberline {4.10}Conclusion}{61}{section.4.10}
-\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{63}{chapter.5}
-\contentsline {section}{\numberline {5.1}Conclusions}{63}{section.5.1}
-\contentsline {section}{\numberline {5.2}Future Work}{65}{section.5.2}
-\contentsline {subsubsection}{Possible Experiments on Off-The-Shelf SRAMs}{65}{section.5.2}
-\contentsline {subsubsection}{Improvement on Secure Data and Key Storage Scheme}{66}{section.5.2}
-\contentsline {chapter}{\numberline {A}Screenshot of Secure Data and Key Storage Scheme}{75}{appendix.A}
+\contentsline {subsection}{\numberline {2.5.1}PUFs Classification}{13}{subsection.2.5.1}
+\contentsline {subsection}{\numberline {2.5.2}Hamming Distances as an Identification Helper}{14}{subsection.2.5.2}
+\contentsline {subsection}{\numberline {2.5.3}Helper Data Algorithms and Fuzzy Extractor}{15}{subsection.2.5.3}
+\contentsline {subsection}{\numberline {2.5.4}Error Correcting Codes}{16}{subsection.2.5.4}
+\contentsline {section}{\numberline {2.6}SRAM PUF}{17}{section.2.6}
+\contentsline {subsection}{\numberline {2.6.1}Requirements for SRAM to be a PUF Component}{17}{subsection.2.6.1}
+\contentsline {subsection}{\numberline {2.6.2}SRAM Cell}{18}{subsection.2.6.2}
+\contentsline {subsection}{\numberline {2.6.3}Problem: Noise}{19}{subsection.2.6.3}
+\contentsline {subsection}{\numberline {2.6.4}Bit Selection Algorithm}{20}{subsection.2.6.4}
+\contentsline {section}{\numberline {2.7}PUF Applications}{21}{section.2.7}
+\contentsline {subsection}{\numberline {2.7.1}Key Generation using SRAM PUF}{22}{subsection.2.7.1}
+\contentsline {subsection}{\numberline {2.7.2}Secret Key Binding based on Fuzzy Commitment Scheme}{22}{subsection.2.7.2}
+\contentsline {subsection}{\numberline {2.7.3}Secure Key Storage using Optical PUF and Coating PUF}{23}{subsection.2.7.3}
+\contentsline {section}{\numberline {2.8}Previous Experiments on Off-The-Shelf SRAM PUF}{24}{section.2.8}
+\contentsline {section}{\numberline {2.9}Conclusion}{25}{section.2.9}
+\contentsline {chapter}{\numberline {3}Proposed System}{27}{chapter.3}
+\contentsline {section}{\numberline {3.1}Assumptions, Requirements and Steps To Achieve Main Goal}{27}{section.3.1}
+\contentsline {section}{\numberline {3.2}Arduino Mega 2560 as the Embedded Platform}{29}{section.3.2}
+\contentsline {section}{\numberline {3.3}BCH Codes as Error Correcting Codes}{30}{section.3.3}
+\contentsline {section}{\numberline {3.4}Data and Key Storage Scheme}{32}{section.3.4}
+\contentsline {section}{\numberline {3.5}Key Generation Scheme}{32}{section.3.5}
+\contentsline {section}{\numberline {3.6}Bits Locations as the PUF Challenge - Numerous CRPs}{34}{section.3.6}
+\contentsline {section}{\numberline {3.7}Security Analysis of The Proposed Scheme}{35}{section.3.7}
+\contentsline {section}{\numberline {3.8}Conclusion}{37}{section.3.8}
+\contentsline {chapter}{\numberline {4}Implementation, Experiments and Results}{39}{chapter.4}
+\contentsline {section}{\numberline {4.1}Chosen Off-The-Shelf SRAMs}{39}{section.4.1}
+\contentsline {subsubsection}{Microchip 23LC1024}{40}{section.4.1}
+\contentsline {subsubsection}{Cypress CY62256NLL}{40}{figure.caption.15}
+\contentsline {section}{\numberline {4.2}Automated PUF Profiling System}{40}{section.4.2}
+\contentsline {section}{\numberline {4.3}Testing on Chosen Off-The-Shelf SRAMs}{41}{section.4.3}
+\contentsline {subsubsection}{Microchip 23LC1024}{42}{section.4.3}
+\contentsline {subsubsection}{Cypress CY62256NLL}{43}{figure.caption.18}
+\contentsline {section}{\numberline {4.4}Testing on Bit Selection Algorithms}{43}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Neighbour Stability Analysis}{44}{subsection.4.4.1}
+\contentsline {subsubsection}{Microchip 23LC1024}{44}{subsection.4.4.1}
+\contentsline {subsubsection}{Cypress CY62256NLL}{44}{figure.caption.20}
+\contentsline {subsection}{\numberline {4.4.2}Data Remanence Approach}{45}{subsection.4.4.2}
+\contentsline {subsubsection}{Microchip 23LC1024}{45}{subsection.4.4.2}
+\contentsline {subsubsection}{Cypress CY62256NLL}{45}{figure.caption.22}
+\contentsline {subsection}{\numberline {4.4.3}Stability Test on Stable Bits}{47}{subsection.4.4.3}
+\contentsline {subsubsection}{Microchip 23LC1024}{47}{figure.caption.27}
+\contentsline {subsubsection}{Cypress CY62256NLL}{52}{figure.caption.27}
+\contentsline {subsubsection}{Stability Test Conclusion}{52}{figure.caption.27}
+\contentsline {section}{\numberline {4.5}Testing on Bits Locations as A Challenge}{54}{section.4.5}
+\contentsline {section}{\numberline {4.6}Complete Enrollment and Reconstruction Scheme}{55}{section.4.6}
+\contentsline {section}{\numberline {4.7}Procedure on Developing SRAM PUF-Based Applications}{55}{section.4.7}
+\contentsline {section}{\numberline {4.8}Testing on Secure Data and Key Storage Scheme}{58}{section.4.8}
+\contentsline {section}{\numberline {4.9}Concluding Experiment with Cybercurrency}{62}{section.4.9}
+\contentsline {section}{\numberline {4.10}Conclusion}{63}{section.4.10}
+\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{65}{chapter.5}
+\contentsline {section}{\numberline {5.1}Conclusions}{65}{section.5.1}
+\contentsline {section}{\numberline {5.2}Future Work}{67}{section.5.2}
+\contentsline {subsubsection}{Possible Experiments on Off-The-Shelf SRAMs}{67}{section.5.2}
+\contentsline {subsubsection}{Improvement on Secure Data and Key Storage Scheme}{68}{section.5.2}
+\contentsline {chapter}{\numberline {A}Screenshot of Secure Data and Key Storage Scheme}{77}{appendix.A}
 \contentsfinish 

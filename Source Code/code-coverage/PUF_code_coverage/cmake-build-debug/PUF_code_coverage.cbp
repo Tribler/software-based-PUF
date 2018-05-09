@@ -353,6 +353,18 @@
 		<Unit filename="/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/BlockCipher.h">
 			<Option target="PUF_code_coverage"/>
 		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/CTR.cpp">
+			<Option target="PUF_code_coverage"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/CTR.h">
+			<Option target="PUF_code_coverage"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/Cipher.cpp">
+			<Option target="PUF_code_coverage"/>
+		</Unit>
+		<Unit filename="/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/Cipher.h">
+			<Option target="PUF_code_coverage"/>
+		</Unit>
 		<Unit filename="/Users/ades17/Documents/Thesis/software-based-Physical-Unclonable-Function/Source Code/code-coverage/PUF_code_coverage/src/Crypto/Hash.cpp">
 			<Option target="PUF_code_coverage"/>
 		</Unit>

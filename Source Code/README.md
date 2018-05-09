@@ -58,7 +58,7 @@ If the SRAM is unique and stable (pass the test on Section 1.5 and Section 1.6),
 7. The program will generate the final key.
 8. Wait until it ask for user key.
 9. Enter user key. It has to be 256-bits (16 characters)
-10. The program will encrypt the user key. The ciphertext will be stored in "e.txt" in microSD.
+10. The program will encrypt the user key. The ciphertext will be stored in "e.txt" in microSD. The IV (initialization vector) used for the encryption is stored in "i.txt". MAC of ciphertext is saved in "h.txt".
 
 ## Section 4.2: Decrypt Using The Final Key
 1. Ensure the encryption stage is already performed (explained in Section 4.1).
@@ -68,5 +68,7 @@ If the SRAM is unique and stable (pass the test on Section 1.5 and Section 1.6),
 5. Wait until it ask for user password.
 6. Enter user password.
 7. The program will generate the final key.
-8. The program will decrypt the user key which stored in "e.txt" in microSD.
-10. The reconstructed user key will be printed to the screen.
+8. The program will load the ciphertext from "e.txt" 
+9. The program will load the IV (initialization vector) used for the encryption from "i.txt". and used it together with the final key to decrypt the ciphertext.
+10. It will calculate the MAC of the ciphertext and compared it to the saved MAC from "h.txt".
+11. If the calculated MAC and the stored MAC is similar, it will print the result of decryption to the screen.

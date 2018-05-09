@@ -9,6 +9,7 @@
 #include <SHA3.h>
 #include <string.h>
 #include <AES.h>
+#include <CTR.h>
 
 #define PIN_POWER_ANALOG A8
 #define PIN_POWER 9
@@ -228,6 +229,14 @@ void print_key(uint8_t* key, uint8_t length) {
   Serial.println();
 }
 
+void gen_IV(uint8_t * result, uint8_t length){
+  randomSeed(analogRead(0));
+
+  for (uint8_t i=0;i<length;i++){
+    result[i]=random(256);
+  }
+}
+
 void derive_new_key(String user_password, uint8_t* final_key, uint8_t* key_32) {
   SHA3_256 sha3_256;
 
@@ -236,17 +245,33 @@ void derive_new_key(String user_password, uint8_t* final_key, uint8_t* key_32) {
   sha3_256.finalizeHMAC(key_32, 32, final_key, 32);
 }
 
-void encrypt_test(uint8_t* final_key, uint8_t *plain, uint8_t *result) {
-  AES256 aes256;
-  aes256.setKey(final_key, 32);
-  aes256.encryptBlock(&result[0], &plain[0]);
-  aes256.encryptBlock(&result[16], &plain[16]);
+void check_integrity(uint8_t* encrypted, uint8_t* result, uint8_t* key_32) {
+  SHA3_256 sha3_256;
+
+  sha3_256.resetHMAC(key_32, 32);
+  sha3_256.update(encrypted, sizeof(encrypted));
+  sha3_256.finalizeHMAC(key_32, 32, result, 32);
+}
+
+void encrypt_test(uint8_t* final_key, uint8_t* iv, uint8_t *plain, uint8_t *result) {
+  CTR<AES256> ctraes256;
+  ctraes256.clear();
+  if (!ctraes256.setKey(final_key, 32)) {
+      Serial.print("setKey failed\n");
+      return;
+  }
+  if (!ctraes256.setIV(iv, 16)) {
+      Serial.print("setIV failed\n");
+      return;
+  }
+
+  ctraes256.encrypt(result, plain, 32);
 }
 
 void setup(void)
 {
   delay(1000);
-  String user_password = "password";
+  String user_password = "";
   uint8_t final_key[32];
   uint8_t key_32[32];
   memset(key_32, 0, sizeof(key_32));
@@ -296,14 +321,30 @@ void setup(void)
   String plain_text = Serial.readString();
   Serial.print("plaintext \t: ");
   Serial.println(plain_text);
+  Serial.begin(115200);
+
+  Serial.println();
 
   uint8_t result[32];
   memset(result, 0, sizeof(result));
-  encrypt_test(final_key, reinterpret_cast<const uint8_t*>(&plain_text[0]), result);
+
+  uint8_t iv[16];
+  memset(iv, 0, sizeof(iv));
+  gen_IV(iv, 16);
+  // Serial.print("IV \t\t: ");
+  // print_key(iv, 16);
+
+  encrypt_test(final_key, iv, reinterpret_cast<const uint8_t*>(&plain_text[0]), result);
   Serial.print("encrypted \t: ");
   print_key(result, 32);
 
+  uint8_t h_result[32];
+  memset(h_result, 0, sizeof(h_result));
+  check_integrity(result, h_result, key_32);
+
   writeToSD("e.txt", result, 32);
+  writeToSD("i.txt", iv, 16);
+  writeToSD("h.txt", h_result, 32);
 }
 
 void loop() {
