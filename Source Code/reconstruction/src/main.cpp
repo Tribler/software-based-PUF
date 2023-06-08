@@ -172,7 +172,7 @@ void readSRAMfromMicroSD() {
 }
 
 void readHelperDatafromMicroSD() {
-  memset(helper_data_new, 0, sizeof(puf_binary_new));
+  memset(helper_data_new, 0, sizeof(helper_data_new));
   uint8_t result;
 
   // read
