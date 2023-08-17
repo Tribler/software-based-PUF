@@ -1,8 +1,31 @@
-import time
+# This file is part of the software-based-PUF,
+# https://github.com/Tribler/software-based-PUF
+# Copyright (C) 2018 Ade Setyawan Sajim
+# Modifications and additions Copyright (C) 2023 myndcryme
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import sys
+import os
+import time
+import threading
 from random import shuffle
 from PUF import SerialPUF, Tools
-import threading
+
+# Append puf_xtra package path.  New modules of reused code are organized in the puf_xtra package.
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'puf_xtra'))   # add puf_xtra path
+import port_detect as pd
 
 
 def get_strong_bits_by_goal(serialPUF, goal, initial_delay=0.3, step_delay=0.005, write_ones=True):
@@ -119,5 +142,16 @@ class EnrollmentTools(threading.Thread):
         serialPUF.generate_helper_data_on_sd()
 
 
-thread1 = EnrollmentTools(serialconnection='/dev/cu.usbmodem1411', bitrate=115200, index="C", initial_delay=0.31)
-thread1.start()
+# Device auto detected or may be selected by user
+# serialconnection param may be set manually w/ device path or VID:PID (but not required)
+# examples :     s = pd.detect()     s = pd.detect('/dev/ttyACM0')     s = pd.detect('2341:0042')
+#
+s = pd.detect()  # user may change this but isn't necessary if using genuine ArduinoMEGA2560_R3 (examples above)
+if s != '':
+    thread1 = EnrollmentTools(serialconnection=s,bitrate=115200,index="C",initial_delay=0.31)
+    thread1.start()
+else:
+    print('device not found... exit')
+    sys.exit()
+
+# ***** open an issue and provide your working Arduino clone VID:PID to add for auto detection *****

@@ -3,7 +3,7 @@ import time
 from PUF import SerialPUF, Tools
 import numpy
 
-
+# TODO: add device auto detect?
 serialPUF = SerialPUF.SerialPUF()
 if not serialPUF.connect('/dev/cu.usbmodem1411', 115200, is_sram_23lc1024=False):
     print("Error connecting to Arduino")

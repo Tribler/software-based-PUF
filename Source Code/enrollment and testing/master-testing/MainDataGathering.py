@@ -6,6 +6,7 @@ from PUF import SerialPUF, Tools
 # set true if testing is done on microchip 23lc1024
 is_sram_23lc1024 = False
 
+# TODO: add device auto detect?
 serialPUF = SerialPUF.SerialPUF()
 if not serialPUF.connect('/dev/cu.usbmodem1411', 115200, is_sram_23lc1024):
     print("Error connecting to Arduino")

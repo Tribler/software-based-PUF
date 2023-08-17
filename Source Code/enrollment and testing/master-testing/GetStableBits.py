@@ -1,9 +1,33 @@
+# This file is part of the software-based-PUF,
+# https://github.com/Tribler/software-based-PUF
+# Copyright (C) 2018 Ade Setyawan Sajim
+# Modifications and additions Copyright (C) 2023 myndcryme
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# from __future__ import print_function     # for python2
+import sys
+import os
 import time
 import threading
-import _thread
-
-from random import shuffle
+# import _thread
 from PUF import SerialPUF, Tools
+
+# Append puf_xtra package path.  New modules of reused code are organized in the puf_xtra package.
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'puf_xtra'))   # add puf_xtra path
+import port_detect as pd
+import puf_consts as pc
 
 
 def get_strong_bits_by_goal(serialPUF, goal, initial_delay=0.3, step_delay=0.005, write_ones=True):
@@ -118,17 +142,39 @@ class StableBitsGenerator(threading.Thread):
         Tools.save_to_file(x, filename, with_comma=True)
 
 
-# **************** parallelly generate stable bits ****************
-# thread1 = StableBitsGenerator(is_sram_23lc1024=False, serialconnection='/dev/cu.usbmodem14111', bitrate=115200,
-#                               index='A')
-thread2 = StableBitsGenerator(is_sram_23lc1024=False, serialconnection='/dev/cu.usbmodem14121', bitrate=115200,
-                              index='C')
+# ***** set bit generation mode *****
+mode = pc.mode.DEFAULT          # default mode is a single Arduino profiling
+# mode = pc.mode.PARALLEL       # set this mode for parallel profiling
 
-# thread1.start()
-thread2.start()
+if mode == pc.mode.DEFAULT:
+    # **************** generate bits, single serial device with auto detection ****************
+    # Device auto detected or may be selected by user
+    # serialconnection param may be set manually w/ device path or VID:PID (but not required)
+    #
+    # examples :  s = pd.detect()     s = pd.detect('/dev/ttyACM0')     s = pd.detect('2341:0042')
+
+    s = pd.detect()  # may be set manually by the user but is not necessary (see examples above)
+    if s != '':
+        print('using device path ' + s)
+        thread2 = StableBitsGenerator(is_sram_23lc1024=False, serialconnection=s, bitrate=115200, index='C')
+        thread2.start()
+    else:
+        print('device not found... exit')
+        sys.exit()
+
+# ***** open an issue and provide your working Arduino clone VID:PID to add for auto detection *****
+
+elif mode == pc.mode.PARALLEL:
+    # TODO: add auto detection for parallel bit generation
+    # **************** parallelly generate stable bits ****************
+    thread1 = StableBitsGenerator(is_sram_23lc1024=False, serialconnection='/dev/cu.usbmodem14111', bitrate=115200,
+                                  index='A')
+    thread1.start()
+    thread2 = StableBitsGenerator(is_sram_23lc1024=False, serialconnection='/dev/cu.usbmodem14121', bitrate=115200,
+                                  index='C')
+    thread2.start()
 
 # **************** solo generating stable bits ****************
 # thread1 = stableBitsGenerator(is_sram_23lc1024=False, serialconnection='/dev/cu.usbmodem14111', bitrate=115200,
 #                               index='A')
 # thread1.start()
-
