@@ -1,6 +1,6 @@
 # This file is part of the software-based-PUF,
 # https://github.com/Tribler/software-based-PUF
-# Copyright (C) 2018 Ade Setyawan Sajim
+#
 # Modifications and additions Copyright (C) 2023 myndcryme
 #
 # This program is free software: you can redistribute it and/or modify
