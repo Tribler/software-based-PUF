@@ -36,7 +36,7 @@ If the SRAM is unique and stable (pass the test on Section 1.5 and Section 1.6),
 1. Connect Arduino with SRAM Cypress CY62256NLL and microSD. Refer to 'CY62256NLL-enrollment-microSD.fzz' in folder 'schematic' for connecting these components.
 2. Connect Arduino to PC using USB-to-serial cable.
 3. Upload 'slave-cy62256nll' project to Arduino
-4. Open 'master-enrollment'. Run MainEnrollment.py from PC. Make sure the serial name and port is correct.
+4. Open 'master-enrollment'. Run MainEnrollment.py from PC. Features have been added for serial device detection.  If a device is not auto detected, the user is prompted to select device from list.  User may also manually set a device in the configuration file, conf.py via the SERIAL_DEVICE parameter.  SERIAL_DEVICE can be set as device VID:PID or device path.  Using VID:PID is preferred since the device will be found even if the OS assigns a new port after replugging.  *NOTE - open an issue, providing your MEGA2560_R3 clone device VID:PID so it can be added for auto detection.
 5. MainEnrollment.py will locate the stable bits using data remanence analysis, then shuffle these stable bits to generate PUF challenge. Afterwards, the PUF challenge is send to Arduino to be stored in microSD. Later, it will ask Arduino to generate the helper data and stored it in microSD.
 6. When finished, microSD will have "challenge.txt" which contains PUF challenge and "helper_data.txt" which filled with helper data.
 
