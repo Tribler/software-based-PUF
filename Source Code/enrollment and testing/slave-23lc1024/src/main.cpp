@@ -1,4 +1,6 @@
 #include <Arduino.h>
+#include <ArduinoUniqueID.h>
+#include <stdio.h>
 #include <SRAM.h>
 
 #define TURN_OFF_CMD 40
@@ -11,6 +13,10 @@
 #define WRITE_PAGE 47
 #define WRITE_SINGLE 48
 #define READ_BIT_CMD 49
+#define GET_UID 55
+#define UID_BUF_SIZE 36
+// #define BUF_SIZE 4
+
 #define PIN_POWER_ANALOG A8
 #define PIN_POWER 9
 
@@ -73,11 +79,20 @@ boolean readBit(long location){
   return result >> (7 - (location % 8)) & 0x1 == 1;
 }
 
+// TODO: increase the entropy of the seed value for randomSeed()
 void setup(void)
 {
   Serial.begin(115200);
+  while (!Serial)
+  {
+    ;       // wait for serial connection
+  }
 
-  randomSeed(analogRead(A0));
+  // TODO: analogRead(floating_pin) isn't remotely close to random, we need another approach
+  // TODO: w/o dedicated onboard HWRNG, high entropy on embedded is nearly impossible
+  // TODO: combine multi pin reads into uint32_t seed (still bad) or maybe XOR with /dev/urandom from host?
+
+  randomSeed(analogRead(A0));       // fix seed val - use a random uint32_t instead of 10 bit number
 
   sram = SRAM();
   sram.set_pin_cs(10);
@@ -100,15 +115,18 @@ uint8_t result;
 unsigned long address;
 uint8_t result_page[32];
 
-void check_command(){
+void check_command()
+{
   uint16_t q;
   if (command[0] != 99)
     return;
-  switch (command[1]) {
+  switch (command[1])
+  {
     case TURN_OFF_CMD:  // turn_off
       sram.turn_off();
       writeAnalog(PIN_POWER, 0);
-      if (command[2] > 0){
+      if (command[2] > 0)
+      {
         delay(1000);
       }
       q = readAnalog(PIN_POWER_ANALOG);
@@ -120,10 +138,12 @@ void check_command(){
       for (int i=0; i < 36-4; i++)
         Serial.write(0);
       break;
+
     case TURN_ON_CMD:  // turn_on
       sram.turn_on();
       writeAnalog(PIN_POWER, 255);
-      if (command[2] > 0){
+      if (command[2] > 0)
+      {
         delay(1000);
       }
       q = readAnalog(PIN_POWER_ANALOG);
@@ -135,6 +155,7 @@ void check_command(){
       for (int i=0; i < 36-4; i++)
         Serial.write(0);
       break;
+
     case READ_PAGE_CMD:  //
       memset(result_page, 0 , sizeof(result_page));
       address = 0;
@@ -146,10 +167,12 @@ void check_command(){
       Serial.write((address >> 8) & 0xFF);
       Serial.write(address & 0xFF);
 
-      for (int i=0;i<32;i++){
+      for (int i=0;i<32;i++)
+      {
         Serial.write(result_page[i]);
       }
       break;
+
     case READ_SINGLE_CMD:  // turn_on
       address = 0;
       memcpy(&address, &command[2], 4);
@@ -166,6 +189,7 @@ void check_command(){
       for (int i=0; i < 36-7; i++)
         Serial.write(0);
       break;
+
     case READ_BIT_CMD:
       boolean c;
       memcpy(&address, &command[2], 4);
@@ -181,6 +205,7 @@ void check_command(){
       for (int i=0; i < 36-7; i++)
         Serial.write(0);
       break;
+
     case WRITE_ALL_ONE_CMD:
       sram.write_all_one();
       delay(500);
@@ -190,6 +215,7 @@ void check_command(){
       for (int i=0; i < 36-3; i++)
         Serial.write(0);
       break;
+
     case WRITE_ALL_ZERO_CMD:
       sram.write_all_zero();
       delay(500);
@@ -198,6 +224,7 @@ void check_command(){
       for (int i=0; i < 36-2; i++)
         Serial.write(0);
       break;
+
     case WRITE_ANALOG:
       q = (uint16_t) command[2];
       Serial.write(99);
@@ -210,8 +237,8 @@ void check_command(){
       Serial.write(q & 0xFF);
       for (int i=0; i < 36-5; i++)
         Serial.write(0);
-
       break;
+
     case WRITE_PAGE:
       address = 0;
       memcpy(&address, &command[2], 2);
@@ -223,6 +250,7 @@ void check_command(){
       for (int i=0; i < 36-4; i++)
         Serial.write(0);
       break;
+
     case WRITE_SINGLE:
       address = 0;
       memcpy(&address, &command[2], 4);
@@ -236,11 +264,28 @@ void check_command(){
       for (int i=0; i < 36-6; i++)
         Serial.write(0);
       break;
+
+    case GET_UID:       // uses ArduinoUniqueID library to retrieve uid
+      size_t i=0;
+      char str[UID_BUF_SIZE] = {'\0'};      // char array since String class can cause issues
+
+      for (i=0; i<UniqueIDsize; i++)        // size_t i
+      {
+        if (UniqueID[i] < 0x10)     // single character (i.e. decimal value 10 is hex value A)
+          sprintf(str + (i * 2), "0%X", UniqueID[i]);   // shift array start position, pad single char (example: 0A)
+        else
+          sprintf(str + (i * 2), "%X", UniqueID[i]);    // shift array start position
+      }
+      // shouldn't be necessary but ensure newline and terminate
+      str[UID_BUF_SIZE-2] = '\n';       // end of data marker
+      str[UID_BUF_SIZE-1] = '\0';
+      Serial.write(str);    // writes uid as binary data
+      break;
+
     default:
       Serial.write(99);
       for (int i=0; i < 36-1; i++)
         Serial.write(0);
-
       break;
   }
   memset(command, 0, 6);
@@ -248,10 +293,12 @@ void check_command(){
 
 void loop()
 {
-  if (Serial.available() > 0) {
+  if (Serial.available() > 0)
+  {
     command[count] = Serial.read();
     count++;
-    if (count == 6){
+    if (count == 6)
+    {
       check_command();
       count = 0;
     }

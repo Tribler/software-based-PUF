@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <ArduinoUniqueID.h>
 #include <stdio.h>
 #include <Tools.h>
 #include <BCH.h>
@@ -19,6 +20,8 @@
 #define FINISH_WRITING_CHALLENGE_TO_MICRO_SD 52
 #define GENERATE_HELPER_DATA 53
 #define GET_KEYS 54
+#define GET_UID 55          // added cmd
+#define UID_BUF_SIZE 36     // uid str buffer
 
 #define PIN_POWER_ANALOG A8
 #define PIN_POWER 9
@@ -77,7 +80,10 @@ void set(){
   pinMode(9, OUTPUT);
 
   Serial.begin(115200);
-
+  while (!Serial)
+  {
+    ;       // proper wait for serial connection
+  }
   delay(1000);
 
   bch = BCH();
@@ -260,16 +266,19 @@ void gen_helper_data(){
   }
 }
 
-void check_command(){
+void check_command()
+{
   int q;
   long a;
 
   if (command[0] != 99)
     return;
-  switch (command[1]) {
+  switch (command[1])
+  {
     case TURN_OFF_CMD:
       turn_off_sram();
-      if (command[2] > 0){
+      if (command[2] > 0)
+      {
         delay(1000);
       }
       q = analogRead(PIN_POWER_ANALOG);
@@ -281,9 +290,11 @@ void check_command(){
       for (int i=0; i < 36-4; i++)
         Serial.write(0);
       break;
+
     case TURN_ON_CMD:
       turn_on_sram();
-      if (command[2] > 0){
+      if (command[2] > 0)
+      {
         delay(1000);
       }
       q = analogRead(PIN_POWER_ANALOG);
@@ -295,6 +306,7 @@ void check_command(){
       for (int i=0; i < 32; i++)
         Serial.write(0);
       break;
+
     case READ_PAGE_CMD:
       address = 0;
       memcpy(&address, &command[2], 2);
@@ -305,11 +317,13 @@ void check_command(){
       Serial.write(address & 0xFF);
 
       address = address * 32;
-      for (int i=0; i < 32; i++){
+      for (int i=0; i < 32; i++)
+      {
         result = sram.read(address + i);
         Serial.write(result);
       }
       break;
+
     case READ_SINGLE_CMD:
       address = 0;
       memcpy(&address, &command[2], 2);
@@ -325,6 +339,7 @@ void check_command(){
       for (int i=0; i < 36-5; i++)
         Serial.write(0);
       break;
+
     case READ_BIT_CMD:
       boolean c;
       memcpy(&a, &command[2], 4);
@@ -342,6 +357,7 @@ void check_command(){
       for (int i=0; i < 36-7; i++)
         Serial.write(0);
       break;
+
     case WRITE_SINGLE:
       address = 0;
       memcpy(&address, &command[2], 2);
@@ -354,6 +370,7 @@ void check_command(){
       for (int i=0; i < 36-4; i++)
         Serial.write(0);
       break;
+
     case WRITE_PAGE:
       address = 0;
       memcpy(&address, &command[2], 2);
@@ -364,18 +381,24 @@ void check_command(){
       Serial.write(address & 0xFF);
 
       address = address * 32;
-      if (command[4] == 1){
-        for (int i=0; i < 32; i++) {
+      if (command[4] == 1)
+      {
+        for (int i=0; i < 32; i++)
+        {
           sram.write(address + i, 0xFF);
           Serial.write(sram.read(address + i));
         }
-      } else {
-        for (int i=0; i < 32; i++) {
+      }
+      else
+      {
+        for (int i=0; i < 32; i++)
+        {
           sram.write(address + i, 0x00);
           Serial.write(sram.read(address + i));
         }
       }
       break;
+
     case APPEND_CHALLENGE_TO_MICRO_SD:
       memcpy(&a, &command[2], 4);
       myFile.println(a);
@@ -389,6 +412,7 @@ void check_command(){
       for (int i=0; i < 36-6; i++)
         Serial.write(0);
       break;
+
     case NEW_CHALLENGE_FOR_MICRO_SD:
       myFile = SD.open("c.txt", O_WRITE | O_CREAT | O_TRUNC);
 
@@ -398,6 +422,7 @@ void check_command(){
       for (int i=0; i < 33; i++)
         Serial.write(0);
       break;
+
     case FINISH_WRITING_CHALLENGE_TO_MICRO_SD:
       myFile.close();
 
@@ -406,6 +431,7 @@ void check_command(){
       for (int i=0; i < 36-2; i++)
         Serial.write(0);
       break;
+
     case GENERATE_HELPER_DATA:
       gen_helper_data();
       Serial.write(99);
@@ -413,6 +439,7 @@ void check_command(){
       for (int i=0; i < 36-2; i++)
         Serial.write(0);
       break;
+
     case GET_KEYS:
       // gen_key256();
       readSRAMfromMicroSD();
@@ -425,6 +452,24 @@ void check_command(){
       for (int i=0; i < 32; i++)
         Serial.write(key_32[i]);
       break;
+
+    case GET_UID:       // get arduino uid (uses ArduinoUniqueID)
+      size_t i=0;
+      char str[UID_BUF_SIZE] = {'\0'};      // char array since String class can cause issues
+
+      for (i=0; i<UniqueIDsize; i++)        // size_t i
+      {
+        if (UniqueID[i] < 0x10)     // single character (i.e. decimal value 10 is hex value A)
+          sprintf(str + (i * 2), "0%X", UniqueID[i]);   // shift array start position, pad single char (example: 0A)
+        else
+          sprintf(str + (i * 2), "%X", UniqueID[i]);    // shift array start position
+      }
+      // shouldn't be necessary but ensure newline and terminate
+      str[UID_BUF_SIZE-2] = '\n';       // end of data marker
+      str[UID_BUF_SIZE-1] = '\0';
+      Serial.write(str);    // writes uid as binary data
+      break;
+
     default:
       Serial.write(99);
       for (int i=0; i < 36-1; i++)
@@ -434,19 +479,21 @@ void check_command(){
   memset(command, 0, 6);
 }
 
-void setup() {
+void setup()
+{
   set();
   initializeSD();
-
   pinMode(PIN_POWER, OUTPUT);
 }
 
 void loop()
 {
-  if (Serial.available() > 0) {
+  if (Serial.available() > 0)
+  {
     command[count] = Serial.read();
     count++;
-    if (count == 6){
+    if (count == 6)
+    {
       check_command();
       count = 0;
     }
