@@ -14,8 +14,11 @@
 #define WRITE_SINGLE 48
 #define READ_BIT_CMD 49
 #define GET_UID 55
+#define GET_URANDOM_SEED 57
+#define SEED_ARDUINO_CMD 0x39           // flag preceding incoming seed data
 #define UID_BUF_SIZE 36
-// #define BUF_SIZE 4
+#define BUF_SIZE 5
+#define PIN_SAMPLE_SIZE 16
 
 #define PIN_POWER_ANALOG A8
 #define PIN_POWER 9
@@ -24,6 +27,7 @@ SRAM sram;
 
 int count = 0;
 char command[6];
+uint32_t g_seed;
 
 void writeVoltage(uint8_t pin, float value){
   analogWrite(pin, value * 51);
@@ -79,20 +83,76 @@ boolean readBit(long location){
   return result >> (7 - (location % 8)) & 0x1 == 1;
 }
 
-// TODO: increase the entropy of the seed value for randomSeed()
-void setup(void)
+uint32_t gen_seed_xor()
 {
-  Serial.begin(115200);
-  while (!Serial)
+  const uint8_t n = PIN_SAMPLE_SIZE;
+
+  // sample spread of available pins (A0-A7, A9-A15), re-sample A0 so we have 16 reads
+  uint16_t pins[n] = {A0,A1,A2,A3,A4,A5,A6,A7,A9,A10,A11,A12,A13,A14,A15,A0};
+
+  // pin A8 is wired (not floating) - don't use
+  // use only low nibble of low byte for larger variability
+  // since analogRead() returns a 10 bit wide int, high nibble of high byte always 0000 - discard
+  // low nibble of high byte can only be 0000, 0001, 0010, 0011, but realistically is almost always 0001 - discard
+  // high nibble of low byte repeats too frequently (4,5,6,7) - discard
+
+  uint16_t res[n];    // 0000 00XX XXXX XXXX    // 10 bit wide int
+                      //        XX hnib lnib
+  uint8_t lnib[n];    // low nibble of low byte
+  uint8_t xnib[n];    // xor'd nibbles
+  uint32_t seed;
+
+  for (int i=0; i<n; i++)
   {
-    ;       // wait for serial connection
+    res[i] = analogRead(pins[i]);   // analogRead(floating_pin) returns 0 to 1023 (realistically ~ 200 to 500)
+    lnib[i] = res[i] & 0x0F;        // get low nibbles, 00 0000 1111 (0x0F), mask
   }
 
-  // TODO: analogRead(floating_pin) isn't remotely close to random, we need another approach
-  // TODO: w/o dedicated onboard HWRNG, high entropy on embedded is nearly impossible
-  // TODO: combine multi pin reads into uint32_t seed (still bad) or maybe XOR with /dev/urandom from host?
+  // xor the staggered low nibbles and shift to create a uint32_t seed
+  for (int j=0; j<n/2; j++)
+  {
+    xnib[j] = lnib[j]^lnib[n/2+j];      // xor nibble pairs (0,8), (1,9), ..., (7,15)
+  }
+  // shift 8 nibbles into a uint32_t seed
+  seed = ((uint32_t)xnib[0]<<28) | ((uint32_t)xnib[1]<<24) | ((uint32_t)xnib[2]<<20) | ((uint32_t)xnib[3]<<16) |
+                  ((uint32_t)xnib[4]<<12) | ((uint32_t)xnib[5]<<8) | ((uint32_t)xnib[6]<<4) | (uint32_t)xnib[7];
+  return seed;
+}
 
-  randomSeed(analogRead(A0));       // fix seed val - use a random uint32_t instead of 10 bit number
+void setup(void)
+{
+  uint8_t buf[BUF_SIZE] = {'\0'};
+  uint32_t seed=0;
+  size_t result=0;
+
+  Serial.begin(115200);     // mega board serial is available immediately after init
+  delay(1000);
+  Serial.setTimeout(5000);  // timeout (ms)
+
+  // TODO: fix external seeding
+  // read CMD + urandom data sent from host (initiated in python script)
+
+  /*result = Serial.readBytes(buf, BUF_SIZE);     // readBytes() blocks till either buf is filled or timeout
+  if ((result == BUF_SIZE) && (buf[0] == (uint8_t)SEED_ARDUINO_CMD))
+  {
+    // first byte received was seeding command, next four bytes used to compose seed
+    seed = ((uint32_t)buf[4] << 24) | ((uint32_t)buf[3] << 16) | ((uint32_t)buf[2] << 8) | (uint32_t)buf[1];
+    Serial.println("arduino seed generated from urandom data");
+  }
+  else      // timeout or error
+  {
+    // fallback if bytes from host are not received
+    Serial.println("fallback to improved, but still weaker, PRNG seeding")
+    seed = gen_seed_xor();
+  }*/
+
+  // MUST use on device seeding for now
+  seed = gen_seed_xor();
+  randomSeed(seed);     // begin PRNG stream
+
+  // analogRead(floating_pin) isn't remotely close to random, we need another approach
+  // w/o dedicated onboard HWRNG, high entropy on embedded is nearly impossible
+  // partial fix:  combined multi pin reads into uint32_t seed using gen_seed_xor()
 
   sram = SRAM();
   sram.set_pin_cs(10);
@@ -112,7 +172,7 @@ void send_command(char c){
 }
 
 uint8_t result;
-unsigned long address;
+unsigned long address;      // uint32_t
 uint8_t result_page[32];
 
 void check_command()
@@ -173,7 +233,7 @@ void check_command()
       }
       break;
 
-    case READ_SINGLE_CMD:  // turn_on
+    case READ_SINGLE_CMD:       // read single byte at address
       address = 0;
       memcpy(&address, &command[2], 4);
       result = sram.read_single(address);
@@ -190,7 +250,7 @@ void check_command()
         Serial.write(0);
       break;
 
-    case READ_BIT_CMD:
+    case READ_BIT_CMD:      // read single bit from byte at address
       boolean c;
       memcpy(&address, &command[2], 4);
       c = readBit(address);
@@ -263,6 +323,10 @@ void check_command()
       Serial.write(address & 0xFF);
       for (int i=0; i < 36-6; i++)
         Serial.write(0);
+      break;
+
+    case GET_URANDOM_SEED:      // get a crypto quality uint32_t seed value from host
+      g_seed = (command[5] | (command[4] << 8) | (command[3] << 16) | (command[2] << 24));
       break;
 
     case GET_UID:       // uses ArduinoUniqueID library to retrieve uid

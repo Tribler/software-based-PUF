@@ -57,7 +57,40 @@ def save_param_setting(name, val) -> int:
     importlib.reload(user)              # reload after parameter value change
     return 0
 
-def get_user_input(msg):
+def get_user_response(msg: str):
+    """
+    Display msg, read and return the user response.
+    :msg: display message
+    :return: True (yes), False (no), None on error
+    """
+    y = {'y','Y','yes','Yes','YES', 'yES'}      # set of acceptable yes answers
+    n = {'n','N','no','No','NO', 'nO', ""}      # set of acceptable no answers, plus *just* <enter>
+
+    result = None
+    ver = sys.version_info.major
+    if ver>2:  # use input function
+        try:
+            result = input(msg)
+        except ValueError:
+            print('error: invalid entry')
+            return None
+    elif ver<=2:  # use raw_input
+        try:
+            result = raw_input(msg)
+        except ValueError:
+            print('error: invalid entry')
+            return None
+    else:
+        return None
+    if result in y:
+        return True
+    elif result in n:
+        return False
+    else:
+        print("invalid entry")
+        return None
+
+def get_user_input(msg):        # TODO: redundant but no harm, fix later
     """
     Prompt user and read input.
     :msg: display message
@@ -129,7 +162,7 @@ def detect() -> str:
     Detects if specified device (default is genuine MEGA2560_R3) is
     connected and acquires device info, otherwise displays a list of
     serial devices to choose from manually.
-    :return: device path, empty string if no device, or RERUN
+    :return: device, empty string if no device, or RERUN
     """
     s = const.EMPTY     # path string, initialized to empty string
     ports = list(serial.tools.list_ports.comports())
@@ -139,9 +172,9 @@ def detect() -> str:
                 s = str(p.device)
                 print('device id detected...\nusing device ' + s)
         for p in ports:
-            if conf.SERIAL_DEVICE in p.device:      # user specified a device path
+            if conf.SERIAL_DEVICE in p.device:      # user specified a device
                 s = str(p.device)
-                print('device path found\nusing device ' + s)
+                print('device found\nusing device ' + s)
 
     elif user.selected_vidpid != const.EMPTY:       # user previously selected a device, VID:PID was saved
         for p in ports:
@@ -162,13 +195,13 @@ def detect() -> str:
                     s = str(p.device)
                     print('using device ' + s)
                 else:
-                    selected_device_reset()         # de-selected saved device
+                    selected_device_reset()         # de-selected device
                     return const.RERUN              # re-run detect()
 
     elif conf.SERIAL_DEVICE.upper() == const.DEFAULT_DEVICE_ID:         # detect genuine Arduino board
         for p in ports:
             if conf.SERIAL_DEVICE.upper() in p.hwid:        # VID:PID found
-                s = str(p.device)  # device path            # associated path of VID:PID
+                s = str(p.device)                           # associated path of VID:PID
                 print('Arduino MEGA2560_R3 detected...\nusing device ' + s)
 
     # TODO: elif: add MEGA2560_R3 clone VID:PID info for port auto-detection
@@ -182,7 +215,6 @@ def detect() -> str:
             print('(' + str(n) + ')\t', end='')     # no newline ending
             print('manufacturer: ' + str(p.manufacturer) + '\n\tproduct: ' + \
                   str(p.product) + '\n\thwid: ' + str(p.hwid) + '\n')
-
         n=0  # input value
         ver = sys.version_info.major
         if ver > 2:  # use input function
@@ -197,7 +229,6 @@ def detect() -> str:
                 print('error: invalid entry')
         else:
             print('\npython version unsupported\n')
-
         if n == 0:
             return s  # exit, return empty string
 

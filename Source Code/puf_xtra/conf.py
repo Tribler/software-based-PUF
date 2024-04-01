@@ -22,26 +22,26 @@ from pconst import const as conf    # dual alias for dual prefix naming (caveat:
 # configuration values are immutable at runtime #
 #################################################
 
-#conf.OPERATION_MODE = 'MONO'            # single arduino
-#conf.SERIAL_DEVICE = '2341:0042'        # either device VID:PID or serial device path works
+""" OPERATION CONFIG """
+conf.OPERATION_MODE = 'MONO'            # single arduino
+conf.SERIAL_DEVICE = '2341:0042'        # either device VID:PID or serial device path works
 
-conf.OPERATION_MODE = 'PARALLEL'            # for parallel profiling
-conf.SERIAL_DEVICE = ['/dev/ttyACM1']       # test case
+#conf.OPERATION_MODE = 'PARALLEL'            # for parallel profiling
+#conf.SERIAL_DEVICE = ['/dev/ttyACM1']       # test case
 #conf.SERIAL_DEVICE = ['/dev/ttyACM0', '/dev/ttyACM1', '/dev/ttyACM2']   # use device path only, add as needed
 
-##### SRAM config not yet implemented #####
-#conf.SRAM = 'CY62256NLL'
+""" SRAM MODULE CONFIG """
+conf.SRAM = 'CY62256NLL'
 #conf.SRAM = '23LC1024'
-#TODO: test/add other SRAM modules LY62256PL-55LLI, 71256SA20TPG, etc.
 
-##### GSBV_MODE not yet implemented #####
+#GSBV_MODE not yet implemented
 #conf.GSBV_MODE = 'VOLTAGE_VARIATION'       # select a mode when running GetStableBitsValue.py (GSBV)
 #conf.GSBV_MODE = 'TIME_INTERVAL'
 
+""" GENERAL CONFIG """
 conf.BITRATE = 115200       # serial connection bitrate setting
-
 conf.USE_BINDING = True
-
+conf.URANDOM_SOURCE = 'OS_URANDOM'          # 'DEV_URANDOM'
 
 conf.DEBUG = False          # project debug
 conf.DEBUG_FILE = False     # file debug
@@ -50,8 +50,10 @@ conf.DEBUG_FILE = False     # file debug
 # do not change config param entries below #
 ############################################
 
+conf.ERR_THRESH = 0.10      # max percent error (dissimilar cells) allowed for positive SRAM identification
 conf.BIND_FILE = 'bindings.csv'
 conf.USER_FILE = 'user.py'
+conf.USE_UPDATE = conf.USE_BINDING
 conf.USE_LEGACY = not conf.USE_BINDING
 
 ####################################################
@@ -60,8 +62,10 @@ conf.USE_LEGACY = not conf.USE_BINDING
 
 const.DEFAULT_DEVICE_ID = '2341:0042'                   # Genuine Arduino MEGA2560_R3 VID:PID
 const.DEFAULT_DEVICE_NAME = 'GENUINE_MEGA2560_R3'
-const.GET_UID = 55
+const.GET_UID = 0x37            # 55
 const.UID_BUF_SIZE = 36
+const.SEED_ARDUINO_CMD = 0x39   # 57
+const.SEED_BUF_SIZE = 5         # one byte prefix, 4 bytes to construct seed value
 const.EMPTY = ''
 const.RUN = 'RUN'
 const.RERUN = const.RUN

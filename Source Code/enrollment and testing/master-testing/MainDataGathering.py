@@ -1,11 +1,20 @@
 import numpy
+import sys
+import os
 import time
-
 from PUF import SerialPUF, Tools
 
-# set true if testing is done on microchip 23lc1024
-is_sram_23lc1024 = False
+# temporarily append puf_xtra package if not already in sys.path
+pkg = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'puf_xtra')
+Tools.sys_path_append(pkg)
+import bindutils
 
+is_sram_23lc1024 = bindutils.is_sram_val()
+if is_sram_23lc1024 is None:
+    print("invalid SRAM module config, check setting")
+    sys.exit(1)
+
+# TODO: add device auto detect
 serialPUF = SerialPUF.SerialPUF()
 if not serialPUF.connect('/dev/cu.usbmodem1411', 115200, is_sram_23lc1024):
     print("Error connecting to Arduino")

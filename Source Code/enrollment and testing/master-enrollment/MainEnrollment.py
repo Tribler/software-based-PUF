@@ -1,6 +1,5 @@
 # This file is part of the software-based-PUF,
-# https://github.com/Tribler/software-based-PUF
-#
+# https://github.com/Tribler/software-based-PUF#
 # Modifications and additions Copyright (C) 2023 myndcryme
 #
 # This program is free software: you can redistribute it and/or modify
@@ -21,18 +20,21 @@ import os
 import time
 import threading
 from random import shuffle
-from PUF import SerialPUF       # Tools
+from PUF import SerialPUF, Tools
 
-# Temporarily append puf_xtra package path.  New modules and config files are organized in the puf_xtra package.
-sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'puf_xtra'))   # add puf_xtra path
-
+# temporarily append puf_xtra package if not already in sys.path
+pkg = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'puf_xtra')
+Tools.sys_path_append(pkg)
 import bindutils
 import portutils
 from conf import conf, const
 
+#TODO: add serial polling monitor and send urandom data (if using 23LC1024) when connects
+
 def get_strong_bits_by_goal(serialPUF, goal, initial_delay=0.3, step_delay=0.005, write_ones=True):
     """
     Bit selection algorithm using data remanence approach
+    :param serialPUF: an instance of the SerialPUF class
     :param goal: number of strong bits desired
     :param initial_delay: initial delay
     :param step_delay: initial step delay
@@ -67,9 +69,8 @@ def get_strong_bits_by_goal(serialPUF, goal, initial_delay=0.3, step_delay=0.005
 def get_strong_bits_by_time(serialPUF, delay, write_ones=True):
     """
     Bit selection algorithm using data remanence approach
-    :param goal: number of strong bits desired
-    :param initial_delay: initial delay
-    :param step_delay: initial step delay
+    :param serialPUF: an instance of the SerialPUF class
+    :param delay: initial delay
     :param write_ones: write one to all location. Set to true if strong zeroes are the goal.
             Otherwise set to false
     :return: location of strong bits
@@ -100,9 +101,17 @@ def get_strong_bits(serialPUF, goal, initial_delay=0.3, step_delay=0.005):
     :return:
     """
     a = get_strong_bits_by_goal(serialPUF, goal, initial_delay, step_delay, write_ones=False)
-    b = get_strong_bits_by_goal(serialPUF, goal, a[1] - step_delay, step_delay, write_ones=True)
-    strong_ones = a[0]
-    strong_zeros = b[0]
+
+    # TODO: check if (a[1] - step_delay) is correct since get_strong_bits elsewhere uses just a[1].
+    # TODO: not sure why we would want to record strong_ones beginning with:  delay == initial_delay
+    # TODO: but record strong_zeros beginning with:  delay == (initial_delay - step_delay)
+    # TODO: likely an error
+
+    #b = get_strong_bits_by_goal(serialPUF, goal, a[1] - step_delay, step_delay, write_ones=True)
+    b = get_strong_bits_by_goal(serialPUF, goal, a[1], step_delay, write_ones=True)
+
+    strong_ones = a[0]      # a[0] is the strong_bits list, a[1] is the delay
+    strong_zeros = b[0]     # ditto
     return [strong_ones, strong_zeros]
 
 
@@ -138,8 +147,8 @@ class EnrollmentTools(threading.Thread):
         x = list(map(int, x))
 
         shuffle(x)
-        serialPUF.write_challenges_to_sd(x[:37 * 63])
-        # Tools.save_to_file(x[:37 * 63], "challenge-" + self.index + ".txt", with_comma=True)
+        serialPUF.write_challenges_to_sd(x[:37 * 63])       # 2331
+        # Tools.save_to_file(x[:37 * 63], "challenge-" + self.idx + ".txt", with_comma=True)
 
         serialPUF.generate_helper_data_on_sd()
 
@@ -152,25 +161,44 @@ class EnrollmentTools(threading.Thread):
 s = const.RUN
 while s == const.RUN:       # runs again if detect() returns RERUN          (RERUN == RUN)
     s = portutils.detect()
-if s:   # s not empty
-    idx = ''
-    unique_id = bindutils.get_uid(s)
-    if unique_id:
-        idx = bindutils.get_index(conf.BIND_FILE, unique_id=unique_id)
-    else:
-        print('get_uid error\n')
-        sys.exit(2)
-    if idx:
+if s:   # device found
+    # ARCHIVE_B1
+    idx = bindutils.get_sram_index(s)
+    if not idx.startswith("ERR"):
         thread = EnrollmentTools(thread_name='thread0', serialconnection=s, bitrate=conf.BITRATE, index=idx,
                                  initial_delay=0.31)
         thread.start()
+        thread.join()       # block caller till thread finishes
     else:
-        print('get_index error... exit\n')
-        sys.exit(3)
+        # TODO: add check / sram profiler
+        print("sram did not match any existing profiles - try running GetStableBits.py to generate an sram "
+              "profile with index binding before running this script again... exiting")
+        sys.exit(2)
 else:
     print('device not found... exit')
     sys.exit(1)
+print("Enrollment Tools finished")
+sys.exit(0)
+
+# TODO: add PARALLEL case
 
 #thread1 = threading.Thread(target=EnrollmentTools, kwargs={'serialconnection':s, 'bitrate':conf.BITRATE,
-#                                                           'index':"C", 'initial_delay':0.31})
+#                                                           'idx':"C", 'initial_delay':0.31})
 #thread1.start()
+
+#begin ARCHIVE_B1
+    # idx = ''
+    # unique_id = bindutils.get_uid(s)
+    # if unique_id:
+    #     idx = bindutils.get_index(conf.BIND_FILE, unique_id=unique_id)
+    # else:
+    #     print('get_uid error\n')
+    #     sys.exit(2)
+    # if idx:
+    #     thread = EnrollmentTools(thread_name='thread0', serialconnection=s, bitrate=conf.BITRATE, index=idx,
+    #                              initial_delay=0.31)
+    #     thread.start()
+    # else:
+    #     print('get_index error... exit\n')
+    #     sys.exit(3)
+#end

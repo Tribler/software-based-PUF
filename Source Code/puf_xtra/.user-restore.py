@@ -25,6 +25,7 @@
 selected_device = ''
 selected_vidpid = ''
 selected_uid = ''
+selected_index = ''
 
 # for information display
 selected_manufacturer = ''

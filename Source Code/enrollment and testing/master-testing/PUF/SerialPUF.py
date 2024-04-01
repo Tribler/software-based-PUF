@@ -23,6 +23,10 @@ class SerialPUF:
         except serial.SerialException:
             return False
 
+    # add simple close method ?
+    # def close(self):
+    #     if isinstance(self.ser, serial.Serial):
+    #         self.ser.close()
 
     def collect_pages(self):
         current_page = 0
@@ -66,7 +70,9 @@ class SerialPUF:
             bits = self.collect_pages()
             # else:
             #     bits = self.collect_bytes()
-            save_to_file(bits, "../CY62256NLL/" + create_today_date() + "/" + str(currentIndex))
+
+            # save_to_file(bits, "../CY62256NLL/" + create_today_date() + "/" + str(currentIndex))
+            save_to_file(bits, os.path.join("..", "CY62256NLL", create_today_date(), str(currentIndex)))
             # save_to_file(bits, "../2018130/" + str(currentIndex))
             # self.saveToFile(bits, currentIndex)
 
