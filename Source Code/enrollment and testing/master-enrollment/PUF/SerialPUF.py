@@ -5,8 +5,9 @@ class SerialPUF:
     ser = serial.Serial
     is_turn_on = False
     has_reply = True
+    is_sram_23lc1024 = True
 
-    def connect(self, name, port):
+    def connect(self, name, port, is_sram_23lc1024=True):
         """
         Connect to an Arduino
         :param name: location of Arduino
@@ -15,6 +16,7 @@ class SerialPUF:
         """
         try:
             self.ser = serial.Serial(name, port)
+            self.is_sram_23lc1024 = is_sram_23lc1024
             return True
         except serial.SerialException:
             return False
@@ -25,7 +27,10 @@ class SerialPUF:
         :return:
         """
         current_page = 0
-        total_page = 1024
+        if self.is_sram_23lc1024:
+            total_page = 4096
+        else:
+            total_page = 1024
         bits = []
 
         while current_page < total_page:
@@ -129,7 +134,10 @@ class SerialPUF:
         Read a byte in SRAM Cypress CY62256NLL.
         :param address: byte address
         """
-        self.ser.write(pack('<bbHH', 99, 43, address, 0))
+        if self.is_sram_23lc1024:
+            self.ser.write(pack('<bbl', 99, 43, address))
+        else:
+            self.ser.write(pack('<bbHH', 99, 43, address, 0))
         self.has_reply = False
 
     def send_command_read_bit(self, address):
@@ -155,7 +163,10 @@ class SerialPUF:
         :param address: byte address
         :param data: data to be written
         """
-        self.ser.write(pack('<bbHH', 99, 48, address, data))
+        if self.is_sram_23lc1024:
+            self.ser.write(pack('<bbL', 99, 48, address))
+        else:
+            self.ser.write(pack('<bbHH', 99, 48, address, data))
         self.has_reply = False
 
     def send_command_append_challenges(self, address):
@@ -219,7 +230,7 @@ class SerialPUF:
             self.has_reply = True
             return rp
         elif res[1] == 43:
-            rb = ReadByteResult(res)
+            rb = ReadByteResult(res, is_sram_23lc1024=self.is_sram_23lc1024)
             self.has_reply = True
             return rb
         elif res[1] == 46:
@@ -233,7 +244,7 @@ class SerialPUF:
             self.has_reply = True
             return rp
         elif res[1] == 48:
-            r = WriteByteResult(res)
+            r = WriteByteResult(res, is_sram_23lc1024=self.is_sram_23lc1024)
             self.has_reply = True
             return r
         elif res[1] == 49:
@@ -390,7 +401,10 @@ class SerialPUF:
         """
         bits = []
         current_page = 0
-        total_page = 1024
+        if self.is_sram_23lc1024:
+            total_page = 4096
+        else:
+            total_page = 1024
 
         while current_page < total_page:
             self.write_page(current_page, is_ones, bits)

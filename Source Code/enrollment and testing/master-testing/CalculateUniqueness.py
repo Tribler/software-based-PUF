@@ -1,14 +1,14 @@
 import os
 import itertools
 from PUF import Tools, Analyzer, DataRemanenceCalculator
-import distance
-h = Analyzer.Analyzer()
+import distance     # from scipy.spatial import distance
 
+h = Analyzer.Analyzer()
 
 def read_folder(folder):
     result = []
-    for f in os.listdir(folder + "/"):
-        file = folder + "/" + f
+    for f in os.listdir(folder + os.sep):       # use os.sep instead of hardcoding '/'
+        file = folder + os.sep + f
         if os.path.isdir(file):
             result.extend(read_folder(file))
         else:
@@ -21,11 +21,26 @@ def read_file(file):
     return Tools.read_bits_from_file_and_merge(file)
 
 
-def calculate_uniquessness(min_index_SRAM, max_index_SRAM):
-    files_per_folder = {}
+def get_index_list() -> list:
+    dir_name = 'Values' + os.sep
+    result = [i for i in os.listdir(dir_name) if os.path.isdir(os.path.join(dir_name, i))]      # directories only
+    return result
 
-    for k in [chr(i) for i in range(ord(min_index_SRAM), ord(max_index_SRAM) + 1)]:
-        folder = 'Values/' + k
+
+def calculate_uniqueness():
+    files_per_folder = {}
+    dir_name = 'Values' + os.sep        # 'Values/'
+
+    index_list = get_index_list()
+    if len(index_list) > 0:
+        min_index_sram = min(index_list)
+        max_index_sram = max(index_list)
+    else:
+        print('no index directories found... exit')
+        return None
+
+    for k in [chr(i) for i in range(ord(min_index_sram), ord(max_index_sram) + 1)]:
+        folder = dir_name + k
         files = read_folder(folder)
         files_per_folder[k] = files
 
@@ -39,12 +54,11 @@ def calculate_uniquessness(min_index_SRAM, max_index_SRAM):
     average = sum(inter_hd) / len(inter_hd)
     max_distance = max(inter_hd)
     min_distance = min(inter_hd)
-
     return [average, max_distance, min_distance]
 
 
-result = calculate_uniquessness(min_index_SRAM='A', max_index_SRAM='B')
-
-print("Average inter fractional hamming distance: " + str(result[0]))
-print("Maximum inter fractional hamming distance: " + str(result[1]))
-print("Minimum inter fractional hamming distance: " + str(result[2]))
+result = calculate_uniqueness()
+if result is not None:
+    print("Average inter fractional hamming distance: " + str(result[0]))
+    print("Maximum inter fractional hamming distance: " + str(result[1]))
+    print("Minimum inter fractional hamming distance: " + str(result[2]))

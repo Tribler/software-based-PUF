@@ -1,7 +1,6 @@
 # This file is part of the software-based-PUF,
 # https://github.com/Tribler/software-based-PUF
-#
-# Modifications and additions Copyright (C) 2023 myndcryme
+# Modifications and additions Copyright (C) 2023, 2024 myndcryme
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,23 +15,23 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# from __future__ import print_function     # for python2
 import sys
 import os
 import time
 import threading
-# import _thread
 from PUF import SerialPUF, Tools
 
-# Append puf_xtra package path.  New modules of reused code are organized in the puf_xtra package.
-sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'puf_xtra'))   # add puf_xtra path
-import port_detect as pd
-import puf_consts as pc
-
+# temporarily append puf_xtra package if not already in sys.path
+pkg = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'puf_xtra')
+Tools.sys_path_append(pkg)
+from conf import conf, const        # double import
+import portutils
+import bindutils
 
 def get_strong_bits_by_goal(serialPUF, goal, initial_delay=0.3, step_delay=0.005, write_ones=True):
     """
     Bit selection algorithm using data remanence approach
+    :param serialPUF: an instance of the SerialPUF class
     :param goal: number of strong bits desired
     :param initial_delay: initial delay
     :param step_delay: initial step delay
@@ -40,6 +39,14 @@ def get_strong_bits_by_goal(serialPUF, goal, initial_delay=0.3, step_delay=0.005
             Otherwise set to false
     :return: location of strong bits
     """
+    def scale():
+        """
+        Gets the number of decimal places (scale) in 'step_delay' param.  This is used to round
+        'delay' value, avoiding floating point addition errors.
+        :return: number of decimal places
+        """
+        return len(str(step_delay).split('.')[1]) if '.' in str(step_delay) else 0
+
     delay = initial_delay
     strong_bits = []
 
@@ -47,6 +54,7 @@ def get_strong_bits_by_goal(serialPUF, goal, initial_delay=0.3, step_delay=0.005
     delays = []
 
     while current_goal < goal:
+        delay = round(delay, scale())         # rounds delay appropriately
         print("DATA REMANENCE - delay: " + str(delay), end=' : ')
         delays.append(delay)
 
@@ -67,9 +75,8 @@ def get_strong_bits_by_goal(serialPUF, goal, initial_delay=0.3, step_delay=0.005
 def get_strong_bits_by_time(serialPUF, delay, write_ones=True):
     """
     Bit selection algorithm using data remanence approach
-    :param goal: number of strong bits desired
-    :param initial_delay: initial delay
-    :param step_delay: initial step delay
+    :param serialPUF: an instance of the SerialPUF class
+    :param delay: delay value
     :param write_ones: write one to all location. Set to true if strong zeroes are the goal.
             Otherwise set to false
     :return: location of strong bits
@@ -99,9 +106,11 @@ def get_strong_bits(serialPUF, goal, initial_delay=0.3, step_delay=0.005):
 
 
 class StableBitsGenerator(threading.Thread):
-    def __init__(self, is_sram_23lc1024, serialconnection, bitrate, index='', goal=2331, initial_delay=0.33,
-                 step_delay=0.01):
-        threading.Thread.__init__(self)
+    def __init__(self, thread_name, is_sram_23lc1024, serialconnection, bitrate, index='', goal=2331,
+                 initial_delay=0.33, step_delay=0.01):
+        threading.Thread.__init__(self, name=thread_name)
+        if is_sram_23lc1024 is None:
+            raise ValueError("SRAM module config invalid, check setting")
         self.is_sram_23lc1024 = is_sram_23lc1024
         self.serialconnection = serialconnection
         self.bitrate = bitrate
@@ -141,40 +150,131 @@ class StableBitsGenerator(threading.Thread):
         filename = "strongbits-" + self.index + ".txt" if self.index else "strongbits.txt"
         Tools.save_to_file(x, filename, with_comma=True)
 
+if __name__ == "__main__":      # guard so we can import functions without running the whole script
+    if conf.OPERATION_MODE == 'MONO':
+        # **************** generate bits, single serial device with auto detection ****************
+        # detect() will automatically set 'serialconnection' param when possible
+        # user may set a device manually via SERIAL_DEVICE in conf.py but should usually not be necessary
+        # detection progression:  configuration file --> previous selected device --> MEGA2560_R3 (arduino) -->
+        # MEGA2560_R3 (clone) --> display serial devices (user select and save)
 
-# ***** set bit generation mode *****
-mode = pc.mode.DEFAULT          # default mode is a single Arduino profiling
-# mode = pc.mode.PARALLEL       # set this mode for parallel profiling
+        s = const.RUN
+        while s == const.RUN:       # runs again if detect() returns RERUN          (RERUN == RUN)
+            s = portutils.detect()
+        if s:       # s not empty
+            sdx = bindutils.get_sram_index(device=s)
+            if not sdx.startswith("ERR"):       # sram match
+                print("match found\nsram index: %s\nstable bits location file already exists, so it is "
+                      "not necessary to run GetStableBits.py\nYou can generate a new strongbits file if desired "
+                      "but is not recommended.\n" % sdx)
+                res = portutils.get_user_response("Generate a new strongbits location file? [y/N]\n> ")
+                if res is True:
+                    thread = StableBitsGenerator(thread_name='thread0', is_sram_23lc1024=bindutils.is_sram_val(),
+                                                 serialconnection=s, bitrate=conf.BITRATE, index=sdx)
+                    thread.start()
+                    thread.join()       # wait
+                elif res is False:
+                    print("exiting...")
+                    sys.exit(0)
+                else:
+                    sys.exit(2)     # error: invalid response
+            elif sdx == "ERR_NO_VALUES_INDEX":     # no existing index in 'Values' directory
+                print("no existing sram index was found\nrunning gen_sram_profile...")
+                sdx = bindutils.gen_sram_profile(device=s)       # generates profile and returns index
+                if not sdx.startswith("ERR"):       # current sram location and values files creation succeeded
+                    print("new sram profile generated successfully\nstrongbits location file and values file for "
+                          "sram '%s' have been created... exit" % sdx)
+                    sys.exit(0)
+                else:       # error
+                    print("error: %s occurred while trying to create sram profile... exit" % sdx)
+                    sys.exit(3)
+            elif sdx == "ERR_NO_VALUES_FILE":
+                print("error: %s, exit" % sdx)      # TODO: handle properly
+                sys.exit(7)
+            elif sdx == "ERR_DISTANCE_CALCULATION":
+                print("error: %s, exit" % sdx)
+                sys.exit(4)
+            elif sdx == "ERR_INDEX_NOT_ASSIGNED":       # not fatal - means no sram index found
+                print("no sram match found\ngenerating new sram profile...")
+                sdx = bindutils.gen_sram_profile(device=s)      # create profile for current sram
+                if not sdx.startswith("ERR"):
+                    print("New sram profile '%s' created successfully... exit" % sdx)
+                    sys.exit(0)
+                else:
+                    print("error: %s occurred trying to create sram profile... exit" % sdx)
+                    sys.exit(5)
+        else:
+            print('device not found... exit')
+            sys.exit(1)
 
-if mode == pc.mode.DEFAULT:
-    # **************** generate bits, single serial device with auto detection ****************
-    # Device auto detected or may be selected by user
-    # serialconnection param may be set manually w/ device path or VID:PID (but not required)
-    #
-    # examples :  s = pd.detect()     s = pd.detect('/dev/ttyACM0')     s = pd.detect('2341:0042')
+    # operation mode is set in conf.py
+    elif conf.OPERATION_MODE == 'PARALLEL' and conf.USE_BINDING:
+        # **************** parallelly generate stable bits ****************
+        # must set devices in the configuration file via SERIAL_DEVICE param (use device paths)
+        # creates a thread for each device given in configuration list
+        # each device unique id is bound to an idx value and the idx value is set accordingly
+        # for each thread(device) so the user no longer needs to set manually
 
-    s = pd.detect()  # may be set manually by the user but is not necessary (see examples above)
-    if s != '':
-        print('using device path ' + s)
-        thread2 = StableBitsGenerator(is_sram_23lc1024=False, serialconnection=s, bitrate=115200, index='C')
+        # check to make sure we can get all unique_id and idx values without error
+        n = len(conf.SERIAL_DEVICE)             # number of serial devices
+        unique_id = ['' for _ in range(n)]      # empty n item list
+        idx = ['' for _ in range(n)]
+        err=0
+
+        # added GET_UID case to Arduino code for cy62256nll and 23lc1024
+        for i in range(n):
+            unique_id[i] = bindutils.get_uid(conf.SERIAL_DEVICE[i])     # gets unique_id
+            if unique_id[i] == '':      # break on error
+                err += 1
+                break
+            idx[i] = bindutils.get_index(conf.BIND_FILE, unique_id=unique_id[i])    # now get the index (or create)
+            if idx[i] == '':        # error, increment error counter and break
+                err += 1
+                break
+        if err > 0:
+            print('error getting device unique id and/or idx binding\n'
+                  'unable to proceed, exit')
+            sys.exit(1)
+
+        # all serial devices are properly bound, all should succeed generating stable bits
+        threads=[]
+        for i in range(len(conf.SERIAL_DEVICE)):
+            tname = 'thread' + str(i)
+            thread = StableBitsGenerator(thread_name=tname, is_sram_23lc1024=bindutils.is_sram_val(),
+                                         serialconnection=conf.SERIAL_DEVICE[i], bitrate=conf.BITRATE, index=idx[i])
+            threads.append(thread)
+            thread.start()
+
+        for thread in threads:
+            thread.join()       # wait until all threads finish
+
+        # threads will execute concurrently but all code added hereafter is blocked until threads finish
+        print('all threads finished')
+        sys.exit(0)
+
+    elif conf.OPERATION_MODE == 'PARALLEL' and conf.USE_LEGACY:
+        # ************************* legacy parallel *************************
+        # set USE_BINDING to False in conf.py if you want to use legacy code
+        # user must set all parameters manually
+        thread1 = StableBitsGenerator(thread_name='thread1', is_sram_23lc1024=bindutils.is_sram_val(),
+                                      serialconnection='/dev/cu.usbmodem14111', bitrate=115200, index='A')
+        thread1.start()
+        thread2 = StableBitsGenerator(thread_name='thread2', is_sram_23lc1024=bindutils.is_sram_val(),
+                                      serialconnection='/dev/cu.usbmodem14121', bitrate=115200, index='C')
         thread2.start()
-    else:
-        print('device not found... exit')
-        sys.exit()
-
-# ***** open an issue and provide your working Arduino clone VID:PID to add for auto detection *****
-
-elif mode == pc.mode.PARALLEL:
-    # TODO: add auto detection for parallel bit generation
-    # **************** parallelly generate stable bits ****************
-    thread1 = StableBitsGenerator(is_sram_23lc1024=False, serialconnection='/dev/cu.usbmodem14111', bitrate=115200,
-                                  index='A')
-    thread1.start()
-    thread2 = StableBitsGenerator(is_sram_23lc1024=False, serialconnection='/dev/cu.usbmodem14121', bitrate=115200,
-                                  index='C')
-    thread2.start()
 
 # **************** solo generating stable bits ****************
 # thread1 = stableBitsGenerator(is_sram_23lc1024=False, serialconnection='/dev/cu.usbmodem14111', bitrate=115200,
-#                               index='A')
+#                               idx='A')
 # thread1.start()
+
+# begin ARCHIVE_C0
+#     idx = ''
+#         unique_id = bindutils.get_uid(s)
+#         if unique_id:
+#             idx = bindutils.get_index(conf.BIND_FILE,unique_id=unique_id)
+#         else:
+#             print('get_uid error\n')
+#             sys.exit(2)
+#         if idx:
+# end

@@ -3,6 +3,8 @@
 #include <Tools.h>
 #include <BCH.h>
 #include <SRAM_CY62256N.h>
+#define SERIAL_RX_BUFFER_SIZE 128       // override HardwareSerial.h (included in SPI.h)
+#define SERIAL_TX_BUFFER_SIZE 128       // override HardwareSerial.h (default is 64)
 #include <SPI.h>
 #include <SD.h>
 #include <Crypto.h>
@@ -13,9 +15,16 @@
 
 #define PIN_POWER_ANALOG A8
 #define PIN_POWER 9
+#define BUF_SIZE 5          // first byte is prefix code
+#define MAX_COUNT 120
+#define PIN_SAMPLE_SIZE 16
+#define MSGBUF_SIZE 128                 // serial_print() message buffer size
+#define SEED_ARDUINO_CMD 0x39           // flag preceding incoming seed data
+#define DEBUG
 
 SRAM_CY62256N sram;
 
+char msgbuf[MSGBUF_SIZE] = {'\0'};      // global message buffer
 uint8_t helper_data_new[7 * 37];
 uint8_t puf_binary_new[8 * 37];
 
@@ -24,8 +33,57 @@ boolean readBit(long location) {
   return result >> (7 - (location % 8)) & 0x1 == 1;
 }
 
-void set() {
+// format message string then serial print and flush (avoids display issues)
+void serial_print(char *str)
+{
+  snprintf(msgbuf, MSGBUF_SIZE, str);       // truncates if str > msgbuf
+  Serial.print(msgbuf);
+  Serial.flush();
+}
+
+uint32_t gen_seed_xor()
+{
+  const uint8_t n = PIN_SAMPLE_SIZE;
+
+  // sample spread of available pins (A0-A7, A9-A15), re-sample A0 so we have 16 reads
+  uint16_t pins[n] = {A0,A1,A2,A3,A4,A5,A6,A7,A9,A10,A11,A12,A13,A14,A15,A0};
+
+  // use only low nibble of low byte for larger variability
+  // since analogRead() returns a 10 bit wide int, high nibble of high byte always 0000 - discard
+  // low nibble of high byte can only be 0000, 0001, 0010, 0011, but realistically is almost always 0001 - discard
+  // high nibble of low byte repeats too frequently (4,5,6,7) - discard
+
+  uint16_t res[n];    // 0000 00XX XXXX XXXX    // 10 bit wide int
+                      //        XX hnib lnib
+  uint8_t lnib[n];    // low nibble of low byte
+  uint8_t xnib[n];    // xor'd nibbles
+  uint32_t seed=0;
+
+  for (int i=0; i<n; i++)
+  {
+    res[i] = analogRead(pins[i]);   // analogRead(floating_pin) returns 0 to 1023 (realistically ~ 200 to 500)
+
+    // get low nibbles
+    lnib[i] = res[i] & 0x0F;        // 00 0000 1111 (0x0F), mask
+  }
+
+  // xor the staggered low nibbles and shift to create a uint32_t seed
+  for (int j=0; j<n/2; j++)
+  {
+    xnib[j] = lnib[j]^lnib[n/2+j];      // nibble xor pairs (0,8), (1,9), ..., (7,15)
+  }
+  // shift 8 nibbles into a uint32_t seed
+  seed = ((uint32_t)xnib[0] << 28) | ((uint32_t)xnib[1] << 24) | ((uint32_t)xnib[2] << 20) | ((uint32_t)xnib[3] << 16) |
+                  ((uint32_t)xnib[4] << 12) | ((uint32_t)xnib[5] << 8) | ((uint32_t)xnib[6] << 4) | (uint32_t)xnib[7];
+  return seed;
+}
+
+void set()
+{
   sram = SRAM_CY62256N();
+  uint8_t buf[BUF_SIZE] = {'\0'};
+  uint32_t seed=0;
+  size_t result=0;
 
   DDRB = 0b11100000; //Pin 13, 12, 11 set to output
   DDRA = 0b11111111; //Pins 22-29 Set as Output (Lower Byte of Address)
@@ -33,9 +91,29 @@ void set() {
 
   pinMode(PIN_POWER, OUTPUT);
 
-  Serial.begin(115200);
-
+  Serial.begin(115200);         // arduino mega available immediately after init
   delay(1000);
+  Serial.setTimeout(10000);     // timeout (ms)
+
+  // TODO: alt method for quality random seed w/o user action - maybe have data on sd card
+  serial_print("run the seed_arduino.py script for best quality PRNG seed\r\n");          // prompt user to run script
+  serial_print("waiting 10 seconds till fallback to alternate seed generation...\r\n");
+
+  result = Serial.readBytes(buf, BUF_SIZE);     // readBytes() blocks till either buf is filled or timeout
+  if ((result == BUF_SIZE) && (buf[0] == (uint8_t)SEED_ARDUINO_CMD))
+  {
+    // first byte received was SEED command, next four bytes used to compose seed
+    seed = ((uint32_t)buf[4] << 24) | ((uint32_t)buf[3] << 16) | ((uint32_t)buf[2] << 8) | (uint32_t)buf[1];
+    serial_print("arduino seed generated from urandom data\r\n");
+  }
+  else      // timeout or error
+  {
+    // fallback if bytes from host are not received
+    serial_print("fallback to improved, but still weaker, PRNG seeding method\r\n");
+    seed = gen_seed_xor();
+    // seed = analogRead(A0);       // very inadequate
+  }
+  randomSeed(seed);     // begin PRNG stream
 }
 
 void decode(uint8_t *key_32) {
@@ -229,8 +307,9 @@ void print_key(uint8_t* key, uint8_t length) {
   Serial.println();
 }
 
-void gen_IV(uint8_t * result, uint8_t length){
-  randomSeed(analogRead(0));
+void gen_IV(uint8_t * result, uint8_t length)
+{
+  // moved and modified PRNG seeding code to set() function for proper init
 
   for (uint8_t i=0;i<length;i++){
     result[i]=random(256);
@@ -278,6 +357,9 @@ void setup(void)
   memset(final_key, 0, sizeof(final_key));
 
   set();
+#ifdef DEBUG
+  exit(0);
+#endif
   initializeSD();
 
   turn_on_sram();

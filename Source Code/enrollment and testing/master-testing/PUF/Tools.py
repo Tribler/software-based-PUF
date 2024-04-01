@@ -1,7 +1,35 @@
 import os, errno, collections
-
+import sys
 import datetime
 
+def save_to_tmp(data, tmpfile, with_comma=False):
+    """
+    Uses partial code written by Ade Setyawan Sajim but saves
+    data to a tempfile rather than a persistent file.
+    :param data: data to write to tmpfile
+    :param tmpfile: named tempfile, create with mode='w+t' (write+textfile)
+    :param with_comma: formatting flag
+    :return: 0 on success, 1 on error
+    """
+    if not tmpfile.closed and tmpfile.mode == 'w+t':        # tmpfile is open and mode is 'w+t'
+        if isinstance(data, collections.Iterable):
+            if not with_comma:
+                for i in data:
+                    print(i, file=tmpfile)
+            else:
+                j = 0
+                for i in data:
+                    print(i, file=tmpfile, end=", ")
+                    j += 1
+                    if j%16 == 0:
+                        print(file=tmpfile)
+        else:
+            print(data, file=tmpfile)
+        tmpfile.flush()
+        return 0
+    else:       # tempfile should be open with w+t attributes
+        print("tempfile error\n")
+        return 1
 
 def save_to_file(data, filename, with_comma=False):
     dir_name = os.path.dirname(filename)
@@ -135,3 +163,27 @@ def convert_dict_to_list(dct, separator=", "):
     for i in dct:
         dct_string.append(i + separator + str(dct[i]))
     return dct_string
+
+
+def sys_path_append(paths):
+    """
+    Wrapper for sys.path.append that includes checks.  Accepts single path
+    string or a list of strings to temporarily append.  This is a duplicate
+    of sys_path_append found in the wrapper module.
+    :param paths: string or list of strings containing paths to add
+    :return: 0 if all succeed, 1 on error
+    """
+    if isinstance(paths, str):
+        paths = [paths]     # convert string to list
+    for p in paths:
+        if not os.path.exists(p):    # check for non-existent path
+            return 1
+        path = os.path.abspath(p)
+        for x in sys.path:
+            x = os.path.abspath(x)
+            if path in (x, x+os.sep):     # already in sys.path
+                return 0
+        sys.path.append(path)
+        print(path, "added to sys.path (temporary)")
+        return 0
+    return 1

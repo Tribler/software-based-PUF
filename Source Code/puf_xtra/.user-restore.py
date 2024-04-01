@@ -1,4 +1,5 @@
-# Adds immutable constants for software-based-PUF,
+# File for storing user selected device settings.
+# This file is a part of software-based-PUF,
 # https://github.com/Tribler/software-based-PUF
 # Copyright (C) 2023 myndcryme
 #
@@ -15,12 +16,18 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from collections import namedtuple
+##################################################################
+# Configuration settings in this file are set at runtime         #
+# DO NOT set these values manually since they may be overwritten #
+##################################################################
 
-Mode = namedtuple('Constants', ['DEFAULT', 'MONO', 'PARALLEL'])
-mode = Mode(0, 0, 1)
+# saved user menu selection
+selected_device = ''
+selected_vidpid = ''
+selected_uid = ''
+selected_index = ''
 
-Device = namedtuple('Constants', ['GENUINE_MEGA2560_R3'])
-device = Device('2341:0042')        # VID:PID
-
-# any attempts to re-assign a value fails and raises an AttributeError
+# for information display
+selected_manufacturer = ''
+selected_product = ''
+selected_hwid = ''
