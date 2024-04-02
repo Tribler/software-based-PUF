@@ -77,7 +77,7 @@ void set(){
   DDRA = 0b11111111; //Pins 22-29 Set as Output (Lower Byte of Address)
   DDRC = 0b01111111; //Pins 37-31 Set as Output (Upper Byte of Address)
 
-  pinMode(PIN_POWER, OUTPUT)
+  pinMode(PIN_POWER, OUTPUT);
 
   Serial.begin(115200);     // serial ready immediately following init on mega boards
   delay(1000);
