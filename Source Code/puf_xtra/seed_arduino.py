@@ -24,7 +24,7 @@ from conf import conf, const
 
 def seeder():
     """
-    Monolithic function that is guarded since it is intended to be run directly.
+    Function is guarded since it is intended to be run directly.
     This function generates a crypto quality seed value (4 bytes) from the host's
     urandom pool and transmits the data via serial to the connected Arduino.
     Running this script is an optional but highly recommended to remedy inadequate
