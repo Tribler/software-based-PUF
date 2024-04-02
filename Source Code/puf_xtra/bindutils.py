@@ -372,7 +372,7 @@ def get_uid(serial_device_path: str = '') -> str:
     Writes GET_UID (55) command to Arduino serial device port.  Arduino device
     utilizes the ArduinoUniqueID library to retrieve the unique id and returns
     the uid hex string.
-    :param serial_device_path: Arduino device f
+    :param serial_device_path: Arduino device path
     :return: unique id for given device, empty on error
     """
     try:
