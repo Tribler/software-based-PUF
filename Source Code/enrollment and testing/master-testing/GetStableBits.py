@@ -52,10 +52,12 @@ def get_strong_bits_by_goal(serialPUF, goal, initial_delay=0.3, step_delay=0.005
 
     current_goal = 0
     delays = []
+    d = scale()
+    fmt_spec = '.' + str(d) + 'f'
 
     while current_goal < goal:
-        delay = round(delay, scale())         # rounds delay appropriately
-        print("DATA REMANENCE - delay: " + str(delay), end=' : ')
+        delay = round(delay, d)
+        print("DATA REMANENCE - delay:", format(delay, fmt_spec), end=' : ')
         delays.append(delay)
 
         result = serialPUF.try_data_remanence(delay, write_ones)
@@ -67,7 +69,7 @@ def get_strong_bits_by_goal(serialPUF, goal, initial_delay=0.3, step_delay=0.005
         print(current_goal)
 
         if current_goal < goal:
-            delay = delay + step_delay
+            delay += step_delay
 
     return [strong_bits, delay]
 
