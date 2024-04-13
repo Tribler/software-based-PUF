@@ -25,8 +25,10 @@ import threading
 from PUF import SerialPUF, Tools
 
 # temporarily append puf_xtra package if not already in sys.path
-pkg = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'puf_xtra')
-Tools.sys_path_append(pkg)
+pkg = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'puf_xtra'))
+if Tools.sys_path_append(pkg) != 0:
+    print("append path error")
+    sys.exit(1)
 import portutils
 import bindutils
 from conf import conf, const
@@ -88,7 +90,9 @@ class StableBitsValueGetter(threading.Thread):
         time.sleep(2)
 
         # serialPUF.check_if_it_is_working()
-
+        if self.tmp is not None:
+            abs_dir = os.path.dirname(os.path.abspath(__file__))
+            self.filename = os.path.join(abs_dir, self.filename)        # added so MainEnrollment.py can find the file
         bits = Tools.read_bits_from_file(self.filename, is_separated_by_comma=True)
         values = serialPUF.get_data(delay=5, address=bits)
 
