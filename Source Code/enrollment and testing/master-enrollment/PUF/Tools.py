@@ -174,16 +174,18 @@ def sys_path_append(paths):
     :return: 0 if all succeed, 1 on error
     """
     if isinstance(paths, str):
-        paths = [paths]     # convert string to list
+        paths = [paths]     # convert string to list for single path
     for p in paths:
+        present = False     # flag indicating status of path in sys.path
         if not os.path.exists(p):    # check for non-existent path
             return 1
         path = os.path.abspath(p)
-        for x in sys.path:
-            x = os.path.abspath(x)
+        for i in sys.path:
+            x = os.path.abspath(i)
             if path in (x, x+os.sep):     # already in sys.path
-                return 0
-        sys.path.append(path)
-        print(path, "added to sys.path (temporary)")
-        return 0
-    return 1
+                present = True
+                break
+        if not present:
+            sys.path.append(path)
+            print(path, "added to sys.path (temporary)")
+    return 0
