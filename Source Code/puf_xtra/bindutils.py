@@ -28,10 +28,12 @@ from scipy.spatial import distance
 from conf import conf, const
 import wrapper
 
-path0 = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'enrollment and testing', 'master-enrollment')
-path1 = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'enrollment and testing', 'master-testing')
+path0 = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)),'..','enrollment and testing','master-enrollment'))
+path1 = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)),'..', 'enrollment and testing', 'master-testing'))
 paths = [path0, path1]
-wrapper.sys_path_append(paths)
+if wrapper.sys_path_append(paths) != 0:
+    print("error appending path")
+    sys.exit(1)
 
 def hamming_distance(file1, file2) -> Optional[float]:
     """
@@ -77,8 +79,8 @@ def bind_file_chk(filename: str=conf.BIND_FILE):
         with open(filename,'w') as f:     # create file
             f.write("")
 
-# ***** See notes about CDF of binomial distribution for matching rational ***** #
-# ***** CDF (cumulative distribution function) ********************************* #
+# ***** See notes about CDF of binomial distribution for matching rationale ***** #
+# ***** CDF (cumulative distribution function) ********************************** #
 def get_sram_index(device: str) -> str:
     """
     Checks current SRAM against known SRAM results.  Parses directories containing
@@ -167,7 +169,7 @@ def get_sram_index(device: str) -> str:
         tmp = tempfile.NamedTemporaryFile(mode='w+t', delete=True)
         # stable bits values written to tempfile for the current sram at index {n} strongbits location
         thread = StableBitsValueGetter(thread_name=tname, is_sram_23lc1024=is_sram_val(), serialconnection=device,
-                              bitrate=conf.BITRATE, index=n, bits_filename=bfname, saved_filename='', tmp=tmp)
+                                       bitrate=conf.BITRATE, index=n, bits_filename=bfname, saved_filename='', tmp=tmp)
         thread.start()
         thread.join()
         # calculate hamming distance of prior indexed sram and current sram (for comparison)
