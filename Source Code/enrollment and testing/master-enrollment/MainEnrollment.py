@@ -23,8 +23,10 @@ from random import shuffle
 from PUF import SerialPUF, Tools
 
 # temporarily append puf_xtra package if not already in sys.path
-pkg = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'puf_xtra')
-Tools.sys_path_append(pkg)
+pkg = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'puf_xtra'))
+if Tools.sys_path_append(pkg) != 0:
+    print("error appending path")
+    sys.exit(1)
 import bindutils
 import portutils
 from conf import conf, const
@@ -42,14 +44,25 @@ def get_strong_bits_by_goal(serialPUF, goal, initial_delay=0.3, step_delay=0.005
             Otherwise set to false
     :return: location of strong bits
     """
+    def scale():
+        """
+        Gets the number of decimal places (scale) in 'step_delay' param.  This is used to round
+        'delay' value, avoiding floating point addition errors.
+        :return: number of decimal places
+        """
+        return len(str(step_delay).split('.')[1]) if '.' in str(step_delay) else 0
+
     delay = initial_delay
     strong_bits = []
 
     current_goal = 0
     delays = []
+    d = scale()
+    fmt_spec = '.' + str(d) + 'f'
 
     while current_goal < goal:
-        print("DATA REMANENCE - delay: " + str(delay), end=' : ')
+        delay = round(delay, d)
+        print("DATA REMANENCE - delay:", format(delay, fmt_spec), end=' : ')
         delays.append(delay)
 
         result = serialPUF.try_data_remanence(delay, write_ones)
@@ -61,7 +74,7 @@ def get_strong_bits_by_goal(serialPUF, goal, initial_delay=0.3, step_delay=0.005
         print(current_goal)
 
         if current_goal < goal:
-            delay = delay + step_delay
+            delay += step_delay
 
     return [strong_bits, delay]
 
@@ -107,7 +120,7 @@ def get_strong_bits(serialPUF, goal, initial_delay=0.3, step_delay=0.005):
     # TODO: but record strong_zeros beginning with:  delay == (initial_delay - step_delay)
     # TODO: likely an error
 
-    #b = get_strong_bits_by_goal(serialPUF, goal, a[1] - step_delay, step_delay, write_ones=True)
+    # b = get_strong_bits_by_goal(serialPUF, goal, a[1] - step_delay, step_delay, write_ones=True)
     b = get_strong_bits_by_goal(serialPUF, goal, a[1], step_delay, write_ones=True)
 
     strong_ones = a[0]      # a[0] is the strong_bits list, a[1] is the delay
@@ -162,7 +175,6 @@ s = const.RUN
 while s == const.RUN:       # runs again if detect() returns RERUN          (RERUN == RUN)
     s = portutils.detect()
 if s:   # device found
-    # ARCHIVE_B1
     idx = bindutils.get_sram_index(s)
     if not idx.startswith("ERR"):
         thread = EnrollmentTools(thread_name='thread0', serialconnection=s, bitrate=conf.BITRATE, index=idx,
