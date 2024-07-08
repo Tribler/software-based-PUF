@@ -1,0 +1,9 @@
+{
+	"name": "TPS63811",
+	"version": "1.0",
+	"license": "GPLv3",
+	"keywords": "software-based-puf, tps, 63811, tps63811, tps6381x",
+	"description": "Tribler/software-based-PUF TPS63811 shared library",
+	"frameworks": "arduino",
+	"platforms": "atmelavr"
+}
