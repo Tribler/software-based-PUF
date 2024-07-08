@@ -1,3 +1,20 @@
+// This file is part of the software-based-PUF,
+// https://github.com/Tribler/software-based-PUF
+// Modifications and additions Copyright (C) 2023, 2024 myndcryme
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 #include <Arduino.h>
 #include <ArduinoUniqueID.h>
 #include <stdio.h>
@@ -6,6 +23,7 @@
 #include <SRAM_CY62256N.h>
 #include <SPI.h>
 #include <SD.h>
+#include <TPS63811.h>
 
 #define TURN_OFF_CMD 40
 #define TURN_ON_CMD 41
@@ -25,6 +43,8 @@
 
 #define PIN_POWER_ANALOG A8
 #define PIN_POWER 9
+
+// #define TPS63811_TEST
 
 SRAM_CY62256N sram;
 char command[6];
@@ -85,7 +105,6 @@ void set(){
   bch = BCH();
   tools = Tools();
   bch.initialize();               /* Read m */
-
 }
 
 void decode(){
@@ -477,9 +496,21 @@ void check_command()
 
 void setup()
 {
-  set();
+  set();                        // sram init, serial begin, etc.
   initializeSD();
   pinMode(PIN_POWER, OUTPUT);
+
+#ifdef TPS63811_TEST
+  uint8_t vreg = calc_vout_regval(3.300);
+
+  tps63811_on();
+  tps63811_init();
+  register_set_bit(VOUT1, bx.vout1, sizeof(bx.vout1), &vreg);   // sets vout1 register value to yield 3.3V output
+  enable_output_converter();
+  delay(1000);
+  disable_output_converter();
+  tps63811_off();
+#endif
 }
 
 void loop()
