@@ -3,6 +3,13 @@
 ## README
 This repository is dedicated for the first open source software-based Physically Unclonable Function (PUF) using off-the-shelf SRAM.
 
+### 2024 update
+
+_New research: [A Systematic Bit Selection Method for Robust SRAM PUFs](https://eng.auburn.edu/~uguin/pdfs/wang2022systematic) is published in 2022_. Main content: ```We show in this paper that
+power-up states are also infuenced by the power supply ramp rate at power-up, which can be yet another source of cell instability. To address the general problem of instability in SRAM power-up states that can result in inconsistent responses from SRAM PUFs, we present an efective stable cell selection method to identify the cells in the SRAM that are strongly biased, thereby resistant to circuit noise, voltage and temperature changes, and also aging.```.
+The code within this repo might be updated one day with this new insight. It's solid work!
+
+
 ### Abstract
 SRAM PUF has a potential to become the main player in hardware security. Unfortunately, currently available solutions are usually locked to specific entities, such as companies or universities. Here, we introduce the first open source project to develop software-based SRAM PUF technology using off-the-shelf SRAM.
 We also present testing results on two off-the-shelf SRAMs quality to be a PUF component; Microchip 23LC1024 and Cypress CY62256NLL.
