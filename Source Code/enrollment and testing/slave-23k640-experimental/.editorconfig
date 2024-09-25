@@ -1,0 +1,4 @@
+root = true
+[*.{cpp,h,ini}]
+indent_style = space
+indent_size = 2
