@@ -6,10 +6,13 @@ This repository is dedicated for the first open source software-based Physically
 ### 2024 update
 
 Development has started for integrating an alternative, reliable bit selection method that can be applied to 
-currently available, easily obtained SRAM.  New development files are located in: software-based-PUF/Source 
-Code/enrollment and testing/slave-23k640-experimental.  Current work is experimental, determining how to best 
+currently available, easily obtained SRAM.  New development files are located in ```software-based-PUF/Source 
+Code/enrollment and testing/slave-23k640-experimental```.  Current work is experimental, determining how to best 
 replicate some research elements in the field rather than a lab environment. Slow voltage ramp can be achieved using 
-an inexpensive DAC (Adafruit MCP4725 breakout board 12 bit DAC) but fast ramp will require a custom ramp circuit to approach the TeKtronix AFG3952C ~7ns ramp.
+an inexpensive DAC (Adafruit MCP4725 breakout board 12 bit DAC) but fast ramp will require a custom ramp circuit to 
+approach the TeKtronix AFG3952C ~7ns ramp. The disconnected circuit on the right side was a POC triangle wave 
+generator from some TL081 I had on hand for ramp circuit prototyping - it will receive a major 
+upgrade soon. 
 
 ![prototyping setup](Source%20Code/enrollment%20and%20testing/slave-23k640-experimental/figures/ramp-setup-sm.jpg)
 
