@@ -77,6 +77,7 @@ void XSRAM::dac_begin(uint8_t addr)
   // dac.setVoltage(0, false);
 }
 
+/* replaces pwr on/off toggle for new bit selection method */
 void XSRAM::dac_set_voltage(uint16_t dn, bool b)
 {
   dac.setVoltage(dn, b);
