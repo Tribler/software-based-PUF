@@ -6,15 +6,20 @@ This repository is dedicated for the first open source software-based Physically
 ### 2024 update
 
 Development has started for integrating an alternative, reliable bit selection method that can be applied to 
-currently available, easily obtained SRAM.  New development files are located in ```software-based-PUF/Source 
-Code/enrollment and testing/slave-23k640-experimental```.  Current work is experimental, determining how to best 
-replicate some research elements in the field rather than a lab environment. Slow voltage ramp can be achieved using 
-an inexpensive DAC (Adafruit MCP4725 breakout board 12 bit DAC) but fast ramp will require a custom ramp circuit to 
-approach the TeKtronix AFG3952C ~7ns ramp. The disconnected circuit on the right side was a POC triangle wave 
-generator from some TL081 I had on hand for ramp circuit prototyping - it will receive a major 
-upgrade soon. 
+currently available, easily obtained SRAM.  New development files are located in:
+[slave-23K640-experimental](https://github.com/Tribler/software-based-PUF/tree/master/Source%20Code/enrollment%20and%20testing/slave-23k640-experimental).
+Current work is experimental, determining how to best replicate some research elements in the field rather than a 
+lab environment.
 
-![prototyping setup](Source%20Code/enrollment%20and%20testing/slave-23k640-experimental/figures/ramp-setup-sm.jpg)
+*Edit - fast ramp circuit is progressing.  See prototype using a Nexperia 74LVC1G125 buffer/line driver here: 
+[experimental readme](https://github.com/Tribler/tree/master/software-based-PUF/Source%20Code/enrollment%20and%20testing/slave-23k640-experimental/README.md)
+
+Slow voltage ramp can be achieved using an inexpensive DAC (Adafruit MCP4725 breakout board 12 bit DAC) but fast 
+ramp will require a custom ramp circuit to approach the TeKtronix AFG3952C ~7ns ramp. The disconnected circuit on 
+the right side was a POC triangle wave generator from some TL081 I had on hand for ramp circuit prototyping - it 
+will receive a major upgrade soon.
+
+![prototyping setup](Source%20Code/enrollment%20and%20testing/slave-23k640-experimental/figures/MCP4725-ramp-setup-sm.jpg)
 
 _New research: [A Systematic Bit Selection Method for Robust SRAM PUFs](https://eng.auburn.edu/~uguin/pdfs/wang2022systematic) is published in 2022_. Main content: ```We show in this paper that
 power-up states are also infuenced by the power supply ramp rate at power-up, which can be yet another source of cell instability. To address the general problem of instability in SRAM power-up states that can result in inconsistent responses from SRAM PUFs, we present an efective stable cell selection method to identify the cells in the SRAM that are strongly biased, thereby resistant to circuit noise, voltage and temperature changes, and also aging.```.
