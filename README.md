@@ -12,7 +12,8 @@ Current work is experimental, determining how to best replicate some research el
 lab environment.
 
 *Edit - fast ramp circuit is progressing.  See prototype using a Nexperia 74LVC1G125 buffer/line driver here: 
-[experimental readme](https://github.com/Tribler/tree/master/software-based-PUF/Source%20Code/enrollment%20and%20testing/slave-23k640-experimental/README.md)
+[experimental readme](https://github.com/Tribler/software-based-PUF/tree/master/Source%20Code/enrollment%20and%20testing
+/slave-23k640-experimental/README.md)
 
 Slow voltage ramp can be achieved using an inexpensive DAC (Adafruit MCP4725 breakout board 12 bit DAC) but fast 
 ramp will require a custom ramp circuit to approach the TeKtronix AFG3952C ~7ns ramp. The disconnected circuit on 
