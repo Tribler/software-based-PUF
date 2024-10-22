@@ -39,6 +39,6 @@ a solution also adds complexity and cost since MOSFETs and GaNFETs require gate 
 
 Slow voltage ramp can be achieved using an inexpensive DAC (Adafruit MCP4725 breakout board 12 bit DAC).
 
-[slow ramp waveform](https://github.com/Tribler/software-based-PUF/tree/master/Source%20Code/enrollment%20and%20testing/slave-23k640-experimental/figures/mcp4725-1s-ramp.png)
+[slow ramp waveform](https://github.com/Tribler/software-based-PUF/tree/master/Source%20Code/enrollment%20and%20testing/slave-23k640-experimental/figures/MCP4725-1s-ramp.png)
 
-[slow ramp circuit](https://github.com/Tribler/software-based-PUF/tree/master/Source%20Code/enrollment%20and%20testing/slave-23k640-experimental/figures/ramp-dac.jpg)
+[slow ramp circuit](https://github.com/Tribler/software-based-PUF/tree/master/Source%20Code/enrollment%20and%20testing/slave-23k640-experimental/figures/MCP4725-ramp-dac.jpg)
