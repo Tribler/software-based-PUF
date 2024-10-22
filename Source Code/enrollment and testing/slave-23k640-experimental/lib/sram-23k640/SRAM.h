@@ -1,9 +1,6 @@
-//
-// Created by Ade Setyawan on 01/17/18.
-//
-
 // This file is part of software-based-PUF,
 // https://github.com/Tribler/software-based-PUF
+// Original file created by Ade Setyawan on 01/17/18.
 // Modifications and additions Copyright (C) 2024 myndcryme.
 //
 // This program is free software: you can redistribute it and/or modify
@@ -31,12 +28,19 @@
 #include "Arduino.h"
 #include <SPI.h>
 
+#define SRAM_23K640   // if using 23K640, otherwise defaults to 23LC1024 specs
+
 using namespace std;
 
 class SRAM {
 protected:    // changed from private so that members are visible to XSRAM
-  uint32_t maxram = 131072; // number of bytes in 23LC1024 SRAM
-  uint32_t maxpage = 4096;  // number of pages in 23LC1024 SRAM
+#ifdef SRAM_23K640
+  uint32_t maxram = 32768;    // bytes in 23K640 SRAM
+  uint32_t maxpage = 1024;    // pages in 23K640 SRAM
+#else
+  uint32_t maxram = 131072;   // bytes in 23LC1024 SRAM (default)
+  uint32_t maxpage = 4096;    // pages in 23LC1024 SRAM (default)
+#endif
   uint8_t pin_cs;
   uint8_t pin_hold;
   uint8_t pin_power;
