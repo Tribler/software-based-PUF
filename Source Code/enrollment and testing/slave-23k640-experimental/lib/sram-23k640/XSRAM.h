@@ -30,6 +30,9 @@ class XSRAM : public SRAM {
 public:
   XSRAM();    // constructor
 
+  uint8_t pin_in1;
+  uint8_t pin_oe;
+
   // override
   void set_pin_power();   // power supplied via DAC module, not arduino pin
   void turn_off();        // power is supplied via DAC
@@ -37,7 +40,9 @@ public:
 
   // additional
   void dac_begin(uint8_t addr);
-  void config_pre_ramp();
+  void config_slow_ramp();
+  void config_fast_ramp();
+  void fast_on();
   void dac_set_voltage(uint16_t dn, bool b);
 };
 
