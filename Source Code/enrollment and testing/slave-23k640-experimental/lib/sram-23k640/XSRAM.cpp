@@ -33,10 +33,14 @@ void XSRAM::turn_off()
 {
   SPI.end();
 
+  pinMode(pin_in1, OUTPUT);
+  pinMode(pin_oe, OUTPUT);
   pinMode(pin_miso, OUTPUT);
   pinMode(pin_mosi, OUTPUT);
   pinMode(pin_sck, OUTPUT);
 
+  digitalWrite(pin_in1, LOW);         // disconnects DAC to SRAM power path
+  digitalWrite(pin_oe, HIGH);         // latches OE pin, Hi-Z / OFF state
   digitalWrite(pin_miso, LOW);
   digitalWrite(pin_mosi, LOW);
   digitalWrite(pin_sck, LOW);
@@ -57,15 +61,40 @@ void XSRAM::turn_on()
   SPI.begin();
 }
 
-/* call prior to voltage ramp routine */
-void XSRAM::config_pre_ramp()
+/* slow ramp CONFIG */
+void XSRAM::config_slow_ramp()
 {
+  pinMode(pin_in1, OUTPUT);
+  pinMode(pin_oe, OUTPUT);
   pinMode(pin_cs, OUTPUT);
   pinMode(pin_hold, OUTPUT);
+  digitalWrite(pin_in1, HIGH);    // drive IN1 HIGH, closing DAC VOUT ==> SRAM VCC connection
+  digitalWrite(pin_oe, HIGH);     // drive OE HIGH, Hi-Z / OFF state
   digitalWrite(pin_cs, LOW);
   digitalWrite(pin_hold, HIGH);
 
   SPI.begin();
+}
+
+/* fast ramp CONFIG */
+void XSRAM::config_fast_ramp()
+{
+  pinMode(pin_in1, OUTPUT);
+  pinMode(pin_oe, OUTPUT);
+  pinMode(pin_cs, OUTPUT);
+  pinMode(pin_hold, OUTPUT);
+  digitalWrite(pin_in1, LOW);   // disconnect DAC_VOUT from SRAM VCC
+  digitalWrite(pin_oe, HIGH);   // keep OE HIGH until actually ramp is executed
+  digitalWrite(pin_cs, LOW);
+  digitalWrite(pin_hold, HIGH);
+
+  SPI.begin();
+}
+
+void XSRAM::fast_on()
+{
+  pinMode(pin_oe, OUTPUT);
+  digitalWrite(pin_oe, LOW);    // enable output
 }
 
 void XSRAM::dac_begin(uint8_t addr)
