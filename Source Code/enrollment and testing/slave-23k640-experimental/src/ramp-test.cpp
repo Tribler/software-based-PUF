@@ -60,10 +60,8 @@ void uint8_print_hex(uint8_t val, bool sep)
     Serial.print(" ");
 }
 
-/* NOTE - MCP4725 slew rate is 0.55 V/us, thus the fastest possible ramp with
- * this DAC is around 5 to 6 microseconds when ramping from .58 V to 3.3 V.  To
- * mimic researcher's fast ramp (~ 7ns) we can probably get close building a gated
- * ramp circuit.  Powering an Arduino output pin ramps quite slow (~ 1us).
+/* PUF breakout board utilizes MCP4725 for slow ramp and Nexperia 74LVC1G125GV(Q100)
+ * as a gate to generate the fast ramp.
  */
 
 void setup()
@@ -102,17 +100,20 @@ void setup()
   Serial.print("init sd card...");
   if (!SD.begin(SD_CS_PIN))
   {
-    Serial.println("init failed");
+    Serial.println("sd init failed");
+    delay(1000);
     while(1);    // wait forever till sd bring up
   }
   Serial.println("done");
   delay(1000);
 
-  Serial.println("set min voltage, hold, then slow ramp to supply voltage");
-  xsram.config_pre_ramp();                 // configure pins before DAC output
-  xsram.dac_set_voltage(dn_min, false);    // set initial voltage with vdd_min input code
-  delay(hold_ms);                          // hold min voltage for specified ms
-  for (dn=dn_min; dn<DN_VDD; dn++)         // voltage ramp loop
+
+  // slow ramp test routine
+  Serial.println("\nbegin slow ramp test");
+  xsram.config_slow_ramp();               // configure pins before DAC output
+  xsram.dac_set_voltage(dn_min, false);   // set initial voltage with vdd_min input code
+  delay(hold_ms);                         // hold min voltage for specified ms
+  for (dn=dn_min; dn<DN_VDD; dn++)        // voltage ramp loop
   {
     xsram.dac_set_voltage(dn, false);
     delayMicroseconds(133);               // results in approximately a one sec ramp time
@@ -120,7 +121,7 @@ void setup()
   }
 
   // read sram test
-  Serial.println("read page test");
+  Serial.println("read page test results (slow ramp)");
 
   // 23LC1024 4096 total pages, let's test read some
   // TODO: add 23K640 SRAM
@@ -149,6 +150,29 @@ void setup()
   {
     Serial.println("error opening file");
   }
+
+  // fast ramp test routine
+  Serial.println("\nbegin fast ramp test");
+  xsram.config_fast_ramp();
+  xsram.fast_on();
+  Serial.println("read page test results (fast ramp)");
+
+  // 23LC1024 4096 total pages, let's test read some
+  // TODO: add 23K640 SRAM
+  for (int n=0; n<8; n++)
+  {
+    uint32_t addr = n*32;
+
+    Serial.print(addr, HEX);
+    Serial.print(":  ");
+    read_page(addr);
+    for (int i=0; i<32; i++)
+    {
+      uint8_print_hex(result_page[i], true);
+    }
+    Serial.println("");
+  }
+  xsram.turn_off();
 }
 
 void loop()
