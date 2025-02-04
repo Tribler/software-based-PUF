@@ -1,4 +1,19 @@
 
+### Update February 2025
+
+PCB for new bit selection method is nearing completion.  A render of the first revision PCB has been added to 
+figures.  Initial prototype requires a hardware fix to be usable and has been removed.  Testing performed on a 
+modified prototype board show it works well but issues arose:
+
+1. Unlike 23LC1024 which is 5V capable, 23K640 (3.6V max) needs a level shifter.  A TXB has been added for on board 
+   level shifting.
+2. Executing the fast ramp causes the Arduino to reboot, possibly due to voltage sag, but this needs to be debugged.
+3. Fast ramp waveform is probably already acceptable but can benefit from some tuning of R6.  This will make more 
+   sense when the schematic is released.
+
+Although it may appear a little "cart before the horse", it is necessary to build the hardware first to replicate and 
+incorporate the research into the software-based-PUF.
+
 ### Fast ramp circuit
 
 Preliminary figures have been included showing a very unrefined fast ramp prototype circuit.  Due to the fast rise 
