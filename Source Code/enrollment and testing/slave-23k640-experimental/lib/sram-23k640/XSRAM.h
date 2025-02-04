@@ -4,7 +4,7 @@
 //
 // This file is part of software-based-PUF,
 // https://github.com/Tribler/software-based-PUF
-// Copyright (C) 2024 myndcryme.
+// Copyright (C) 2024, 2025 myndcryme.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,27 +23,24 @@
 #define XSRAM_H
 
 #include "SRAM.h"
-#include <Adafruit_MCP4725.h>
 
 // XSRAM extends base SRAM class for new bit selection method
 class XSRAM : public SRAM {
 public:
   XSRAM();    // constructor
 
-  uint8_t pin_in1;
-  uint8_t pin_oe;
+  // hide these since they won't work powering the SRAM via DAC
+  void set_pin_power();
+  void turn_off();
+  void turn_on();
 
-  // override
-  void set_pin_power();   // power supplied via DAC module, not arduino pin
-  void turn_off();        // power is supplied via DAC
-  void turn_on();         // power is supplied via DAC
-
-  // additional
-  void dac_begin(uint8_t addr);
-  void config_slow_ramp();
-  void config_fast_ramp();
-  void fast_on();
-  void dac_set_voltage(uint16_t dn, bool b);
+  // add necessary getters
+  uint8_t get_pin_cs() const;
+  uint8_t get_pin_hold() const;
+  uint8_t get_pin_power() const;
+  uint8_t get_pin_mosi() const;
+  uint8_t get_pin_miso() const;
+  uint8_t get_pin_sck() const;
 };
 
 #endif
