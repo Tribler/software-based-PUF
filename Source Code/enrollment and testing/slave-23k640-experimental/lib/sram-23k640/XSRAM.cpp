@@ -4,7 +4,7 @@
 //
 // This file is part of software-based-PUF,
 // https://github.com/Tribler/software-based-PUF
-// Copyright (C) 2024 myndcryme.
+// Copyright (C) 2024, 2025 myndcryme.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,93 +21,40 @@
 
 #include "XSRAM.h"
 
-Adafruit_MCP4725 dac;
+#define SRAM_23K640   // using 23K640 for ramp method
 
-XSRAM::XSRAM() : SRAM(){}
-
-// override
-void set_pin_power(){}    // using DAC instead
-
-/* modified to use DAC instead of Arduino output pin */
-void XSRAM::turn_off()
-{
-  SPI.end();
-
-  pinMode(pin_in1, OUTPUT);
-  pinMode(pin_oe, OUTPUT);
-  pinMode(pin_miso, OUTPUT);
-  pinMode(pin_mosi, OUTPUT);
-  pinMode(pin_sck, OUTPUT);
-
-  digitalWrite(pin_in1, LOW);         // disconnects DAC to SRAM power path
-  digitalWrite(pin_oe, HIGH);         // latches OE pin, Hi-Z / OFF state
-  digitalWrite(pin_miso, LOW);
-  digitalWrite(pin_mosi, LOW);
-  digitalWrite(pin_sck, LOW);
-  dac.setVoltage(0, false);         // set DAC voltage to 0V
-  digitalWrite(pin_hold, LOW);
-  digitalWrite(pin_cs, HIGH);         // changed from LOW
+XSRAM::XSRAM() : SRAM(){
+#ifdef SRAM_23K640  // re-assign vars from 23LC1024 (SRAM class defaults)
+  maxram = 32768;   // bytes in 23K640 SRAM
+  maxpage = 1024;   // pages in 23K640 SRAM
+#endif
 }
 
-/* modified to use DAC - sets voltage to DAC VDD input (max voltage) */
-void XSRAM::turn_on()
-{
-  pinMode(pin_cs, OUTPUT);
-  pinMode(pin_hold, OUTPUT);
-  digitalWrite(pin_cs, LOW);
-  digitalWrite(pin_hold, HIGH);
-  dac.setVoltage(4095, false);    // 4095 is max Dn input code (results in voltage VDD)
+// hide, since using DAC instead
+void XSRAM::set_pin_power(){}
+void XSRAM::turn_off(){}
+void XSRAM::turn_on(){}
 
-  SPI.begin();
+uint8_t XSRAM::get_pin_cs() const{
+  return pin_cs;
 }
 
-/* slow ramp CONFIG */
-void XSRAM::config_slow_ramp()
-{
-  pinMode(pin_in1, OUTPUT);
-  pinMode(pin_oe, OUTPUT);
-  pinMode(pin_cs, OUTPUT);
-  pinMode(pin_hold, OUTPUT);
-  digitalWrite(pin_in1, HIGH);    // drive IN1 HIGH, closing DAC VOUT ==> SRAM VCC connection
-  digitalWrite(pin_oe, HIGH);     // drive OE HIGH, Hi-Z / OFF state
-  digitalWrite(pin_cs, LOW);
-  digitalWrite(pin_hold, HIGH);
-
-  SPI.begin();
+uint8_t XSRAM::get_pin_hold() const{
+  return pin_hold;
 }
 
-/* fast ramp CONFIG */
-void XSRAM::config_fast_ramp()
-{
-  pinMode(pin_in1, OUTPUT);
-  pinMode(pin_oe, OUTPUT);
-  pinMode(pin_cs, OUTPUT);
-  pinMode(pin_hold, OUTPUT);
-  digitalWrite(pin_in1, LOW);   // disconnect DAC_VOUT from SRAM VCC
-  digitalWrite(pin_oe, HIGH);   // keep OE HIGH until actually ramp is executed
-  digitalWrite(pin_cs, LOW);
-  digitalWrite(pin_hold, HIGH);
-
-  SPI.begin();
+uint8_t XSRAM::get_pin_power() const{
+  return pin_power;
 }
 
-void XSRAM::fast_on()
-{
-  pinMode(pin_oe, OUTPUT);
-  digitalWrite(pin_oe, LOW);    // enable output
+uint8_t XSRAM::get_pin_mosi() const{
+  return pin_mosi;
 }
 
-void XSRAM::dac_begin(uint8_t addr)
-{
-  dac.begin(addr);
-  TWBR = 12;          // 400 KHz operation
-
-  /* write non-volatile value to EEPROM for persistent start up of 0V, or uncomment next line */
-  // dac.setVoltage(0, false);
+uint8_t XSRAM::get_pin_miso() const{
+  return pin_miso;
 }
 
-/* replaces pwr on/off toggle for new bit selection method */
-void XSRAM::dac_set_voltage(uint16_t dn, bool b)
-{
-  dac.setVoltage(dn, b);
+uint8_t XSRAM::get_pin_sck() const{
+  return pin_sck;
 }
