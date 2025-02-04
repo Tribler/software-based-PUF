@@ -67,10 +67,25 @@ private:
     }
   };
 
+  // TODO: finish adding TXB0106 nested class and getters, other related
+  class Shifter_TXB0106{    // level shifter
+  private:
+    uint8_t pin_oe_txb;   // oe pin for txb level shifter
+
+  public:
+    uint8_t get_oe_txb() const{
+      return pin_oe_txb;
+    }
+    void set_oe_txb(uint8_t pin){
+      pin_oe_txb = pin;
+    }
+  };
+
   XSRAM xsram;                  // embedded instance
   Adafruit_MCP4725 dac;         // embedded instance
   Buffer_74LVC1G125 lvc1g125;   // buffer embedded instance
   Switch_LMS4684 lms4684;       // analog switch embedded instance
+  Shifter_TXB0106 txb0106;      // level shifter embedded instance
 
 public:
   PUFBoard();
@@ -86,6 +101,9 @@ public:
   uint8_t get_pin_in1() const{
     return lms4684.get_in1();
   }
+  uint8_t get_pin_oe_txb() const{
+    return txb0106.get_oe_txb();
+  }
 
   // public setters
   void set_pin_oe(uint8_t pin){
@@ -96,6 +114,9 @@ public:
   }
   void set_pin_in1(uint8_t pin){
     lms4684.set_in1(pin);
+  }
+  void set_pin_oe_txb(uint8_t pin){
+    txb0106.set_oe_txb(pin);
   }
 
   void init_board();
