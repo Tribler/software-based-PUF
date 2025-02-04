@@ -32,6 +32,7 @@ private:
   uint8_t pin_in1;
   uint8_t pin_oe;
   uint8_t pin_vcc;
+  uint8_t pin_oe_txb;
 
   // nested classes for puf board IC pin config and function
   class Buffer_74LVC1G125{    // tri state buffer
