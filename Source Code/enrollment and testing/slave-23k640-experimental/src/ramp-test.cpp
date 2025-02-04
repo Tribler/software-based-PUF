@@ -2,7 +2,7 @@
 // an alternative bit selection method for SRAM PUFs.
 // This file is part of software-based-PUF,
 // https://github.com/Tribler/software-based-PUF
-// Copyright (C) 2024 myndcryme.
+// Copyright (C) 2024, 2025 myndcryme.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 #include <SPI.h>
 #include <SD.h>
 #include <Wire.h>
-#include <XSRAM.h>      // includes Adafruit_MCP4725.h
+#include <pufboard.h>
 
 #define DAC_ADDR 0x62   // ADAFRUIT_MCP4725_I2C_ADDR
 #define DN_RES 4096     // DAC input code resolution (12 bits)
@@ -33,13 +33,17 @@
 #define MISO_PIN 50
 #define MOSI_PIN 51
 #define SCK_PIN 52
-#define SD_CS_PIN 7     // chip select pin for SD card breakout
-#define SRAM_CS_PIN 10  // chip select pin for SRAM IC
+#define SD_CS_PIN 7       // chip select pin for SD card breakout
+#define SRAM_CS_PIN 10    // chip select pin for SRAM IC
+//#define VCC_PIN 12        // VCC (74LVC1G125 supply voltage)
+#define OE_PIN 3          // OE (74LVC1G125 output enable)
+#define IN1_PIN 8         // IN1 (LMS4684 input1)
+
+PUFBoard board;         // PUF breakout board instance
+
+XSRAM& xsram = board.getXSRAM();    // allow access XSRAM instance directly
 
 const char HEX_TABLE[] = "0123456789ABCDEF";
-
-XSRAM xsram;
-
 uint8_t result_page[32] = {'\0'};
 size_t rp_size = sizeof(result_page);
 
@@ -60,13 +64,27 @@ void uint8_print_hex(uint8_t val, bool sep)
     Serial.print(" ");
 }
 
-/* PUF breakout board utilizes MCP4725 for slow ramp and Nexperia 74LVC1G125GV(Q100)
- * as a gate to generate the fast ramp.
- */
-
 void setup()
 {
+  // set pin assignments
+  board.set_pin_in1(IN1_PIN);   // puf board IC LMS4684 in1 pin
+  board.set_pin_oe(OE_PIN);     // puf board IC 74LVC1G125 oe pin
+  //board.set_pin_vcc(VCC_PIN);
+
+  // sram is now mounted on board but pin assignments are still set using original class
+  // setters (actually extended class setters, but they are inherited and equivalent)
+  xsram.set_pin_cs(SRAM_CS_PIN);
+  xsram.set_pin_hold(HOLD_PIN);
+  xsram.set_pin_mosi(MOSI_PIN);
+  xsram.set_pin_miso(MISO_PIN);
+  xsram.set_pin_sck(SCK_PIN);
+
+  // then initialize the board
+  board.init_board();
+  delay(500);
+
   File myFile;              // SD card file
+  bool b = false;
   const char *filename = "test.txt";
   float vdd_min = 0.58;    // ramp begin voltage
   float vdd_spl = VDD;     // ramp end voltage
@@ -84,38 +102,43 @@ void setup()
   // TODO:  account for loop and operations time for an accurate step value
   uint32_t step_usec = floor((ramp_ms*1000)/steps);
 
-  xsram = XSRAM();
-
-  xsram.set_pin_cs(SRAM_CS_PIN);
-  xsram.set_pin_hold(HOLD_PIN);
-  xsram.set_pin_mosi(MOSI_PIN);
-  xsram.set_pin_miso(MISO_PIN);
-  xsram.set_pin_sck(SCK_PIN);
-
   Serial.begin(115200);
   delay(500);
-  Serial.println("\ninitializing DAC");
-  xsram.dac_begin(DAC_ADDR);    // initialize DAC and join I2C bus
-  delay(500);
-  Serial.print("init sd card...");
-  if (!SD.begin(SD_CS_PIN))
-  {
-    Serial.println("sd init failed");
-    delay(1000);
-    while(1);    // wait forever till sd bring up
-  }
-  Serial.println("done");
-  delay(1000);
 
+  Serial.println("\ninitializing DAC");
+  board.dac_begin(DAC_ADDR);    // initialize DAC and join I2C bus
+  delay(500);
+  Serial.println("sram_power_on\npin_in1 HIGH, pin_oe HIGH");
+  board.sram_power_on();
+  delay(1000);
+  Serial.println("sram_power_off\npin_in1 LOW, pin_oe HIGH");
+  board.sram_power_off();
+  delay(500);
+
+//  Serial.print("init sd card...");
+//  if (!SD.begin(SD_CS_PIN))
+//  {
+//    Serial.println("sd init failed");
+//    delay(1000);
+//    while(1);    // wait forever till sd bring up
+//  }
+//  Serial.println("done");
+
+  delay(10000);
 
   // slow ramp test routine
+  Serial.println("config slow ramp");
+  board.config_slow_ramp();               // configure pins before DAC output
+  delay(1000);
+
   Serial.println("\nbegin slow ramp test");
-  xsram.config_slow_ramp();               // configure pins before DAC output
-  xsram.dac_set_voltage(dn_min, false);   // set initial voltage with vdd_min input code
+  board.config_slow_ramp();
+  delay(500);
+  board.dac_set_voltage(dn_min, false);   // set initial voltage with vdd_min input code
   delay(hold_ms);                         // hold min voltage for specified ms
   for (dn=dn_min; dn<DN_VDD; dn++)        // voltage ramp loop
   {
-    xsram.dac_set_voltage(dn, false);
+    board.dac_set_voltage(dn, false);
     delayMicroseconds(133);               // results in approximately a one sec ramp time
     // delayMicroseconds(step_usec);      // TODO: step_usec needs a correction factor to work properly
   }
@@ -123,8 +146,7 @@ void setup()
   // read sram test
   Serial.println("read page test results (slow ramp)");
 
-  // 23LC1024 4096 total pages, let's test read some
-  // TODO: add 23K640 SRAM
+  // TODO: check xsram.get_max_page(), 23LC1024 4096 total pages, 23K640 1024 pages
   for (int n=0; n<8; n++)
   {
     uint32_t addr = n*32;
@@ -138,7 +160,9 @@ void setup()
     }
     Serial.println("");
   }
-  xsram.turn_off();
+  board.sram_power_off();
+  Serial.println("slow ramp test complete");
+  delay(5000);
 
   myFile = SD.open(filename, FILE_WRITE);
   if (myFile)
@@ -153,12 +177,18 @@ void setup()
 
   // fast ramp test routine
   Serial.println("\nbegin fast ramp test");
-  xsram.config_fast_ramp();
-  xsram.fast_on();
+  board.config_fast_ramp();
+  delay(1000);
+  Serial.println("sram_fast_on");
+  board.sram_fast_on();
+  delay(3500);
+  board.sram_fast_off();
+  delay(1000);
+  board.sram_fast_on();
+  delay(1000);
   Serial.println("read page test results (fast ramp)");
 
-  // 23LC1024 4096 total pages, let's test read some
-  // TODO: add 23K640 SRAM
+  // 23K640 maxram is 32768, maxpage is
   for (int n=0; n<8; n++)
   {
     uint32_t addr = n*32;
@@ -172,7 +202,9 @@ void setup()
     }
     Serial.println("");
   }
-  xsram.turn_off();
+  Serial.println("sram_power_off");
+  board.sram_power_off();
+  delay(1000);
 }
 
 void loop()
