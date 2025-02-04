@@ -29,13 +29,17 @@ void PUFBoard::init_board()
 {
   pin_in1 = get_pin_in1();
   pin_oe = get_pin_oe();
+  pin_oe_txb = get_pin_oe_txb();
   //pin_vcc = get_pin_vcc();
 
   pinMode(pin_in1, OUTPUT);     // input1 pin (LMS4684) - pin mode OUTPUT for *Arduino* is correct
   pinMode(pin_oe, OUTPUT);      // output enable pin (74LVC1G125)
+  pinMode(pin_oe_txb, OUTPUT);  // txb output enable pin
   //pinMode(pin_vcc, OUTPUT);
   digitalWrite(pin_in1, LOW);   // disconnect DAC to SRAM power path
   digitalWrite(pin_oe, HIGH);   // latch OE pin, Hi-Z / OFF state
+  // TODO: finish adding oe_txb pin
+  // digitalWrite(pin_oe_txb, LOW);
 
   pin_cs = xsram.get_pin_cs();
   pin_hold = xsram.get_pin_hold();
