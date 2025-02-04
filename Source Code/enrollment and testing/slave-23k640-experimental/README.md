@@ -2,7 +2,7 @@
 ### Update February 2025
 
 PCB for new bit selection method is nearing completion.  A render of the first revision PCB has been added to 
-figures.  Initial prototype requires a hardware fix to be usable and has been removed.  Testing performed on a 
+figures.  Initial prototype required a hardware fix to be usable and has been removed.  Testing performed on a 
 modified prototype board show it works well but issues arose:
 
 1. Unlike 23LC1024 which is 5V capable, 23K640 (3.6V max) needs a level shifter.  A TXB has been added for on board 
