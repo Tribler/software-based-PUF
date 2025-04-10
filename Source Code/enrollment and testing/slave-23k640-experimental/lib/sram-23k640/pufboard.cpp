@@ -18,7 +18,7 @@
 #include "pufboard.h"
 
 // init embedded instances
-PUFBoard::PUFBoard() : xsram(), dac(), lvc1g125(), lms4684(){}
+PUFBoard::PUFBoard() : xsram(), dac(), lvc1g125(), lms4684(), txb0106(){}
 
 // derived class instance getter
 XSRAM& PUFBoard::getXSRAM(){
@@ -34,12 +34,11 @@ void PUFBoard::init_board()
 
   pinMode(pin_in1, OUTPUT);     // input1 pin (LMS4684) - pin mode OUTPUT for *Arduino* is correct
   pinMode(pin_oe, OUTPUT);      // output enable pin (74LVC1G125)
-  pinMode(pin_oe_txb, OUTPUT);  // txb output enable pin
+  pinMode(pin_oe_txb, OUTPUT);  // txb0601 output enable pin
   //pinMode(pin_vcc, OUTPUT);
   digitalWrite(pin_in1, LOW);   // disconnect DAC to SRAM power path
   digitalWrite(pin_oe, HIGH);   // latch OE pin, Hi-Z / OFF state
-  // TODO: finish adding oe_txb pin
-  // digitalWrite(pin_oe_txb, LOW);
+  digitalWrite(pin_oe_txb, LOW);   // LOW places all shifter I/Os in a high impedance state (OFF state)
 
   pin_cs = xsram.get_pin_cs();
   pin_hold = xsram.get_pin_hold();
@@ -51,6 +50,16 @@ void PUFBoard::init_board()
   pinMode(pin_hold, OUTPUT);    // sram hold pin
 }
 
+void PUFBoard::txb_enable()
+{
+  digitalWrite(pin_oe_txb, HIGH);
+}
+
+void PUFBoard::txb_disable()
+{
+  digitalWrite(pin_oe_txb, LOW);    // all TXB I/Os in a high impedance state (OFF state)
+}
+
 // uses DAC instead of Arduino output pin for power
 void PUFBoard::sram_power_off()
 {
@@ -60,10 +69,10 @@ void PUFBoard::sram_power_off()
   digitalWrite(pin_in1, LOW);         // disconnects DAC to SRAM power path
   dac.setVoltage(0, false);           // set DAC voltage to 0V
   digitalWrite(pin_miso, LOW);
-  digitalWrite(pin_mosi, LOW);
-  digitalWrite(pin_sck, LOW);
-  digitalWrite(pin_hold, LOW);
-  digitalWrite(pin_cs, HIGH);         // de-select
+  digitalWrite(pin_mosi, LOW);        //  || set all inputs LOW when SRAM is powered off
+  digitalWrite(pin_sck, LOW);         //  ||
+  digitalWrite(pin_hold, LOW);        //  ||
+  digitalWrite(pin_cs, LOW);          //  \/
 }
 
 // sets voltage to DAC VDD input (max voltage)
@@ -84,8 +93,12 @@ void PUFBoard::config_slow_ramp()
   digitalWrite(pin_in1, HIGH);    // drive IN1 HIGH, closing NO1, connecting DAC to SRAM power path
   digitalWrite(pin_oe, HIGH);     // drive OE HIGH, ensuring Hi-Z / OFF state
   digitalWrite(pin_cs, LOW);
-  digitalWrite(pin_hold, HIGH);
 
+  /* temporarily keep the HOLD pin LOW (or possibly float?) during VCC ramp since input pins should not exceed VCC+0.3V
+   * but HOLD must be pulled HIGH after power ramp - also note HIGH is 3.3V for 23K640 so signal must be translated
+   */
+
+  digitalWrite(pin_hold, LOW);
   SPI.begin();
 }
 
@@ -95,19 +108,27 @@ void PUFBoard::config_fast_ramp()
   digitalWrite(pin_in1, LOW);   // disconnect DAC VOUT from SRAM VCC
   digitalWrite(pin_oe, HIGH);   // keep OE HIGH until actually ramp is executed
   digitalWrite(pin_cs, LOW);
-  digitalWrite(pin_hold, HIGH);
 
+  /* temporarily keep the HOLD pin LOW (or possibly float?) during VCC ramp since input pins should not exceed VCC+0.3V
+   * but HOLD must be pulled HIGH after power ramp completes - also note HIGH is 3.3V for 23K640 so signal must be
+   * translated
+   */
+
+  digitalWrite(pin_hold, LOW);
   SPI.begin();
 }
 
 void PUFBoard::sram_fast_on()
 {
   digitalWrite(pin_oe, LOW);    // enable output, fast ramp on
+  delayMicroseconds(1000);      // short delay so VCC can settle before pulling HOLD up
+  digitalWrite(pin_hold, HIGH);
 }
 
 void PUFBoard::sram_fast_off()
 {
   digitalWrite(pin_oe, HIGH);
+  digitalWrite(pin_hold, LOW);    // must set LOW when SRAM is powered off
 }
 
 bool PUFBoard::dac_begin(uint8_t addr)
