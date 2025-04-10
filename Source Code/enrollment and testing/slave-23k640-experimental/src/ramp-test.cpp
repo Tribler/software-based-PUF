@@ -35,9 +35,9 @@
 #define SCK_PIN 52
 #define SD_CS_PIN 7       // chip select pin for SD card breakout
 #define SRAM_CS_PIN 10    // chip select pin for SRAM IC
-//#define VCC_PIN 12        // VCC (74LVC1G125 supply voltage)
 #define OE_PIN 3          // OE (74LVC1G125 output enable)
 #define IN1_PIN 8         // IN1 (LMS4684 input1)
+#define OE_TXB_PIN 5      // output enable for TXB level shifter
 
 PUFBoard board;         // PUF breakout board instance
 
@@ -69,6 +69,7 @@ void setup()
   // set pin assignments
   board.set_pin_in1(IN1_PIN);   // puf board IC LMS4684 in1 pin
   board.set_pin_oe(OE_PIN);     // puf board IC 74LVC1G125 oe pin
+  board.set_pin_oe_txb(OE_TXB_PIN);
   //board.set_pin_vcc(VCC_PIN);
 
   // sram is now mounted on board but pin assignments are still set using original class
@@ -89,9 +90,10 @@ void setup()
   float vdd_min = 0.58;    // ramp begin voltage
   float vdd_spl = VDD;     // ramp end voltage
 
-  // Dn = input code (0 to 4095)
-  // Vout = VDD*(Dn/4096)
-  // Dn = (Vout*4096)/VDD
+  /* Dn = input code (0 to 4095)
+   * Vout = VDD*(Dn/4096)
+   * Dn = (Vout*4096)/VDD
+   */
 
   uint32_t dn;          // input code
   uint32_t dn_min = floor((vdd_min*DN_RES)/vdd_spl);    // Dn (input code) == vdd_min voltage
@@ -108,12 +110,15 @@ void setup()
   Serial.println("\ninitializing DAC");
   board.dac_begin(DAC_ADDR);    // initialize DAC and join I2C bus
   delay(500);
-  Serial.println("sram_power_on\npin_in1 HIGH, pin_oe HIGH");
-  board.sram_power_on();
-  delay(1000);
-  Serial.println("sram_power_off\npin_in1 LOW, pin_oe HIGH");
-  board.sram_power_off();
-  delay(500);
+  Serial.println("enable voltage level shifter");
+  board.txb_enable();   // on for read operation
+
+//  Serial.println("sram_power_on\npin_in1 HIGH, pin_oe HIGH");
+//  board.sram_power_on();
+//  delay(1000);
+//  Serial.println("sram_power_off\npin_in1 LOW, pin_oe HIGH");
+//  board.sram_power_off();
+//  delay(500);
 
 //  Serial.print("init sd card...");
 //  if (!SD.begin(SD_CS_PIN))
@@ -124,7 +129,7 @@ void setup()
 //  }
 //  Serial.println("done");
 
-  delay(10000);
+  delay(5000);
 
   // slow ramp test routine
   Serial.println("config slow ramp");
@@ -132,8 +137,6 @@ void setup()
   delay(1000);
 
   Serial.println("\nbegin slow ramp test");
-  board.config_slow_ramp();
-  delay(500);
   board.dac_set_voltage(dn_min, false);   // set initial voltage with vdd_min input code
   delay(hold_ms);                         // hold min voltage for specified ms
   for (dn=dn_min; dn<DN_VDD; dn++)        // voltage ramp loop
@@ -143,8 +146,12 @@ void setup()
     // delayMicroseconds(step_usec);      // TODO: step_usec needs a correction factor to work properly
   }
 
+  // slow ramp complete, must pull HOLD up to VCC
+  digitalWrite(HOLD_PIN, HIGH);   // TODO: this should be handled elsewhere, in a callable slow ramp function
+
   // read sram test
   Serial.println("read page test results (slow ramp)");
+  delay(100);
 
   // TODO: check xsram.get_max_page(), 23LC1024 4096 total pages, 23K640 1024 pages
   for (int n=0; n<8; n++)
@@ -164,29 +171,26 @@ void setup()
   Serial.println("slow ramp test complete");
   delay(5000);
 
-  myFile = SD.open(filename, FILE_WRITE);
-  if (myFile)
-  {
-    // TODO: write test data to sd or save on host
-    myFile.close();
-  }
-  else
-  {
-    Serial.println("error opening file");
-  }
+//  myFile = SD.open(filename, FILE_WRITE);
+//  if (myFile)
+//  {
+//    // TODO: write test data to sd or save on host
+//    myFile.close();
+//  }
+//  else
+//  {
+//    Serial.println("error opening file");
+//  }
 
-  // fast ramp test routine
+  // fast ramp quick test routine
   Serial.println("\nbegin fast ramp test");
   board.config_fast_ramp();
   delay(1000);
   Serial.println("sram_fast_on");
   board.sram_fast_on();
-  delay(3500);
-  board.sram_fast_off();
-  delay(1000);
-  board.sram_fast_on();
   delay(1000);
   Serial.println("read page test results (fast ramp)");
+  delay(100);
 
   // 23K640 maxram is 32768, maxpage is
   for (int n=0; n<8; n++)
@@ -204,6 +208,9 @@ void setup()
   }
   Serial.println("sram_power_off");
   board.sram_power_off();
+  delay(500);
+  Serial.println("disable voltage level translator (TXB)");
+  board.txb_disable();
   delay(1000);
 }
 
