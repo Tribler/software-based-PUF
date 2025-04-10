@@ -23,6 +23,8 @@
 
 #define SRAM_23K640   // using 23K640 for ramp method
 
+// *note - 23K640 instruction set/format (READ, WRITE, RDSR, WRSR) is the same as 23LC1024
+
 XSRAM::XSRAM() : SRAM(){
 #ifdef SRAM_23K640  // re-assign vars from 23LC1024 (SRAM class defaults)
   maxram = 32768;   // bytes in 23K640 SRAM
