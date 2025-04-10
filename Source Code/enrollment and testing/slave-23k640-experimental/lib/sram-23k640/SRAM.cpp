@@ -151,8 +151,7 @@ SRAM::turn_off(){
   digitalWrite(pin_sck, LOW);
   digitalWrite(pin_power, LOW);
   digitalWrite(pin_hold, LOW);
-  digitalWrite(pin_cs, HIGH);   // corrected
-  // digitalWrite(pin_cs, LOW);
+  digitalWrite(pin_cs, LOW);    // correct since SRAM is toggled off
 }
 
 void
