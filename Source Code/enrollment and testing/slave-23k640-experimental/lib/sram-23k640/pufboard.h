@@ -123,10 +123,12 @@ public:
   void init_board();
   void config_slow_ramp();
   void config_fast_ramp();
-  void sram_fast_on();
-  void sram_fast_off();
-  void sram_power_off();
-  void sram_power_on();
+  void txb_enable();      // ON state, enable TXB0106 level shifter
+  void txb_disable();     // OFF state, all I/Os in a high impedance state
+  void sram_fast_on();    // 74LVC1G125 enable output (sets OE pin LOW)
+  void sram_fast_off();   // 74LVC1G125 disable output (sets OE pin HIGH)
+  void sram_power_off();  // complete SRAM power off (for both slow / fast)
+  void sram_power_on();   // for legacy power on/off (uses DAC)
   bool dac_begin(uint8_t addr);
   bool dac_set_voltage(uint16_t dn, bool b);
 };
