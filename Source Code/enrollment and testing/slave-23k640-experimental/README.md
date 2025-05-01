@@ -1,4 +1,31 @@
 
+### Update May 2025 - Lessons learned
+Second PCB revision has revealed some minor flaws plus an unexpected voltage transient during fast ramp that will be 
+addressed for the next board revision (hopefully release).  Board fabrication was severely delayed and partly 
+responsible for the slow progress.  A photo of the actual pcb_r2 board has been included (apologies for the poor 
+quality) and is more representative of what to expect for release.  The Adafruit DAC and SD card breakouts plug into 
+board mounted headers for simplicity.  The PCB layout may eventually be altered to produce an Arduino "hat" to 
+completely eliminate hookup wires and errors.
+
+The reboot issue on fast voltage ramp is resolved by using a dedicated power supply.  I dislike this constraint but 
+will deal with it for now.
+
+Because the SRAM is subject to unconventional operation, some datasheet recommendations and example circuit 
+diagrams are effectively "wrong".  Following typical practices resulted in minor issues that are easily fixed - 
+"wrong" pull-ups and a software issue improperly manipulating the CS line (original implementation is correct).
+
+For revision r3, a load switch or MOSFETs will be added on SPI lines between SRAM and voltage level shifter to 
+prevent backpowering when SRAM is powered off.  An alternative voltage translator instead of TXB0106 may be used.
+
+A diagnosis for the nature of the voltage transient when executing fast voltage ramp is needed.  It is unclear if it is 
+due to inrush current, SRAM internals, etc.  The 23K640 datasheet specifies that Vdr (Ram Data Retention Voltage) is 
+1.2 V, so cell data may be unaffected.  A quick test hack adding a 10 nF capacitor to the SRAM supply pin did not 
+resolve the transient and raised ramp time to ~40 ns as expected due to charging and is not a solution.  A 
+pre-charged capacitor/bank behind a gate might need to be added.  Other than the transient, the ramp waveform looks 
+good.
+
+[pcb_r2 figures](https://github.com/Tribler/software-based-PUF/tree/master/Source%20Code/enrollment%20and%20testing/slave-23k640-experimental/figures/)
+
 ### Update February 2025
 
 PCB for new bit selection method is nearing completion.  A render of the first revision PCB has been added to 
