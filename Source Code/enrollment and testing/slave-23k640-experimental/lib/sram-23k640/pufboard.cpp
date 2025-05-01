@@ -65,6 +65,10 @@ void PUFBoard::sram_power_off()
 {
   SPI.end();
 
+  pinMode(pin_miso, OUTPUT);
+  pinMode(pin_mosi, OUTPUT);
+  pinMode(pin_sck, OUTPUT);
+
   digitalWrite(pin_oe, HIGH);         // latches OE pin, Hi-Z / OFF state
   digitalWrite(pin_in1, LOW);         // disconnects DAC to SRAM power path
   dac.setVoltage(0, false);           // set DAC voltage to 0V
@@ -127,8 +131,8 @@ void PUFBoard::sram_fast_on()
 
 void PUFBoard::sram_fast_off()
 {
+  digitalWrite(pin_hold, LOW);    // must first set hold pin LOW when SRAM is powered off
   digitalWrite(pin_oe, HIGH);
-  digitalWrite(pin_hold, LOW);    // must set LOW when SRAM is powered off
 }
 
 bool PUFBoard::dac_begin(uint8_t addr)
