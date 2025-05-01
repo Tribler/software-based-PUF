@@ -39,6 +39,9 @@
 #define IN1_PIN 8         // IN1 (LMS4684 input1)
 #define OE_TXB_PIN 5      // output enable for TXB level shifter
 
+// #define RAMP_SLOW
+#define RAMP_FAST
+
 PUFBoard board;         // PUF breakout board instance
 
 XSRAM& xsram = board.getXSRAM();    // allow access XSRAM instance directly
@@ -107,6 +110,7 @@ void setup()
   Serial.begin(115200);
   delay(500);
 
+#ifdef RAMP_SLOW
   Serial.println("\ninitializing DAC");
   board.dac_begin(DAC_ADDR);    // initialize DAC and join I2C bus
   delay(500);
@@ -169,7 +173,8 @@ void setup()
   }
   board.sram_power_off();
   Serial.println("slow ramp test complete");
-  delay(5000);
+  delay(3000);
+#endif
 
 //  myFile = SD.open(filename, FILE_WRITE);
 //  if (myFile)
@@ -185,12 +190,15 @@ void setup()
   // fast ramp quick test routine
   Serial.println("\nbegin fast ramp test");
   board.config_fast_ramp();
-  delay(1000);
+  delay(3000);
   Serial.println("sram_fast_on");
   board.sram_fast_on();
-  delay(1000);
+  delay(3000);
+  Serial.println("txb_enable");
+  board.txb_enable();
+  delay(3000);
   Serial.println("read page test results (fast ramp)");
-  delay(100);
+  delay(1000);
 
   // 23K640 maxram is 32768, maxpage is
   for (int n=0; n<8; n++)
@@ -207,11 +215,12 @@ void setup()
     Serial.println("");
   }
   Serial.println("sram_power_off");
-  board.sram_power_off();
-  delay(500);
-  Serial.println("disable voltage level translator (TXB)");
-  board.txb_disable();
   delay(1000);
+  board.sram_power_off();
+  Serial.println("txb_disable");
+  board.txb_disable();
+  Serial.println("done");
+  delay(5000);
 }
 
 void loop()
