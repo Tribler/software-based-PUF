@@ -1,3 +1,20 @@
+### Update October 20 2025
+The amount of time I have been able to devote to this project has been limited since May due to a family medical 
+issue.  I'm posting the updates even though they are incomplete.  The latest design replaces TXB0106 with (3) 
+74LXC2T45 voltage translators to achieve true Vcc isolation.  LVC translators were used in the prototype for testing 
+but LXC are drop in replacements with some advantages.  Testing shows elimination of back-powering present with TXB0106.
+
+The addition of a 3.3V onboard regulator has solved the reboot issue.  The Arduino 3.3V dedicated rail is unable to 
+supply enough power but an AMS1117 or AP2112 5V --> 3.3V LDO should work since an AME1117 harvested from a junk board 
+works well.  An LDO with an on/off switch would be ideal because the board initialization lags when the Arduino is 
+powered and the SRAM is briefly powered with unconfigured I/Os. 
+
+A TPS22917 switch is added to control Vcca supply, which in turn controls Vcc disconnect.  It's added on the schematic 
+and board files but I didn't have one for testing.  Support has already been added in pufboard.  The schematic will 
+be added soon.  It isn't final but it is fairly close.
+
+[102025 figures](https://github.com/Tribler/software-based-PUF/tree/master/Source%20Code/enrollment%20and%20testing/slave-23k640-experimental/figures/102025_update)
+
 
 ### Update May 2025 - Lessons learned
 Second PCB revision has revealed some minor flaws plus an unexpected voltage transient during fast ramp that will be 
@@ -14,7 +31,7 @@ Because the SRAM is subject to unconventional operation, some datasheet recommen
 diagrams are effectively "wrong".  Following typical practices resulted in minor issues that are easily fixed - 
 "wrong" pull-ups and a software issue improperly manipulating the CS line (original implementation is correct).
 
-For revision r3, a load switch or MOSFETs will be added on SPI lines between SRAM and voltage level shifter to 
+For revision r3, a load switch or MOSFETs will be added on SPI lines between SRAM and voltage level translator to 
 prevent backpowering when SRAM is powered off.  An alternative voltage translator instead of TXB0106 may be used.
 
 A diagnosis for the nature of the voltage transient when executing fast voltage ramp is needed.  It is unclear if it is 
