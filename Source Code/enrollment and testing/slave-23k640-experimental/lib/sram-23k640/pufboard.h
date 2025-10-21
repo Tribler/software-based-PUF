@@ -23,35 +23,44 @@
 
 class PUFBoard{
 private:
-  // board class scoped pin variables
-  uint8_t pin_cs;
-  uint8_t pin_hold;
-  uint8_t pin_miso;
-  uint8_t pin_mosi;
-  uint8_t pin_sck;
-  uint8_t pin_in1;
-  uint8_t pin_oe;
-  uint8_t pin_vcc;
-  uint8_t pin_oe_txb;
+  // class scoped constants
+  static const uint8_t GRP_COUNT = 3;     // number of translators in the trans group
+  static const uint8_t CONNECTED = 0;
+  static const uint8_t DISCONNECTED = 1;
 
-  // nested classes for puf board IC pin config and function
+  // class scoped vars (init in src file)
+  static bool calibrated;                 // DAC calibration flag
+  static uint8_t vcca_conn_state;         // Vcca connection state flag
+  static uint32_t dn_min;                 // Dn (input code) == vdd_min voltage
+  static uint32_t steps;                  // available DAC steps between min and max voltages
+  static uint32_t step_us;                // step delay in microseconds
+
+  // board class scoped pin variables
+  uint8_t pin_cs;       // SRAM
+  uint8_t pin_hold;     // ||
+  uint8_t pin_miso;     // ||
+  uint8_t pin_mosi;     // ||
+  uint8_t pin_sck;      // \/
+
+  uint8_t pin_in1;              // LMS switch in1
+  uint8_t pin_oe;               // LVC buffer oe
+  uint8_t pin_vcc;              // LVC buffer vcc
+  uint8_t pin_on;               // TPS switch on
+  uint8_t pin_b1[GRP_COUNT];    // LXC translator b1
+  uint8_t pin_b2[GRP_COUNT];    // LXC translator b2
+
+
+  // nested classes for puf board IC pin config and function //
   class Buffer_74LVC1G125{    // tri state buffer
   private:
     uint8_t pin_oe;     // 74LVC1G125 output enable pin
-    uint8_t pin_vcc;    // 74LVC1G125 supply voltage pin
 
   public:
     uint8_t get_oe() const{
       return pin_oe;
     }
-    uint8_t get_vcc() const{
-      return pin_vcc;
-    }
     void set_oe(uint8_t pin){
       pin_oe = pin;
-    }
-    void set_vcc(uint8_t pin){
-      pin_vcc = pin;
     }
   };
 
@@ -68,69 +77,107 @@ private:
     }
   };
 
-  // TODO: finish adding TXB0106 nested class and getters, other related
-  class Shifter_TXB0106{    // level shifter
+  // voltage translator SN74LXC2T45 has no OE function     //
+  // use Vccx disconnect feature (supply < 100 mV) instead //
+  // recommended to pull I/Os down prior to floating Vccx  //
+  // high (B-port) always powered, low (A-port) switched   //
+
+  class Trans_74LXC2T45{   // SN74LXC2T45
   private:
-    uint8_t pin_oe_txb;   // oe pin for txb level shifter
+    // only B1, B2 pins are adjustable //
+    // A1, A2, Vcca, Vccb, DIR, GND are hard-wired //
+    uint8_t pin_b1;
+    uint8_t pin_b2;
 
   public:
-    uint8_t get_oe_txb() const{
-      return pin_oe_txb;
+    uint8_t get_b1() const{
+      return pin_b1;
     }
-    void set_oe_txb(uint8_t pin){
-      pin_oe_txb = pin;
+    uint8_t get_b2() const{
+      return pin_b2;
+    }
+    void set_b1(uint8_t pin){
+      pin_b1 = pin;
+    }
+    void set_b2(uint8_t pin){
+      pin_b2 = pin;
     }
   };
 
-  XSRAM xsram;                  // embedded instance
-  Adafruit_MCP4725 dac;         // embedded instance
-  Buffer_74LVC1G125 lvc1g125;   // buffer embedded instance
-  Switch_LMS4684 lms4684;       // analog switch embedded instance
-  Shifter_TXB0106 txb0106;      // level shifter embedded instance
+  class Switch_TPS22917{   // TPS22917 for switching 74LXC2T45 Vcca power
+  private:
+    uint8_t pin_on;    // ON pin is active HIGH, don't float
+
+  public:
+    uint8_t get_on() const{
+      return pin_on;
+    }
+    void set_on(uint8_t pin){
+      pin_on = pin;
+    }
+  };
+
+
+  XSRAM xsram;                        // embedded instance
+  Adafruit_MCP4725 dac;               // dac embedded instance
+  Buffer_74LVC1G125 lvc1g125;         // buffer embedded instance
+  Switch_LMS4684 lms4684;             // analog switch embedded instance
+  Trans_74LXC2T45 trans[GRP_COUNT];   // create a group of embedded translator instances
+  Switch_TPS22917 tps;                // translators A-port power switch instance
+
 
 public:
   PUFBoard();
-  XSRAM& getXSRAM();          // class instance getter
+  XSRAM& getXSRAM();              // class instance getter
 
   // public getters for nested class private vars
   uint8_t get_pin_oe() const{
     return lvc1g125.get_oe();
   }
-  uint8_t get_pin_vcc() const{
-    return lvc1g125.get_vcc();
-  }
   uint8_t get_pin_in1() const{
     return lms4684.get_in1();
   }
-  uint8_t get_pin_oe_txb() const{
-    return txb0106.get_oe_txb();
+  uint8_t get_pin_on() const{
+    return tps.get_on();
+  }
+  uint8_t get_pin_b1(uint8_t index) const{
+    return trans[index].get_b1();
+  }
+  uint8_t get_pin_b2(uint8_t index) const{
+    return trans[index].get_b2();
   }
 
-  // public setters
+  // setters for nested class private vars
   void set_pin_oe(uint8_t pin){
     lvc1g125.set_oe(pin);
-  }
-  void set_pin_vcc(uint8_t pin){
-    lvc1g125.set_vcc(pin);
   }
   void set_pin_in1(uint8_t pin){
     lms4684.set_in1(pin);
   }
-  void set_pin_oe_txb(uint8_t pin){
-    txb0106.set_oe_txb(pin);
+  void set_pin_on(uint8_t pin){
+    tps.set_on(pin);
+  }
+  void set_pin_b1(uint8_t index, uint8_t pin){
+    trans[index].set_b1(pin);
+  }
+  void set_pin_b2(uint8_t index, uint8_t pin){
+    trans[index].set_b2(pin);
   }
 
-  void init_board();
-  void config_slow_ramp();
-  void config_fast_ramp();
-  void txb_enable();      // ON state, enable TXB0106 level shifter
-  void txb_disable();     // OFF state, all I/Os in a high impedance state
-  void sram_fast_on();    // 74LVC1G125 enable output (sets OE pin LOW)
-  void sram_fast_off();   // 74LVC1G125 disable output (sets OE pin HIGH)
-  void sram_power_off();  // complete SRAM power off (for both slow / fast)
-  void sram_power_on();   // for legacy power on/off (uses DAC)
   bool dac_begin(uint8_t addr);
   bool dac_set_voltage(uint16_t dn, bool b);
+  uint8_t get_vcca_state();
+  void set_vcca_state(uint8_t state);
+
+  void init_board();            // initialize puf pcba
+  int sram_slow_on();           // execute slow ramp
+  void sram_fast_on();          // 74LVC1G125 enable output (sets OE pin LOW)
+  void sram_fast_off();         // 74LVC1G125 disable output (sets OE pin HIGH)
+  void sram_pwr_off();          // complete SRAM power off (for both slow / fast / legacy)
+  void sram_pwr_on();           // legacy power on/off replacement (uses DAC)
+  void vcca_connect();          // apply power to LXC A-port supply (all translators)
+  void vcca_disconnect();       // remove power from LXC A-port supply (all)
+  void calibrate_step_delay();  // adjusts step delay for accurate slow ramp time
 };
 
 #endif
