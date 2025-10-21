@@ -29,6 +29,8 @@ class XSRAM : public SRAM {
 public:
   XSRAM();    // constructor
 
+  static constexpr size_t pagesize = 32;
+
   // hide these since they won't work powering the SRAM via DAC
   void set_pin_power();
   void turn_off();
@@ -41,6 +43,15 @@ public:
   uint8_t get_pin_mosi() const;
   uint8_t get_pin_miso() const;
   uint8_t get_pin_sck() const;
+
+  // additional, 23K640 specific
+  uint8_t Spi23K640Read8(uint16_t addr, uint8_t cs_pin);
+  void Spi23K640Write8(uint16_t addr, uint8_t cs_pin, uint8_t data);
+  int Spi23K640Read32(uint16_t addr, uint8_t cs_pin, uint8_t *buf, size_t bufsize);
+  int Spi23K640Write32(uint16_t addr, uint8_t cs_pin, uint8_t *buf, size_t bufsize);
+  void Spi23K640ReadAllPrintHex(bool sep);
+  void Spi23K640WriteAllZero();
+  void Spi23K640WriteAllOne();
 };
 
 #endif
