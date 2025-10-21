@@ -98,8 +98,8 @@ SRAM::Spi23LC1024Write8(uint32_t address, uint8_t data_byte, uint8_t cs_pin)
 void
 SRAM::Spi23LC1024Read32(uint32_t address, uint8_t cs_pin, uint8_t* buff)
 {
-  // uint32_t i;                // larger than necessary
-  // uint8_t read_page;         // unnecessary
+  uint32_t i;
+  uint8_t read_page;
 
   digitalWrite(cs_pin, LOW);
   SPI.transfer(READ);
@@ -107,31 +107,31 @@ SRAM::Spi23LC1024Read32(uint32_t address, uint8_t cs_pin, uint8_t* buff)
   SPI.transfer((uint8_t)(address >> 8));
   SPI.transfer((uint8_t)address);
 
-  for (int i=0; i<32; i++)
-  {
-    buff[i] = SPI.transfer(0x00);
-  }
-  digitalWrite(cs_pin, HIGH);
-
-//  for (i = 0; i < 32; i++)
+//  for (uint8_t i=0; i<32; i++)
 //  {
-//    read_page = SPI.transfer(0x00);
-//    buff[i] = read_page;
+//    buff[i] = SPI.transfer(0x00);
 //  }
 //  digitalWrite(cs_pin, HIGH);
+
+  for (i = 0; i < 32; i++)
+  {
+    read_page = SPI.transfer(0x00);
+    buff[i] = read_page;
+  }
+  digitalWrite(cs_pin, HIGH);
 }
 
 void
 SRAM::Spi23LC1024Write32(uint32_t address, uint8_t* buffer170, uint8_t cs_pin)
 {
-  // uint32_t i;    // larger than necessary
+  uint32_t i;
 
   digitalWrite(cs_pin, LOW);
   SPI.transfer(WRITE);
   SPI.transfer((uint8_t)(address >> 16));
   SPI.transfer((uint8_t)(address >> 8));
   SPI.transfer((uint8_t)address);
-  for (int i=0; i<32; i++)
+  for (i=0; i<32; i++)
   {
     SPI.transfer(buffer170[i]);
   }
@@ -171,7 +171,7 @@ void
 SRAM::read_all(){
   uint8_t buff[32];
 
-  for (int i = 0; i < get_max_page(); i++)
+  for (uint32_t i=0; i<get_max_page(); i++)
   {
     Spi23LC1024Read32(i, pin_cs, buff);
     for (int n = 0; n < 32; n++)
@@ -201,7 +201,7 @@ SRAM::write_all_zero(){
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
   };
 
-  for (int i = 0; i < maxpage; i++)
+  for (uint32_t i=0; i<maxpage; i++)
   {
     Spi23LC1024Write32(i, buffer00, pin_cs);
   }
@@ -216,7 +216,7 @@ SRAM::write_all_one(){
     0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
   };
 
-  for (int i = 0; i < maxpage; i++)
+  for (uint32_t i=0; i<maxpage; i++)
   {
     Spi23LC1024Write32(i, bufferFF, pin_cs);
   }
